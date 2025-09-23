@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "mcpixel";
+    src: url("/fonts/Minecraft.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "mcpixel-ten";
+    src: url("/fonts/MinecraftTen.ttf") format("truetype");
+}
+
+body {
+    margin: 0;
+    font-family: "mcpixel-ten";
+}
+
+img:not(.has-event) {
+    pointer-events: none;
+}
+
+*:not(.selectable) {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+@plugin "daisyui" {
+    exclude: rootscrollgutter, scrollbar;
+}

@@ -39,7 +39,9 @@
                         <NuxtLink href="/servers/1.21.8">
                             <button class="btn">了解服务器</button>
                         </NuxtLink>
-                        <button class="btn">查询 Wiki</button>
+                        <NuxtLink href="https://www.yuque.com/u29304293/cc" target="_blank">
+                            <button class="btn">查询 Wiki</button>
+                        </NuxtLink>
                     </div>
                 </WrappedAnimatedContent>
             </div>

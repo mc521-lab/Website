@@ -1,6 +1,6 @@
 ---
 title: 📺 如何绑定 Bilibili
-slug: 新手教程/绑定Bilibili
+slug: xin-shou-jiao-cheng/bang-ding-Bilibili
 index: 7
 ---
 

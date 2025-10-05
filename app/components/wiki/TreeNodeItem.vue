@@ -18,13 +18,18 @@
             });
         });
     });
+
+    const TitleMap: Record<string, string> = {
+        "xin-shou-jiao-cheng": "⭐ 纯新手必看教程",
+        "gui-zhang-zhi-du": "📜 服务器规章",
+    };
 </script>
 
 <template>
     <section v-for="(node, index) in treeData" :key="index" class="last:-mb-2">
         <div class="collapse collapse-arrow bg-base-100/25 border-base-300 border mb-2" v-if="node.children">
             <input type="checkbox" v-model="checkboxStates[node.title]" @change="(e) => handleCheckboxChange(e, node)" />
-            <div class="collapse-title font-semibold after:-translate-y-[11px] py-2">{{ node.title }}</div>
+            <div class="collapse-title font-semibold after:-translate-y-[11px] py-2">{{ TitleMap[node.title] }}</div>
             <div class="collapse-content text-sm">
                 <WikiTreeNodeItem :treeData="node.children" />
             </div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import SplitText from "~/components/vuebits/animations/SplitText.vue";
-    import type { IWrappedAnimatedContent } from "~/components/WrappedAnimatedContent.vue";
+    import type { IWrappedAnimatedContent } from "~/types";
 
     const ani1 = ref<IWrappedAnimatedContent>();
     const ani2 = ref<IWrappedAnimatedContent>();

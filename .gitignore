@@ -16,7 +16,7 @@ logs
 # Misc
 .DS_Store
 .fleet
-.idea
+.idea/.gitignore
 
 # Local env files
 .env
@@ -26,10 +26,5 @@ logs
 # Large binarys
 bin/
 
-# Not yet finished
-/server/*
-/scripts/
-/app/pages/servers/1.21.8/download.vue
-
-!/server/api/
-!/server/modules/
+# Useless files
+app/components/FloatActionButton.vue

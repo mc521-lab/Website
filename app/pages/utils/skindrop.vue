@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { SkinViewer, WalkingAnimation } from "skinview3d";
     import SplitText from "~/components/vuebits/animations/SplitText.vue";
-    import type { IWrappedAnimatedContent } from "~/components/WrappedAnimatedContent.vue";
+    import type { IWrappedAnimatedContent } from "~/types";
 
     const ani1 = ref<IWrappedAnimatedContent>();
     const ani2 = ref<IWrappedAnimatedContent>();
@@ -126,7 +126,7 @@
     });
 
     const copyCmd = () => {
-        copy(`${useRuntimeConfig().public.alistUrl}/d/SkinDrop/${s3_filename.value}`);
+        copy(`/skin url ${useRuntimeConfig().public.alistUrl}/d/SkinDrop/${s3_filename.value}`);
     };
 </script>
 

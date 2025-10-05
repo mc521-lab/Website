@@ -1,6 +1,6 @@
 <script setup lang="ts">
-    import type { IWrappedAnimatedContent } from "~/components/WrappedAnimatedContent.vue";
     import ProfileCard from "~/components/vuebits/components/ProfileCard.vue";
+    import type { IWrappedAnimatedContent } from "~/types";
 
     const ani1 = ref<IWrappedAnimatedContent>();
     const ani2 = ref<IWrappedAnimatedContent>();
@@ -22,27 +22,27 @@
                     <ProfileCard
                         name="CC"
                         title="服主"
-                        avatar-url="/images/staffs/CC.png"
-                        icon-url="/images/staffs/DevIconPattern.png"
-                        grain-url="/images/staffs/Grain.webp"
+                        avatar-url="/assets/images/staffs/CC.png"
+                        icon-url="/assets/images/staffs/DevIconPattern.png"
+                        grain-url="/assets/images/staffs/Grain.webp"
                         :show-user-info="false"
                         :show-behind-gradient="true"
                         :enable-tilt="true" />
                     <ProfileCard
                         name="凌云"
                         title="技术客服"
-                        avatar-url="/images/staffs/LingyunAwA.png"
-                        icon-url="/images/staffs/DevIconPattern.png"
-                        grain-url="/images/staffs/Grain.webp"
+                        avatar-url="/assets/images/staffs/LingyunAwA.png"
+                        icon-url="/assets/images/staffs/DevIconPattern.png"
+                        grain-url="/assets/images/staffs/Grain.webp"
                         :show-user-info="false"
                         :show-behind-gradient="true"
                         :enable-tilt="true" />
                     <ProfileCard
                         name="零壹"
                         title="小游戏主管"
-                        avatar-url="/images/staffs/FBK_Lynn.png"
-                        icon-url="/images/staffs/DevIconPattern.png"
-                        grain-url="/images/staffs/Grain.webp"
+                        avatar-url="/assets/images/staffs/FBK_Lynn.png"
+                        icon-url="/assets/images/staffs/DevIconPattern.png"
+                        grain-url="/assets/images/staffs/Grain.webp"
                         :show-user-info="false"
                         :show-behind-gradient="true"
                         :enable-tilt="true" />

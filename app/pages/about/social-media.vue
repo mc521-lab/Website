@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import type { IWrappedAnimatedContent } from "~/components/WrappedAnimatedContent.vue";
+    import type { IWrappedAnimatedContent } from "~/types";
 
     const ani1 = ref<IWrappedAnimatedContent>();
     const ani2 = ref<IWrappedAnimatedContent>();
@@ -19,7 +19,7 @@
             <br />
             <WrappedAnimatedContent ref="ani2" manual @complete="ani3?.animating()">
                 <div class="flex items-center gap-4">
-                    <img src="/images/socials/huya.png" class="w-10 h-8.5" />
+                    <img src="/assets/images/socials/huya.png" class="w-10 h-8.5" />
                     <span class="text-xl text-warning">
                         官方虎牙直播间：
                         <br />
@@ -27,7 +27,7 @@
                     </span>
                 </div>
                 <div class="flex items-center gap-4 mt-2">
-                    <img src="/images/socials/bili.png" class="aspect-square w-10 scale-95" />
+                    <img src="/assets/images/socials/bili.png" class="aspect-square w-10 scale-95" />
                     <span class="text-xl text-info">
                         官方哔哩哔哩账户：
                         <br />
@@ -35,7 +35,7 @@
                     </span>
                 </div>
                 <div class="flex items-center gap-4 mt-2">
-                    <img src="/images/socials/tt.png" class="w-10 h-9.7 scale-95" />
+                    <img src="/assets/images/socials/tt.png" class="w-10 h-9.7 scale-95" />
                     <span class="text-xl">
                         官方 TT 语音房间：
                         <br />
@@ -58,14 +58,7 @@
             </WrappedAnimatedContent>
             <br />
             <WrappedAnimatedContent ref="ani5" manual>
-                <div class="flex items-center gap-4 mt-2">
-                    <img src="/images/socials/tiktok.png" class="w-10 h-9.7 scale-95" />
-                    <span class="text-xl">
-                        <span class="text-[#FE0660]">抖</span><span class="text-[#02E8E3]">音</span>主播 黎塘安 的直播间
-                        <br />
-                        <WrappedSocialMediaLink href="https://v.douyin.com/zXb5Cx4j_ck/" text="观看直播" />
-                    </span>
-                </div>
+                <span class="opacity-75">暂无……</span>
             </WrappedAnimatedContent>
         </div>
     </div>

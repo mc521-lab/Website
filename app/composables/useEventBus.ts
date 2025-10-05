@@ -1,5 +1,5 @@
 import mitt from "mitt";
-import type { EventBusEvents } from "~/types/eventbus";
+import type { EventBusEvents } from "~/types/EventBus";
 
 let emitter: ReturnType<typeof mitt<EventBusEvents>> | null = null;
 

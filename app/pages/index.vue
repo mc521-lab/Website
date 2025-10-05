@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import SplitText from "~/components/vuebits/animations/SplitText.vue";
-    import type { IWrappedAnimatedContent } from "~/components/WrappedAnimatedContent.vue";
+    import type { IWrappedAnimatedContent } from "~/types";
 
     const ani1 = ref<IWrappedAnimatedContent>();
     const ani2 = ref<IWrappedAnimatedContent>();
@@ -17,7 +16,7 @@
         <div class="hero-content text-neutral-content text-center">
             <div>
                 <WrappedAnimatedContent ref="ani1" manual @complete="ani2?.animating()">
-                    <SplitText
+                    <VuebitsAnimationsSplitText
                         text="君庭阁：1.21.8"
                         className="font-semibold text-center text-4xl lg:text-[4vw]"
                         :delay="100"
@@ -39,7 +38,7 @@
                         <NuxtLink href="/servers/1.21.8">
                             <button class="btn">了解服务器</button>
                         </NuxtLink>
-                        <NuxtLink href="https://www.yuque.com/u29304293/cc" target="_blank">
+                        <NuxtLink href="/wiki">
                             <button class="btn">查询 Wiki</button>
                         </NuxtLink>
                     </div>

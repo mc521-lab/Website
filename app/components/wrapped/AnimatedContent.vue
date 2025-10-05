@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import AnimatedContent from "./vuebits/animations/AnimatedContent.vue";
+    import AnimatedContent from "../vuebits/animations/AnimatedContent.vue";
 
     // Props
     interface AnimatedContentProps {
@@ -34,9 +34,6 @@
 
     // Expose
     const animatedContentRef = ref<typeof AnimatedContent>();
-    export interface IWrappedAnimatedContent {
-        animating: () => void;
-    }
     defineExpose({
         animating: () => {
             animatedContentRef.value?.animating();

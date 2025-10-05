@@ -1,32 +1,7 @@
 <script setup lang="ts">
     import { gsap } from "gsap";
     import { nextTick, onBeforeUpdate, onMounted, onUnmounted, ref, watch, type VNodeRef } from "vue";
-
-    type CardNavLink = {
-        label: string;
-        href?: string;
-        ariaLabel: string;
-        target?: string;
-    };
-
-    export type CardNavItem = {
-        label: string;
-        bgColor: string;
-        textColor: string;
-        links: CardNavLink[];
-    };
-
-    export interface CardNavProps {
-        logoAlt?: string;
-        items: CardNavItem[];
-        buttonText: string;
-        className?: string;
-        ease?: string;
-        baseColor?: string;
-        menuColor?: string;
-        buttonBgColor?: string;
-        buttonTextColor?: string;
-    }
+    import type { CardNavProps } from "~/types/CardNav";
 
     const props = withDefaults(defineProps<CardNavProps>(), {
         logoAlt: "Logo",
@@ -166,7 +141,7 @@
 </script>
 
 <template>
-    <section class="fixed backdrop-blur-sm w-full h-[95px] md:h-[110px] z-[99] py-[1.2em] md:py-[1.5em]">
+    <section class="fixed backdrop-blur-xs w-full h-[95px] md:h-[110px] z-[99] py-[1.2em] md:py-[1.5em]">
         <div :class="`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] ${props.className}`">
             <nav
                 ref="navRef"

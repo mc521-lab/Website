@@ -15,7 +15,7 @@ export async function uploadBufferToAlist(fileBuffer: Buffer, filename: string):
 
     // 基础输入验证
     if (!alistUrl || !alistUsername || !alistPassword) {
-        return [null, "服务器 Alist 配置不完整"];
+        return [null, "服务器 Alist 配置不完整，请联系管理员"];
     }
     if (!fileBuffer || !filename) {
         return [null, "输入不完整 (fileBuffer 或 filename)"];

@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import Stack from "~/components/vuebits/components/Stack.vue";
-    import type { IWrappedAnimatedContent } from "~/components/WrappedAnimatedContent.vue";
+    import type { IWrappedAnimatedContent } from "~/types";
 
     // Animating Refs
     const ani1 = ref<IWrappedAnimatedContent>();
@@ -34,19 +34,19 @@
     const images = [
         {
             id: 1,
-            img: "/images/server-showcase/2025-09-05_14.36.06.png",
+            img: "/assets/images/server-showcase/2025-09-05_14.36.06.png",
             title: "主城",
             desp: "服务器主城经过精心设计，拥有红棕色屋顶的建筑沿整洁的街道排列，中央有喷泉和装饰性植物。夕阳下的天空云层飘逸，一只猫头鹰增添奇幻感。绿意盎然的街道细节丰富，展现出生机勃勃的社区氛围。",
         },
         {
             id: 2,
-            img: "/images/server-showcase/2025-09-05_14.48.37.png",
+            img: "/assets/images/server-showcase/2025-09-05_14.48.37.png",
             title: "幻想乡",
             desp: "幻想乡是由玩家建立的社区，其建筑群中心有一座气势恢宏的穹顶建筑，周围环绕着绿意盎然的庭院和装饰性结构。天空湛蓝，云层飘逸，社区布局对称，细节精致，展现了玩家们的创造力和合作精神。",
         },
         {
             id: 3,
-            img: "/images/server-showcase/2025-09-21_16.40.08.png",
+            img: "/assets/images/server-showcase/2025-09-21_16.40.08.png",
             title: "落樱城",
             desp: "落樱城是由玩家精心打造的社区，其中心矗立着一座宏伟壮观的哥特式建筑，尖塔高耸，气势非凡。周围环绕着色彩斑斓的农田，黄色、粉色与绿色交织，展现出丰收的景象。溪流蜿蜒，旁边的传统木桥与樱花点缀相得益彰，天空湛蓝，云朵轻盈，整体布局和谐，细节精美，充分体现了玩家们的创意与协作之美。",
         },
@@ -126,7 +126,7 @@
                         <div class="stat">
                             <div class="stat-title text-sm">系统支持</div>
                             <div class="stat-value text-xl flex items-center gap-2">
-                                <svg aria-label="Microsoft logo" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <svg aria-label="Microsoft logo" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="mb-0.5">
                                     <path d="M96 96H247V247H96" fill="#f24f23"></path>
                                     <path d="M265 96V247H416V96" fill="#7eba03"></path>
                                     <path d="M96 265H247V416H96" fill="#3ca4ef"></path>
@@ -142,7 +142,7 @@
                                 </svg>
                                 安卓
                             </div>
-                            <div class="stat-desc text-sm">使用手机也可游玩！</div>
+                            <div class="stat-desc text-sm">使用手机/平板也可游玩！</div>
                         </div>
                     </div>
                 </section>
@@ -170,7 +170,7 @@
                                 fill="#8bc34a"
                                 d="M8 12h16v12H8zm2 12h4v4a2 2 0 0 1-2 2a2 2 0 0 1-2-2zm8 0h4v4a2 2 0 0 1-2 2a2 2 0 0 1-2-2zm3.545-19.759l2.12-2.12A1 1 0 0 0 22.251.707l-2.326 2.326a7.97 7.97 0 0 0-7.85 0L9.75.707a1 1 0 1 0-1.414 1.414l2.12 2.12A7.97 7.97 0 0 0 8 10h16a7.97 7.97 0 0 0-2.455-5.759M14 8h-2V6h2Zm6 0h-2V6h2Z" />
                         </svg>
-                        手机版下载
+                        移动版下载
                     </button>
                 </div>
             </WrappedAnimatedContent>

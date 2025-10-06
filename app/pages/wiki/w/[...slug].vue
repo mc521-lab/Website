@@ -42,10 +42,8 @@
 
                 <section class="col-span-7 w-full">
                     <ScrollView width="100%" height="80vh" class="overflow-y-auto">
-                        <h1 class="text-5xl font-bold mb-4">{{ data?.title }}</h1>
-                        <div class="prose max-w-full w-full">
-                            <ContentRenderer v-if="data" :value="data" />
-                        </div>
+                        <h1 class="text-5xl text-base-content font-bold mb-4">{{ data?.title }}</h1>
+                        <ContentRenderer v-if="data" :value="data" class="prose max-w-full w-full" />
                     </ScrollView>
                 </section>
 
@@ -69,17 +67,39 @@
     </div>
 </template>
 
-<style>
-    h1 > a,
-    h2 > a,
-    h3 > a,
-    h4 > a,
-    h5 > a,
-    h6 > a {
-        text-decoration: none;
-    }
+<style scoped lang="scss">
+    :deep(.prose) {
+        color: var(--color-base-content) !important;
 
-    code {
-        user-select: initial !important;
+        p,
+        li {
+            font-size: 1.1rem !important;
+        }
+
+        p {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        ol {
+            margin-bottom: 0 !important;
+        }
+
+        b {
+            font-weight: bolder !important;
+        }
+
+        h1 > a,
+        h2 > a,
+        h3 > a,
+        h4 > a,
+        h5 > a,
+        h6 > a {
+            text-decoration: none !important;
+        }
+
+        code {
+            user-select: initial !important;
+        }
     }
 </style>

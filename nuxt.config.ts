@@ -35,7 +35,7 @@ export default defineNuxtConfig({
     // 运行时配置
     modules: ["@nuxt/content", "@nuxt/icon"],
     runtimeConfig: {
-        // 仅后端 Env
+        // 仅后端 EnvZ
         alistUsername: "",
         alistPassword: "",
         // 公开 Env
@@ -46,7 +46,10 @@ export default defineNuxtConfig({
 
     // 开发与构建设置
     devServer: {
-        host: "127.30.0.1",
+        // Local Dev
+        // host: "127.30.0.1",
+        // LAN Dev (with Mobile Emulator)
+        host: "0.0.0.0",
         port: 3000,
     },
     vite: {
@@ -56,3 +59,4 @@ export default defineNuxtConfig({
     //     preset: "node-server", // 用 Vercel 了，不再指定为 node-server
     // },
 });
+

@@ -36,7 +36,7 @@
                     }">
                     <img :src="card.img" :alt="`card-${card.id}`" className="w-full h-full object-cover pointer-events-none" />
                     <button
-                        class="absolute bottom-4 right-4 btn btn-square opacity-50 hover:opacity-75 transition-opacity duration-75 ease-in-out"
+                        class="absolute bottom-4 right-4 btn btn-square opacity-75 hover:opacity-100 dark:opacity-50 dark:hover:opacity-75 transition-opacity duration-75 ease-in-out"
                         @click="emitClick(card.id)">
                         <!-- Icon from Myna UI Icons by Praveen Juge - https://github.com/praveenjuge/mynaui-icons/blob/main/LICENSE -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">

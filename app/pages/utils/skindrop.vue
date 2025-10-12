@@ -1,6 +1,5 @@
 <script setup lang="ts">
     import { SkinViewer, WalkingAnimation } from "skinview3d";
-    import SplitText from "~/components/vuebits/animations/SplitText.vue";
     import type { IWrappedAnimatedContent } from "~/types";
 
     const ani1 = ref<IWrappedAnimatedContent>();
@@ -133,12 +132,12 @@
 <template>
     <div class="hero min-h-screen">
         <div class="hero-overlay"></div>
-        <div class="hero-content text-neutral-content w-full max-w-7xl flex-col">
+        <div class="hero-content w-full max-w-7xl flex-col">
             <div class="w-5xl">
                 <WrappedAnimatedContent ref="ani1" manual @complete="ani2?.animating()">
-                    <SplitText
+                    <VuebitsAnimationsSplitText
                         text="落颜 · SkinDrop | 轻量级换皮肤工具"
-                        className="font-semibold text-center text-2xl lg:text-[1.5vw]"
+                        className="font-semibold text-center text-neutral-content text-2xl lg:text-[1.5vw]"
                         :delay="15"
                         :duration="0.5"
                         ease="power3.out"
@@ -151,7 +150,7 @@
                 </WrappedAnimatedContent>
                 <br />
                 <WrappedAnimatedContent ref="ani2" class="w-full" manual :delay="0.25">
-                    <div class="w-full grid grid-cols-5 grid-rows-1 gap-x-4">
+                    <div class="w-full grid grid-cols-5 grid-rows-1 gap-x-4 text-base-content">
                         <div class="card card-border bg-base-100 aspect-square w-full col-span-2">
                             <div class="card-body flex justify-center items-center">
                                 <div class="skeleton w-36 h-64" v-if="step === 1"></div>

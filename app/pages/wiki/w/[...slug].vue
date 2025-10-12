@@ -27,23 +27,35 @@
             element.scrollIntoView({ behavior: "smooth" });
         }
     }
+
+    onMounted(() => {
+        const proseEl = document.getElementById("wiki-content");
+        if (!proseEl) return;
+        proseEl.querySelectorAll("code").forEach((element) => {
+            element.style.cursor = "pointer";
+            element.onclick = () => {
+                if (!element.textContent) return;
+                copy(element.textContent);
+            };
+        });
+    });
 </script>
 
 <template>
     <div class="hero min-h-screen">
         <div class="hero-overlay"></div>
-        <div class="hero-content text-neutral-content text-left w-full max-w-full pt-4 lg:pt-32">
-            <section class="grid grid-cols-12 gap-x-8 w-full px-8">
+        <div class="hero-content text-neutral-content text-left w-full max-w-full mt-22 lg:mt-18">
+            <section class="hidden lg:grid lg:grid-cols-12 lg:gap-x-8 w-full lg:px-8">
                 <section class="col-span-3">
                     <ScrollView width="100%" height="80vh" class="overflow-y-auto">
                         <WikiTreeNodeItem :treeData="treeData" />
                     </ScrollView>
                 </section>
 
-                <section class="col-span-7 w-full">
-                    <ScrollView width="100%" height="80vh" class="overflow-y-auto">
-                        <h1 class="text-5xl text-base-content font-bold mb-4">{{ data?.title }}</h1>
-                        <ContentRenderer v-if="data" :value="data" class="prose max-w-full w-full" />
+                <section class="col-span-7 w-full font-no-pixel">
+                    <ScrollView width="100%" height="85vh" class="overflow-y-auto">
+                        <h1 class="text-5xl text-neutral-content font-bold mb-6 pb-4 border-b-neutral-content/20 border-b-1">{{ data?.title }}</h1>
+                        <ContentRenderer v-if="data" :value="data" class="prose max-w-full w-full" id="wiki-content" />
                     </ScrollView>
                 </section>
 
@@ -55,7 +67,7 @@
                             <li
                                 v-for="(item, index) in toc.links"
                                 :key="index"
-                                class="opacity-50 hover:opacity-100 hover:underline transition-all duration-150 ease-in-out cursor-pointer"
+                                class="opacity-50 hover:opacity-100 hover:underline underline-offset-5 transition-all duration-150 ease-in-out cursor-pointer"
                                 @click="smoothScrollTo(item.id)">
                                 {{ item.text }}
                             </li>
@@ -63,13 +75,22 @@
                     </div>
                 </section>
             </section>
+            <section class="w-full font-no-pixel lg:hidden">
+                <h1 class="text-3xl text-neutral-content font-bold mb-6 pb-4 border-b-neutral-content/20 border-b-1">{{ data?.title }}</h1>
+                <ContentRenderer v-if="data" :value="data" class="prose max-w-full w-full" id="wiki-content" />
+            </section>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
     :deep(.prose) {
-        color: var(--color-base-content) !important;
+        *:not(code, pre, [style*="color:"]),
+        li::marker {
+            // Static Color instead of var(--color-base-content)
+            // due to background need light foreground.
+            color: var(--color-neutral-content);
+        }
 
         p,
         li {
@@ -89,6 +110,16 @@
             font-weight: bolder !important;
         }
 
+        a {
+            text-underline-offset: 0.3rem;
+        }
+
+        hr {
+            border-color: var(--color-neutral-content);
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
         h1 > a,
         h2 > a,
         h3 > a,
@@ -98,8 +129,9 @@
             text-decoration: none !important;
         }
 
-        code {
-            user-select: initial !important;
+        h1 > a,
+        h2 > a {
+            font-weight: bolder !important;
         }
     }
 </style>

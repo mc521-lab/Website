@@ -4,11 +4,11 @@ slug: xin-shou-jiao-cheng/bang-ding-Bilibili
 index: 7
 ---
 
-## **绑定的作用：**
+## 绑定的作用：
 
 1. 绑定以后 三连指定视频，可以在游戏内领取非常丰厚奖励！
 
-## **绑定教程：**
+## 绑定教程：
 
 1. 首先需要注册一个 B 站账号：[B 站官网](https://www.bilibili.com)
 

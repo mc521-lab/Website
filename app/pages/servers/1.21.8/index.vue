@@ -97,12 +97,14 @@
     <section class="hero min-h-screen">
         <div class="hero-overlay"></div>
         <section class="hero-content text-neutral-content w-full flex-col">
-            <WrappedAnimatedContent ref="ani1" class="mt-2 lg:mt-0" manual @complete="ani2?.animating()">
-                <h1 class="text-3xl lg:text-[2.5vw] font-bold">[高版本] 1.21.8 趣味生存</h1>
+            <WrappedAnimatedContent ref="ani1" class="mt-26 lg:mt-0" manual @complete="ani2?.animating()">
+                <h1 class="hidden lg:block text-[2.5vw] font-bold">[高版本] 1.21.8 趣味生存</h1>
+                <h1 class="block lg:hidden text-3xl font-bold">[高版本] 1.21.8</h1>
+                <h1 class="block lg:hidden text-3xl font-bold text-center">趣味生存</h1>
             </WrappedAnimatedContent>
             <WrappedAnimatedContent class="mt-4" ref="ani2" manual @complete="ani3?.animating()">
                 <section class="flex">
-                    <div class="stats stats-vertical lg:stats-horizontal shadow">
+                    <div class="stats stats-vertical lg:stats-horizontal shadow-[0_0_4px_0] shadow-neutral-content">
                         <div class="stat">
                             <div class="stat-title text-sm">服务器 IP</div>
                             <div class="stat-value text-xl text-error cursor-pointer" @click="copy('mc521.cc')">mc521.cc</div>
@@ -149,7 +151,7 @@
             </WrappedAnimatedContent>
             <WrappedAnimatedContent class="mt-2" ref="ani3" manual @complete="ani4?.animating()">
                 <!-- <NuxtLink href="/servers/1.21.8/download"> -->
-                <div class="tooltip tooltip-left cursor-not-allowed" data-tip="请加入官方群聊下载客户端">
+                <div class="tooltip tooltip-bottom lg:tooltip-left cursor-not-allowed" data-tip="请加入官方群聊下载客户端">
                     <button disabled class="btn">
                         <svg aria-label="Microsoft logo" width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path d="M96 96H247V247H96" fill="#f24f23"></path>
@@ -161,7 +163,7 @@
                     </button>
                 </div>
                 <!-- </NuxtLink> -->
-                <div class="tooltip tooltip-right cursor-not-allowed" data-tip="请加入官方群聊下载客户端">
+                <div class="tooltip tooltip-bottom lg:tooltip-right cursor-not-allowed" data-tip="请加入官方群聊下载客户端">
                     <button disabled class="ml-2 btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
                             <rect width="4" height="10" x="2" y="12" fill="#8bc34a" rx="2" />
@@ -174,7 +176,7 @@
                     </button>
                 </div>
             </WrappedAnimatedContent>
-            <WrappedAnimatedContent class="mt-2" ref="ani4" manual :delay="1">
+            <WrappedAnimatedContent class="mt-4" ref="ani4" manual :delay="1">
                 <span class="opacity-75">▼ 继续向下滑动查看画廊 ▼</span>
             </WrappedAnimatedContent>
         </section>
@@ -211,9 +213,14 @@
     </dialog>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     div.stat {
         border-inline-end: none !important;
+
+        div.stat-title,
+        div.stat-desc {
+            color: #ecf9ff;
+        }
     }
 
     dialog.modal[open] {

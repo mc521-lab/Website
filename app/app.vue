@@ -53,11 +53,11 @@
         buttonBgColor="var(--color-base-300)"
         buttonTextColor="var(--color-base-content)"
         ease="power3.out" />
-    <div class="backdrop-blur-md">
+    <div class="backdrop-blur-sm bg-black/10">
         <NuxtPage />
-    </div>
-    <div class="toast">
-        <AlertItem v-for="a in alerts" :key="a.id" :message="a.message" :level="a.level" />
+        <div class="toast">
+            <AlertItem v-for="a in alerts" :key="a.id" :message="a.message" :level="a.level" />
+        </div>
     </div>
     <VercelAnalytics />
     <VercelSpeedInsights />

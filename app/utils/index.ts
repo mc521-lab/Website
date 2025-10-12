@@ -17,3 +17,7 @@ export const copy = (text: string) => {
 export const open = (url: string, target: string = "_blank") => {
     window.open(url, target);
 };
+
+export const navigateToWiki = (path: string) => {
+    navigateTo(`/wiki/w/${path}`);
+};

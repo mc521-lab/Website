@@ -29,15 +29,21 @@
     <section v-for="(node, index) in treeData" :key="index" class="last:-mb-2">
         <div class="collapse collapse-arrow bg-base-100/25 border-base-300 border mb-2" v-if="node.children">
             <input type="checkbox" v-model="checkboxStates[node.title]" @change="(e) => handleCheckboxChange(e, node)" />
-            <div class="collapse-title font-semibold after:-translate-y-[11px] py-2">{{ TitleMap[node.title] }}</div>
+            <div class="collapse-title font-semibold after:start-5 after:end-auto after:-translate-y-[1.5px] pe-4 ps-12 text-neutral-content">{{ TitleMap[node.title] }}</div>
             <div class="collapse-content text-sm">
                 <WikiTreeNodeItem :treeData="node.children" />
             </div>
         </div>
+        <!-- <NuxtLink
+            v-else
+            :href="`/wiki/w/${node.slug}`"
+            class="block py-2 bg-base-200/50 hover:bg-base-200 dark:bg-base-100/25 dark:hover:bg-base-100/75 text-base-content transition-all duration-150 ease-in-out rounded-md pl-2">
+            {{ node.title }}
+        </NuxtLink> -->
         <NuxtLink
             v-else
             :href="`/wiki/w/${node.slug}`"
-            class="block py-2 bg-base-100/25 hover:bg-base-100/75 transition-all duration-150 ease-in-out rounded-md pl-2">
+            class="link link-hover underline-offset-4 text-base">
             {{ node.title }}
         </NuxtLink>
     </section>

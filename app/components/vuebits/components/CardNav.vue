@@ -141,7 +141,7 @@
 </script>
 
 <template>
-    <section class="fixed backdrop-blur-xs w-full h-[95px] md:h-[110px] z-[99] py-[1.2em] md:py-[1.5em]">
+    <section class="fixed backdrop-blur-xs w-full max-w-[100vw] h-[95px] z-[99] py-[1.2em] md:py-[1.5em]">
         <div :class="`card-nav-container absolute left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] ${props.className}`">
             <nav
                 ref="navRef"

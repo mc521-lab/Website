@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import SplitText from "~/components/vuebits/animations/SplitText.vue";
     import type { IWrappedAnimatedContent } from "~/types";
 
     const ani1 = ref<IWrappedAnimatedContent>();
@@ -35,7 +34,7 @@
         <div class="hero-content text-neutral-content text-center">
             <div>
                 <WrappedAnimatedContent ref="ani1" manual @complete="ani2?.animating()">
-                    <SplitText
+                    <VuebitsAnimationsSplitText
                         text="实用工具"
                         className="font-semibold text-center text-3xl lg:text-[3vw]"
                         :delay="100"
@@ -51,7 +50,7 @@
                 <br />
                 <WrappedAnimatedContent ref="ani2" manual :delay="0.25">
                     <div
-                        class="card bg-base-100 card-md cursor-pointer"
+                        class="card bg-base-100 text-base-content card-md cursor-pointer"
                         v-for="tool in tools"
                         :key="tool.title"
                         @click="tool.routerLink ? $router.push(tool.routerLink) : tool.link ? openOuterLink(tool.link) : null">

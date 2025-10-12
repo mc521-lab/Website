@@ -1,5 +1,5 @@
 {
     "command": "pnpm",
     "args": ["dev"],
-    "restartDelay": 2000
+    "restartDelay": 5000
 }

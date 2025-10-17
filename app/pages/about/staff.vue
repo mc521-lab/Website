@@ -22,27 +22,27 @@
                     <ProfileCard
                         name="CC"
                         title="服主"
-                        avatar-url="/assets/images/staffs/CC.png"
-                        icon-url="/assets/images/staffs/DevIconPattern.png"
-                        grain-url="/assets/images/staffs/Grain.webp"
+                        avatar-url="/assets/images/staffs/CC.webp"
+                        icon-url="/assets/images/staffs/DevIconPattern.webp"
+                        grain-url="/assets/images/staffs/_Grain.webp"
                         :show-user-info="false"
                         :show-behind-gradient="true"
                         :enable-tilt="true" />
                     <ProfileCard
                         name="凌云"
                         title="技术客服"
-                        avatar-url="/assets/images/staffs/LingyunAwA.png"
-                        icon-url="/assets/images/staffs/DevIconPattern.png"
-                        grain-url="/assets/images/staffs/Grain.webp"
+                        avatar-url="/assets/images/staffs/LingyunAwA.webp"
+                        icon-url="/assets/images/staffs/DevIconPattern.webp"
+                        grain-url="/assets/images/staffs/_Grain.webp"
                         :show-user-info="false"
                         :show-behind-gradient="true"
                         :enable-tilt="true" />
                     <ProfileCard
                         name="零壹"
                         title="小游戏主管"
-                        avatar-url="/assets/images/staffs/FBK_Lynn.png"
-                        icon-url="/assets/images/staffs/DevIconPattern.png"
-                        grain-url="/assets/images/staffs/Grain.webp"
+                        avatar-url="/assets/images/staffs/FBK_Lynn.webp"
+                        icon-url="/assets/images/staffs/DevIconPattern.webp"
+                        grain-url="/assets/images/staffs/_Grain.webp"
                         :show-user-info="false"
                         :show-behind-gradient="true"
                         :enable-tilt="true" />

@@ -19,7 +19,7 @@
             <br />
             <WrappedAnimatedContent ref="ani2" manual @complete="ani3?.animating()">
                 <div class="flex items-center gap-4">
-                    <img src="/assets/images/socials/huya.png" class="w-10 h-8.5" />
+                    <img src="/assets/images/socials/huya.webp" class="w-10 h-8.5" />
                     <span class="text-xl text-warning">
                         官方虎牙直播间：
                         <br />
@@ -27,7 +27,7 @@
                     </span>
                 </div>
                 <div class="flex items-center gap-4 mt-2">
-                    <img src="/assets/images/socials/bili.png" class="aspect-square w-10 scale-95" />
+                    <img src="/assets/images/socials/bilibili.webp" class="aspect-square w-10 scale-95" />
                     <span class="text-xl text-info">
                         官方哔哩哔哩账户：
                         <br />
@@ -35,7 +35,7 @@
                     </span>
                 </div>
                 <div class="flex items-center gap-4 mt-2">
-                    <img src="/assets/images/socials/tt.png" class="w-10 h-9.7 scale-95" />
+                    <img src="/assets/images/socials/tt.webp" class="w-10 h-9.7 scale-95" />
                     <span class="text-xl">
                         官方 TT 语音房间：
                         <br />

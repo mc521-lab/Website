@@ -1,13 +1,8 @@
 @import "tailwindcss";
 
 @font-face {
-    font-family: "mcpixel";
-    src: url("/assets/fonts/Minecraft.ttf") format("truetype");
-}
-
-@font-face {
     font-family: "mcpixel-ten";
-    src: url("/assets/fonts/MinecraftTen.ttf") format("truetype");
+    src: url("/assets/fonts/MinecraftTen.woff2") format("woff2");
 }
 
 body {

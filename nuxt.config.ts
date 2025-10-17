@@ -4,7 +4,6 @@ export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
     devtools: { enabled: true },
 
-    // App 全局配置
     app: {
         head: {
             title: "君庭阁 · 我的世界服务器",
@@ -32,10 +31,10 @@ export default defineNuxtConfig({
         },
     },
 
-    // 运行时配置
     modules: ["@nuxt/content", "@nuxt/icon"],
+
     runtimeConfig: {
-        // 仅后端 EnvZ
+        // 仅后端 Env
         alistUsername: "",
         alistPassword: "",
         // 公开 Env
@@ -44,7 +43,6 @@ export default defineNuxtConfig({
         },
     },
 
-    // 开发与构建设置
     devServer: {
         // Local Dev
         // host: "127.30.0.1",
@@ -52,6 +50,7 @@ export default defineNuxtConfig({
         host: "0.0.0.0",
         port: 3000,
     },
+
     vite: {
         plugins: [tailwindcss()],
     },

@@ -7,8 +7,7 @@
         "dev": "nuxt dev",
         "generate": "nuxt generate",
         "preview": "nuxt preview",
-        "postinstall": "nuxt prepare",
-        "prepare": "node ./scripts/LocalizeImages.cjs"
+        "postinstall": "nuxt prepare"
     },
     "dependencies": {
         "@vercel/analytics": "^1.5.0",
@@ -20,7 +19,7 @@
         "motion-v": "^1.7.2",
         "skinview3d": "^3.4.1",
         "vue": "^3.5.22",
-        "vue-router": "^4.5.1"
+        "vue-router": "^4.6.3"
     },
     "devDependencies": {
         "@iconify/tailwind4": "^1.0.6",
@@ -30,8 +29,8 @@
         "@nuxtjs/mdc": "0.18.0",
         "@tailwindcss/typography": "^0.5.19",
         "@tailwindcss/vite": "^4.1.14",
-        "@types/node": "^24.7.1",
-        "daisyui": "^5.1.31",
+        "@types/node": "^24.8.1",
+        "daisyui": "^5.3.7",
         "glob": "^11.0.3",
         "lenis": "^1.3.11",
         "nuxt": "^4.1.3",

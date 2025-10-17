@@ -24,6 +24,8 @@ logs
 !.env.example
 
 # Large binarys
+public/assets/**/*.[pP][nN][gG]
+public/assets/**/*.[gG][iI][fF]
 bin/
 
 # Useless files

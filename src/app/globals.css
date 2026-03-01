@@ -49,78 +49,131 @@
 
 :root {
     --background: oklch(1 0 0);
-    --foreground: oklch(0.147 0.004 49.25);
+    --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.147 0.004 49.25);
+    --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.147 0.004 49.25);
-    --primary: oklch(0.67 0.16 58);
-    --primary-foreground: oklch(0.99 0.02 95);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.852 0.199 91.936);
+    --primary-foreground: oklch(0.421 0.095 57.708);
     --secondary: oklch(0.967 0.001 286.375);
     --secondary-foreground: oklch(0.21 0.006 285.885);
-    --muted: oklch(0.97 0.001 106.424);
-    --muted-foreground: oklch(0.553 0.013 58.071);
-    --accent: oklch(0.97 0.001 106.424);
-    --accent-foreground: oklch(0.216 0.006 56.043);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.923 0.003 48.717);
-    --input: oklch(0.923 0.003 48.717);
-    --ring: oklch(0.709 0.01 56.259);
-    --chart-1: oklch(0.88 0.15 92);
-    --chart-2: oklch(0.77 0.16 70);
-    --chart-3: oklch(0.67 0.16 58);
-    --chart-4: oklch(0.56 0.15 49);
-    --chart-5: oklch(0.47 0.12 46);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.58 0.22 27);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.905 0.182 98.111);
+    --chart-2: oklch(0.795 0.184 86.047);
+    --chart-3: oklch(0.681 0.162 75.834);
+    --chart-4: oklch(0.554 0.135 66.442);
+    --chart-5: oklch(0.476 0.114 61.907);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0.001 106.423);
-    --sidebar-foreground: oklch(0.147 0.004 49.25);
-    --sidebar-primary: oklch(0.67 0.16 58);
-    --sidebar-primary-foreground: oklch(0.99 0.02 95);
-    --sidebar-accent: oklch(0.97 0.001 106.424);
-    --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
-    --sidebar-border: oklch(0.923 0.003 48.717);
-    --sidebar-ring: oklch(0.709 0.01 56.259);
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.681 0.162 75.834);
+    --sidebar-primary-foreground: oklch(0.987 0.026 102.212);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
-    --background: oklch(0.147 0.004 49.25);
-    --foreground: oklch(0.985 0.001 106.423);
-    --card: oklch(0.216 0.006 56.043);
-    --card-foreground: oklch(0.985 0.001 106.423);
-    --popover: oklch(0.216 0.006 56.043);
-    --popover-foreground: oklch(0.985 0.001 106.423);
-    --primary: oklch(0.77 0.16 70);
-    --primary-foreground: oklch(0.28 0.07 46);
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.795 0.184 86.047);
+    --primary-foreground: oklch(0.421 0.095 57.708);
     --secondary: oklch(0.274 0.006 286.033);
     --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.268 0.007 34.298);
-    --muted-foreground: oklch(0.709 0.01 56.259);
-    --accent: oklch(0.268 0.007 34.298);
-    --accent-foreground: oklch(0.985 0.001 106.423);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.371 0 0);
+    --accent-foreground: oklch(0.985 0 0);
     --destructive: oklch(0.704 0.191 22.216);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.553 0.013 58.071);
-    --chart-1: oklch(0.88 0.15 92);
-    --chart-2: oklch(0.77 0.16 70);
-    --chart-3: oklch(0.67 0.16 58);
-    --chart-4: oklch(0.56 0.15 49);
-    --chart-5: oklch(0.47 0.12 46);
-    --sidebar: oklch(0.216 0.006 56.043);
-    --sidebar-foreground: oklch(0.985 0.001 106.423);
-    --sidebar-primary: oklch(0.77 0.16 70);
-    --sidebar-primary-foreground: oklch(0.28 0.07 46);
-    --sidebar-accent: oklch(0.268 0.007 34.298);
-    --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.905 0.182 98.111);
+    --chart-2: oklch(0.795 0.184 86.047);
+    --chart-3: oklch(0.681 0.162 75.834);
+    --chart-4: oklch(0.554 0.135 66.442);
+    --chart-5: oklch(0.476 0.114 61.907);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.795 0.184 86.047);
+    --sidebar-primary-foreground: oklch(0.987 0.026 102.212);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.553 0.013 58.071);
+    --sidebar-ring: oklch(0.556 0 0);
 }
 
 @layer base {
     * {
         @apply border-border outline-ring/50;
     }
+    *:not(input, textarea) {
+        @apply select-none;
+    }
+    img {
+        @apply pointer-events-none;
+    }
     body {
         @apply bg-background text-foreground;
     }
+    .pixel-font {
+        font-family: "FusionPixel", monospace !important;
+    }
+
+    ::-webkit-scrollbar {
+        background: var(--color-accent);
+        width: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-primary);
+        border: 2px solid var(--color-accent);
+    }
+}
+
+@font-face {
+    font-family: "FusionPixel";
+    src: url("/fonts/fusion-pixel-12px-monospaced-zh_hans.otf.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@keyframes floatY {
+    0%,
+    100% {
+        transform: translateY(0) scale(0.97);
+    }
+    50% {
+        transform: translateY(16px) scale(1);
+    }
+}
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+}
+
+.animate-float-y {
+    animation: floatY 2.2s ease infinite;
 }

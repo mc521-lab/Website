@@ -5,3 +5,9 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
+export const navigateTo = (id: string) => {
+    const element = document.getElementById(id.slice(1));
+    if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+    }
+};

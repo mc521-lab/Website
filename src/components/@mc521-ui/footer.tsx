@@ -1,4 +1,4 @@
-import { MessageCircleIcon } from "lucide-react";
+import { MessageCircleMoreIcon } from "lucide-react";
 import { Radix } from "..";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ export function Footer() {
                     <div>
                         <FooterTitle>联系我们</FooterTitle>
                         <span className="flex items-center gap-2">
-                            <MessageCircleIcon className="text-primary size-5 -translate-y-px" />
+                            <MessageCircleMoreIcon className="text-primary size-5 -translate-y-px" />
                             QQ群: 5587557
                         </span>
                     </div>

@@ -15,17 +15,32 @@ export function OwnerCard() {
                         <Image
                             alt="Founder"
                             className="rendering-pixelated h-full w-full object-cover object-top grayscale-25 transition-all duration-500 group-hover:grayscale-0"
-                            src="/images/CC.webp"
+                            src="/images/team/CC.webp"
                             width={100}
                             height={100}></Image>
                     </div>
                 </div>
                 <div className="space-y-1 text-center">
-                    <h3 className="text-foreground group-hover:text-primary text-2xl font-bold tracking-wide transition-colors">CC</h3>
+                    <h3 className="text-foreground group-hover:text-primary text-4xl font-bold tracking-wide transition-colors">CC</h3>
                     <Radix.Badge variant="default">创始人</Radix.Badge>
                 </div>
             </div>
         </div>
+    );
+}
+
+export function TeamSeparator() {
+    return (
+        <>
+            <div className="relative flex h-16 w-full flex-col items-center overflow-hidden">
+                <div className="relative h-full w-px bg-neutral-700">
+                    <div className="absolute top-0 left-1/2 h-8 w-1 -translate-x-1/2 animate-[drop_2s_infinite] bg-linear-to-b from-transparent to-yellow-500/50 blur-[2px]"></div>
+                </div>
+            </div>
+            <div className="relative mb-8 hidden h-px w-[80%] bg-neutral-700 md:block">
+                <div className="absolute top-0 left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-neutral-600 bg-[#1f1f1f]"></div>
+            </div>
+        </>
     );
 }
 

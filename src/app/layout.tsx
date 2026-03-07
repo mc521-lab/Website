@@ -29,8 +29,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className={`${notoSans.variable} ${geistSans.variable} ${geistMono.variable} overflow-x-hidden antialiased`}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    <Mc521.NavBar />
-                    {children}
+                    <Mc521.NavigationWrapper>{children}</Mc521.NavigationWrapper>
                 </ThemeProvider>
             </body>
         </html>

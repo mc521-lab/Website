@@ -3,8 +3,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Radix } from "@/components";
-import { Menu } from "lucide-react";
+import { Mc521, Radix } from "@/components";
+import { ChevronLeftIcon, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useScrollSpy } from "@/hook/use-scroll-spy";
 import { useMcStatus } from "@/hook/use-server-status";
@@ -53,14 +53,16 @@ function NavBar_BigButton({ children, onClick }: { children: React.ReactNode; on
     );
 }
 
-export function NavBar() {
+export function NavBarHome() {
     const pathname = usePathname();
 
     const [scrolled, setScrolled] = useState(false);
+
     useEffect(() => {
         const onScroll = () => {
             setScrolled(window.scrollY > 50); // 滚动超过 50px
         };
+        onScroll();
         window.addEventListener("scroll", onScroll);
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
@@ -94,14 +96,7 @@ export function NavBar() {
                             current={activeId === item.href.slice(1)}
                         />
                     ))}
-                    {!loading && (
-                        <div className="border-background/25 bg-background/50 text-foreground/50 -mr-4 hidden items-center gap-2 rounded border px-3 py-1.5 font-mono text-xs xl:flex">
-                            <span
-                                className={`mr-1 h-2 w-2 rounded-full ${!status.error ? "animate-pulse bg-green-500" : "bg-destructive"}`}></span>
-                            {!status.error && <span>{status.online} 人在线</span>}
-                            {status.error && <span>离线</span>}
-                        </div>
-                    )}
+                    {!loading && <Mc521.OnlineIndicator online={status.online ?? 0} error={status?.error} type="small" />}
                     <NavBar_BigButton onClick={() => navigateTo("#join")}>加入我们</NavBar_BigButton>
                 </nav>
 
@@ -128,6 +123,21 @@ export function NavBar() {
                         </nav>
                     </Radix.SheetContent>
                 </Radix.Sheet>
+            </div>
+        </header>
+    );
+}
+
+export function NavBarSubpages({ name, path = "/" }: { name: string; path?: string }) {
+    return (
+        <header className={`bg-background/50 fixed top-0 right-0 left-0 z-50 border-b border-transparent py-4 transition-all duration-300`}>
+            <div className="mx-auto max-w-3/5">
+                <span onClick={() => (window.location.href = path)} className="flex cursor-pointer items-center gap-2">
+                    <ChevronLeftIcon className="translate-y-px opacity-50" />
+                    <span className="text-xl font-bold transition-colors duration-300">
+                        君庭阁 <span className="text-primary">{name}</span>
+                    </span>
+                </span>
             </div>
         </header>
     );

@@ -15,10 +15,20 @@ export function SectionTitle({ title, description = undefined }: SectionTitlePro
     );
 }
 
-export function Section({ zebra = false, id, children }: { zebra?: boolean; id: string; children: React.ReactNode }) {
+export function Section({
+    zebra = false,
+    id,
+    children,
+    className = "",
+}: {
+    zebra?: boolean;
+    id: string;
+    children: React.ReactNode;
+    className?: string;
+}) {
     return (
         <section
-            className={`${zebra ? "bg-foreground/5" : "bg-foreground/7"} relative flex min-h-96 items-center justify-center py-24`}
+            className={`${zebra ? "bg-foreground/5" : "bg-foreground/7"} relative flex min-h-96 items-center justify-center py-24 ${className}`}
             id={id}>
             {children}
         </section>

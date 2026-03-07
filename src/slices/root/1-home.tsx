@@ -1,7 +1,6 @@
 import { Mc521 } from "@/components";
 import { useMcStatus } from "@/hook/use-server-status";
 import { navigateTo } from "@/lib/utils";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Gamepad2Icon, ChevronDownIcon, BookOpenIcon } from "lucide-react";
 import { useEffect } from "react";
 
@@ -22,9 +21,9 @@ export function Home() {
                     <Mc521.HomeButton text="开始游戏" onClick={() => navigateTo("#join")}>
                         <Gamepad2Icon />
                     </Mc521.HomeButton>
-                    {/* <Mc521.HomeButton theme="light" text="查看百科">
+                    <Mc521.HomeButton theme="light" text="查看百科" onClick={() => (location.href = "/wiki")}>
                         <BookOpenIcon />
-                    </Mc521.HomeButton> */}
+                    </Mc521.HomeButton>
                 </div>
                 {!loading && <Mc521.OnlineIndicator online={status.online ?? 0} error={status.error} />}
             </div>

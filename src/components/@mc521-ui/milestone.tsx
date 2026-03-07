@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, PointerEvent } from "react";
+import { Fragment } from "react";
 
 interface MilestoneItemProps {
     date: string; // e.g. "2026.01.01"
@@ -97,10 +98,10 @@ export function MilestoneItem({ date, title, description, version, Icon, classNa
                     <div className="bg-primary/50 mb-3 h-1 w-10 rounded-full" />
                     <p className="text-foreground/60 line-clamp-4 text-xs leading-relaxed md:line-clamp-3 md:text-sm">
                         {description.map((item, index) => (
-                            <>
+                            <Fragment key={index}>
                                 {item}
                                 {index < description.length - 1 && <br />}
-                            </>
+                            </Fragment>
                         ))}
                     </p>
                 </div>

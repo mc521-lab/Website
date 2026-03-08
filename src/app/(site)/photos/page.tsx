@@ -1,9 +1,10 @@
+"use client";
+
 import { Mc521, Radix } from "@/components";
 import { PhotoItem } from "@/types/api";
-import { SquareArrowOutUpRightIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export function Photos() {
+export default function ChangeLog() {
     const [photos, setChangelog] = useState<PhotoItem[]>([]);
     const [current, setCurrent] = useState<PhotoItem>();
 
@@ -16,14 +17,13 @@ export function Photos() {
     }, []);
 
     return (
-        <Mc521.Section id="photos">
-            <div className="mb-6 flex w-full max-w-3/5 flex-col items-center justify-center mask-[linear-gradient(to_bottom,black_75%,transparent_98%)]">
-                <Mc521.SectionTitle title="光影时刻" description="记录社区内的每一个精彩瞬间" />
-                {/* <span className="mt-12 text-center opacity-50">暂无数据</span> */}
+        <Mc521.Section id="photos" className="min-h-screen">
+            <div className="flex w-full max-w-3/5 flex-col items-center justify-center py-12">
+                <Mc521.SectionTitle title="光影时刻" description="查看一路上走来的点点滴滴" />
                 {photos.length > 0 && (
                     <Radix.Dialog>
                         <Radix.DialogTrigger asChild>
-                            <section className="pointer-events-none mt-12 grid h-140 w-full grid-cols-4 gap-x-4">
+                            <section className="pointer-events-none mt-12 grid w-full grid-cols-4 gap-x-4">
                                 {photos.map((item, index) => (
                                     <Mc521.ImageShowEntry
                                         key={index}
@@ -39,10 +39,10 @@ export function Photos() {
                         </Radix.DialogContent>
                     </Radix.Dialog>
                 )}
+                <span className="group border-foreground/20 bg-muted text-foregroundmx-auto mx-auto flex w-fit items-center justify-center gap-2 border px-6 py-3">
+                    <span className="text-sm font-bold">已到最底部</span>
+                </span>
             </div>
-            <Mc521.HomeButton text="查看更多" theme="primary" className="absolute! bottom-24" onClick={() => (location.href = "/photos")}>
-                <SquareArrowOutUpRightIcon />
-            </Mc521.HomeButton>
         </Mc521.Section>
     );
 }

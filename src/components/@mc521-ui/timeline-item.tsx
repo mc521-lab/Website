@@ -48,7 +48,7 @@ export function TimelineItem({ version, date, major, content, dir }: TimelineIte
                         ) : (
                             <li className="text-foreground flex items-start gap-3 text-sm leading-relaxed">
                                 <div className="bg-primary h-1.5 w-1.5 shrink-0 translate-y-[9.5px]"></div>
-                                <span className="flex-1 opacity-75 line-through">&nbsp;管理员忘了写更新条目啦，快去提醒他一下&nbsp;</span>
+                                <span className="flex-1 line-through opacity-75">&nbsp;管理员忘了写更新条目啦，快去提醒他一下&nbsp;</span>
                             </li>
                         )}
                     </ul>

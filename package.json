@@ -3,12 +3,11 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev --port 3001",
         "build": "next build",
         "start": "next start",
         "lint": "eslint",
-        "format": "prettier -w .",
-        "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
+        "format": "prettier -w ."
     },
     "dependencies": {
         "@base-ui/react": "^1.2.0",

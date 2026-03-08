@@ -1,15 +1,16 @@
 // components/Header.tsx
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mc521, Radix } from "@/components";
-import { ChevronLeftIcon, Menu } from "lucide-react";
+import { ChevronLeftIcon, ChevronLeftCircleIcon, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useScrollSpy } from "@/hook/use-scroll-spy";
 import { useMcStatus } from "@/hook/use-server-status";
-import Image from "next/image";
 import { navigateTo } from "@/lib/utils";
+import { Navbar as NextraNavbar } from "nextra-theme-docs";
+import Link from "next/link";
+import Image from "next/image";
 
 const NAV_ITEMS = [
     { label: "首页", href: "#home" },
@@ -130,7 +131,7 @@ export function NavBarHome() {
 
 export function NavBarSubpages({ name, path = "/" }: { name: string; path?: string }) {
     return (
-        <header className={`bg-background/50 fixed top-0 right-0 left-0 z-50 border-b border-transparent py-4 transition-all duration-300`}>
+        <header className={`bg-muted fixed top-0 right-0 left-0 z-50 border-b border-transparent py-4 shadow-lg transition-all duration-300`}>
             <div className="mx-auto max-w-3/5">
                 <span onClick={() => (window.location.href = path)} className="flex cursor-pointer items-center gap-2">
                     <ChevronLeftIcon className="translate-y-px opacity-50" />
@@ -140,5 +141,37 @@ export function NavBarSubpages({ name, path = "/" }: { name: string; path?: stri
                 </span>
             </div>
         </header>
+    );
+}
+
+function Logo({ showBackToHome }: { showBackToHome: boolean }) {
+    return (
+        <>
+            {showBackToHome && (
+                <div className="mr-4">
+                    <Link className="flex items-center gap-2" href="/">
+                        <ChevronLeftCircleIcon />
+                    </Link>
+                </div>
+            )}
+            <Link className="flex items-center gap-2" href="/wiki">
+                <Image src="/images/logo.png" alt="君庭阁" className="mr-1 rounded-xs" width={36} height={36} />
+                <span className="text-xl font-bold transition-colors duration-300">
+                    <span className="text-primary">君庭阁</span> Wiki
+                </span>
+            </Link>
+        </>
+    );
+}
+export function NavBarWiki() {
+    const pathname = usePathname();
+    const showBackToHome = pathname === "/wiki";
+
+    return (
+        <NextraNavbar
+            logo={<Logo showBackToHome={showBackToHome} />}
+            logoLink={false}
+            projectLink="https://github.com/mc521-lab/Website/tree/v4/content/wiki"
+        />
     );
 }

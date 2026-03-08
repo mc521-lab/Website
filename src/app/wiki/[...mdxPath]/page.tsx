@@ -18,8 +18,6 @@ export default async function Page(props: Props) {
     const { mdxPath = [] } = await props.params;
     const { default: MDXContent, toc, metadata, sourceCode } = await importPage(["wiki", ...mdxPath]);
 
-    console.debug({ toc, metadata, sourceCode });
-
     return (
         <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
             <MDXContent params={{ mdxPath }} />

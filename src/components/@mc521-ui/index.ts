@@ -6,7 +6,7 @@ export { Carousel } from "./carousel";
 export { Footer } from "./footer";
 export { ImageShowEntry, ImageShow } from "./image-show";
 export { Milestone, MilestoneItem } from "./milestone";
-export { NavBarHome, NavBarSubpages } from "./nav-bar";
+export { NavBarHome, NavBarSubpages, NavBarWiki } from "./nav-bar";
 export { OnlineIndicator } from "./online-indicator";
 export { Section, SectionTitle } from "./section";
 export { MemberCard, OwnerCard, TeamSeparator } from "./team-cards";

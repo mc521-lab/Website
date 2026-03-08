@@ -15,7 +15,9 @@ type ImageShowProps = {
 };
 export function ImageShowEntry({ image, title, className = "", onClick }: ImageShowProps) {
     return (
-        <div className={`group pointer-events-auto relative mb-12 inline-block w-full cursor-pointer break-inside-avoid ${className}`} onClick={onClick}>
+        <div
+            className={`group pointer-events-auto relative mb-12 inline-block w-full cursor-pointer break-inside-avoid ${className}`}
+            onClick={onClick}>
             <div className="bg-background group-hover:bg-primary/80 group-hover:border-primary/80 transform border p-3 pb-8 shadow-md transition-all duration-300 group-hover:-translate-y-1 group-hover:-rotate-1 group-hover:shadow-[0_0_20px_var(--color-primary)]">
                 <div className="border-foreground/15 group-hover:border-foreground/75 relative overflow-hidden border-2">
                     <Image

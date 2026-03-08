@@ -6,9 +6,10 @@ import React from "react";
 type HomeButtonProps = {
     text: string;
     theme?: "light" | "dark" | "primary";
-    children: React.ReactNode;
+    children?: React.ReactNode;
     onClick?: () => void;
     className?: string;
+    extraClassName?: string;
 };
 
 export const buttonVariants = cva(
@@ -40,13 +41,17 @@ export const buttonInnerVariants = cva("absolute inset-0 opacity-0 transition-op
     },
 });
 
-export function HomeButton({ text, theme = "dark", children, onClick, className }: HomeButtonProps) {
+export function HomeButton({ text, theme = "dark", children, onClick, className, extraClassName }: HomeButtonProps) {
     return (
         <button onClick={onClick} className={buttonVariants({ theme, className })}>
-            <span className="flex items-center gap-3">
-                <div className="translate-y-px">{children}</div>
-                {text}
-            </span>
+            {children ? (
+                <span className="flex items-center gap-3">
+                    <div className="translate-y-px">{children}</div>
+                    {text}
+                </span>
+            ) : (
+                <span className={extraClassName}>{text}</span>
+            )}
             <div className={buttonInnerVariants({ theme })}></div>
         </button>
     );

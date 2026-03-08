@@ -11,3 +11,13 @@ export type MilestoneItem = {
     title: string;
     description: string[];
 };
+
+export type PhotoItem = {
+    image: {
+        src: string;
+        width: number;
+        height: number;
+    };
+    title: string;
+    description: string;
+};

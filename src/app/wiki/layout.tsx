@@ -1,18 +1,26 @@
-import { Layout, Navbar } from "nextra-theme-docs";
+import { Layout } from "nextra-theme-docs";
 import { Banner } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
-import "nextra-theme-docs/style.css";
 import { PageMapItem } from "nextra";
+import "nextra-theme-docs/style.css";
+import "./wiki.css";
+import { Mc521 } from "@/components";
 
 export const metadata = {
-    // Define your metadata here
-    // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+    title: {
+        absolute: "君庭阁 Wiki",
+        template: "%s - 君庭阁 Wiki",
+    },
 };
 
 const banner = <Banner>🚧 重要通知 | 本 Wiki 仍在建设中，如有问题请及时反馈 🚧</Banner>;
-const navbar = <Navbar logo={<b>君庭阁 Wiki</b>} />;
 
-const overridePageMap = { 0: { title: "⭐ 纯新手必看教程" } };
+const overridePageMap = {
+    0: { title: "🔙 返回主页" },
+    1: { title: "📑 规章制度" },
+    2: { title: "⭐ 纯新手必看教程" },
+    3: { title: "🏠 公会系统" },
+};
 function mergePageMap(pageMap: PageMapItem[], overridePageMap: Record<number, Record<string, string>>) {
     return pageMap.map((item, idx) => {
         if (idx in overridePageMap) {
@@ -24,15 +32,15 @@ function mergePageMap(pageMap: PageMapItem[], overridePageMap: Record<number, Re
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     const pageMap = await getPageMap("/wiki");
-
-    console.debug(mergePageMap(pageMap, overridePageMap));
+    const mergedPageMap = mergePageMap(pageMap, overridePageMap);
+    console.debug({ pageMap, mergedPageMap });
 
     return (
         <Layout
             banner={banner}
-            navbar={navbar}
+            navbar={<Mc521.NavBarWiki />}
             footer={null}
-            pageMap={mergePageMap(pageMap, overridePageMap)}
+            pageMap={mergedPageMap}
             docsRepositoryBase="https://github.com/mc521-lab/Website/tree/v4/content/wiki">
             {children}
         </Layout>

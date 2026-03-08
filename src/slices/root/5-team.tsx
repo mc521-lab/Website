@@ -11,6 +11,11 @@ const TEAMMEMBER_DATA = [
         position: ["小游戏主管", "副本主管"],
         image: "/images/team/FBK_Lynn.webp",
     },
+    {
+        name: "We1Rou",
+        position: ["秘书"],
+        image: "/images/team/We1Rou.webp",
+    },
 ];
 
 export function Team() {
@@ -21,7 +26,7 @@ export function Team() {
                 <div className="mt-12 flex w-full flex-col items-center">
                     <Mc521.OwnerCard />
                     <Mc521.TeamSeparator />
-                    <div className="grid w-full grid-cols-2 gap-x-12">
+                    <div className="grid w-full grid-cols-3 gap-x-12">
                         {TEAMMEMBER_DATA.map((item, index) => (
                             <Mc521.MemberCard key={index} name={item.name} position={item.position} image={item.image} />
                         ))}

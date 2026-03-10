@@ -29,7 +29,7 @@ export function Home() {
             </div>
             <ChevronDownIcon className="animate-float-y absolute bottom-16 left-1/2 z-3 size-10 -translate-x-1/2 opacity-50" />
             <div className="from-background/75 via-background/50 to-background absolute z-2 h-full w-full bg-linear-to-b via-50% backdrop-blur-xs"></div>
-            <video className="absolute top-0 left-0 h-full w-full object-cover" src="/videos/mc-background-video.webm" autoPlay loop muted />
+            <video className="absolute top-0 left-0 h-full w-full object-cover" src="/videos/mc-background-video.webm" autoPlay loop muted preload="lazy" />
         </section>
     );
 }

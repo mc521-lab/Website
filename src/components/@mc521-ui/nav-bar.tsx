@@ -6,7 +6,6 @@ import { Mc521, Radix } from "@/components";
 import { ChevronLeftIcon, ChevronLeftCircleIcon, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useScrollSpy } from "@/hook/use-scroll-spy";
-import { useMcStatus } from "@/hook/use-server-status";
 import { navigateTo } from "@/lib/utils";
 import { Navbar as NextraNavbar } from "nextra-theme-docs";
 import Link from "next/link";
@@ -70,11 +69,6 @@ export function NavBarHome() {
 
     const activeId = useScrollSpy([...NAV_ITEMS.map((item) => item.href.slice(1)), "join"], 100);
 
-    const { status, loading, fetchStatus } = useMcStatus("mc521.cc");
-    useEffect(() => {
-        fetchStatus();
-    }, [fetchStatus]);
-
     return (
         <header
             className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-neutral-800 bg-[#1a1a1a]/95 py-3 shadow-lg backdrop-blur-md" : "border-transparent bg-transparent py-6"}`}>
@@ -97,7 +91,7 @@ export function NavBarHome() {
                             current={activeId === item.href.slice(1)}
                         />
                     ))}
-                    {!loading && <Mc521.OnlineIndicator online={status.online ?? 0} error={status?.error} type="small" />}
+                    <Mc521.OnlineIndicator type="small" />
                     <NavBar_BigButton onClick={() => navigateTo("#join")}>加入我们</NavBar_BigButton>
                 </nav>
 

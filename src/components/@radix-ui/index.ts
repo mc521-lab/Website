@@ -1,5 +1,6 @@
 // 此文件由 generate_index_ts.py 自动生成，请勿手动修改
 
+export { Alert, AlertAction, AlertDescription, AlertTitle } from "./alert";
 export { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger } from "./alert-dialog";
 export { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from "./avatar";
 export { Badge } from "./badge";

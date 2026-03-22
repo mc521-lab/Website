@@ -26,6 +26,10 @@ const entries = [
         text: "伤害计算工具",
         url: "/toolbox/damage-calc",
     },
+    {
+        text: "换皮肤工具",
+        url: "/toolbox/skindrop",
+    },
 ];
 
 export default function ToolboxHome() {

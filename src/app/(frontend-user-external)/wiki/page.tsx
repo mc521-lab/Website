@@ -1,7 +1,8 @@
 "use client";
 
 import { Mc521 } from "@/components";
-import router from "next/router";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useRouter } from "next/navigation";
 
 const svg = `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
     <g fill="none" fill-rule="evenodd">
@@ -15,12 +16,14 @@ const encodedSvg = encodeURIComponent(svg);
 const entries = [
     {
         text: "⭐ 纯新手必看教程",
-        onClick: () => router.push("/wiki/2-beginner/1-common-commands"),
+        onClick: ($router: AppRouterInstance) => $router.push("/wiki/2-beginner/1-common-commands"),
         extraClassName: "-ml-1.5",
     },
 ];
 
 export default function WikiHome() {
+    const router = useRouter();
+
     return (
         <main
             className="pixel-font flex h-[calc(100vh-104px)] w-full flex-col items-center justify-center"
@@ -34,7 +37,7 @@ export default function WikiHome() {
             <p className="mx-auto mb-10 max-w-2xl -translate-y-2 text-3xl leading-relaxed text-neutral-300 md:text-4xl">无所不知 无所不晓</p>
             <div className="flex -translate-y-2 gap-4">
                 {entries.map((entry) => (
-                    <Mc521.HomeButton key={entry.text} {...entry} />
+                    <Mc521.HomeButton key={entry.text} {...entry} onClick={() => entry.onClick(router)} />
                 ))}
             </div>
         </main>

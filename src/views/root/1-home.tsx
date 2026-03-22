@@ -1,10 +1,12 @@
 import { Mc521 } from "@/components";
-import { navigateTo } from "@/lib/utils";
+import { transformTo } from "@/lib/utils";
 
 import { Gamepad2Icon, ChevronDownIcon, BookOpenIcon, ToolboxIcon } from "lucide-react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 export function Home() {
+    const $router = useRouter();
+
     return (
         <section className="relative h-screen" id="home">
             <div className="absolute top-0 left-0 z-3 flex h-full w-full flex-col items-center justify-center">
@@ -12,7 +14,7 @@ export function Home() {
                     <span className="text-primary">MC</span>521
                 </h1>
                 <p className="mx-auto mb-10 max-w-2xl text-3xl leading-relaxed text-neutral-300 md:text-4xl">二十余年，同在一片方块天</p>
-                <Mc521.HomeButton text="开始游戏" onClick={() => navigateTo("#join")}>
+                <Mc521.HomeButton text="开始游戏" onClick={() => transformTo("#join")}>
                     <Gamepad2Icon />
                 </Mc521.HomeButton>
                 <div className="mt-4 flex scale-80 gap-4 pl-1">
@@ -20,14 +22,14 @@ export function Home() {
                         theme="light"
                         text="查看百科"
                         className="flex w-50 justify-center"
-                        onClick={() => router.push("/wiki")}>
+                        onClick={() => $router.push("/wiki")}>
                         <BookOpenIcon />
                     </Mc521.HomeButton>
                     <Mc521.HomeButton
                         theme="light"
                         text="打开工具箱"
                         className="flex w-50 justify-center"
-                        onClick={() => router.push("/toolbox")}>
+                        onClick={() => $router.push("/toolbox")}>
                         <ToolboxIcon />
                     </Mc521.HomeButton>
                 </div>

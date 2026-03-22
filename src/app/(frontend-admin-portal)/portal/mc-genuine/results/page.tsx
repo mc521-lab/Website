@@ -140,7 +140,7 @@ export default function Page() {
             }>
             <Dashboard.AppSidebar variant="inset" />
             <Radix.SidebarInset>
-                <Dashboard.SiteHeader title="君庭阁 官网数据后台 - 验证结果记录" />
+                <Dashboard.SiteHeader title="正版验证系统 - 验证通过记录" />
                 <div className="flex flex-1 flex-col">
                     <div className="@container/main flex flex-1 flex-col gap-2">
                         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">

@@ -1,7 +1,7 @@
 import { Mc521 } from "@/components";
 import { ChangelogItem } from "@/types/api";
 import { ChevronRightIcon } from "lucide-react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const daysSince = (d: string) => Math.floor((new Date().getTime() - new Date(d).getTime()) / 86400000);
@@ -26,6 +26,8 @@ export function Changelog() {
             });
     }, []);
 
+    const $router = useRouter();
+
     return (
         <Mc521.Section id="changelog" zebra>
             <div className="flex w-full max-w-3/5 flex-col items-center justify-center">
@@ -47,7 +49,7 @@ export function Changelog() {
                     <div className="relative z-10 mt-16 text-center">
                         <button
                             className="group border-foreground/20 bg-muted text-foreground hover:bg-foreground hover:text-background mx-auto flex cursor-pointer items-center justify-center gap-2 border px-6 py-3 transition-all duration-300"
-                            onClick={() => router.push("/changelog")}>
+                            onClick={() => $router.push("/changelog")}>
                             <span className="text-sm font-bold">查看完整历史记录</span>
                             <ChevronRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
                         </button>

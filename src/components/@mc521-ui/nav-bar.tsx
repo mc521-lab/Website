@@ -1,15 +1,14 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Mc521, Radix } from "@/components";
 import { ChevronLeftIcon, ChevronLeftCircleIcon, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
-import { navigateTo } from "@/lib/utils";
+import { transformTo } from "@/lib/utils";
 import { Navbar as NextraNavbar } from "nextra-theme-docs";
 import Link from "next/link";
 import Image from "next/image";
-import router from "next/router";
 
 const NAV_ITEMS = [
     { label: "首页", href: "#home" },
@@ -87,7 +86,7 @@ export function NavBarHome() {
                         <NavBar_Item
                             key={item.href}
                             label={item.label}
-                            onClick={() => navigateTo(item.href)}
+                            onClick={() => transformTo(item.href)}
                             current={activeId === item.href.slice(1)}
                         />
                     ))}
@@ -95,7 +94,7 @@ export function NavBarHome() {
                 </nav>
 
                 <nav className="hidden items-center gap-10 md:flex">
-                    <NavBar_BigButton onClick={() => navigateTo("#join")}>加入我们</NavBar_BigButton>
+                    <NavBar_BigButton onClick={() => transformTo("#join")}>加入我们</NavBar_BigButton>
                 </nav>
 
                 {/* Mobile Navigation */}
@@ -126,11 +125,23 @@ export function NavBarHome() {
     );
 }
 
-export function NavBarSubpages({ name, path = "/" }: { name: string; path?: string }) {
+interface NavBarSubpagesProps__Path {
+    name: string;
+    path: string;
+    prev?: never;
+}
+interface NavBarSubpagesProps__Prev {
+    name: string;
+    path?: never;
+    prev: true;
+}
+export function NavBarSubpages({ name, path, prev }: NavBarSubpagesProps__Path | NavBarSubpagesProps__Prev) {
+    const $router = useRouter();
+
     return (
         <header className={`bg-muted fixed top-0 right-0 left-0 z-50 border-b border-transparent py-4 shadow-lg transition-all duration-300`}>
             <div className="mx-auto max-w-3/5">
-                <span onClick={() => router.push(path)} className="flex cursor-pointer items-center gap-2">
+                <span onClick={() => (prev ? $router.back() : $router.push(path))} className="flex cursor-pointer items-center gap-2">
                     <ChevronLeftIcon className="translate-y-px opacity-50" />
                     <span className="text-xl font-bold transition-colors duration-300">
                         君庭阁 <span className="text-primary">{name}</span>

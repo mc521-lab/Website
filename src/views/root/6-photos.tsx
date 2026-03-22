@@ -1,7 +1,7 @@
 import { Mc521, Radix } from "@/components";
 import { PhotoItem } from "@/types/api";
 import { SquareArrowOutUpRightIcon } from "lucide-react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function Photos() {
@@ -15,6 +15,8 @@ export function Photos() {
                 setChangelog(data.slice(0, 12));
             });
     }, []);
+
+    const $router = useRouter();
 
     return (
         <Mc521.Section id="photos">
@@ -41,7 +43,7 @@ export function Photos() {
                     </Radix.Dialog>
                 )}
             </div>
-            <Mc521.HomeButton text="查看更多" theme="primary" className="absolute! bottom-24" onClick={() => router.push("/photos")}>
+            <Mc521.HomeButton text="查看更多" theme="primary" className="absolute! bottom-24" onClick={() => $router.push("/photos")}>
                 <SquareArrowOutUpRightIcon />
             </Mc521.HomeButton>
         </Mc521.Section>

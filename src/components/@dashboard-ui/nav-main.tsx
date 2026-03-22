@@ -12,8 +12,8 @@ export function NavMain({
         icon?: React.ReactNode;
     }[];
 }) {
-    const router = useRouter();
-    const pathname = usePathname();
+    const $router = useRouter();
+    const $pathname = usePathname();
 
     return (
         <SidebarGroup>
@@ -23,8 +23,8 @@ export function NavMain({
                         <SidebarMenuItem key={item.title}>
                             <SidebarMenuButton
                                 tooltip={item.title}
-                                variant={pathname === item.url ? "primary" : "default"}
-                                onClick={() => router.push(item.url)}>
+                                variant={$pathname === item.url ? "primary" : "default"}
+                                onClick={() => $router.push(item.url)}>
                                 {item.icon}
                                 <span>{item.title}</span>
                             </SidebarMenuButton>

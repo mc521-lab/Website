@@ -27,6 +27,12 @@ const data = {
                 { name: "验证通过记录", url: "/portal/mc-genuine/results", icon: <BadgeCheckIcon /> },
             ],
         },
+        {
+            name: "工单系统",
+            items: [
+                { name: "工单列表", url: "/portal/jira", icon: <FormIcon /> },
+            ],
+        },
     ],
 };
 

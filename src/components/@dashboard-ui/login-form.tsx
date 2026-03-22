@@ -10,7 +10,7 @@ import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from 
 import { Input } from "@/components/@radix-ui/input";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
-    const router = useRouter();
+    const $router = useRouter();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -40,8 +40,8 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
         }
 
         // ✅ 登录成功 → 跳转
-        router.push("/portal");
-        router.refresh(); // 让 middleware / server 立即感知登录态
+        $router.push("/portal");
+        $router.refresh(); // 让 middleware / server 立即感知登录态
     };
 
     return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { Mc521 } from "@/components";
-import { IndexSlice } from "@/slices";
+import { IndexSlice } from "@/views";
 
 export default function Page() {
     return (

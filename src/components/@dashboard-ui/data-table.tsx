@@ -116,10 +116,12 @@ export function DataTable<T extends { id: string | number }>({
     data: initialData,
     columns,
     onRefresh,
+    hideSearch = false,
 }: {
     data: T[];
     columns: ColumnDef<T>[];
     onRefresh: React.MouseEventHandler;
+    hideSearch?: boolean;
 }) {
     const [data, setData] = React.useState(() => initialData);
     const [searchId, setSearchId] = React.useState("");
@@ -189,7 +191,9 @@ export function DataTable<T extends { id: string | number }>({
                     View
                 </Label>
 
-                <Input className="w-lg" placeholder="按记录 ID 搜索" value={searchId} onChange={(e) => setSearchId(e.target.value)} />
+                {hideSearch ? <div></div> : (
+                    <Input className="w-lg" placeholder="按记录 ID 搜索" value={searchId} onChange={(e) => setSearchId(e.target.value)} />
+                )}
                 <div className="flex items-center gap-2">
                     <Button variant="outline" size="sm" onClick={onRefresh}>
                         <RefreshCcwIcon data-icon="inline-start" />

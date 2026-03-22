@@ -2,7 +2,7 @@
 
 import { Radix } from "@/components";
 import { openCentered } from "@/lib/utils";
-import { ZhengbanSlice } from "@/slices";
+import { ZhengbanSlice } from "@/views";
 import { ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";

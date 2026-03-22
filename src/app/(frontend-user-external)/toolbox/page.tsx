@@ -1,7 +1,8 @@
 "use client";
 
 import { Mc521 } from "@/components";
-import router from "next/router";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useRouter } from "next/navigation";
 
 const svg = `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
     <g fill="none" fill-rule="evenodd">
@@ -15,11 +16,17 @@ const encodedSvg = encodeURIComponent(svg);
 const entries = [
     {
         text: "正版验证工具",
-        onClick: () => router.push("/toolbox/zhengban"),
+        url: "/toolbox/genuine-title",
+    },
+    {
+        text: "工单系统",
+        url: "/toolbox/jira",
     },
 ];
 
 export default function ToolboxHome() {
+    const router = useRouter();
+
     return (
         <main
             className="pixel-font flex h-[calc(100vh-61px)] w-full translate-y-15.25 flex-col items-center justify-center"
@@ -33,7 +40,7 @@ export default function ToolboxHome() {
             <p className="mx-auto mb-10 max-w-2xl -translate-y-2 text-3xl leading-relaxed text-neutral-300 md:text-4xl">玩服必备工具箱</p>
             <div className="flex -translate-y-2 gap-4">
                 {entries.map((entry) => (
-                    <Mc521.HomeButton key={entry.text} {...entry} />
+                    <Mc521.HomeButton key={entry.text} {...entry} onClick={() => router.push(entry.url)} />
                 ))}
             </div>
         </main>

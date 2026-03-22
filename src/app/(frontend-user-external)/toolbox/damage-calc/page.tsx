@@ -31,21 +31,25 @@ function armorDamageReduction(d: number, v: number, t: number, p: number = 0): n
 }
 
 export default function ArmorDamageCalculator() {
-    const [damage, setDamage] = useState(10);
-    const [armor, setArmor] = useState(20);
-    const [toughness, setToughness] = useState(0);
-    const [reduce, setReduce] = useState(0);
-    const [penetration] = useState(0);
-    const [enchantment, setEnchantment] = useState(100);
+    const [damage, setDamage] = useState<number | null>(10);
+    const [armor, setArmor] = useState<number | null>(20);
+    const [toughness, setToughness] = useState<number | null>(0);
+    const [reduce, setReduce] = useState<number | null>(0);
+    const [penetration] = useState<number | null>(0);
+    const [enchantment, setEnchantment] = useState<number | null>(100);
 
     const { result, error } = useMemo(() => {
-        try {
-            const baseDamage = Math.max(0, damage - reduce);
+        function wrapper(input: number | null | undefined) {
+            return input ?? 0;
+        }
 
-            const r = armorDamageReduction(baseDamage, armor, toughness, penetration);
+        try {
+            const baseDamage = Math.max(0, wrapper(damage) - wrapper(reduce));
+
+            const r = armorDamageReduction(baseDamage, wrapper(armor), wrapper(toughness), wrapper(penetration));
 
             return {
-                result: r * (enchantment / 100),
+                result: r * (wrapper(enchantment) / 100),
                 error: null,
             };
         } catch (e: any) {
@@ -69,16 +73,29 @@ export default function ArmorDamageCalculator() {
                                 className="flex-1"
                                 min={0}
                                 step={0.25}
-                                value={[damage]}
-                                onValueChange={(val: SetStateAction<number>[]) => setDamage(val[0])}
+                                value={[damage ?? 0]}
+                                onValueChange={(val: SetStateAction<number | null>[]) => setDamage(val[0])}
                             />
                             <Radix.Input
                                 min={0}
                                 step={0.25}
                                 type="number"
                                 className="w-20"
-                                value={damage}
-                                onChange={(e: { target: { value: any } }) => setDamage(Number(e.target.value))}
+                                value={damage ?? ""}
+                                onChange={(e) => {
+                                    const val = e.target.value;
+                                    if (val === "") {
+                                        setDamage(null);
+                                    } else {
+                                        setDamage(Number(val));
+                                    }
+                                }}
+                                onBlur={() => {
+                                    // 失焦时修正为最小值
+                                    if (damage === null || isNaN(damage)) {
+                                        setDamage(0);
+                                    }
+                                }}
                             />
                         </div>
                     </div>
@@ -91,16 +108,29 @@ export default function ArmorDamageCalculator() {
                                 className="flex-1"
                                 min={0}
                                 step={0.5}
-                                value={[reduce]}
-                                onValueChange={(val: SetStateAction<number>[]) => setReduce(val[0])}
+                                value={[reduce ?? 0]}
+                                onValueChange={(val: SetStateAction<number | null>[]) => setReduce(val[0])}
                             />
                             <Radix.Input
                                 min={0}
                                 step={0.5}
                                 type="number"
                                 className="w-20"
-                                value={reduce}
-                                onChange={(e: { target: { value: any } }) => setReduce(Number(e.target.value))}
+                                value={reduce ?? ""}
+                                onChange={(e: { target: { value: string } }) => {
+                                    const val = e.target.value;
+                                    if (val === "") {
+                                        setReduce(null);
+                                    } else {
+                                        setReduce(Number(val));
+                                    }
+                                }}
+                                onBlur={() => {
+                                    // 失焦时修正为最小值
+                                    if (reduce === null || isNaN(reduce)) {
+                                        setReduce(0);
+                                    }
+                                }}
                             />
                         </div>
                     </div>
@@ -113,15 +143,28 @@ export default function ArmorDamageCalculator() {
                                 className="flex-1"
                                 min={0}
                                 step={0.5}
-                                value={[armor]}
-                                onValueChange={(val: SetStateAction<number>[]) => setArmor(val[0])}
+                                value={[armor ?? 0]}
+                                onValueChange={(val: SetStateAction<number | null>[]) => setArmor(val[0])}
                             />
                             <Radix.Input
                                 min={0}
                                 type="number"
                                 className="w-20"
-                                value={armor}
-                                onChange={(e: { target: { value: any } }) => setArmor(Number(e.target.value))}
+                                value={armor ?? ""}
+                                onChange={(e: { target: { value: string } }) => {
+                                    const val = e.target.value;
+                                    if (val === "") {
+                                        setArmor(null);
+                                    } else {
+                                        setArmor(Number(e.target.value));
+                                    }
+                                }}
+                                onBlur={() => {
+                                    // 失焦时修正为最小值
+                                    if (armor === null || isNaN(armor)) {
+                                        setArmor(0);
+                                    }
+                                }}
                             />
                         </div>
                     </div>
@@ -134,15 +177,28 @@ export default function ArmorDamageCalculator() {
                                 className="flex-1"
                                 min={0}
                                 step={0.5}
-                                value={[toughness]}
-                                onValueChange={(val: SetStateAction<number>[]) => setToughness(val[0])}
+                                value={[toughness ?? 0]}
+                                onValueChange={(val: SetStateAction<number | null>[]) => setToughness(val[0])}
                             />
                             <Radix.Input
                                 min={0}
                                 type="number"
                                 className="w-20"
-                                value={toughness}
-                                onChange={(e: { target: { value: any } }) => setToughness(Number(e.target.value))}
+                                value={toughness ?? ""}
+                                onChange={(e: { target: { value: string } }) => {
+                                    const val = e.target.value;
+                                    if (val === "") {
+                                        setToughness(null);
+                                    } else {
+                                        setToughness(Number(e.target.value));
+                                    }
+                                }}
+                                onBlur={() => {
+                                    // 失焦时修正为最小值
+                                    if (toughness === null || isNaN(toughness)) {
+                                        setToughness(0);
+                                    }
+                                }}
                             />
                         </div>
                     </div>
@@ -156,18 +212,31 @@ export default function ArmorDamageCalculator() {
                                 min={0}
                                 max={2}
                                 step={0.5}
-                                value={[penetration]}
+                                value={[penetration ?? 0]}
                                 disabled={true}
-                                onValueChange={(val: SetStateAction<number>[]) => setPenetration(val[0])}
+                                onValueChange={(val: SetStateAction<number | null>[]) => setPenetration(val[0])}
                             />
                             <Radix.Input
                                 min={0}
                                 max={2}
                                 type="number"
                                 className="w-20"
-                                value={penetration}
+                                value={penetration ?? ""}
                                 disabled={true}
-                                onChange={(e: { target: { value: any } }) => setPenetration(Number(e.target.value))}
+                                onChange={(e: { target: { value: string } }) => {
+                                    const val = e.target.value;
+                                    if (val === "") {
+                                        setPenetration(null);
+                                    } else {
+                                        setPenetration(Number(e.target.value));
+                                    }
+                                }}
+                                onBlur={() => {
+                                    // 失焦时修正为最小值
+                                    if (penetration === null || isNaN(penetration)) {
+                                        setPenetration(0);
+                                    }
+                                }}
                             />
                         </div>
                     </div> */}
@@ -181,8 +250,8 @@ export default function ArmorDamageCalculator() {
                                 min={0}
                                 max={100}
                                 step={1}
-                                value={[enchantment]}
-                                onValueChange={(val: SetStateAction<number>[]) => setEnchantment(val[0])}
+                                value={[enchantment ?? 0]}
+                                onValueChange={(val: SetStateAction<number | null>[]) => setEnchantment(val[0])}
                             />
                             <Radix.Input
                                 min={0}
@@ -190,8 +259,15 @@ export default function ArmorDamageCalculator() {
                                 step={1}
                                 type="number"
                                 className="w-20"
-                                value={enchantment}
-                                onChange={(e: { target: { value: any } }) => setEnchantment(Number(e.target.value))}
+                                value={enchantment ?? ""}
+                                onChange={(e: { target: { value: string } }) => {
+                                    const val = e.target.value;
+                                    if (val === "") {
+                                        setEnchantment(null);
+                                    } else {
+                                        setEnchantment(Number(e.target.value));
+                                    }
+                                }}
                             />
                         </div>
                     </div>

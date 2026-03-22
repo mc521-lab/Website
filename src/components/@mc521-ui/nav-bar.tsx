@@ -1,4 +1,3 @@
-// components/Header.tsx
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -72,7 +71,7 @@ export function NavBarHome() {
     return (
         <header
             className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-neutral-800 bg-[#1a1a1a]/95 py-3 shadow-lg backdrop-blur-md" : "border-transparent bg-transparent py-6"}`}>
-            <div className="container mx-auto flex h-12 items-center justify-center gap-10 px-4">
+            <div className="container mx-auto flex h-12 max-w-[80vw] items-center justify-center gap-32 -translate-x-8 px-4">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
                     <Image src="/images/logo.png" alt="君庭阁" className="mr-1 rounded-xs" width={36} height={36} />
@@ -91,7 +90,10 @@ export function NavBarHome() {
                             current={activeId === item.href.slice(1)}
                         />
                     ))}
-                    <Mc521.OnlineIndicator type="small" />
+                    {false && <Mc521.OnlineIndicator type="small" />}
+                </nav>
+
+                <nav className="hidden items-center gap-10 md:flex">
                     <NavBar_BigButton onClick={() => navigateTo("#join")}>加入我们</NavBar_BigButton>
                 </nav>
 

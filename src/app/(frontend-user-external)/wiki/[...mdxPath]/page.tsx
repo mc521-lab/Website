@@ -8,7 +8,7 @@ type Props = { params: Promise<Params> };
 
 export async function generateMetadata(props: Props) {
     const { mdxPath = [] } = await props.params;
-    const { metadata } = await importPage([...mdxPath]);
+    const { metadata } = await importPage(["wiki", ...mdxPath]);
     return metadata;
 }
 
@@ -16,7 +16,7 @@ const Wrapper = getMDXComponents().wrapper;
 
 export default async function Page(props: Props) {
     const { mdxPath = [] } = await props.params;
-    const { default: MDXContent, toc, metadata, sourceCode } = await importPage([...mdxPath]);
+    const { default: MDXContent, toc, metadata, sourceCode } = await importPage(["wiki", ...mdxPath]);
 
     return (
         <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>

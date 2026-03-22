@@ -9,7 +9,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="h-screen flex flex-col">
+        <div className="flex h-screen flex-col">
             <Mc521.NavBarSubpages name="工具箱" path="/" />
             {children}
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMcStatus } from "@/hook/use-server-status";
+import { useMcStatus } from "@/hooks/use-server-status";
 import { useEffect } from "react";
 
 export function OnlineIndicator({ type = "large" }: { type?: "small" | "large" }) {

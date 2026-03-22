@@ -22,6 +22,10 @@ const entries = [
         text: "工单系统",
         url: "/toolbox/jira",
     },
+    {
+        text: "伤害计算工具",
+        url: "/toolbox/damage-calc",
+    },
 ];
 
 export default function ToolboxHome() {

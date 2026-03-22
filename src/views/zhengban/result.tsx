@@ -66,7 +66,9 @@ const MinecraftVerifyResultCard: React.FC<MinecraftVerifyResultCardProps> = ({ s
                 </p>
             </Radix.CardContent>
             <Radix.CardFooter>
-                <Radix.Button className="ml-auto" onClick={onRestart}>重置</Radix.Button>
+                <Radix.Button className="ml-auto" onClick={onRestart}>
+                    重置
+                </Radix.Button>
             </Radix.CardFooter>
         </Radix.Card>
     );

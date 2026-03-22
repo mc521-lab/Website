@@ -8,7 +8,7 @@ const withNextra = nextra({
 const nextConfig: NextConfig = withNextra({
     turbopack: {
         resolveAlias: {
-            "next-mdx-import-source-file": "@/hook/mdx-components.ts",
+            "next-mdx-import-source-file": "@/hooks/mdx-components.ts",
         },
     },
 });

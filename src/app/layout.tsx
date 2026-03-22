@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${notoSans.variable} ${geistSans.variable} ${geistMono.variable} overflow-x-hidden antialiased`}>
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
                     {children}
                 </ThemeProvider>
                 <SpeedInsights />

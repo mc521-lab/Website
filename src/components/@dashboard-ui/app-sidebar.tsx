@@ -19,11 +19,6 @@ import { BadgeCheckIcon, CircleArrowLeft, FormIcon, HomeIcon } from "lucide-reac
 import Link from "next/link";
 
 const data = {
-    user: {
-        name: "shadcn",
-        email: "m@example.com",
-        avatar: "/avatars/shadcn.jpg",
-    },
     sidebar: [
         {
             name: "正版验证系统",
@@ -65,7 +60,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ))}
             </SidebarContent>
             <SidebarFooter>
-                <NavUser user={data.user} />
+                <NavUser />
             </SidebarFooter>
         </Sidebar>
     );

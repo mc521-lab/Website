@@ -9,6 +9,7 @@ import { navigateTo } from "@/lib/utils";
 import { Navbar as NextraNavbar } from "nextra-theme-docs";
 import Link from "next/link";
 import Image from "next/image";
+import router from "next/router";
 
 const NAV_ITEMS = [
     { label: "首页", href: "#home" },
@@ -129,7 +130,7 @@ export function NavBarSubpages({ name, path = "/" }: { name: string; path?: stri
     return (
         <header className={`bg-muted fixed top-0 right-0 left-0 z-50 border-b border-transparent py-4 shadow-lg transition-all duration-300`}>
             <div className="mx-auto max-w-3/5">
-                <span onClick={() => (window.location.href = path)} className="flex cursor-pointer items-center gap-2">
+                <span onClick={() => router.push(path)} className="flex cursor-pointer items-center gap-2">
                     <ChevronLeftIcon className="translate-y-px opacity-50" />
                     <span className="text-xl font-bold transition-colors duration-300">
                         君庭阁 <span className="text-primary">{name}</span>

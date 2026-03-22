@@ -2,6 +2,7 @@ import { Mc521 } from "@/components";
 import { navigateTo } from "@/lib/utils";
 
 import { Gamepad2Icon, ChevronDownIcon, BookOpenIcon, ToolboxIcon } from "lucide-react";
+import router from "next/router";
 
 export function Home() {
     return (
@@ -19,14 +20,14 @@ export function Home() {
                         theme="light"
                         text="查看百科"
                         className="flex w-50 justify-center"
-                        onClick={() => (location.href = "/wiki")}>
+                        onClick={() => router.push("/wiki")}>
                         <BookOpenIcon />
                     </Mc521.HomeButton>
                     <Mc521.HomeButton
                         theme="light"
                         text="打开工具箱"
                         className="flex w-50 justify-center"
-                        onClick={() => (location.href = "/toolbox")}>
+                        onClick={() => router.push("/toolbox")}>
                         <ToolboxIcon />
                     </Mc521.HomeButton>
                 </div>

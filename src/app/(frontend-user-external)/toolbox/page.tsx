@@ -1,6 +1,7 @@
 "use client";
 
 import { Mc521 } from "@/components";
+import router from "next/router";
 
 const svg = `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
     <g fill="none" fill-rule="evenodd">
@@ -14,7 +15,7 @@ const encodedSvg = encodeURIComponent(svg);
 const entries = [
     {
         text: "正版验证工具",
-        onClick: () => (location.href = "/toolbox/zhengban"),
+        onClick: () => router.push("/toolbox/zhengban"),
     },
 ];
 

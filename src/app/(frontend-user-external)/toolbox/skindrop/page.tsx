@@ -56,7 +56,7 @@ export default function SkinDrop() {
             skinUrl = URL.createObjectURL(file);
         } else if (url) {
             try {
-                const res = await fetch(`/api/skindrop/download?id=${url.split("/").pop()}`);
+                const res = await fetch(`/api/skindrop/download/${url.split("/").pop()}`);
                 const blob = await res.blob();
                 skinBlobRef.current = blob;
                 skinUrl = URL.createObjectURL(blob);

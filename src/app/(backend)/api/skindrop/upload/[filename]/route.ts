@@ -13,7 +13,7 @@ async function parseFileFromRequest(req: NextRequest): Promise<{ data: ArrayBuff
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ filename?: string }> }) {
     // URL 文件名
-    const filename = (await params).filename;
+    const { filename } = await params;
     if (!filename) {
         return new Response("请求错误：URL 中缺少文件名。", { status: 400 });
     }

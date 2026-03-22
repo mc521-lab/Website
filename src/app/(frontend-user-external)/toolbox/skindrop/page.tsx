@@ -12,6 +12,7 @@ export default function SkinDrop() {
     const [file, setFile] = useState<File | null>(null);
     const [url, setUrl] = useState("");
     const [playerName, setPlayerName] = useState<string>("");
+    const [step1Loading, setStep1Loading] = useState<boolean>(false);
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const skinViewerRef = useRef<SkinViewer | null>(null);
@@ -50,23 +51,11 @@ export default function SkinDrop() {
             skinViewerRef.current.dispose();
             skinViewerRef.current = null;
         }
-        let skinUrl: string;
-        if (file) {
-            skinBlobRef.current = file;
-            skinUrl = URL.createObjectURL(file);
-        } else if (url) {
-            try {
-                const res = await fetch(`/api/skindrop/download/${url.split("/").pop()}`);
-                const blob = await res.blob();
-                skinBlobRef.current = blob;
-                skinUrl = URL.createObjectURL(blob);
-            } catch (err) {
-                console.error("获取 NameMC 皮肤失败", err);
-                return;
-            }
-        } else {
-            return;
-        }
+
+        if (!skinBlobRef.current) return;
+
+        const skinUrl = URL.createObjectURL(skinBlobRef.current);
+
         skinViewerRef.current = new SkinViewer({
             canvas: canvasRef.current,
             width: 368,
@@ -74,7 +63,7 @@ export default function SkinDrop() {
             skin: skinUrl,
         });
         skinViewerRef.current.animation = new WalkingAnimation();
-    }, [file, url]);
+    }, []);
 
     useEffect(() => {
         if (step === 1) {
@@ -82,10 +71,6 @@ export default function SkinDrop() {
                 skinViewerRef.current.dispose();
                 skinViewerRef.current = null;
             }
-        }
-
-        if (step === 2) {
-            createSkinViewer();
         }
 
         if (step === 3) {
@@ -128,6 +113,54 @@ export default function SkinDrop() {
             setStep(1); // 重置流程
         }
     }, [step, file, url, createSkinViewer, playerName]);
+
+    useEffect(() => {
+        if (!skinBlobRef.current || !canvasRef.current) return;
+
+        // 创建或更新 SkinViewer
+        if (!skinViewerRef.current) {
+            skinViewerRef.current = new SkinViewer({
+                canvas: canvasRef.current,
+                width: 368,
+                height: 368,
+                skin: URL.createObjectURL(skinBlobRef.current),
+            });
+            skinViewerRef.current.animation = new WalkingAnimation();
+        } else {
+            // 只更新皮肤，而不销毁 canvas
+            skinViewerRef.current.loadSkin(URL.createObjectURL(skinBlobRef.current));
+        }
+
+        return () => {
+            // 组件卸载时销毁
+            skinViewerRef.current?.dispose();
+            skinViewerRef.current = null;
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [skinBlobRef.current]);
+
+    const gotoStep2 = async () => {
+        if (file) {
+            skinBlobRef.current = file;
+            setStep(2);
+            return;
+        } else {
+            setStep1Loading(true);
+            try {
+                const res = await fetch(`/api/skindrop/download/${url.split("/").pop()}`);
+                const blob = await res.blob();
+                skinBlobRef.current = blob;
+            } catch (err) {
+                console.error("获取 NameMC 皮肤失败", err);
+                setUploadSuccess(false);
+                setErrorMessage("获取 NameMC 皮肤失败");
+                return;
+            } finally {
+                setStep(2);
+                setStep1Loading(false);
+            }
+        }
+    };
 
     return (
         <main className="pixel-font flex h-[calc(100vh-61px)] w-full translate-y-15.25 flex-col items-center justify-center">
@@ -193,7 +226,8 @@ export default function SkinDrop() {
 
                                 <Radix.Separator className="mt-auto" />
 
-                                <Radix.Button className="ml-auto w-fit px-4" disabled={!validStep1} onClick={() => setStep(2)}>
+                                <Radix.Button className="ml-auto w-fit px-4" disabled={!validStep1 || step1Loading} onClick={() => gotoStep2()}>
+                                    {step1Loading && <LoaderCircleIcon className="animate-spin" />}
                                     下一步
                                 </Radix.Button>
                             </div>

@@ -101,7 +101,7 @@ export default function Page() {
 
     // 结果表格列配置
     const resultColumns = [
-        { header: "记录 ID", accessorKey: "id" },
+        { header: "记录 ID", accessorKey: "id", enable: false },
         {
             header: "创建时间",
             accessorKey: "created_at",

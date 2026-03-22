@@ -29,9 +29,7 @@ const data = {
         },
         {
             name: "工单系统",
-            items: [
-                { name: "工单列表", url: "/portal/jira", icon: <FormIcon /> },
-            ],
+            items: [{ name: "工单列表", url: "/portal/jira", icon: <FormIcon /> }],
         },
     ],
 };

@@ -18,11 +18,7 @@ export function Home() {
                     <Gamepad2Icon />
                 </Mc521.HomeButton>
                 <div className="mt-4 flex scale-80 gap-4 pl-1">
-                    <Mc521.HomeButton
-                        theme="light"
-                        text="查看百科"
-                        className="flex w-50 justify-center"
-                        onClick={() => $router.push("/wiki")}>
+                    <Mc521.HomeButton theme="light" text="查看百科" className="flex w-50 justify-center" onClick={() => $router.push("/wiki")}>
                         <BookOpenIcon />
                     </Mc521.HomeButton>
                     <Mc521.HomeButton

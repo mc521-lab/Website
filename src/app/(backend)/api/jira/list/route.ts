@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
             success: true,
             data: convertNullsToString(ticketsData) || [],
         });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         console.error("Error fetching tickets:", error);
         return NextResponse.json({ success: false, error: error.message || "Unknown error" }, { status: 500 });

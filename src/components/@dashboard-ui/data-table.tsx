@@ -191,7 +191,9 @@ export function DataTable<T extends { id: string | number }>({
                     View
                 </Label>
 
-                {hideSearch ? <div></div> : (
+                {hideSearch ? (
+                    <div></div>
+                ) : (
                     <Input className="w-lg" placeholder="按记录 ID 搜索" value={searchId} onChange={(e) => setSearchId(e.target.value)} />
                 )}
                 <div className="flex items-center gap-2">

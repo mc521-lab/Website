@@ -77,8 +77,7 @@ export function Milestone({ children }: { children: React.ReactNode }) {
 export function MilestoneItem({ date, title, description, version, Icon, className = "" }: MilestoneItemProps) {
     return (
         <div
-            className={`group border-primary bg-muted relative z-20 shrink-0 snap-center overflow-hidden border-2 transition-all duration-500 ${className}`}
-            style={{ width: 720, height: 340 }}>
+            className={`group border-primary bg-muted relative z-20 shrink-0 snap-center overflow-hidden border-2 transition-all duration-500 ${className} h-[36vh] w-[75vw] max-w-180`}>
             {/* 左上角图标 */}
             <div className="absolute top-4 left-4 z-20 md:top-6 md:left-6">
                 <div className="border-primary/50 bg-background/20 text-primary flex h-10 w-10 scale-110 items-center justify-center border-2 transition-colors duration-300 md:h-12 md:w-12">

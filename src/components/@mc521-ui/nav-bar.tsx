@@ -71,7 +71,7 @@ export function NavBarHome() {
     return (
         <header
             className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-neutral-800 bg-[#1a1a1a]/95 py-3 shadow-lg backdrop-blur-md" : "border-transparent bg-transparent py-6"}`}>
-            <div className="container mx-auto flex h-12 max-w-[80vw] -translate-x-8 items-center justify-center gap-32 px-4">
+            <div className="container mx-auto flex h-12 w-full max-w-[80vw] items-center justify-between px-4 lg:-translate-x-8 lg:justify-center lg:gap-32">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
                     <Image src="/images/logo.png" alt="君庭阁" className="mr-1 rounded-xs" width={36} height={36} />
@@ -113,7 +113,7 @@ export function NavBarHome() {
                                 </Link>
                             ))}
                             <div className="mt-4 flex flex-col gap-2">
-                                <Radix.Button variant="default" size="lg">
+                                <Radix.Button variant="default" size="lg" onClick={() => transformTo("#join")}>
                                     加入我们
                                 </Radix.Button>
                             </div>

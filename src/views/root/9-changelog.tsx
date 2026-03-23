@@ -30,8 +30,19 @@ export function Changelog() {
 
     return (
         <Mc521.Section id="changelog" zebra>
-            <div className="flex w-full max-w-3/5 flex-col items-center justify-center">
-                <Mc521.SectionTitle title="更新日志" description={`累计 ${changelog.length} 条更新 · 过去 ${runningDays} 天持续更新`} />
+            <div className="flex w-full max-w-4/5 lg:max-w-3/5 flex-col items-center justify-center">
+                <Mc521.SectionTitle
+                    title="更新日志"
+                    description={<span className="flex flex-col items-center lg:flex-row">
+                        <span>
+                            累计 {changelog.length} 条更新
+                        </span>
+                        <span className="hidden lg:inline-block lg:mx-2">·</span>
+                        <span>
+                            过去 {runningDays} 天持续更新
+                        </span>
+                    </span>}
+                />
                 <section className="relative mt-12 w-full">
                     <div className="absolute top-0 bottom-0 left-4 w-px transform bg-neutral-800 md:left-1/2 md:-translate-x-1/2"></div>
                     <div className="space-y-12">

@@ -1,6 +1,6 @@
 type SectionTitleProps = {
     title: string;
-    description?: string;
+    description?: string | React.ReactNode;
 };
 export function SectionTitle({ title, description = undefined }: SectionTitleProps) {
     return (

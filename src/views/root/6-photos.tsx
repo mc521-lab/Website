@@ -20,13 +20,13 @@ export function Photos() {
 
     return (
         <Mc521.Section id="photos">
-            <div className="mb-6 flex w-full max-w-3/5 flex-col items-center justify-center mask-[linear-gradient(to_bottom,black_75%,transparent_98%)]">
+            <div className="mb-6 flex w-full max-w-4/5 lg:max-w-3/5 flex-col items-center justify-center mask-[linear-gradient(to_bottom,black_75%,transparent_98%)]">
                 <Mc521.SectionTitle title="光影时刻" description="记录社区内的每一个精彩瞬间" />
                 {/* <span className="mt-12 text-center opacity-50">暂无数据</span> */}
                 {photos.length > 0 && (
                     <Radix.Dialog>
                         <Radix.DialogTrigger asChild>
-                            <section className="pointer-events-none mt-12 grid h-140 w-full grid-cols-4 gap-x-4">
+                            <section className="pointer-events-none mt-12 grid h-140 w-full lg:grid-cols-4 gap-x-4">
                                 {photos.map((item, index) => (
                                     <Mc521.ImageShowEntry
                                         key={index}
@@ -37,7 +37,7 @@ export function Photos() {
                                 ))}
                             </section>
                         </Radix.DialogTrigger>
-                        <Radix.DialogContent showCloseButton={false} className="h-130 w-240">
+                        <Radix.DialogContent showCloseButton={false} className="w-9/10 lg:w-1/2">
                             <Mc521.ImageShow {...current!} />
                         </Radix.DialogContent>
                     </Radix.Dialog>

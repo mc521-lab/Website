@@ -12,7 +12,7 @@ export function Join() {
 
     return (
         <section className="bg-primary relative flex min-h-96 items-center justify-center py-24" id="join">
-            <div className="flex w-full max-w-4xl flex-col items-center justify-center">
+            <div className="flex w-full max-w-[80vw] flex-col items-center justify-center">
                 <div className="border-background bg-foreground mx-auto w-full border-4 p-8 shadow-[12px_12px_0_rgba(0,0,0,0.8)] md:p-12">
                     <div className="mb-10 text-center">
                         <h2 className="text-background mb-4 text-4xl font-bold">准备好加入了吗？</h2>
@@ -55,7 +55,7 @@ export function Join() {
                         </div>
                         <div className="space-y-4">
                             <h3 className="text-background flex items-center gap-2 text-xl font-bold">官方社群</h3>
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid lg:grid-cols-2 gap-3">
                                 <a
                                     href="https://qm.qq.com/q/nLEPToNgpq"
                                     target="_blank"

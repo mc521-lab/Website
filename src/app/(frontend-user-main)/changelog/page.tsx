@@ -30,7 +30,7 @@ export default function ChangeLog() {
 
     return (
         <Mc521.Section id="changelog" className="min-h-screen">
-            <div className="flex w-full max-w-3/5 flex-col items-center justify-center py-12">
+            <div className="flex w-full max-w-4/5 lg:max-w-3/5 flex-col items-center justify-center py-12">
                 <Mc521.SectionTitle title="完整更新日志" description="按时间顺序查看所有版本变更" />
                 <section className="relative mt-12 w-full">
                     <div className="absolute top-0 bottom-0 left-4 w-px transform bg-neutral-800 md:left-1/2 md:-translate-x-1/2"></div>

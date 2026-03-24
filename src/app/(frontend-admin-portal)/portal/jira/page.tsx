@@ -190,7 +190,7 @@ export default function Page() {
         },
         {
             header: "优先级",
-            accessorKey: "assignee",
+            accessorKey: "Priority",
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             cell: (info: any) => {
                 const row = info.row.original;

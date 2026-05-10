@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id?:
                 "cache-control": "public, max-age=86400, stale-while-revalidate=3600",
             },
         });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
         console.error("puppeteer failed:", err);
 

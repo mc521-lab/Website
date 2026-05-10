@@ -1,6 +1,7 @@
 "use client";
 
 import { cva } from "class-variance-authority";
+import Link from "next/link";
 import React from "react";
 
 type HomeButtonProps = {
@@ -8,12 +9,13 @@ type HomeButtonProps = {
     theme?: "light" | "dark" | "primary";
     children?: React.ReactNode;
     onClick?: () => void;
+    href?: string;
     className?: string;
     extraClassName?: string;
 };
 
 export const buttonVariants = cva(
-    "group hover:border-primary relative cursor-pointer border-2 px-8 py-4 text-lg font-bold shadow-[4px_4px_0_#000] transition-all active:translate-y-1",
+    "group hover:border-primary relative cursor-pointer border-2 px-8 py-4 text-lg font-bold shadow-[4px_4px_0_#000] transition-all active:translate-y-1 inline-flex items-center justify-center",
     {
         variants: {
             theme: {
@@ -41,9 +43,9 @@ export const buttonInnerVariants = cva("absolute inset-0 opacity-0 transition-op
     },
 });
 
-export function HomeButton({ text, theme = "dark", children, onClick, className, extraClassName }: HomeButtonProps) {
-    return (
-        <button onClick={onClick} className={buttonVariants({ theme, className })}>
+export function HomeButton({ text, theme = "dark", children, onClick, href, className, extraClassName }: HomeButtonProps) {
+    const content = (
+        <>
             {children ? (
                 <span className="flex items-center gap-3">
                     <div className="translate-y-px">{children}</div>
@@ -53,6 +55,20 @@ export function HomeButton({ text, theme = "dark", children, onClick, className,
                 <span className={extraClassName}>{text}</span>
             )}
             <div className={buttonInnerVariants({ theme })}></div>
+        </>
+    );
+
+    if (href) {
+        return (
+            <Link href={href} className={buttonVariants({ theme, className })}>
+                {content}
+            </Link>
+        );
+    }
+
+    return (
+        <button onClick={onClick} className={buttonVariants({ theme, className })}>
+            {content}
         </button>
     );
 }

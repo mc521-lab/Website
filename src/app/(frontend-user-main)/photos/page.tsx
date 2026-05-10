@@ -18,12 +18,12 @@ export default function ChangeLog() {
 
     return (
         <Mc521.Section id="photos" className="min-h-screen">
-            <div className="flex w-full max-w-4/5 lg:max-w-3/5 flex-col items-center justify-center py-12">
+            <div className="flex w-full max-w-4/5 flex-col items-center justify-center py-12 lg:max-w-3/5">
                 <Mc521.SectionTitle title="光影时刻" description="查看一路上走来的点点滴滴" />
                 {photos.length > 0 && (
                     <Radix.Dialog>
                         <Radix.DialogTrigger asChild>
-                            <section className="pointer-events-none mt-12 grid w-full lg:grid-cols-4 gap-x-4">
+                            <section className="pointer-events-none mt-12 grid w-full gap-x-4 lg:grid-cols-4">
                                 {photos.map((item, index) => (
                                     <Mc521.ImageShowEntry
                                         key={index}

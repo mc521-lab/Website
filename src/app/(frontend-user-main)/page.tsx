@@ -1,5 +1,3 @@
-"use client";
-
 import { Mc521 } from "@/components";
 import { IndexSlice } from "@/views";
 

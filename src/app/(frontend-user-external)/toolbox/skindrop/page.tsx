@@ -221,18 +221,18 @@ export default function SkinDrop() {
                                                     setUrl(e.target.value);
                                                 }}
                                             />
-                                            <Radix.Label htmlFor="skinurl" className="-translate-x-8 -translate-y-3 opacity-75 scale-90">
+                                            <Radix.Label htmlFor="skinurl" className="-translate-x-8 -translate-y-3 scale-90 opacity-75">
                                                 <Radix.Button variant="link">
                                                     <Link href="https://namemc.com/" target="_blank" rel="noopener noreferrer">
                                                         打开 NameMC (国际站)
                                                     </Link>
-                                                    <ExternalLinkIcon className="size-3 -ml-px" />
+                                                    <ExternalLinkIcon className="-ml-px size-3" />
                                                 </Radix.Button>
                                                 <Radix.Button variant="link" className="-ml-4">
                                                     <Link href="https://zh.namemc.com/" target="_blank" rel="noopener noreferrer">
                                                         打开 NameMC (镜像站)
                                                     </Link>
-                                                    <ExternalLinkIcon className="size-3 -ml-px" />
+                                                    <ExternalLinkIcon className="-ml-px size-3" />
                                                 </Radix.Button>
                                             </Radix.Label>
                                         </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import { ServerIcon, CopyCheckIcon, CopyIcon, MessageCircleMoreIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -55,7 +57,7 @@ export function Join() {
                         </div>
                         <div className="space-y-4">
                             <h3 className="text-background flex items-center gap-2 text-xl font-bold">官方社群</h3>
-                            <div className="grid lg:grid-cols-2 gap-3">
+                            <div className="grid gap-3 lg:grid-cols-2">
                                 <a
                                     href="https://qm.qq.com/q/nLEPToNgpq"
                                     target="_blank"

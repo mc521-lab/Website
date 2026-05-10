@@ -1,0 +1,19 @@
+# 规章制度分类配置
+title: "📝 规章制度"
+order: 3
+expanded: false
+
+# 子文件/文件夹配置
+items:
+  basic.mdx:
+    title: "基本规则"
+    order: 1
+  adjudication.mdx:
+    title: "附录：裁定标准"
+    order: 2
+  punishment.mdx:
+    title: "附录：惩罚制度"
+    order: 3
+  policy.mdx:
+    title: "附录：处理政策"
+    order: 4

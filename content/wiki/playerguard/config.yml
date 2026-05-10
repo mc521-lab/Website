@@ -1,0 +1,19 @@
+# 公会系统分类配置
+title: "🏠 公会系统"
+order: 2
+expanded: false
+
+# 子文件/文件夹配置
+items:
+  update.mdx:
+    title: "⬆️ 公会升级"
+    order: 1
+  stone.mdx:
+    title: "💎 公会神石"
+    order: 2
+  maintainance-funds.mdx:
+    title: "💰 公会维护资金"
+    order: 3
+  common-questions.mdx:
+    title: "❓ 常见问题"
+    order: 4

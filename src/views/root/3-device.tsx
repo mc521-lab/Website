@@ -4,9 +4,9 @@ import { CpuIcon, HardDriveIcon, ShieldIcon, CircleGaugeIcon } from "lucide-reac
 export function Device() {
     return (
         <Mc521.Section id="device" zebra>
-            <div className="flex w-full max-w-4/5 lg:max-w-3/4 flex-col items-center justify-center">
+            <div className="flex w-full max-w-4/5 flex-col items-center justify-center lg:max-w-3/4">
                 <Mc521.SectionTitle title="硬核配置" description="为了最流畅的游戏体验，我们不惜成本打造顶尖基础设施" />
-                <div className="grid grid-rows-4 lg:grid-rows-1 lg:grid-cols-4 gap-x-4">
+                <div className="grid grid-rows-4 gap-x-4 lg:grid-cols-4 lg:grid-rows-1">
                     <Mc521.Card hasTitleIcon title="极致性能" className="mt-12 w-full" Icon={CpuIcon}>
                         <Radix.CardContent className="space-y-4 text-base leading-relaxed opacity-50">
                             搭载 R9-7950X 高频处理器，拒绝卡顿

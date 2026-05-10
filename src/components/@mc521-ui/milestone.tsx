@@ -62,7 +62,7 @@ export function Milestone({ children }: { children: React.ReactNode }) {
             <div className="absolute bottom-0 h-1 w-full -translate-y-9 text-center text-sm opacity-50">&lt; 可左右拖动查看 &gt;</div>
             <div
                 ref={ref}
-                className="scrollbar-none mt-12 flex h-full w-full cursor-grab touch-pan-x snap-x snap-mandatory items-center gap-4 overflow-x-auto mask-[linear-gradient(to_right,transparent_0%,black_25%,black_75%,transparent_100%)] px-[50vw] pb-16 active:cursor-grabbing md:gap-64"
+                className="mt-12 flex h-full w-full cursor-grab touch-pan-x snap-x snap-mandatory scrollbar-none items-center gap-4 overflow-x-auto mask-[linear-gradient(to_right,transparent_0%,black_25%,black_75%,transparent_100%)] px-[50vw] pb-16 active:cursor-grabbing md:gap-64"
                 style={{
                     scrollBehavior: "smooth",
                     overscrollBehaviorX: "contain",

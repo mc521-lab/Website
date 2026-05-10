@@ -1,3 +1,5 @@
+"use client";
+
 import { Mc521 } from "@/components";
 import { MilestoneItem } from "@/types/api";
 import { RocketIcon } from "lucide-react";

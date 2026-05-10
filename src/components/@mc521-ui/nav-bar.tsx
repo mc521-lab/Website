@@ -6,7 +6,6 @@ import { ChevronLeftIcon, ChevronLeftCircleIcon, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useScrollSpy } from "@/hooks/use-scroll-spy";
 import { transformTo } from "@/lib/utils";
-import { Navbar as NextraNavbar } from "nextra-theme-docs";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -105,12 +104,12 @@ export function NavBarHome() {
                     <Radix.SheetContent side="right" className="w-64 p-4">
                         <nav className="flex flex-col gap-4">
                             {NAV_ITEMS.map((item) => (
-                                <Link
+                                <button
                                     key={item.href}
-                                    href={item.href}
-                                    className={`hover:text-yellow-400 ${pathname === item.href ? "text-yellow-400" : "text-gray-700"}`}>
+                                    onClick={() => transformTo(item.href)}
+                                    className={`text-left hover:text-yellow-400 ${pathname === item.href ? "text-yellow-400" : "text-gray-700"}`}>
                                     {item.label}
-                                </Link>
+                                </button>
                             ))}
                             <div className="mt-4 flex flex-col gap-2">
                                 <Radix.Button variant="default" size="lg" onClick={() => transformTo("#join")}>
@@ -152,34 +151,35 @@ export function NavBarSubpages({ name, path, prev }: NavBarSubpagesProps__Path |
     );
 }
 
-function Logo({ showBackToHome }: { showBackToHome: boolean }) {
-    return (
-        <>
-            {showBackToHome && (
-                <div className="mr-4">
-                    <Link className="flex items-center gap-2" href="/">
-                        <ChevronLeftCircleIcon />
-                    </Link>
-                </div>
-            )}
-            <Link className="flex items-center gap-2" href="/wiki">
-                <Image src="/images/logo.png" alt="君庭阁" className="mr-1 rounded-xs" width={36} height={36} />
-                <span className="text-xl font-bold transition-colors duration-300">
-                    <span className="text-primary">君庭阁</span> Wiki
-                </span>
-            </Link>
-        </>
-    );
-}
 export function NavBarWiki() {
     const pathname = usePathname();
+    const $router = useRouter();
     const showBackToHome = pathname === "/wiki";
 
     return (
-        <NextraNavbar
-            logo={<Logo showBackToHome={showBackToHome} />}
-            logoLink={false}
-            projectLink="https://github.com/mc521-lab/Website/tree/v4/content/wiki"
-        />
+        <header className="fixed top-0 right-0 left-0 z-50 border-b border-neutral-800 bg-[#1a1a1a]/95 py-3 shadow-lg backdrop-blur-md">
+            <div className="container mx-auto flex h-12 w-full max-w-[80vw] items-center justify-between px-4">
+                <div className="flex items-center gap-4">
+                    {showBackToHome && (
+                        <button onClick={() => $router.push("/")} className="text-neutral-400 hover:text-neutral-200">
+                            <ChevronLeftCircleIcon className="h-6 w-6" />
+                        </button>
+                    )}
+                    <Link href="/wiki" className="flex items-center gap-2">
+                        <Image src="/images/logo.png" alt="君庭阁" className="mr-1 rounded-xs" width={36} height={36} />
+                        <span className="text-xl font-bold transition-colors duration-300">
+                            <span className="text-primary">君庭阁</span> Wiki
+                        </span>
+                    </Link>
+                </div>
+                {/* <a
+                    href="https://github.com/mc521-lab/Website/tree/v4/content/wiki"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-neutral-400 hover:text-neutral-200">
+                    GitHub
+                </a> */}
+            </div>
+        </header>
     );
 }

@@ -4,7 +4,7 @@ import { ServerIcon } from "lucide-react";
 export function About() {
     return (
         <Mc521.Section id="about">
-            <div className="flex w-full max-w-4/5 lg:max-w-3/5 flex-col items-center justify-center">
+            <div className="flex w-full max-w-4/5 flex-col items-center justify-center lg:max-w-3/5">
                 <Mc521.SectionTitle title="服务器介绍" />
                 <Mc521.Card title="关于服务器" className="mt-12 w-full" Icon={ServerIcon}>
                     <Radix.CardContent className="space-y-4 text-lg leading-relaxed opacity-50">

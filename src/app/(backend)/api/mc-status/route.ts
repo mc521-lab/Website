@@ -3,11 +3,28 @@
 import { NextRequest, NextResponse } from "next/server";
 import mcping from "mcping-js";
 
+// 简单的内存缓存
+const cache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL = 30 * 1000; // 30秒缓存
+
 export async function GET(req: NextRequest) {
     const host = req.nextUrl.searchParams.get("host");
     const port = parseInt(req.nextUrl.searchParams.get("port") ?? "25565");
 
     if (!host) return NextResponse.json({ error: "host is required" }, { status: 400 });
+
+    const cacheKey = `${host}:${port}`;
+    const cached = cache.get(cacheKey);
+
+    // 检查缓存是否有效
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+        return NextResponse.json(cached.data, {
+            headers: {
+                "X-Cache": "HIT",
+                "Cache-Control": "public, max-age=30",
+            },
+        });
+    }
 
     try {
         const server = new mcping.MinecraftServer(host, port);
@@ -25,7 +42,16 @@ export async function GET(req: NextRequest) {
         });
 
         const result = await data;
-        return NextResponse.json(result);
+
+        // 更新缓存
+        cache.set(cacheKey, { data: result, timestamp: Date.now() });
+
+        return NextResponse.json(result, {
+            headers: {
+                "X-Cache": "MISS",
+                "Cache-Control": "public, max-age=30",
+            },
+        });
     } catch {
         return NextResponse.json({ online: null, max: null, error: true }, { status: 500 });
     }

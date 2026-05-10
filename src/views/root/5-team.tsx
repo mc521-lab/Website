@@ -21,12 +21,12 @@ const TEAMMEMBER_DATA = [
 export function Team() {
     return (
         <Mc521.Section id="team" zebra>
-            <div className="flex w-full max-w-4/5 lg:max-w-3/5 flex-col items-center justify-center">
+            <div className="flex w-full max-w-4/5 flex-col items-center justify-center lg:max-w-3/5">
                 <Mc521.SectionTitle title="管理团队" />
                 <div className="mt-12 flex w-full flex-col items-center">
                     <Mc521.OwnerCard />
                     <Mc521.TeamSeparator />
-                    <div className="grid w-full grid-rows-3 gap-y-6 lg:grid-rows-1 lg:grid-cols-3 lg:gap-x-12">
+                    <div className="grid w-full grid-rows-3 gap-y-6 lg:grid-cols-3 lg:grid-rows-1 lg:gap-x-12">
                         {TEAMMEMBER_DATA.map((item, index) => (
                             <Mc521.MemberCard key={index} name={item.name} position={item.position} image={item.image} />
                         ))}

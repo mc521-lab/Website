@@ -1,9 +1,15 @@
+allowBuilds:
+    msw: true
+    puppeteer: true
+    sharp: true
+    unrs-resolver: true
 onlyBuiltDependencies:
-  - better-sqlite3
-  - core-js
-  - esbuild
-  - msw
-  - protobufjs
-  - puppeteer
-  - sharp
-  - unrs-resolver
+    - better-sqlite3
+    - contentlayer
+    - core-js
+    - esbuild
+    - msw
+    - protobufjs
+    - puppeteer
+    - sharp
+    - unrs-resolver

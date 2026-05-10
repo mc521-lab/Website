@@ -1,0 +1,25 @@
+# 新手指南分类配置
+title: "🌟 纯新手必看教程"
+order: 1
+expanded: true
+
+# 子文件/文件夹配置
+items:
+  common-commands.mdx:
+    title: "📚 常用指令"
+    order: 1
+  how-to-claim-land.mdx:
+    title: "🏠 如何圈地"
+    order: 2
+  how-to-change-skin.mdx:
+    title: "👕 如何更换皮肤"
+    order: 3
+  how-to-earn-money.mdx:
+    title: "🪙 如何赚取金币"
+    order: 4
+  how-to-bind-bilibili.mdx:
+    title: "📺 如何绑定 Bilibili"
+    order: 5
+  how-to-create-quickshop.mdx:
+    title: "📦 如何创建箱子商店"
+    order: 6

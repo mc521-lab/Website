@@ -6,10 +6,24 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const transformTo = (id: string) => {
-    const element = document.getElementById(id.slice(1));
-    if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-    }
+    // 移除 # 前缀
+    const targetId = id.startsWith("#") ? id.slice(1) : id;
+
+    // 使用 requestAnimationFrame 确保 DOM 已更新
+    requestAnimationFrame(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+            // 如果元素不存在，尝试延迟查找（应对懒加载情况）
+            setTimeout(() => {
+                const delayedElement = document.getElementById(targetId);
+                if (delayedElement) {
+                    delayedElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            }, 100);
+        }
+    });
 };
 
 export function openCentered(url: string, width = 600, height = 400) {

@@ -1,8 +1,14 @@
+"use client";
+
 import { Mc521 } from "@/components";
 import { transformTo } from "@/lib/utils";
 
 import { Gamepad2Icon, ChevronDownIcon, BookOpenIcon, ToolboxIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Suspense, lazy } from "react";
+
+// 懒加载视频组件
+const VideoBackground = lazy(() => import("./video-background"));
 
 export function Home() {
     const $router = useRouter();
@@ -29,18 +35,14 @@ export function Home() {
                         <ToolboxIcon />
                     </Mc521.HomeButton>
                 </div>
-                {false && <Mc521.OnlineIndicator type="large" />}
             </div>
             <ChevronDownIcon className="animate-float-y absolute bottom-16 left-1/2 z-3 size-10 -translate-x-1/2 opacity-50" />
             <div className="from-background/75 via-background/50 to-background absolute z-2 h-full w-full bg-linear-to-b via-50% backdrop-blur-xs"></div>
-            <video
-                className="absolute top-0 left-0 h-full w-full object-cover"
-                src="/videos/mc-background-video.webm"
-                autoPlay
-                loop
-                muted
-                preload="lazy"
-            />
+
+            {/* 视频背景使用 Suspense 和懒加载 */}
+            <Suspense fallback={<div className="absolute top-0 left-0 h-full w-full bg-gradient-to-b from-neutral-900 to-neutral-800" />}>
+                <VideoBackground />
+            </Suspense>
         </section>
     );
 }

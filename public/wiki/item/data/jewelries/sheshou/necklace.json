@@ -1,0 +1,7 @@
+{
+    "id": "sheshou_necklace",
+    "inherit": "common_necklace",
+    "variables": {
+        "jobSpecify": "光羽"
+    }
+}

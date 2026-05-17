@@ -1,0 +1,66 @@
+{
+    "id": "sheshou_guangyu_secret",
+    "name": "光羽秘宝",
+    "type": "饰品",
+    "applicableClass": "射手",
+    "features": [
+        {
+            "id": "combo1",
+            "name": "组合1",
+            "values": [
+                {
+                    "id": "attackBonus",
+                    "name": "攻击加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "value": [2.5, 5]
+                }
+            ]
+        },
+        {
+            "id": "combo2",
+            "name": "组合2",
+            "values": [
+                {
+                    "id": "dodgeRate",
+                    "name": "闪避几率",
+                    "value": [1, 5]
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "value": [2.5, 5]
+                }
+            ]
+        },
+        {
+            "id": "combo3",
+            "name": "组合3",
+            "values": [
+                {
+                    "id": "attackBonus",
+                    "name": "攻击加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "dodgeRate",
+                    "name": "闪避几率",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

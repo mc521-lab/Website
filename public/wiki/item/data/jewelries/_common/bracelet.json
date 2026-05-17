@@ -1,0 +1,34 @@
+{
+    "id": "common_bracelet",
+    "name": "{jobSpecify}手镯",
+    "type": "饰品",
+    "applicableClass": "通用",
+    "features": [
+        {
+            "id": "staminaBonus",
+            "name": "体力加成",
+            "value": [0.5, 2.5]
+        },
+        {
+            "id": "manaBonus",
+            "name": "法力加成",
+            "value": [0.5, 2.5]
+        },
+        {
+            "id": "staminaAndMana",
+            "name": "体力加成+法力加成",
+            "values": [
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

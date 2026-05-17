@@ -1,0 +1,7 @@
+{
+    "id": "mushi_necklace",
+    "inherit": "common_necklace",
+    "variables": {
+        "jobSpecify": "牧灵"
+    }
+}

@@ -1,0 +1,79 @@
+{
+    "id": "baoji",
+    "name": "暴击宝石",
+    "symbolColor": "#D80071",
+    "description": "",
+    "image": null,
+    "features": [
+        {
+            "id": "critRate",
+            "name": "暴击几率"
+        },
+        {
+            "id": "critDamage",
+            "name": "暴击伤害"
+        }
+    ],
+    "qualitys": [
+        {
+            "id": "c",
+            "name": "C 级",
+            "description": "随机一个属性",
+            "features": [
+                {
+                    "id": "critRate",
+                    "value": [1.0, 1.5]
+                },
+                {
+                    "id": "critDamage",
+                    "value": [2.0, 4.0]
+                }
+            ]
+        },
+        {
+            "id": "b",
+            "name": "B 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "critRate",
+                    "value": [1.5, 2.0]
+                },
+                {
+                    "id": "critDamage",
+                    "value": [4.0, 6.0]
+                }
+            ]
+        },
+        {
+            "id": "a",
+            "name": "A 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "critRate",
+                    "value": [2.0, 2.5]
+                },
+                {
+                    "id": "critDamage",
+                    "value": [6.0, 8.0]
+                }
+            ]
+        },
+        {
+            "id": "s",
+            "name": "S 级",
+            "description": "两个属性",
+            "features": [
+                {
+                    "id": "critRate",
+                    "value": [2.5, 3.0]
+                },
+                {
+                    "id": "critDamage",
+                    "value": [8.0, 10.0]
+                }
+            ]
+        }
+    ]
+}

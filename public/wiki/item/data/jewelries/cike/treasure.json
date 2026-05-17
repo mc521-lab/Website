@@ -1,0 +1,66 @@
+{
+    "id": "cike_shunying_treasure",
+    "name": "瞬影秘宝",
+    "type": "饰品",
+    "applicableClass": "刺客",
+    "features": [
+        {
+            "id": "combo1",
+            "name": "组合1",
+            "values": [
+                {
+                    "id": "attackBonus",
+                    "name": "攻击加成",
+                    "value": [1.5, 3.0]
+                },
+                {
+                    "id": "pveDamage",
+                    "name": "PVE加成",
+                    "value": [4.0, 8.0]
+                }
+            ]
+        },
+        {
+            "id": "combo2",
+            "name": "组合2",
+            "values": [
+                {
+                    "id": "moveSpeed",
+                    "name": "移速加成",
+                    "value": [0.01, 0.04]
+                },
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "value": [2, 5]
+                }
+            ]
+        },
+        {
+            "id": "combo3",
+            "name": "组合3",
+            "values": [
+                {
+                    "id": "attackBonus",
+                    "name": "攻击加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "pveDamage",
+                    "name": "PVE加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "moveSpeed",
+                    "name": "移速加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

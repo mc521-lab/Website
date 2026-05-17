@@ -1,0 +1,7 @@
+{
+    "id": "cike_necklace",
+    "inherit": "common_necklace",
+    "variables": {
+        "jobSpecify": "瞬影"
+    }
+}

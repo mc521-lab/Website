@@ -1,0 +1,66 @@
+{
+    "id": "fashi_aoshu_treasure",
+    "name": "奥术秘宝",
+    "type": "饰品",
+    "applicableClass": "法师",
+    "features": [
+        {
+            "id": "combo1",
+            "name": "组合1",
+            "values": [
+                {
+                    "id": "attackBonus",
+                    "name": "攻击加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "manaBoost",
+                    "name": "法力提升",
+                    "value": [5, 10]
+                }
+            ]
+        },
+        {
+            "id": "combo2",
+            "name": "组合2",
+            "values": [
+                {
+                    "id": "parryChance",
+                    "name": "招架几率",
+                    "value": [1, 5]
+                },
+                {
+                    "id": "staminaBoost",
+                    "name": "体力提升",
+                    "value": [5, 10]
+                }
+            ]
+        },
+        {
+            "id": "combo3",
+            "name": "组合3",
+            "values": [
+                {
+                    "id": "attackBonus",
+                    "name": "攻击加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "manaBoost",
+                    "name": "法力提升",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "parryChance",
+                    "name": "招架几率",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "staminaBoost",
+                    "name": "体力提升",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

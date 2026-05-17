@@ -1,0 +1,56 @@
+{
+    "id": "zhanshi_lieyan_treasure",
+    "name": "烈焰秘宝",
+    "type": "饰品",
+    "applicableClass": "战士",
+    "features": [
+        {
+            "id": "singleAttribute",
+            "name": "随机1个属性",
+            "values": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "value": [4.0, 8.0]
+                }
+            ]
+        },
+        {
+            "id": "doubleAttribute",
+            "name": "随机2个属性",
+            "values": [
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "value": [2, 5]
+                },
+                {
+                    "id": "maxRage",
+                    "name": "最大怒气值",
+                    "value": [3, 5]
+                }
+            ]
+        },
+        {
+            "id": "tripleAttribute",
+            "name": "三个属性组合",
+            "values": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "maxRage",
+                    "name": "最大怒气值",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

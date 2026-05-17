@@ -1,0 +1,66 @@
+{
+    "id": "mushi_muling_treasure",
+    "name": "牧灵秘宝",
+    "type": "饰品",
+    "applicableClass": "牧师",
+    "features": [
+        {
+            "id": "combo1",
+            "name": "组合1",
+            "values": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "value": [3.0, 4.0]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "value": [2, 4]
+                }
+            ]
+        },
+        {
+            "id": "combo2",
+            "name": "组合2",
+            "values": [
+                {
+                    "id": "rescue",
+                    "name": "生命恢复",
+                    "value": [0.05, 0.15]
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "value": [2, 4]
+                }
+            ]
+        },
+        {
+            "id": "combo3",
+            "name": "组合3",
+            "values": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "rescue",
+                    "name": "生命恢复",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

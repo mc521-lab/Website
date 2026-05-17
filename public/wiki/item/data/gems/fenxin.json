@@ -1,0 +1,79 @@
+{
+    "id": "fenxin",
+    "name": "焚心宝石",
+    "symbolColor": "#FF0000",
+    "description": "",
+    "image": null,
+    "features": [
+        {
+            "id": "maxHealth",
+            "name": "最大生命值"
+        },
+        {
+            "id": "rescue",
+            "name": "生命恢复"
+        }
+    ],
+    "qualitys": [
+        {
+            "id": "c",
+            "name": "C 级",
+            "description": "随机一个属性",
+            "features": [
+                {
+                    "id": "maxHealth",
+                    "value": [1.0, 1.5]
+                },
+                {
+                    "id": "rescue",
+                    "value": [0.02, 0.05]
+                }
+            ]
+        },
+        {
+            "id": "b",
+            "name": "B 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "maxHealth",
+                    "value": [1.5, 2.0]
+                },
+                {
+                    "id": "rescue",
+                    "value": [0.03, 0.06]
+                }
+            ]
+        },
+        {
+            "id": "a",
+            "name": "A 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "maxHealth",
+                    "value": [2.0, 2.5]
+                },
+                {
+                    "id": "rescue",
+                    "value": [0.05, 0.08]
+                }
+            ]
+        },
+        {
+            "id": "s",
+            "name": "S 级",
+            "description": "两个属性",
+            "features": [
+                {
+                    "id": "maxHealth",
+                    "value": [2.5, 3.0]
+                },
+                {
+                    "id": "rescue",
+                    "value": 0.07
+                }
+            ]
+        }
+    ]
+}

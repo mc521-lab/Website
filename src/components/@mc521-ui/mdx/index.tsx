@@ -1,4 +1,6 @@
 import { ColoredText } from "./components/custom/colored-text";
+import { GemCard, GemGrid, GemShowcase } from "./components/custom/itemframe";
+import { JewelryCard, JewelryGrid, JewelryShowcase } from "./components/custom/itemframe/jewelries";
 import { MyImageWithTooltip } from "./components/custom/wrapped-media";
 import { Pre, Code } from "./components/html/code";
 import { Hr } from "./components/html/hr";
@@ -40,4 +42,14 @@ export const mdxComponents = {
     // Custom components
     ColoredText,
     MyImageWithTooltip,
+
+    // Itemframe components - Gems
+    GemCard,
+    GemGrid,
+    GemShowcase,
+
+    // Itemframe components - Jewelries
+    JewelryCard,
+    JewelryGrid,
+    JewelryShowcase,
 };

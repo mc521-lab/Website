@@ -1,0 +1,89 @@
+{
+    "version": "1.0.0",
+    "categories": [
+        {
+            "id": "gems",
+            "type": "gem",
+            "name": "宝石",
+            "entries": [
+                "gems/baoji.json",
+                "gems/bingling.json",
+                "gems/fengyu.json",
+                "gems/fenxin.json",
+                "gems/huijin.json",
+                "gems/linghun.json"
+            ]
+        },
+        {
+            "id": "jewelries",
+            "type": "jewelry",
+            "name": "饰品",
+            "entries": [
+                "jewelries/zhanshi/bracelet.json",
+                "jewelries/zhanshi/gloves.json",
+                "jewelries/zhanshi/necklace.json",
+                "jewelries/zhanshi/ring_left.json",
+                "jewelries/zhanshi/ring_right.json",
+                "jewelries/zhanshi/treasure.json",
+                "jewelries/sheshou/bracelet.json",
+                "jewelries/sheshou/gloves.json",
+                "jewelries/sheshou/necklace.json",
+                "jewelries/sheshou/ring_left.json",
+                "jewelries/sheshou/ring_right.json",
+                "jewelries/sheshou/treasure.json",
+                "jewelries/mushi/bracelet.json",
+                "jewelries/mushi/gloves.json",
+                "jewelries/mushi/necklace.json",
+                "jewelries/mushi/ring_left.json",
+                "jewelries/mushi/ring_right.json",
+                "jewelries/mushi/treasure.json",
+                "jewelries/cike/bracelet.json",
+                "jewelries/cike/gloves.json",
+                "jewelries/cike/necklace.json",
+                "jewelries/cike/ring_left.json",
+                "jewelries/cike/ring_right.json",
+                "jewelries/cike/treasure.json",
+                "jewelries/fashi/bracelet.json",
+                "jewelries/fashi/gloves.json",
+                "jewelries/fashi/necklace.json",
+                "jewelries/fashi/ring_left.json",
+                "jewelries/fashi/ring_right.json",
+                "jewelries/fashi/treasure.json"
+            ],
+            "metadata": {
+                "jobEntries": [
+                    {
+                        "id": "zhanshi",
+                        "name": "战士",
+                        "entryPrefix": "jewelries/zhanshi",
+                        "symbolColor": "#FF0000"
+                    },
+                    {
+                        "id": "sheshou",
+                        "name": "射手",
+                        "entryPrefix": "jewelries/sheshou",
+                        "symbolColor": "#F0B100"
+                    },
+                    {
+                        "id": "mushi",
+                        "name": "牧师",
+                        "entryPrefix": "jewelries/mushi",
+                        "symbolColor": "#868686"
+                    },
+                    {
+                        "id": "cike",
+                        "name": "刺客",
+                        "entryPrefix": "jewelries/cike",
+                        "symbolColor": "#00C853"
+                    },
+                    {
+                        "id": "fashi",
+                        "name": "法师",
+                        "entryPrefix": "jewelries/fashi",
+                        "symbolColor": "#01B2E3"
+                    }
+                ]
+            }
+        }
+    ]
+}

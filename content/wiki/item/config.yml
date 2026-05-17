@@ -1,0 +1,16 @@
+# 公会系统分类配置
+title: "💠 物品手册"
+order: 4
+expanded: false
+
+# 子文件/文件夹配置
+items:
+  menu.mdx:
+    title: "📖 菜单"
+    order: 1
+  gems.mdx:
+    title: "💎 宝石图鉴"
+    order: 2
+  jewelries.mdx:
+    title: "📿 饰品图鉴"
+    order: 3

@@ -1,0 +1,7 @@
+{
+    "id": "cike_ring_left",
+    "inherit": "common_ring_left",
+    "variables": {
+        "jobSpecify": "瞬影"
+    }
+}

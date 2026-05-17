@@ -1,0 +1,79 @@
+{
+    "id": "bingling",
+    "name": "冰灵宝石",
+    "symbolColor": "#01B2E3",
+    "description": "",
+    "image": null,
+    "features": [
+        {
+            "id": "maxMana",
+            "name": "最大法力值"
+        },
+        {
+            "id": "manaRegen",
+            "name": "法力恢复"
+        }
+    ],
+    "qualitys": [
+        {
+            "id": "c",
+            "name": "C 级",
+            "description": "随机一个属性",
+            "features": [
+                {
+                    "id": "maxMana",
+                    "value": [0.5, 1.0]
+                },
+                {
+                    "id": "manaRegen",
+                    "value": [0.04, 0.08]
+                }
+            ]
+        },
+        {
+            "id": "b",
+            "name": "B 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "maxMana",
+                    "value": [1.0, 1.5]
+                },
+                {
+                    "id": "manaRegen",
+                    "value": [0.08, 0.12]
+                }
+            ]
+        },
+        {
+            "id": "a",
+            "name": "A 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "maxMana",
+                    "value": [1.5, 2.0]
+                },
+                {
+                    "id": "manaRegen",
+                    "value": [0.12, 0.14]
+                }
+            ]
+        },
+        {
+            "id": "s",
+            "name": "S 级",
+            "description": "两个属性",
+            "features": [
+                {
+                    "id": "maxMana",
+                    "value": [2.0, null]
+                },
+                {
+                    "id": "manaRegen",
+                    "value": 0.14
+                }
+            ]
+        }
+    ]
+}

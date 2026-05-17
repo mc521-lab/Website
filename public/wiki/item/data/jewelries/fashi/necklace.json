@@ -1,0 +1,7 @@
+{
+    "id": "fashi_necklace",
+    "inherit": "common_necklace",
+    "variables": {
+        "jobSpecify": "奥术"
+    }
+}

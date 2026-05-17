@@ -1,0 +1,7 @@
+{
+    "id": "sheshou_gloves",
+    "inherit": "common_gloves",
+    "variables": {
+        "jobSpecify": "光羽"
+    }
+}

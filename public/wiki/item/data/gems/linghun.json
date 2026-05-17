@@ -1,0 +1,79 @@
+{
+    "id": "linghun",
+    "name": "灵魂宝石",
+    "symbolColor": "#9E00F4",
+    "description": "",
+    "image": null,
+    "features": [
+        {
+            "id": "baseAttack",
+            "name": "基础攻击"
+        },
+        {
+            "id": "pveAttack",
+            "name": "PVE攻击"
+        }
+    ],
+    "qualitys": [
+        {
+            "id": "c",
+            "name": "C 级",
+            "description": "随机一个属性",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "value": [0.3, 0.6]
+                },
+                {
+                    "id": "pveAttack",
+                    "value": [1.0, 2.0]
+                }
+            ]
+        },
+        {
+            "id": "b",
+            "name": "B 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "value": [0.6, 0.9]
+                },
+                {
+                    "id": "pveAttack",
+                    "value": [2.0, 3.0]
+                }
+            ]
+        },
+        {
+            "id": "a",
+            "name": "A 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "value": [0.9, 1.2]
+                },
+                {
+                    "id": "pveAttack",
+                    "value": [3.0, 4.0]
+                }
+            ]
+        },
+        {
+            "id": "s",
+            "name": "S 级",
+            "description": "两个属性",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "value": [1.2, 1.5]
+                },
+                {
+                    "id": "pveAttack",
+                    "value": [4.0, 5.0]
+                }
+            ]
+        }
+    ]
+}

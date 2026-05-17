@@ -1,0 +1,7 @@
+{
+    "id": "zhanshi_necklace",
+    "inherit": "common_necklace",
+    "variables": {
+        "jobSpecify": "烈焰"
+    }
+}

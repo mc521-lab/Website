@@ -1,0 +1,7 @@
+{
+    "id": "fashi_ring_left",
+    "inherit": "common_ring_left",
+    "variables": {
+        "jobSpecify": "奥术"
+    }
+}

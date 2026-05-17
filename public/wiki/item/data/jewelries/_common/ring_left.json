@@ -1,0 +1,34 @@
+{
+    "id": "common_ring_left",
+    "name": "{jobSpecify}戒指-左",
+    "type": "饰品",
+    "applicableClass": "通用",
+    "features": [
+        {
+            "id": "healthBonus",
+            "name": "生命加成",
+            "value": [1.0, 3.0]
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": [0.2, 1.0]
+        },
+        {
+            "id": "healthAndReduction",
+            "name": "生命加成+减伤",
+            "values": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

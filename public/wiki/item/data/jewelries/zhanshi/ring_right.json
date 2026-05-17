@@ -1,0 +1,7 @@
+{
+    "id": "zhanshi_ring_right",
+    "inherit": "common_ring_right",
+    "variables": {
+        "jobSpecify": "烈焰"
+    }
+}

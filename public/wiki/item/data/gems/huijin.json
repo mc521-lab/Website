@@ -1,0 +1,79 @@
+{
+    "id": "huijin",
+    "name": "灰烬宝石",
+    "symbolColor": "#767676",
+    "description": "",
+    "image": null,
+    "features": [
+        {
+            "id": "dodgeRate",
+            "name": "闪避几率"
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤"
+        }
+    ],
+    "qualitys": [
+        {
+            "id": "c",
+            "name": "C 级",
+            "description": "随机一个属性",
+            "features": [
+                {
+                    "id": "dodgeRate",
+                    "value": [0.5, 1.0]
+                },
+                {
+                    "id": "damageReduction",
+                    "value": [0.2, 0.4]
+                }
+            ]
+        },
+        {
+            "id": "b",
+            "name": "B 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "dodgeRate",
+                    "value": [1.0, 1.5]
+                },
+                {
+                    "id": "damageReduction",
+                    "value": [0.2, 0.6]
+                }
+            ]
+        },
+        {
+            "id": "a",
+            "name": "A 级",
+            "description": "随机一到两个属性",
+            "features": [
+                {
+                    "id": "dodgeRate",
+                    "value": [1.5, 2.0]
+                },
+                {
+                    "id": "damageReduction",
+                    "value": [0.4, 0.8]
+                }
+            ]
+        },
+        {
+            "id": "s",
+            "name": "S 级",
+            "description": "两个属性",
+            "features": [
+                {
+                    "id": "dodgeRate",
+                    "value": [2.0, null]
+                },
+                {
+                    "id": "damageReduction",
+                    "value": [0.6, 1.0]
+                }
+            ]
+        }
+    ]
+}

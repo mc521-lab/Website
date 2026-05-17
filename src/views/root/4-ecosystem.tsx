@@ -54,7 +54,7 @@ const ECOSYSTEM_DATA = [
 export function EcoSystem() {
     return (
         <Mc521.Section id="ecosystem">
-            <div className="flex h-[210vh] w-full max-w-4/5 flex-col items-center justify-center lg:max-w-3/5">
+            <div className="flex h-[320svh] w-full max-w-4/5 flex-col items-center justify-center lg:h-[210svh] lg:max-w-3/5">
                 <Mc521.SectionTitle title="分区介绍" />
                 <div className="mt-12 grid h-full w-full grid-rows-9 gap-x-6 gap-y-4 lg:grid-cols-2 lg:grid-rows-5">
                     <Mc521.ImageCard src="/images/ecosystem/vc-sc.webp" className="lg:col-span-2" title="生存区" tag="探险刺激">

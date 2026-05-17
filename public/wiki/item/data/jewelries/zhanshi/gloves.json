@@ -1,0 +1,7 @@
+{
+    "id": "zhanshi_gloves",
+    "inherit": "common_gloves",
+    "variables": {
+        "jobSpecify": "烈焰"
+    }
+}

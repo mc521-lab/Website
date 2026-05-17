@@ -1,0 +1,34 @@
+{
+    "id": "common_ring_right",
+    "name": "{jobSpecify}戒指-右",
+    "type": "饰品",
+    "applicableClass": "通用",
+    "features": [
+        {
+            "id": "baseAttack",
+            "name": "基础攻击",
+            "value": [0.3, 1.5]
+        },
+        {
+            "id": "pveAttack",
+            "name": "PVE攻击",
+            "value": [1.0, 5.0]
+        },
+        {
+            "id": "attackCombo",
+            "name": "基础攻击+PVE攻击",
+            "values": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "pveAttack",
+                    "name": "PVE攻击",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

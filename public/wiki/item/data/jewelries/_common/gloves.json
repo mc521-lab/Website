@@ -1,0 +1,34 @@
+{
+    "id": "common_gloves",
+    "name": "{jobSpecify}手套",
+    "type": "饰品",
+    "applicableClass": "通用",
+    "features": [
+        {
+            "id": "critDamage",
+            "name": "暴击伤害",
+            "value": [2, 10]
+        },
+        {
+            "id": "critRate",
+            "name": "暴击几率",
+            "value": [1.0, 3.0]
+        },
+        {
+            "id": "critCombo",
+            "name": "暴击伤害+暴击几率",
+            "values": [
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "value": [1, 2]
+                },
+                {
+                    "id": "critRate",
+                    "name": "暴击几率",
+                    "value": [1, 2]
+                }
+            ]
+        }
+    ]
+}

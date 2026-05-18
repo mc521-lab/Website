@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { ResolvedEnchant, EnchantsManifest, EnchantType, EnchantRarity } from "./types";
-import { loadEnchantsManifest, loadAllEnchants } from "./utils";
+import { ResolvedEnchant, EnchantsManifest } from "./types";
+import { loadAllEnchantsData } from "./utils";
 import { EnchantCard } from "./card";
 import { Loader2, Layers, Gem } from "lucide-react";
 
@@ -18,13 +18,12 @@ export function EnchantsShowcase() {
         async function loadData() {
             try {
                 setLoading(true);
-                const manifestData = await loadEnchantsManifest();
-                if (!manifestData) {
-                    throw new Error("无法加载附魔清单");
+                const data = await loadAllEnchantsData();
+                if (!data) {
+                    throw new Error("无法加载附魔数据");
                 }
-                setManifest(manifestData);
-                const allEnchants = await loadAllEnchants(manifestData);
-                setEnchants(allEnchants);
+                setManifest(data.manifest);
+                setEnchants(data.enchants);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "加载失败");
             } finally {
@@ -70,7 +69,7 @@ export function EnchantsShowcase() {
 
     // 获取类型和稀有度信息
     const types = manifest?.types || {};
-    const rarities = manifest?.rarities || {};
+    const rarities = useMemo(() => manifest?.rarities || {}, [manifest]);
 
     // 稀有度排序
     const sortedRarityIds = useMemo(() => {
@@ -104,7 +103,7 @@ export function EnchantsShowcase() {
                         onClick={() => setSelectedType(null)}
                         className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                             selectedType === null
-                                ? "border-neutral-500 bg-neutral-100 text-neutral-900"
+                                ? "bg-primary text-neutral-900"
                                 : "border-neutral-700 bg-neutral-800/60 text-neutral-400 hover:border-neutral-600 hover:text-neutral-200"
                         }`}>
                         全部
@@ -138,7 +137,7 @@ export function EnchantsShowcase() {
                         onClick={() => setSelectedRarity(null)}
                         className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                             selectedRarity === null
-                                ? "border-neutral-500 bg-neutral-100 text-neutral-900"
+                                ? "bg-primary text-neutral-900"
                                 : "border-neutral-700 bg-neutral-800/60 text-neutral-400 hover:border-neutral-600 hover:text-neutral-200"
                         }`}>
                         全部

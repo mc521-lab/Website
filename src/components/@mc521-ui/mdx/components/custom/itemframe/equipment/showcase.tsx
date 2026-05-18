@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { ResolvedEquipment, EquipmentIndex, EquipmentJobEntry } from "./types";
+import { ResolvedEquipment, EquipmentJobEntry } from "./types";
 import { EquipmentGrid } from "./grid";
 import { EquipmentCard } from "./card";
-import { loadJobIndex, loadSetData, loadSetEquipments, loadSetWeapon, loadColorConfig } from "./utils";
+import { loadAllEquipmentData } from "./utils";
 import { Loader2, Users } from "lucide-react";
 
 interface EquipmentShowcaseProps {
@@ -24,46 +24,21 @@ export function EquipmentShowcase({ jobId, equipmentId }: EquipmentShowcaseProps
             try {
                 setLoading(true);
 
-                // 加载颜色配置
-                const colorConfig = await loadColorConfig();
+                const data = await loadAllEquipmentData();
+                if (!data) throw new Error("无法加载装备数据");
 
                 // 构建职业颜色映射
                 const colors: Record<string, string> = {};
-                if (colorConfig) {
-                    Object.entries(colorConfig.jobs).forEach(([id, job]) => {
+                if (data.colors) {
+                    Object.entries(data.colors.jobs).forEach(([id, job]) => {
                         colors[id] = job.symbolColor;
                     });
                 }
                 setJobColors(colors);
+                setJobEntries(data.jobs);
 
-                // 加载总索引
-                const indexRes = await fetch("/wiki/item/data/equipment/index.json");
-                if (!indexRes.ok) throw new Error("无法加载装备索引");
-                const indexData: EquipmentIndex = await indexRes.json();
-                setJobEntries(indexData.jobs);
-
-                // 加载所有职业的装备
-                const allEquipments: ResolvedEquipment[] = [];
-
-                for (const job of indexData.jobs) {
-                    // 如果指定了职业，只加载该职业
-                    if (jobId && job.id !== jobId) continue;
-
-                    // 加载职业索引
-                    const jobIndex = await loadJobIndex(job.entryPrefix);
-                    if (!jobIndex) continue;
-
-                    // 加载该职业所有套装的装备
-                    for (const setEntry of jobIndex.sets) {
-                        const setPath = `${job.entryPrefix}/${setEntry.folder}`;
-                        const setData = await loadSetData(setPath);
-                        if (!setData) continue;
-
-                        const setEquipments = await loadSetEquipments(setPath, setData, job, colorConfig);
-                        allEquipments.push(...setEquipments);
-                    }
-                }
-
+                // 过滤装备
+                const allEquipments = data.equipments.filter((e) => !jobId || e.jobId === jobId);
                 setEquipments(allEquipments);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "加载失败");
@@ -110,48 +85,21 @@ export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
             try {
                 setLoading(true);
 
-                // 加载颜色配置
-                const colorConfig = await loadColorConfig();
+                const data = await loadAllEquipmentData();
+                if (!data) throw new Error("无法加载装备数据");
 
                 // 构建职业颜色映射
                 const colors: Record<string, string> = {};
-                if (colorConfig) {
-                    Object.entries(colorConfig.jobs).forEach(([id, job]) => {
+                if (data.colors) {
+                    Object.entries(data.colors.jobs).forEach(([id, job]) => {
                         colors[id] = job.symbolColor;
                     });
                 }
                 setJobColors(colors);
+                setJobEntries(data.jobs);
 
-                // 加载总索引
-                const indexRes = await fetch("/wiki/item/data/equipment/index.json");
-                if (!indexRes.ok) throw new Error("无法加载装备索引");
-                const indexData: EquipmentIndex = await indexRes.json();
-                setJobEntries(indexData.jobs);
-
-                // 加载所有职业的武器
-                const allWeapons: ResolvedEquipment[] = [];
-
-                for (const job of indexData.jobs) {
-                    // 如果指定了职业，只加载该职业
-                    if (jobId && job.id !== jobId) continue;
-
-                    // 加载职业索引
-                    const jobIndex = await loadJobIndex(job.entryPrefix);
-                    if (!jobIndex) continue;
-
-                    // 加载该职业所有套装的武器
-                    for (const setEntry of jobIndex.sets) {
-                        const setPath = `${job.entryPrefix}/${setEntry.folder}`;
-                        const setData = await loadSetData(setPath);
-                        if (!setData) continue;
-
-                        const weapon = await loadSetWeapon(setPath, setData, job, colorConfig);
-                        if (weapon) {
-                            allWeapons.push(weapon);
-                        }
-                    }
-                }
-
+                // 过滤武器
+                const allWeapons = data.weapons.filter((w) => !jobId || w.jobId === jobId);
                 setWeapons(allWeapons);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "加载失败");

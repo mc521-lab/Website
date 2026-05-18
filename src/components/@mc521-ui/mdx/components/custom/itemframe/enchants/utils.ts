@@ -1,5 +1,20 @@
 import { EnchantData, EnchantsManifest, EnchantValue, ResolvedEnchant } from "./types";
 
+// 从预编译的静态 JSON 加载所有附魔数据
+export async function loadAllEnchantsData(): Promise<{
+    manifest: EnchantsManifest;
+    enchants: ResolvedEnchant[];
+} | null> {
+    try {
+        const res = await fetch("/wiki/item/data/_compiled/enchants.json");
+        if (!res.ok) return null;
+        return await res.json();
+    } catch {
+        return null;
+    }
+}
+
+// 兼容旧 API：单独加载 manifest（如果需要）
 export async function loadEnchantsManifest(): Promise<EnchantsManifest | null> {
     try {
         const res = await fetch("/wiki/item/data/enchants/manifest.json");
@@ -10,6 +25,7 @@ export async function loadEnchantsManifest(): Promise<EnchantsManifest | null> {
     }
 }
 
+// 兼容旧 API：单独加载单个附魔（如果需要）
 export async function loadEnchant(id: string): Promise<EnchantData | null> {
     try {
         const res = await fetch(`/wiki/item/data/enchants/${id}.json`);
@@ -20,6 +36,7 @@ export async function loadEnchant(id: string): Promise<EnchantData | null> {
     }
 }
 
+// 兼容旧 API：从 manifest 加载所有附魔（已弃用，建议使用 loadAllEnchantsData）
 export async function loadAllEnchants(manifest: EnchantsManifest): Promise<ResolvedEnchant[]> {
     const enchants: ResolvedEnchant[] = [];
     for (const id of manifest.enchants) {

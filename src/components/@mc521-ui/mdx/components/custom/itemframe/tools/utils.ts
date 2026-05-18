@@ -2,7 +2,7 @@ import { ToolsIndex, ToolData, ToolCategory, ResolvedTool } from "./types";
 
 export async function loadToolsIndex(): Promise<ToolsIndex | null> {
     try {
-        const res = await fetch("/wiki/item/data/tools/index.json");
+        const res = await fetch("/wiki/item/data/_compiled/tools.json");
         if (!res.ok) return null;
         return await res.json();
     } catch {

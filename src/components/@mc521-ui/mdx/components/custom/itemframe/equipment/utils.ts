@@ -70,6 +70,22 @@ export function isSetData(data: unknown): data is SetData {
     return typeof data === "object" && data !== null && "setEffects" in data && !("stats" in data);
 }
 
+// 从预编译的静态 JSON 加载所有装备数据
+export async function loadAllEquipmentData(): Promise<{
+    colors: ColorConfig;
+    jobs: EquipmentJobEntry[];
+    equipments: ResolvedEquipment[];
+    weapons: ResolvedEquipment[];
+} | null> {
+    try {
+        const res = await fetch("/wiki/item/data/_compiled/equipment.json");
+        if (!res.ok) return null;
+        return await res.json();
+    } catch {
+        return null;
+    }
+}
+
 // 加载颜色配置
 export async function loadColorConfig(): Promise<ColorConfig | null> {
     if (colorConfigCache) return colorConfigCache;

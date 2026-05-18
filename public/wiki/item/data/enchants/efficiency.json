@@ -1,0 +1,30 @@
+{
+    "id": "efficiency",
+    "displayName": "效率",
+    "description": "提升挖掘速度%placeholder%%",
+    "type": "vanilla",
+    "rarity": "epic",
+    "targets": ["pickaxe", "axe", "shovel", "hoe"],
+    "conflicts": [],
+    "maxLevel": 5,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "speed_boost",
+            "description": "提升挖掘速度",
+            "formula": "20 + 5 * %level%"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "速度加成",
+            "formula": "20 + 5 * %level%",
+            "unit": "%",
+            "description": "挖掘速度加成百分比"
+        }
+    ],
+    "conditions": []
+}

@@ -1,0 +1,22 @@
+{
+    "id": "tripleshot",
+    "displayName": "三连射",
+    "description": "一次射出三支箭",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["bow"],
+    "conflicts": ["multishot"],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "triple_shot",
+            "description": "一次射出三支箭",
+            "arrowCount": 3
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

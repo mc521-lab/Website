@@ -1,0 +1,29 @@
+{
+    "id": "density",
+    "displayName": "致密",
+    "description": "每掉落一格造成 %placeholder% 点额外伤害",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["mace"],
+    "conflicts": [],
+    "maxLevel": 5,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "density",
+            "description": "下落攻击额外伤害"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "额外伤害",
+            "formula": "0.5 * %level%",
+            "unit": "点",
+            "description": "每掉落一格的额外伤害"
+        }
+    ],
+    "conditions": []
+}

@@ -1,0 +1,30 @@
+{
+    "id": "mushi_guanghui_set",
+    "name": "光辉",
+    "job": "牧师",
+    "jobId": "mushi",
+    "symbolColor": "#F8FFF8",
+    "setEffects": {
+        "4": [
+            {
+                "id": "extraHealth",
+                "name": "生命上限",
+                "value": 2,
+                "unit": ""
+            },
+            {
+                "id": "maxMana",
+                "name": "法力上限",
+                "value": 2,
+                "unit": ""
+            },
+            {
+                "id": "maxStamina",
+                "name": "耐力上限",
+                "value": 2,
+                "unit": ""
+            }
+        ]
+    },
+    "materials": []
+}

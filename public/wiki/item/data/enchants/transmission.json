@@ -1,0 +1,30 @@
+{
+    "id": "transmission",
+    "displayName": "传送",
+    "description": "攻击时有%chance%%几率传送到目标身后",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["sword", "axe"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "teleport_behind",
+            "description": "传送到目标身后",
+            "chance": 15
+        }
+    ],
+    "values": [
+        {
+            "id": "chance",
+            "name": "传送几率",
+            "formula": "15",
+            "unit": "%",
+            "description": "15%几率传送到目标身后"
+        }
+    ],
+    "conditions": []
+}

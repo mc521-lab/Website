@@ -1,0 +1,33 @@
+{
+    "id": "sheshou_lieshou_helmet",
+    "name": "猎手之盔",
+    "slot": "helmet",
+    "quality": "C",
+    "applicableClass": "射手",
+    "setId": "sheshou_lieshou_set",
+    "stats": [
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 3
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 0.75
+        },
+        {
+            "id": "dodgeRating",
+            "name": "闪避率",
+            "value": 1
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 3,
+    "materials": []
+}

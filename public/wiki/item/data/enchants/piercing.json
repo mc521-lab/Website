@@ -1,0 +1,29 @@
+{
+    "id": "piercing",
+    "displayName": "穿透",
+    "description": "箭矢穿透 %placeholder% 个实体",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["crossbow"],
+    "conflicts": ["multishot"],
+    "maxLevel": 4,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "piercing",
+            "description": "箭矢穿透实体"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "穿透数量",
+            "formula": "%level% + 1",
+            "unit": "个",
+            "description": "可穿透的实体数量"
+        }
+    ],
+    "conditions": []
+}

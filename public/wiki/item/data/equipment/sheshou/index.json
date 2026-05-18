@@ -1,0 +1,37 @@
+{
+    "jobId": "sheshou",
+    "jobName": "射手",
+    "symbolColor": "#FFF3A3",
+    "sets": [
+        {
+            "id": "sheshou_gongzu_set",
+            "name": "弓卒",
+            "folder": "gongzu",
+            "quality": "D"
+        },
+        {
+            "id": "sheshou_lieshou_set",
+            "name": "猎手",
+            "folder": "lieshou",
+            "quality": "C"
+        },
+        {
+            "id": "sheshou_yingyan_set",
+            "name": "鹰眼",
+            "folder": "yingyan",
+            "quality": "B"
+        },
+        {
+            "id": "sheshou_cangqiong_set",
+            "name": "苍穹",
+            "folder": "cangqiong",
+            "quality": "A"
+        },
+        {
+            "id": "sheshou_houyi_set",
+            "name": "后羿",
+            "folder": "houyi",
+            "quality": "S"
+        }
+    ]
+}

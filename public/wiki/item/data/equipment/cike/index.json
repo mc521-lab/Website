@@ -1,0 +1,37 @@
+{
+    "jobId": "cike",
+    "jobName": "刺客",
+    "symbolColor": "#7EC0FF",
+    "sets": [
+        {
+            "id": "cike_anzu_set",
+            "name": "暗卒",
+            "folder": "anzu",
+            "quality": "D"
+        },
+        {
+            "id": "cike_yinni_set",
+            "name": "隐匿",
+            "folder": "yinni",
+            "quality": "C"
+        },
+        {
+            "id": "cike_yexing_set",
+            "name": "夜行",
+            "folder": "yexing",
+            "quality": "B"
+        },
+        {
+            "id": "cike_guiying_set",
+            "name": "诡影",
+            "folder": "guiying",
+            "quality": "A"
+        },
+        {
+            "id": "cike_cihun_set",
+            "name": "刺魂",
+            "folder": "cihun",
+            "quality": "S"
+        }
+    ]
+}

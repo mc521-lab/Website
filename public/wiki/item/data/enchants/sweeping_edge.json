@@ -1,0 +1,29 @@
+{
+    "id": "sweeping_edge",
+    "displayName": "横扫之刃",
+    "description": "提升横扫攻击伤害 %placeholder%%",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["sword"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "sweeping_edge",
+            "description": "提升横扫伤害"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "伤害加成",
+            "formula": "%level% / (%level% + 1) * 100",
+            "unit": "%",
+            "description": "横扫伤害加成"
+        }
+    ],
+    "conditions": []
+}

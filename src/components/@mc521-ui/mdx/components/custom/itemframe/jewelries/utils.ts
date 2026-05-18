@@ -6,6 +6,7 @@ import {
     ResolvedFeature,
     JewelryFeature,
     JewelryFeatureValue,
+    JewelryNestedFeature,
 } from "./types";
 
 export function formatValue(value: number | [number, number]): string {
@@ -73,8 +74,8 @@ export function getSlotIcon(slotType: string): string {
 }
 
 // 判断 feature 是否是嵌套结构（有 values 数组）
-function isNestedFeature(f: JewelryFeature): boolean {
-    return "values" in f && Array.isArray((f as Record<string, unknown>).values);
+function isNestedFeature(f: JewelryFeature): f is JewelryNestedFeature {
+    return "values" in f && Array.isArray((f as unknown as JewelryNestedFeature).values);
 }
 
 // 将 JewelryFeature 统一转换为 ResolvedFeature

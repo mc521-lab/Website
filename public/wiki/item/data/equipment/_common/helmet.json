@@ -1,0 +1,10 @@
+{
+    "id": "common_helmet",
+    "slot": "helmet",
+    "slotName": "头盔",
+    "qualities": {
+        "D": { "enchantSlots": 4, "gemSlots": 2 },
+        "C": { "enchantSlots": 4, "gemSlots": 2 },
+        "B": { "enchantSlots": 4, "gemSlots": 2 }
+    }
+}

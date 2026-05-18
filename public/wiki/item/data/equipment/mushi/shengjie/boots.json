@@ -1,0 +1,38 @@
+{
+    "id": "mushi_shengjie_boots",
+    "name": "圣洁之靴",
+    "slot": "boots",
+    "quality": "C",
+    "applicableClass": "牧师",
+    "setId": "mushi_shengjie_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 0.4
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 3
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 0.6
+        },
+        {
+            "id": "maxMana",
+            "name": "法力上限",
+            "value": 8
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 2,
+    "materials": []
+}

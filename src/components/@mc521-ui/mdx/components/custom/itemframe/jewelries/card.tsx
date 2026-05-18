@@ -2,7 +2,7 @@
 
 import { ResolvedJewelry } from "./types";
 import { formatValue } from "./utils";
-import { Diamond, Zap, Heart, Swords, ShieldCheck, Gauge, Flame, Droplets, Wind, Mountain, Sparkles } from "lucide-react";
+import { Diamond, Zap, Heart, Swords, ShieldCheck, Gauge, Flame, Droplets, Wind, Mountain, Sparkles, Users } from "lucide-react";
 
 function getAttributeIcon(name: string, color: string) {
     const n = name.toLowerCase();
@@ -53,7 +53,7 @@ export function JewelryCard({ jewelry }: JewelryCardProps) {
                     </div>
                     <div className="min-w-0 flex-1">
                         <h3 className="truncate text-lg font-bold text-neutral-100">{jewelry.name}</h3>
-                        <div className="flex items-center gap-2 text-xs text-neutral-500">
+                        {/* <div className="flex items-center gap-2 text-xs text-neutral-500">
                             <span>{jewelry.slotType}</span>
                             {jewelry.jobName && (
                                 <span
@@ -65,13 +65,13 @@ export function JewelryCard({ jewelry }: JewelryCardProps) {
                                     {jewelry.jobName}
                                 </span>
                             )}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
                 {/* 适用职业 */}
                 <div className="mb-3 flex items-center gap-1.5 text-xs text-neutral-400">
-                    <Diamond className="h-3.5 w-3.5" />
+                    <Users className="h-3.5 w-3.5" />
                     <span>适用: {jewelry.applicableClass}</span>
                 </div>
 

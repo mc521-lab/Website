@@ -1,0 +1,35 @@
+{
+    "id": "first_strike",
+    "displayName": "先发制人",
+    "description": "对满血目标造成%placeholder%%额外伤害",
+    "type": "extension",
+    "rarity": "epic",
+    "targets": ["sword", "axe"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "damage_multiplier",
+            "description": "对满血目标伤害加成",
+            "formula": "1 + %level% * 0.15"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "额外伤害",
+            "formula": "%level% * 15",
+            "unit": "%",
+            "description": "每级增加15%对满血目标伤害"
+        }
+    ],
+    "conditions": [
+        {
+            "id": "target_is_full_health",
+            "description": "目标必须处于满血状态"
+        }
+    ]
+}

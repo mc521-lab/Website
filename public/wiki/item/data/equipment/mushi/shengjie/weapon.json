@@ -1,0 +1,34 @@
+{
+    "id": "mushi_shengjie_weapon",
+    "name": "圣洁之杖",
+    "slot": "weapon",
+    "quality": "C",
+    "applicableClass": "牧师",
+    "stats": [
+        {
+            "id": "baseDamage",
+            "name": "基础伤害",
+            "value": 10
+        },
+        {
+            "id": "attackSpeed",
+            "name": "攻击速度",
+            "value": 1.6
+        },
+        {
+            "id": "critDamage",
+            "name": "暴击伤害",
+            "value": 8,
+            "unit": "%"
+        },
+        {
+            "id": "critRate",
+            "name": "暴击概率",
+            "value": 2,
+            "unit": "%"
+        }
+    ],
+    "enchantSlots": 5,
+    "gemSlots": 3,
+    "materials": []
+}

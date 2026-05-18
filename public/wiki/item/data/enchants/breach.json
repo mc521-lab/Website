@@ -1,0 +1,29 @@
+{
+    "id": "breach",
+    "displayName": "破甲",
+    "description": "降低目标盔甲效果 %placeholder%%",
+    "type": "vanilla",
+    "rarity": "epic",
+    "targets": ["mace"],
+    "conflicts": [],
+    "maxLevel": 4,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "breach",
+            "description": "降低目标盔甲效果"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "破甲效果",
+            "formula": "15 * %level%",
+            "unit": "%",
+            "description": "每级降低15%盔甲效果"
+        }
+    ],
+    "conditions": []
+}

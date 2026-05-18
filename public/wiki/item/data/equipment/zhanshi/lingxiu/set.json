@@ -1,0 +1,24 @@
+{
+    "id": "zhanshi_lingxiu_set",
+    "name": "领袖",
+    "job": "战士",
+    "jobId": "zhanshi",
+    "symbolColor": "#FF0000",
+    "setEffects": {
+        "4": [
+            {
+                "id": "cooldownReduction",
+                "name": "技能冷却",
+                "value": -8,
+                "unit": "%"
+            },
+            {
+                "id": "rangedReduction",
+                "name": "远程减免",
+                "value": -20,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

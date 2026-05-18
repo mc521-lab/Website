@@ -1,0 +1,31 @@
+{
+    "id": "wound",
+    "displayName": "创伤",
+    "description": "攻击时造成流血效果，持续%duration%秒",
+    "type": "extension",
+    "rarity": "rare",
+    "targets": ["sword", "axe"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "bleed",
+            "description": "造成流血效果",
+            "duration": "%level% * 3",
+            "damage": "%level% * 0.5"
+        }
+    ],
+    "values": [
+        {
+            "id": "duration",
+            "name": "流血持续时间",
+            "formula": "%level% * 3",
+            "unit": "秒",
+            "description": "每级增加3秒流血时间"
+        }
+    ],
+    "conditions": []
+}

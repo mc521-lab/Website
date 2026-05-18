@@ -1,0 +1,18 @@
+{
+    "id": "cike_anzu_set",
+    "name": "暗卒",
+    "job": "刺客",
+    "jobId": "cike",
+    "symbolColor": "#7EC0FF",
+    "setEffects": {
+        "4": [
+            {
+                "id": "movementSpeed",
+                "name": "移速加成",
+                "value": 0.25,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

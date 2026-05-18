@@ -1,0 +1,18 @@
+{
+    "id": "sheshou_houyi_set",
+    "name": "后羿",
+    "job": "射手",
+    "jobId": "sheshou",
+    "symbolColor": "#FFF3A3",
+    "setEffects": {
+        "4": [
+            {
+                "id": "dodgeRating",
+                "name": "闪避率",
+                "value": 8,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

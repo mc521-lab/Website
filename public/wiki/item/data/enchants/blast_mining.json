@@ -1,0 +1,33 @@
+{
+    "id": "blast_mining",
+    "displayName": "立方",
+    "description": "有%placeholder%%的几率以3x3x3范围挖掘方块",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["pickaxe"],
+    "conflicts": ["veinminer"],
+    "maxLevel": 5,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "mine_radius",
+            "description": "3x3x3范围采矿",
+            "radius": 1,
+            "checkHardness": true,
+            "disableOnSneak": true,
+            "blacklistedBlocks": ["bedrock", "chest", "barrel", "barrier"]
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "触发几率",
+            "formula": "4 * %level%",
+            "unit": "%",
+            "description": "每级增加4%触发几率"
+        }
+    ],
+    "conditions": []
+}

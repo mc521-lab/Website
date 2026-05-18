@@ -1,0 +1,37 @@
+{
+    "jobId": "mushi",
+    "jobName": "牧师",
+    "symbolColor": "#F8FFF8",
+    "sets": [
+        {
+            "id": "mushi_xintu_set",
+            "name": "信徒",
+            "folder": "xintu",
+            "quality": "D"
+        },
+        {
+            "id": "mushi_shengjie_set",
+            "name": "圣洁",
+            "folder": "shengjie",
+            "quality": "C"
+        },
+        {
+            "id": "mushi_guanghui_set",
+            "name": "光辉",
+            "folder": "guanghui",
+            "quality": "B"
+        },
+        {
+            "id": "mushi_shouhu_set",
+            "name": "守护",
+            "folder": "shouhu",
+            "quality": "A"
+        },
+        {
+            "id": "mushi_jiaohuang_set",
+            "name": "教皇",
+            "folder": "jiaohuang",
+            "quality": "S"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "id": "zhanshi_jiangjun_helmet",
+    "name": "将军之盔",
+    "slot": "helmet",
+    "quality": "B",
+    "applicableClass": "战士",
+    "setId": "zhanshi_jiangjun_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 1
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 3
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 1
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 8,
+    "materials": []
+}

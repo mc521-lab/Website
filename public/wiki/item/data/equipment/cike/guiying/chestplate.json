@@ -1,0 +1,43 @@
+{
+    "id": "cike_guiying_chestplate",
+    "name": "诡影胸甲",
+    "slot": "chestplate",
+    "quality": "A",
+    "applicableClass": "刺客",
+    "setId": "cike_guiying_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 1.5
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 8
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 1.25
+        },
+        {
+            "id": "maxStamina",
+            "name": "耐力上限",
+            "value": 20
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 3,
+    "gemSlotDetails": [
+        { "id": "gem1", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem2", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem3", "name": "待打孔", "requireDrill": true }
+    ],
+    "materials": []
+}

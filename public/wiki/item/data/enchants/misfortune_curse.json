@@ -1,0 +1,30 @@
+{
+    "id": "misfortune_curse",
+    "displayName": "倒霉诅咒",
+    "description": "减少幸运值%placeholder%%",
+    "type": "extension",
+    "rarity": "curse",
+    "targets": ["helmet", "chestplate", "leggings", "boots"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": false,
+    "effects": [
+        {
+            "id": "reduce_luck",
+            "description": "减少幸运值",
+            "amount": 1
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "幸运减少",
+            "formula": "1",
+            "unit": "级",
+            "description": "减少1级幸运"
+        }
+    ],
+    "conditions": []
+}

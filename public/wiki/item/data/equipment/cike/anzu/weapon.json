@@ -1,0 +1,34 @@
+{
+    "id": "cike_anzu_weapon",
+    "name": "暗卒之刃",
+    "slot": "weapon",
+    "quality": "D",
+    "applicableClass": "刺客",
+    "stats": [
+        {
+            "id": "baseDamage",
+            "name": "基础伤害",
+            "value": 8
+        },
+        {
+            "id": "attackSpeed",
+            "name": "攻击速度",
+            "value": 1.6
+        },
+        {
+            "id": "critDamage",
+            "name": "暴击伤害",
+            "value": 4,
+            "unit": "%"
+        },
+        {
+            "id": "critRate",
+            "name": "暴击概率",
+            "value": 1,
+            "unit": "%"
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 2,
+    "materials": []
+}

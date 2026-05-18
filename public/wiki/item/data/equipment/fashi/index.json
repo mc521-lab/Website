@@ -1,0 +1,37 @@
+{
+    "jobId": "fashi",
+    "jobName": "法师",
+    "symbolColor": "#C392FF",
+    "sets": [
+        {
+            "id": "fashi_xuetu_set",
+            "name": "学徒",
+            "folder": "xuetu",
+            "quality": "D"
+        },
+        {
+            "id": "fashi_shushi_set",
+            "name": "术师",
+            "folder": "shushi",
+            "quality": "C"
+        },
+        {
+            "id": "fashi_modao_set",
+            "name": "魔导",
+            "folder": "modao",
+            "quality": "B"
+        },
+        {
+            "id": "fashi_xianzhe_set",
+            "name": "贤者",
+            "folder": "xianzhe",
+            "quality": "A"
+        },
+        {
+            "id": "fashi_fashen_set",
+            "name": "法神",
+            "folder": "fashen",
+            "quality": "S"
+        }
+    ]
+}

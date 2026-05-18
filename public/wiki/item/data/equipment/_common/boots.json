@@ -1,0 +1,10 @@
+{
+    "id": "common_boots",
+    "slot": "boots",
+    "slotName": "靴子",
+    "qualities": {
+        "D": { "enchantSlots": 4, "gemSlots": 2 },
+        "C": { "enchantSlots": 4, "gemSlots": 2 },
+        "B": { "enchantSlots": 4, "gemSlots": 2 }
+    }
+}

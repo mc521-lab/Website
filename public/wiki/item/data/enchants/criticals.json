@@ -1,0 +1,30 @@
+{
+    "id": "criticals",
+    "displayName": "暴戾",
+    "description": "提升暴击伤害%placeholder%%",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["sword", "axe"],
+    "conflicts": [],
+    "maxLevel": 5,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "crit_multiplier",
+            "description": "暴击伤害倍率",
+            "formula": "1 + 0.04 * %level%"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "暴击伤害加成",
+            "formula": "4 * %level%",
+            "unit": "%",
+            "description": "每级增加4%暴击伤害"
+        }
+    ],
+    "conditions": []
+}

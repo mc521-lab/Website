@@ -1,0 +1,115 @@
+{
+    "version": "1.0",
+    "types": {
+        "vanilla": {
+            "name": "原版",
+            "color": "#69d941"
+        },
+        "extension": {
+            "name": "扩展",
+            "color": "#f0c529"
+        }
+    },
+    "rarities": {
+        "common": {
+            "name": "普通",
+            "color": "#f8f4ed",
+            "order": 1
+        },
+        "rare": {
+            "name": "精良",
+            "color": "#63bbd0",
+            "order": 2
+        },
+        "epic": {
+            "name": "史诗",
+            "color": "#eb507e",
+            "order": 3
+        },
+        "special": {
+            "name": "稀世",
+            "color": "#fbda41",
+            "order": 4
+        },
+        "curse": {
+            "name": "诅咒",
+            "color": "#d42517",
+            "order": 5
+        }
+    },
+    "enchants": [
+        "telekinesis",
+        "wisdom",
+        "veinminer",
+        "criticals",
+        "lumberjack",
+        "excavation",
+        "infernal_touch",
+        "replenish",
+        "feather_step",
+        "stamina",
+        "thrive",
+        "ender_slayer",
+        "first_strike",
+        "frost",
+        "ninja",
+        "thor",
+        "vanish",
+        "wound",
+        "stun",
+        "tripleshot",
+        "rocket_saver",
+        "shulker_harvest",
+        "transmission",
+        "wyvern",
+        "blast_mining",
+        "breaklessness_curse",
+        "hunger_curse",
+        "misfortune_curse",
+        "permanence_curse",
+        "harmlessness_curse",
+        "fire_aspect",
+        "multishot",
+        "sharpness",
+        "efficiency",
+        "fortune",
+        "respiration",
+        "projectile_protection",
+        "channeling",
+        "loyalty",
+        "silk_touch",
+        "sweeping",
+        "swift_sneak",
+        "mending",
+        "protection",
+        "lure",
+        "punch",
+        "frost_walker",
+        "power",
+        "riptide",
+        "density",
+        "binding_curse",
+        "infinity",
+        "impaling",
+        "thorns",
+        "smite",
+        "unbreaking",
+        "feather_falling",
+        "knockback",
+        "luck_of_the_sea",
+        "bane_of_arthropods",
+        "soul_speed",
+        "quick_charge",
+        "aqua_affinity",
+        "wind_burst",
+        "blast_protection",
+        "piercing",
+        "fire_protection",
+        "breach",
+        "looting",
+        "sweeping_edge",
+        "depth_strider",
+        "vanishing_curse",
+        "flame"
+    ]
+}

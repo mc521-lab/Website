@@ -1,0 +1,10 @@
+{
+    "id": "common_weapon",
+    "slot": "weapon",
+    "slotName": "武器",
+    "qualities": {
+        "D": { "enchantSlots": 4, "gemSlots": 4 },
+        "C": { "enchantSlots": 4, "gemSlots": 4 },
+        "B": { "enchantSlots": 4, "gemSlots": 4 }
+    }
+}

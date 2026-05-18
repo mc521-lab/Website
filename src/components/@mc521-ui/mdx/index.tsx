@@ -1,6 +1,7 @@
 import { ColoredText } from "./components/custom/colored-text";
-import { GemCard, GemGrid, GemShowcase } from "./components/custom/itemframe";
+import { EnchantsShowcase, GemCard, GemGrid, GemShowcase, ToolsShowcase } from "./components/custom/itemframe";
 import { JewelryCard, JewelryGrid, JewelryShowcase } from "./components/custom/itemframe/jewelries";
+import { EquipmentCard, EquipmentGrid, EquipmentShowcase, WeaponShowcase } from "./components/custom/itemframe/equipment";
 import { MyImageWithTooltip } from "./components/custom/wrapped-media";
 import { Pre, Code } from "./components/html/code";
 import { Hr } from "./components/html/hr";
@@ -52,4 +53,16 @@ export const mdxComponents = {
     JewelryCard,
     JewelryGrid,
     JewelryShowcase,
+
+    // Itemframe components - Equipment
+    EquipmentCard,
+    EquipmentGrid,
+    EquipmentShowcase,
+    WeaponShowcase,
+
+    // Itemframe components - Tools
+    ToolsShowcase,
+
+    // Itemframe components - Enchantments
+    EnchantmentShowcase: EnchantsShowcase,
 };

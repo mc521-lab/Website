@@ -1,0 +1,29 @@
+{
+    "id": "swift_sneak",
+    "displayName": "迅捷潜行",
+    "description": "减少潜行时的移动减速 %placeholder%%",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["leggings"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "swift_sneak",
+            "description": "减少潜行减速"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "减速减免",
+            "formula": "min(%level% * 15, 100)",
+            "unit": "%",
+            "description": "减少潜行时的移动减速"
+        }
+    ],
+    "conditions": []
+}

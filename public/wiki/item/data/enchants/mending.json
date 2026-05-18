@@ -1,0 +1,36 @@
+{
+    "id": "mending",
+    "displayName": "经验修补",
+    "description": "通过经验球修复物品耐久",
+    "type": "vanilla",
+    "rarity": "special",
+    "targets": [
+        "pickaxe",
+        "axe",
+        "shovel",
+        "hoe",
+        "sword",
+        "bow",
+        "crossbow",
+        "trident",
+        "helmet",
+        "chestplate",
+        "leggings",
+        "boots",
+        "elytra",
+        "fishing_rod"
+    ],
+    "conflicts": ["infinity"],
+    "maxLevel": 1,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "mending",
+            "description": "经验修复耐久"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

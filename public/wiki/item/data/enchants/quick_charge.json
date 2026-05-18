@@ -1,0 +1,29 @@
+{
+    "id": "quick_charge",
+    "displayName": "快速装填",
+    "description": "减少弩箭充能时间 %placeholder% 秒",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["crossbow"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "quick_charge",
+            "description": "减少装填时间"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "时间减少",
+            "formula": "%level% * 0.25",
+            "unit": "秒",
+            "description": "每级减少0.25秒装填时间"
+        }
+    ],
+    "conditions": []
+}

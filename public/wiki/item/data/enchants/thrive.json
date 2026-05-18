@@ -1,0 +1,30 @@
+{
+    "id": "thrive",
+    "displayName": "茁壮",
+    "description": "作物生长速度提升%placeholder%%",
+    "type": "extension",
+    "rarity": "rare",
+    "targets": ["hoe"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "growth_multiplier",
+            "description": "作物生长速度加成",
+            "formula": "1 + %level% * 0.5"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "生长加速",
+            "formula": "%level% * 50",
+            "unit": "%",
+            "description": "每级增加50%生长速度"
+        }
+    ],
+    "conditions": []
+}

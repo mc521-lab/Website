@@ -1,0 +1,38 @@
+{
+    "id": "mushi_guanghui_boots",
+    "name": "光辉之靴",
+    "slot": "boots",
+    "quality": "B",
+    "applicableClass": "牧师",
+    "setId": "mushi_guanghui_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 0.8
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 3
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 0.8
+        },
+        {
+            "id": "maxMana",
+            "name": "法力上限",
+            "value": 12
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 2,
+    "materials": []
+}

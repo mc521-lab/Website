@@ -1,0 +1,24 @@
+{
+    "id": "fashi_xuetu_set",
+    "name": "学徒",
+    "job": "法师",
+    "jobId": "fashi",
+    "symbolColor": "#C392FF",
+    "setEffects": {
+        "4": [
+            {
+                "id": "maxMana",
+                "name": "法力上限",
+                "value": 0.5,
+                "unit": ""
+            },
+            {
+                "id": "maxStamina",
+                "name": "耐力上限",
+                "value": 0.5,
+                "unit": ""
+            }
+        ]
+    },
+    "materials": []
+}

@@ -1,0 +1,21 @@
+{
+    "id": "vanish",
+    "displayName": "消失",
+    "description": "死亡时该物品不会掉落",
+    "type": "extension",
+    "rarity": "epic",
+    "targets": ["pickaxe", "axe", "shovel", "hoe", "sword", "bow", "crossbow", "trident", "helmet", "chestplate", "leggings", "boots"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "keep_on_death",
+            "description": "死亡时保留物品"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

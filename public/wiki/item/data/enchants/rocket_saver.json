@@ -1,0 +1,35 @@
+{
+    "id": "rocket_saver",
+    "displayName": "火箭节省",
+    "description": "使用烟花火箭飞行时有%chance%%几率不消耗",
+    "type": "extension",
+    "rarity": "rare",
+    "targets": ["elytra"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "save_rocket",
+            "description": "有几率不消耗烟花火箭",
+            "chance": "%level% * 20"
+        }
+    ],
+    "values": [
+        {
+            "id": "chance",
+            "name": "节省几率",
+            "formula": "%level% * 20",
+            "unit": "%",
+            "description": "每级增加20%节省几率"
+        }
+    ],
+    "conditions": [
+        {
+            "id": "is_flying",
+            "description": "必须处于飞行状态"
+        }
+    ]
+}

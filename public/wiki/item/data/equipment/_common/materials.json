@@ -1,0 +1,27 @@
+[
+    {
+        "id": "iron_ingot",
+        "name": "铁锭",
+        "image": null
+    },
+    {
+        "id": "gold_ingot",
+        "name": "金锭",
+        "image": null
+    },
+    {
+        "id": "diamond",
+        "name": "钻石",
+        "image": null
+    },
+    {
+        "id": "emerald",
+        "name": "绿宝石",
+        "image": null
+    },
+    {
+        "id": "netherite_ingot",
+        "name": "下界合金锭",
+        "image": null
+    }
+]

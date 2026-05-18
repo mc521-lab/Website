@@ -1,0 +1,33 @@
+{
+    "id": "frost",
+    "displayName": "霜冻",
+    "description": "攻击时减速目标%duration%秒",
+    "type": "extension",
+    "rarity": "rare",
+    "targets": ["sword", "axe", "bow", "crossbow"],
+    "conflicts": ["fire_aspect"],
+    "maxLevel": 2,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "potion_effect",
+            "description": "给予目标减速效果",
+            "effect": "SLOW",
+            "level": "ceil(%level% / 2)",
+            "duration": "%level% * 20",
+            "applyToTarget": true
+        }
+    ],
+    "values": [
+        {
+            "id": "duration",
+            "name": "减速持续时间",
+            "formula": "%level% * 2",
+            "unit": "秒",
+            "description": "每级增加2秒减速时间"
+        }
+    ],
+    "conditions": []
+}

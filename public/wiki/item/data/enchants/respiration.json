@@ -1,0 +1,36 @@
+{
+    "id": "respiration",
+    "displayName": "水下呼吸",
+    "description": "延长水下呼吸时间 %seconds% 秒，%chance%% 几率免疫溺水伤害",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["helmet"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "water_breathing",
+            "description": "延长水下呼吸时间"
+        }
+    ],
+    "values": [
+        {
+            "id": "seconds",
+            "name": "额外呼吸时间",
+            "formula": "15 * %level%",
+            "unit": "秒",
+            "description": "每级增加15秒水下呼吸时间"
+        },
+        {
+            "id": "chance",
+            "name": "免疫几率",
+            "formula": "%level% / (%level% + 1) * 100",
+            "unit": "%",
+            "description": "免疫溺水伤害的几率"
+        }
+    ],
+    "conditions": []
+}

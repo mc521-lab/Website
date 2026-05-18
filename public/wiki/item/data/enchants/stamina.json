@@ -1,0 +1,35 @@
+{
+    "id": "stamina",
+    "displayName": "耐力",
+    "description": "减少疾跑时的饥饿消耗 %placeholder%%",
+    "type": "extension",
+    "rarity": "epic",
+    "targets": ["chestplate"],
+    "conflicts": [],
+    "maxLevel": 4,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "hunger_multiplier",
+            "description": "减少饥饿消耗",
+            "formula": "1 - %level% * 0.2"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "饥饿减免",
+            "formula": "%level% * 20",
+            "unit": "%",
+            "description": "每级减少20%的饥饿消耗"
+        }
+    ],
+    "conditions": [
+        {
+            "id": "is_sprinting",
+            "description": "仅在疾跑状态下生效"
+        }
+    ]
+}

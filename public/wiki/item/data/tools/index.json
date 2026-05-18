@@ -1,0 +1,168 @@
+{
+    "version": "1.0",
+    "type": "tools",
+    "categories": [
+        {
+            "id": "pickaxe",
+            "name": "镐子",
+            "icon": "⛏️"
+        },
+        {
+            "id": "axe",
+            "name": "斧子",
+            "icon": "🪓"
+        },
+        {
+            "id": "shovel",
+            "name": "铲子",
+            "icon": "🔧"
+        },
+        {
+            "id": "hoe",
+            "name": "锄头",
+            "icon": "🌾"
+        }
+    ],
+    "tools": [
+        {
+            "id": "s_pickaxe",
+            "name": "S级镐子",
+            "category": "pickaxe",
+            "material": "NETHERITE_PICKAXE",
+            "quality": "S",
+            "type": "工具",
+            "description": "此镐子为无限耐久，请放心使用。建议绑定一下，丢失了可不管喔。镐子上的附魔都可以正常拆卸掉。",
+            "unbreakable": true,
+            "enchants": [
+                { "name": "效率", "level": 10 },
+                { "name": "时运", "level": 3 },
+                { "name": "吸星", "level": 1 },
+                { "name": "急迫", "level": 3 },
+                { "name": "脉络", "level": 4 }
+            ]
+        },
+        {
+            "id": "s_pickaxe_trial",
+            "name": "S级镐子 (体验版)",
+            "category": "pickaxe",
+            "material": "NETHERITE_PICKAXE",
+            "quality": "S",
+            "type": "工具",
+            "description": "此镐上的附魔无法被拆卸下来。此镐的耐久无法修复，用完消失。体验不错的话可前往商场购买喔。",
+            "trial": true,
+            "maxDurability": 5000,
+            "timeLimit": "24h",
+            "enchants": [
+                { "name": "效率", "level": 10 },
+                { "name": "时运", "level": 3 },
+                { "name": "吸星", "level": 1 },
+                { "name": "急迫", "level": 3 },
+                { "name": "脉络", "level": 4 }
+            ]
+        },
+        {
+            "id": "s_axe",
+            "name": "S级斧子",
+            "category": "axe",
+            "material": "NETHERITE_AXE",
+            "quality": "S",
+            "type": "工具",
+            "description": "此斧子为无限耐久，请放心使用。建议绑定一下，丢失了可不管喔。斧子上的附魔都可以正常拆卸掉。",
+            "unbreakable": true,
+            "enchants": [
+                { "name": "效率", "level": 10 },
+                { "name": "智识", "level": 3 },
+                { "name": "吸星", "level": 1 },
+                { "name": "暴戾", "level": 5 },
+                { "name": "电锯", "level": 6 }
+            ]
+        },
+        {
+            "id": "s_axe_trial",
+            "name": "S级斧子 (体验版)",
+            "category": "axe",
+            "material": "NETHERITE_AXE",
+            "quality": "S",
+            "type": "工具",
+            "description": "此斧上的附魔无法被拆卸下来。此斧的耐久无法修复，用完消失。体验不错的话可前往商场购买喔。",
+            "trial": true,
+            "maxDurability": 5000,
+            "timeLimit": "24h",
+            "enchants": [
+                { "name": "效率", "level": 10 },
+                { "name": "智识", "level": 3 },
+                { "name": "吸星", "level": 1 },
+                { "name": "暴戾", "level": 5 },
+                { "name": "电锯", "level": 6 }
+            ]
+        },
+        {
+            "id": "s_shovel",
+            "name": "S级铲子",
+            "category": "shovel",
+            "material": "NETHERITE_SHOVEL",
+            "quality": "S",
+            "type": "工具",
+            "description": "此铲子为无限耐久，请放心使用。建议绑定一下，丢失了可不管喔。铲子上的附魔都可以正常拆卸掉。",
+            "unbreakable": true,
+            "enchants": [
+                { "name": "联采", "level": 5 },
+                { "name": "效率", "level": 10 },
+                { "name": "时运", "level": 3 },
+                { "name": "智识", "level": 3 },
+                { "name": "吸星", "level": 1 }
+            ]
+        },
+        {
+            "id": "s_shovel_trial",
+            "name": "S级铲子 (体验版)",
+            "category": "shovel",
+            "material": "NETHERITE_SHOVEL",
+            "quality": "S",
+            "type": "工具",
+            "description": "此铲上的附魔无法被拆卸下来。此铲的耐久无法修复，用完消失。体验不错的话可前往商场购买喔。",
+            "trial": true,
+            "maxDurability": 5000,
+            "timeLimit": "24h",
+            "enchants": [
+                { "name": "联采", "level": 5 },
+                { "name": "效率", "level": 10 },
+                { "name": "时运", "level": 3 },
+                { "name": "智识", "level": 3 },
+                { "name": "吸星", "level": 1 }
+            ]
+        },
+        {
+            "id": "s_hoe",
+            "name": "S级锄头",
+            "category": "hoe",
+            "material": "NETHERITE_HOE",
+            "quality": "S",
+            "type": "工具",
+            "description": "此锄头为无限耐久，请放心使用。建议绑定一下，丢失了可不管喔。锄头上的附魔都可以正常拆卸掉。",
+            "unbreakable": true,
+            "enchants": [
+                { "name": "智识", "level": 3 },
+                { "name": "吸星", "level": 1 },
+                { "name": "播种机", "level": 1 }
+            ]
+        },
+        {
+            "id": "s_hoe_trial",
+            "name": "S级锄头 (体验版)",
+            "category": "hoe",
+            "material": "NETHERITE_HOE",
+            "quality": "S",
+            "type": "工具",
+            "description": "此锄上的附魔无法被拆卸下来。此锄的耐久无法修复，用完消失。体验不错的话可前往商场购买喔。",
+            "trial": true,
+            "maxDurability": 5000,
+            "timeLimit": "24h",
+            "enchants": [
+                { "name": "智识", "level": 3 },
+                { "name": "吸星", "level": 1 },
+                { "name": "播种机", "level": 1 }
+            ]
+        }
+    ]
+}

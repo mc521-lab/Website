@@ -1,0 +1,24 @@
+{
+    "id": "zhanshi_jiangjun_set",
+    "name": "将军",
+    "job": "战士",
+    "jobId": "zhanshi",
+    "symbolColor": "#FF0000",
+    "setEffects": {
+        "4": [
+            {
+                "id": "cooldownReduction",
+                "name": "技能冷却",
+                "value": -6,
+                "unit": "%"
+            },
+            {
+                "id": "rangedReduction",
+                "name": "远程减免",
+                "value": -15,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

@@ -1,0 +1,26 @@
+{
+    "id": "channeling",
+    "displayName": "引雷",
+    "description": "雷暴天气时，三叉戟击中地点召唤闪电",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["trident"],
+    "conflicts": ["riptide"],
+    "maxLevel": 1,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "channeling",
+            "description": "雷暴时召唤闪电"
+        }
+    ],
+    "values": [],
+    "conditions": [
+        {
+            "id": "thundering",
+            "description": "仅在雷暴天气生效"
+        }
+    ]
+}

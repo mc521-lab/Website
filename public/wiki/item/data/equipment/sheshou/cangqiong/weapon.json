@@ -1,0 +1,39 @@
+{
+    "id": "sheshou_cangqiong_weapon",
+    "name": "苍穹之刃",
+    "slot": "weapon",
+    "quality": "A",
+    "applicableClass": "射手",
+    "stats": [
+        {
+            "id": "baseDamage",
+            "name": "基础伤害",
+            "value": 12
+        },
+        {
+            "id": "attackSpeed",
+            "name": "攻击速度",
+            "value": 1.7
+        },
+        {
+            "id": "critDamage",
+            "name": "暴击伤害",
+            "value": 16,
+            "unit": "%"
+        },
+        {
+            "id": "critRate",
+            "name": "暴击概率",
+            "value": 6,
+            "unit": "%"
+        }
+    ],
+    "enchantSlots": 20,
+    "gemSlots": 4,
+    "gemSlotDetails": [
+        { "id": "gem1", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem2", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem3", "name": "待打孔", "requireDrill": true }
+    ],
+    "materials": []
+}

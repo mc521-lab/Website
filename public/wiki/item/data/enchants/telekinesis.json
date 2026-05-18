@@ -1,0 +1,21 @@
+{
+    "id": "telekinesis",
+    "displayName": "吸星",
+    "description": "掉落物和经验将直接进入你的背包",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["pickaxe", "sword", "axe", "hoe", "shovel"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "telekinesis",
+            "description": "自动拾取掉落物和经验球"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

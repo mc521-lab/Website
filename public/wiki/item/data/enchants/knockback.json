@@ -1,0 +1,29 @@
+{
+    "id": "knockback",
+    "displayName": "击退",
+    "description": "提升 %placeholder%% 击退距离",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["sword"],
+    "conflicts": [],
+    "maxLevel": 2,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "knockback",
+            "description": "增加击退"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "击退加成",
+            "formula": "%level% * 85 + 20",
+            "unit": "%",
+            "description": "击退距离加成"
+        }
+    ],
+    "conditions": []
+}

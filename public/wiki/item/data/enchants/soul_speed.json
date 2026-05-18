@@ -1,0 +1,29 @@
+{
+    "id": "soul_speed",
+    "displayName": "灵魂速度",
+    "description": "在灵魂沙和灵魂土上提升行走速度 %placeholder%%",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["boots"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "soul_speed",
+            "description": "灵魂方块上加速"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "速度加成",
+            "formula": "((%level% * 0.105) + 1.3 - 1) * 100",
+            "unit": "%",
+            "description": "在灵魂方块上的速度加成"
+        }
+    ],
+    "conditions": []
+}

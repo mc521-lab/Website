@@ -1,0 +1,38 @@
+{
+    "id": "mushi_xintu_helmet",
+    "name": "信徒之冠",
+    "slot": "helmet",
+    "quality": "D",
+    "applicableClass": "牧师",
+    "setId": "mushi_xintu_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 0.2
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 3
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 0.5
+        },
+        {
+            "id": "maxMana",
+            "name": "法力上限",
+            "value": 5
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 2,
+    "materials": []
+}

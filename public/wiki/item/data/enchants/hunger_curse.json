@@ -1,0 +1,30 @@
+{
+    "id": "hunger_curse",
+    "displayName": "饥饿诅咒",
+    "description": "增加饥饿消耗%placeholder%%",
+    "type": "extension",
+    "rarity": "curse",
+    "targets": ["helmet", "chestplate", "leggings", "boots"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": false,
+    "effects": [
+        {
+            "id": "hunger_multiplier",
+            "description": "增加饥饿消耗",
+            "formula": "1.5"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "饥饿增加",
+            "formula": "50",
+            "unit": "%",
+            "description": "增加50%饥饿消耗"
+        }
+    ],
+    "conditions": []
+}

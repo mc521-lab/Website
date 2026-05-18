@@ -1,0 +1,30 @@
+{
+    "id": "mushi_xintu_set",
+    "name": "信徒",
+    "job": "牧师",
+    "jobId": "mushi",
+    "symbolColor": "#F8FFF8",
+    "setEffects": {
+        "4": [
+            {
+                "id": "extraHealth",
+                "name": "生命上限",
+                "value": 0.5,
+                "unit": ""
+            },
+            {
+                "id": "maxMana",
+                "name": "法力上限",
+                "value": 0.5,
+                "unit": ""
+            },
+            {
+                "id": "maxStamina",
+                "name": "耐力上限",
+                "value": 0.5,
+                "unit": ""
+            }
+        ]
+    },
+    "materials": []
+}

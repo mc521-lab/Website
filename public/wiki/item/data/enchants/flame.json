@@ -1,0 +1,21 @@
+{
+    "id": "flame",
+    "displayName": "火矢",
+    "description": "射出的箭矢点燃目标，造成5点火焰伤害",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["bow"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "flame",
+            "description": "箭矢点燃目标"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

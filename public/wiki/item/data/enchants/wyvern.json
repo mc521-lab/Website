@@ -1,0 +1,35 @@
+{
+    "id": "wyvern",
+    "displayName": "飞龙",
+    "description": "使用鞘翅时获得额外速度%placeholder%%",
+    "type": "extension",
+    "rarity": "epic",
+    "targets": ["elytra"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "speed_boost",
+            "description": "飞行速度加成",
+            "formula": "1 + %level% * 0.15"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "速度加成",
+            "formula": "%level% * 15",
+            "unit": "%",
+            "description": "每级增加15%飞行速度"
+        }
+    ],
+    "conditions": [
+        {
+            "id": "is_flying",
+            "description": "必须处于飞行状态"
+        }
+    ]
+}

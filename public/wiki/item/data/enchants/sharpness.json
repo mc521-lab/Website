@@ -1,0 +1,30 @@
+{
+    "id": "sharpness",
+    "displayName": "锋利",
+    "description": "造成%placeholder%额外近战伤害",
+    "type": "vanilla",
+    "rarity": "epic",
+    "targets": ["sword", "axe"],
+    "conflicts": ["smite", "bane_of_arthropods"],
+    "maxLevel": 5,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "damage_bonus",
+            "description": "增加近战伤害",
+            "formula": "0.5 * %level% + 1"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "额外伤害",
+            "formula": "0.5 * %level% + 1",
+            "unit": "",
+            "description": "额外造成的近战伤害"
+        }
+    ],
+    "conditions": []
+}

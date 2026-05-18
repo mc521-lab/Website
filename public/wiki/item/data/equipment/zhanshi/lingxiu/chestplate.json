@@ -1,0 +1,38 @@
+{
+    "id": "zhanshi_lingxiu_chestplate",
+    "name": "领袖之甲",
+    "slot": "chestplate",
+    "quality": "A",
+    "applicableClass": "战士",
+    "setId": "zhanshi_lingxiu_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 1.5
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 8
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 1.25
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 16,
+    "gemSlotDetails": [
+        { "id": "gem1", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem2", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem3", "name": "待打孔", "requireDrill": true }
+    ],
+    "materials": []
+}

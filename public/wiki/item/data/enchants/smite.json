@@ -1,0 +1,29 @@
+{
+    "id": "smite",
+    "displayName": "亡灵杀手",
+    "description": "对亡灵怪物造成 %placeholder% 额外伤害",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["sword", "axe"],
+    "conflicts": ["sharpness", "bane_of_arthropods"],
+    "maxLevel": 5,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "smite",
+            "description": "对亡灵伤害加成"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "额外伤害",
+            "formula": "2.5 * %level%",
+            "unit": "点",
+            "description": "每级增加2.5点伤害"
+        }
+    ],
+    "conditions": []
+}

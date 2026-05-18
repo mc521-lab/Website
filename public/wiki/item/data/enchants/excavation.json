@@ -1,0 +1,32 @@
+{
+    "id": "excavation",
+    "displayName": "连采",
+    "description": "额外挖掘%placeholder%块方块",
+    "type": "extension",
+    "rarity": "rare",
+    "targets": ["shovel"],
+    "conflicts": [],
+    "maxLevel": 5,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "drill",
+            "description": "钻头式挖掘",
+            "formula": "%level%",
+            "checkHardness": true,
+            "disableOnSneak": true
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "额外挖掘数量",
+            "formula": "%level%",
+            "unit": "个",
+            "description": "额外挖掘方块数量等同于附魔等级"
+        }
+    ],
+    "conditions": []
+}

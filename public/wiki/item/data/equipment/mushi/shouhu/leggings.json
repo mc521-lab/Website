@@ -1,0 +1,43 @@
+{
+    "id": "mushi_shouhu_leggings",
+    "name": "守护之裤",
+    "slot": "leggings",
+    "quality": "A",
+    "applicableClass": "牧师",
+    "setId": "mushi_shouhu_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 1.2
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 6
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 1.0
+        },
+        {
+            "id": "maxMana",
+            "name": "法力上限",
+            "value": 18
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 3,
+    "gemSlotDetails": [
+        { "id": "gem1", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem2", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem3", "name": "待打孔", "requireDrill": true }
+    ],
+    "materials": []
+}

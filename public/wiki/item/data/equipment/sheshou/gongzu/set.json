@@ -1,0 +1,18 @@
+{
+    "id": "sheshou_gongzu_set",
+    "name": "弓卒",
+    "job": "射手",
+    "jobId": "sheshou",
+    "symbolColor": "#FFF3A3",
+    "setEffects": {
+        "4": [
+            {
+                "id": "dodgeRating",
+                "name": "闪避率",
+                "value": 1,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

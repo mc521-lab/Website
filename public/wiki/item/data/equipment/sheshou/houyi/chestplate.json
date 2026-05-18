@@ -1,0 +1,38 @@
+{
+    "id": "sheshou_houyi_chestplate",
+    "name": "后羿之甲",
+    "slot": "chestplate",
+    "quality": "S",
+    "applicableClass": "射手",
+    "setId": "sheshou_houyi_set",
+    "stats": [
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 8
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 1.5
+        },
+        {
+            "id": "dodgeRating",
+            "name": "闪避率",
+            "value": 2.5
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 32,
+    "gemSlotDetails": [
+        { "id": "gem1", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem2", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem3", "name": "待打孔", "requireDrill": true }
+    ],
+    "materials": []
+}

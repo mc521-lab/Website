@@ -1,0 +1,36 @@
+{
+    "id": "blast_protection",
+    "displayName": "爆炸保护",
+    "description": "减少爆炸伤害 %damage%% 及爆炸击退 %knockback%%",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["helmet", "chestplate", "leggings", "boots"],
+    "conflicts": ["protection", "fire_protection", "projectile_protection"],
+    "maxLevel": 4,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "blast_protection",
+            "description": "减少爆炸伤害和击退"
+        }
+    ],
+    "values": [
+        {
+            "id": "damage",
+            "name": "伤害减免",
+            "formula": "%level% * 8",
+            "unit": "%",
+            "description": "每级减少8%爆炸伤害"
+        },
+        {
+            "id": "knockback",
+            "name": "击退减免",
+            "formula": "%level% * 15",
+            "unit": "%",
+            "description": "每级减少15%爆炸击退"
+        }
+    ],
+    "conditions": []
+}

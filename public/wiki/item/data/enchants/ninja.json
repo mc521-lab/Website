@@ -1,0 +1,39 @@
+{
+    "id": "ninja",
+    "displayName": "忍者",
+    "description": "潜行时隐身%duration%秒",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["boots"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "potion_effect",
+            "description": "潜行时获得隐身效果",
+            "effect": "INVISIBILITY",
+            "level": 1,
+            "duration": "5",
+            "applyToPlayer": true,
+            "trigger": "sneak"
+        }
+    ],
+    "values": [
+        {
+            "id": "duration",
+            "name": "隐身持续时间",
+            "formula": "5",
+            "unit": "秒",
+            "description": "隐身持续5秒"
+        }
+    ],
+    "conditions": [
+        {
+            "id": "is_sneaking",
+            "description": "必须处于潜行状态"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "depth_strider",
+    "displayName": "深海探索者",
+    "description": "减少水下移动减速 %placeholder%%",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["boots"],
+    "conflicts": ["frost_walker"],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "depth_strider",
+            "description": "水下移动加速"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "减速减免",
+            "formula": "%level% * 33.333333",
+            "unit": "%",
+            "description": "每级减少33.33%水下减速"
+        }
+    ],
+    "conditions": []
+}

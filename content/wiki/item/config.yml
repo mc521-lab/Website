@@ -1,16 +1,27 @@
-# 公会系统分类配置
-title: "💠 物品手册"
+title: "💠 内容图鉴"
 order: 4
 expanded: false
 
 # 子文件/文件夹配置
 items:
-  menu.mdx:
-    title: "📖 菜单"
-    order: 1
+  # menu.mdx:
+  #   title: "📖 菜单"
+  #   order: 1
   gems.mdx:
     title: "💎 宝石图鉴"
     order: 2
   jewelries.mdx:
     title: "📿 饰品图鉴"
     order: 3
+  equipment.mdx:
+    title: "🛡️ 职业套装"
+    order: 4
+  weapons.mdx:
+    title: "⚔️ 职业武器"
+    order: 5
+  tools.mdx:
+    title: "🔧 工具图鉴"
+    order: 6
+  enchantments.mdx:
+    title: "📚 附魔图鉴"
+    order: 7

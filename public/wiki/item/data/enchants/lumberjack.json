@@ -1,0 +1,51 @@
+{
+    "id": "lumberjack",
+    "displayName": "电锯",
+    "description": "一次性砍伐%placeholder%个树木方块",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["axe"],
+    "conflicts": [],
+    "maxLevel": 6,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "mine_vein",
+            "description": "连锁砍伐树木",
+            "formula": "4 * %level%",
+            "blocks": [
+                "oak_log",
+                "spruce_log",
+                "birch_log",
+                "jungle_log",
+                "acacia_log",
+                "dark_oak_log",
+                "cherry_log",
+                "PALE_OAK_LOG",
+                "oak_wood",
+                "spruce_wood",
+                "birch_wood",
+                "jungle_wood",
+                "acacia_wood",
+                "dark_oak_wood",
+                "cherry_wood",
+                "mangrove_log",
+                "mangrove_wood",
+                "crimson_stem",
+                "warped_stem"
+            ]
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "最大砍伐数量",
+            "formula": "4 * %level%",
+            "unit": "个",
+            "description": "每级可砍伐4个"
+        }
+    ],
+    "conditions": []
+}

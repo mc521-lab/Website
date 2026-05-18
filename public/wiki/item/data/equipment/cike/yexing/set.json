@@ -1,0 +1,18 @@
+{
+    "id": "cike_yexing_set",
+    "name": "夜行",
+    "job": "刺客",
+    "jobId": "cike",
+    "symbolColor": "#7EC0FF",
+    "setEffects": {
+        "4": [
+            {
+                "id": "movementSpeed",
+                "name": "移速加成",
+                "value": 1,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

@@ -1,0 +1,39 @@
+{
+    "id": "fashi_fashen_weapon",
+    "name": "法神之杖",
+    "slot": "weapon",
+    "quality": "S",
+    "applicableClass": "法师",
+    "stats": [
+        {
+            "id": "baseDamage",
+            "name": "基础伤害",
+            "value": 17
+        },
+        {
+            "id": "attackSpeed",
+            "name": "攻击速度",
+            "value": 1.75
+        },
+        {
+            "id": "critDamage",
+            "name": "暴击伤害",
+            "value": 20,
+            "unit": "%"
+        },
+        {
+            "id": "critRate",
+            "name": "暴击概率",
+            "value": 8,
+            "unit": "%"
+        }
+    ],
+    "enchantSlots": 26,
+    "gemSlots": 4,
+    "gemSlotDetails": [
+        { "id": "gem1", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem2", "name": "宝石槽位", "requireDrill": false },
+        { "id": "gem3", "name": "待打孔", "requireDrill": true }
+    ],
+    "materials": []
+}

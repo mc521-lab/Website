@@ -1,0 +1,36 @@
+{
+    "id": "vanishing_curse",
+    "displayName": "消失诅咒",
+    "description": "死亡时物品消失",
+    "type": "vanilla",
+    "rarity": "curse",
+    "targets": [
+        "pickaxe",
+        "axe",
+        "shovel",
+        "hoe",
+        "sword",
+        "bow",
+        "crossbow",
+        "trident",
+        "helmet",
+        "chestplate",
+        "leggings",
+        "boots",
+        "elytra",
+        "fishing_rod"
+    ],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": false,
+    "effects": [
+        {
+            "id": "vanishing_curse",
+            "description": "死亡时消失"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

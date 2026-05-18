@@ -1,0 +1,33 @@
+{
+    "id": "zhanshi_sizu_helmet",
+    "name": "士卒之盔",
+    "slot": "helmet",
+    "quality": "D",
+    "applicableClass": "战士",
+    "setId": "zhanshi_sizu_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 0.2
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 3
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 0.5
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 2,
+    "materials": []
+}

@@ -1,0 +1,34 @@
+{
+    "id": "sheshou_yingyan_weapon",
+    "name": "鹰眼之刃",
+    "slot": "weapon",
+    "quality": "B",
+    "applicableClass": "射手",
+    "stats": [
+        {
+            "id": "baseDamage",
+            "name": "基础伤害",
+            "value": 11
+        },
+        {
+            "id": "attackSpeed",
+            "name": "攻击速度",
+            "value": 1.65
+        },
+        {
+            "id": "critDamage",
+            "name": "暴击伤害",
+            "value": 12,
+            "unit": "%"
+        },
+        {
+            "id": "critRate",
+            "name": "暴击概率",
+            "value": 4,
+            "unit": "%"
+        }
+    ],
+    "enchantSlots": 9,
+    "gemSlots": 3,
+    "materials": []
+}

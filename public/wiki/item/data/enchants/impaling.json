@@ -1,0 +1,29 @@
+{
+    "id": "impaling",
+    "displayName": "穿刺",
+    "description": "对海洋生物造成 %placeholder% 点额外伤害",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["trident"],
+    "conflicts": [],
+    "maxLevel": 5,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "impaling",
+            "description": "对海洋生物额外伤害"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "额外伤害",
+            "formula": "%level% * 2.5",
+            "unit": "点",
+            "description": "每级增加2.5点伤害"
+        }
+    ],
+    "conditions": []
+}

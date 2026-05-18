@@ -1,0 +1,33 @@
+{
+    "id": "zhanshi_qishi_chestplate",
+    "name": "骑士之甲",
+    "slot": "chestplate",
+    "quality": "C",
+    "applicableClass": "战士",
+    "setId": "zhanshi_qishi_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 0.5
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 8
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 0.75
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 3,
+    "materials": []
+}

@@ -1,0 +1,29 @@
+{
+    "id": "power",
+    "displayName": "力量",
+    "description": "提升箭矢伤害 %placeholder%%",
+    "type": "vanilla",
+    "rarity": "epic",
+    "targets": ["bow"],
+    "conflicts": [],
+    "maxLevel": 5,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "power",
+            "description": "增加箭矢伤害"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "伤害加成",
+            "formula": "25 * (%level% + 1)",
+            "unit": "%",
+            "description": "箭矢伤害加成"
+        }
+    ],
+    "conditions": []
+}

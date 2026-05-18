@@ -1,0 +1,22 @@
+{
+    "id": "multishot",
+    "displayName": "多重射击",
+    "description": "射出三支箭矢",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["crossbow"],
+    "conflicts": ["tripleshot"],
+    "maxLevel": 1,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "multishot",
+            "description": "一次射出三支箭矢",
+            "arrowCount": 3
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

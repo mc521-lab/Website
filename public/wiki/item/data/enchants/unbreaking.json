@@ -1,0 +1,44 @@
+{
+    "id": "unbreaking",
+    "displayName": "耐久",
+    "description": "提升物品耐久度 %placeholder%x",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": [
+        "pickaxe",
+        "axe",
+        "shovel",
+        "hoe",
+        "sword",
+        "bow",
+        "crossbow",
+        "trident",
+        "helmet",
+        "chestplate",
+        "leggings",
+        "boots",
+        "elytra",
+        "fishing_rod"
+    ],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "unbreaking",
+            "description": "增加耐久"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "耐久倍数",
+            "formula": "%level% + 1",
+            "unit": "x",
+            "description": "耐久度倍数"
+        }
+    ],
+    "conditions": []
+}

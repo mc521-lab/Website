@@ -1,0 +1,38 @@
+{
+    "id": "fashi_modao_leggings",
+    "name": "魔导之裤",
+    "slot": "leggings",
+    "quality": "B",
+    "applicableClass": "法师",
+    "setId": "fashi_modao_set",
+    "stats": [
+        {
+            "id": "extraHealth",
+            "name": "额外生命",
+            "value": 0.8
+        },
+        {
+            "id": "armorValue",
+            "name": "护甲数值",
+            "value": 6
+        },
+        {
+            "id": "armorToughness",
+            "name": "盔甲韧性",
+            "value": 3
+        },
+        {
+            "id": "damageReduction",
+            "name": "防御减伤",
+            "value": 1
+        },
+        {
+            "id": "maxMana",
+            "name": "法力上限",
+            "value": 15
+        }
+    ],
+    "enchantSlots": 4,
+    "gemSlots": 2,
+    "materials": []
+}

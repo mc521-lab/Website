@@ -1,0 +1,31 @@
+{
+    "version": "1.0",
+    "type": "color_config",
+    "jobs": {
+        "zhanshi": {
+            "id": "zhanshi",
+            "name": "战士",
+            "symbolColor": "#FF0000"
+        },
+        "sheshou": {
+            "id": "sheshou",
+            "name": "射手",
+            "symbolColor": "#F0B100"
+        },
+        "mushi": {
+            "id": "mushi",
+            "name": "牧师",
+            "symbolColor": "#868686"
+        },
+        "cike": {
+            "id": "cike",
+            "name": "刺客",
+            "symbolColor": "#00C853"
+        },
+        "fashi": {
+            "id": "fashi",
+            "name": "法师",
+            "symbolColor": "#01B2E3"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "id": "permanence_curse",
+    "displayName": "永恒诅咒",
+    "description": "无法通过磨石移除该附魔",
+    "type": "extension",
+    "rarity": "curse",
+    "targets": ["pickaxe", "axe", "shovel", "hoe", "sword", "bow", "crossbow", "trident", "helmet", "chestplate", "leggings", "boots"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": false,
+    "effects": [
+        {
+            "id": "no_grindstone",
+            "description": "无法通过磨石移除"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

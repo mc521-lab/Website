@@ -1,0 +1,30 @@
+{
+    "id": "breaklessness_curse",
+    "displayName": "破碎诅咒",
+    "description": "有%chance%%几率无法破坏方块",
+    "type": "extension",
+    "rarity": "curse",
+    "targets": ["axe", "hoe", "pickaxe", "shovel"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": false,
+    "discoverable": false,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "break_fail",
+            "description": "有15%几率无法破坏方块",
+            "chance": 15
+        }
+    ],
+    "values": [
+        {
+            "id": "chance",
+            "name": "失败几率",
+            "formula": "15",
+            "unit": "%",
+            "description": "15%几率无法破坏方块"
+        }
+    ],
+    "conditions": []
+}

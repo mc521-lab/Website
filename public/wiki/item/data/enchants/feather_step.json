@@ -1,0 +1,21 @@
+{
+    "id": "feather_step",
+    "displayName": "轻步",
+    "description": "跳跃时防止践踏农作物",
+    "type": "extension",
+    "rarity": "common",
+    "targets": ["boots"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "feather_step",
+            "description": "防止践踏农作物"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

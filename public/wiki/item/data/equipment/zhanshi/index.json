@@ -1,0 +1,37 @@
+{
+    "jobId": "zhanshi",
+    "jobName": "战士",
+    "symbolColor": "#FF0000",
+    "sets": [
+        {
+            "id": "zhanshi_sizu_set",
+            "name": "士卒",
+            "folder": "sizu",
+            "quality": "D"
+        },
+        {
+            "id": "zhanshi_qishi_set",
+            "name": "骑士",
+            "folder": "qishi",
+            "quality": "C"
+        },
+        {
+            "id": "zhanshi_jiangjun_set",
+            "name": "将军",
+            "folder": "jiangjun",
+            "quality": "B"
+        },
+        {
+            "id": "zhanshi_lingxiu_set",
+            "name": "领袖",
+            "folder": "lingxiu",
+            "quality": "A"
+        },
+        {
+            "id": "zhanshi_zhanshen_set",
+            "name": "战神",
+            "folder": "zhanshen",
+            "quality": "S"
+        }
+    ]
+}

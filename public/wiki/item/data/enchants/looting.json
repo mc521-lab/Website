@@ -1,0 +1,36 @@
+{
+    "id": "looting",
+    "displayName": "抢夺",
+    "description": "增加最多 %common% 个普通掉落及 %rare%% 几率获得稀有掉落",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["sword"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "looting",
+            "description": "增加怪物掉落"
+        }
+    ],
+    "values": [
+        {
+            "id": "common",
+            "name": "普通掉落",
+            "formula": "%level%",
+            "unit": "个",
+            "description": "额外普通掉落数量"
+        },
+        {
+            "id": "rare",
+            "name": "稀有掉落几率",
+            "formula": "%level%",
+            "unit": "%",
+            "description": "稀有掉落几率加成"
+        }
+    ],
+    "conditions": []
+}

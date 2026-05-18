@@ -1,0 +1,33 @@
+{
+    "id": "infernal_touch",
+    "displayName": "急迫",
+    "description": "挖掘方块时获得急迫效果1级，持续%duration%秒",
+    "type": "extension",
+    "rarity": "special",
+    "targets": ["pickaxe"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "potion_effect",
+            "description": "给予急迫效果",
+            "effect": "HASTE",
+            "level": 1,
+            "duration": "%level% * 10",
+            "applyToPlayer": true
+        }
+    ],
+    "values": [
+        {
+            "id": "duration",
+            "name": "持续时间",
+            "formula": "%level% * 0.5",
+            "unit": "秒",
+            "description": "持续时间随等级增加"
+        }
+    ],
+    "conditions": []
+}

@@ -1,0 +1,29 @@
+{
+    "id": "wind_burst",
+    "displayName": "风爆",
+    "description": "击打时向上击退力提升 %placeholder%",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["mace"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "wind_burst",
+            "description": "增加向上击退"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "击退加成",
+            "formula": "1.15 + 0.35 * %level%",
+            "unit": "倍",
+            "description": "向上击退力倍数"
+        }
+    ],
+    "conditions": []
+}

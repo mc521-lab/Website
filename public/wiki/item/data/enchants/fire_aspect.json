@@ -1,0 +1,31 @@
+{
+    "id": "fire_aspect",
+    "displayName": "火焰附加",
+    "description": "点燃敌人4秒，每次火焰伤害造成%placeholder%点伤害",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["sword", "axe"],
+    "conflicts": ["frost"],
+    "maxLevel": 2,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "fire_damage",
+            "description": "点燃目标并造成火焰伤害",
+            "duration": 4,
+            "damage": "(%level% * 4) - 1"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "火焰伤害",
+            "formula": "(%level% * 4) - 1",
+            "unit": "",
+            "description": "每次火焰伤害造成的伤害值"
+        }
+    ],
+    "conditions": []
+}

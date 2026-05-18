@@ -1,0 +1,30 @@
+{
+    "id": "wisdom",
+    "displayName": "智识",
+    "description": "增加掉落经验值 %placeholder%%",
+    "type": "extension",
+    "rarity": "epic",
+    "targets": ["sword", "axe", "pickaxe", "shovel", "hoe", "bow", "crossbow", "trident"],
+    "conflicts": [],
+    "maxLevel": 3,
+    "tradeable": false,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "xp_multiplier",
+            "description": "经验倍率加成",
+            "formula": "0.5 + (%level% * 0.2)"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "经验加成",
+            "formula": "100 + %level% * 20",
+            "unit": "%",
+            "description": "基础100%，每级增加20%"
+        }
+    ],
+    "conditions": []
+}

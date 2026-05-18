@@ -1,0 +1,30 @@
+{
+    "id": "fortune",
+    "displayName": "时运",
+    "description": "增加部分方块的掉落几率%placeholder%%",
+    "type": "vanilla",
+    "rarity": "epic",
+    "targets": ["pickaxe", "shovel", "hoe"],
+    "conflicts": ["silk_touch"],
+    "maxLevel": 3,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "fortune",
+            "description": "增加方块掉落",
+            "formula": "ceil(((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100)"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "掉落几率",
+            "formula": "ceil(((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100)",
+            "unit": "%",
+            "description": "增加掉落几率的百分比"
+        }
+    ],
+    "conditions": []
+}

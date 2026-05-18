@@ -1,0 +1,18 @@
+{
+    "id": "sheshou_yingyan_set",
+    "name": "鹰眼",
+    "job": "射手",
+    "jobId": "sheshou",
+    "symbolColor": "#FFF3A3",
+    "setEffects": {
+        "4": [
+            {
+                "id": "dodgeRating",
+                "name": "闪避率",
+                "value": 4,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

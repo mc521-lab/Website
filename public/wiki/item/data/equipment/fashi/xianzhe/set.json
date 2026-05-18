@@ -1,0 +1,24 @@
+{
+    "id": "fashi_xianzhe_set",
+    "name": "贤者",
+    "job": "法师",
+    "jobId": "fashi",
+    "symbolColor": "#C392FF",
+    "setEffects": {
+        "4": [
+            {
+                "id": "maxMana",
+                "name": "法力上限",
+                "value": 3,
+                "unit": ""
+            },
+            {
+                "id": "maxStamina",
+                "name": "耐力上限",
+                "value": 3,
+                "unit": ""
+            }
+        ]
+    },
+    "materials": []
+}

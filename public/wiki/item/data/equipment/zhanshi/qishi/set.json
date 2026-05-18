@@ -1,0 +1,24 @@
+{
+    "id": "zhanshi_qishi_set",
+    "name": "骑士",
+    "job": "战士",
+    "jobId": "zhanshi",
+    "symbolColor": "#FF0000",
+    "setEffects": {
+        "4": [
+            {
+                "id": "cooldownReduction",
+                "name": "技能冷却",
+                "value": -4,
+                "unit": "%"
+            },
+            {
+                "id": "rangedReduction",
+                "name": "远程减免",
+                "value": -10,
+                "unit": "%"
+            }
+        ]
+    },
+    "materials": []
+}

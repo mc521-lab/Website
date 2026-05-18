@@ -1,0 +1,21 @@
+{
+    "id": "aqua_affinity",
+    "displayName": "水下速掘",
+    "description": "移除水下挖掘速度减缓",
+    "type": "vanilla",
+    "rarity": "common",
+    "targets": ["helmet"],
+    "conflicts": [],
+    "maxLevel": 1,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "aqua_affinity",
+            "description": "水下正常挖掘速度"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

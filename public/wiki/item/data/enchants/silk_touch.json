@@ -1,0 +1,21 @@
+{
+    "id": "silk_touch",
+    "displayName": "精准采集",
+    "description": "采集方块时掉落原方块",
+    "type": "vanilla",
+    "rarity": "rare",
+    "targets": ["pickaxe", "axe", "shovel", "hoe"],
+    "conflicts": ["fortune"],
+    "maxLevel": 1,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "silk_touch",
+            "description": "采集原方块"
+        }
+    ],
+    "values": [],
+    "conditions": []
+}

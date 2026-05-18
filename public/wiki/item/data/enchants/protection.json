@@ -1,0 +1,29 @@
+{
+    "id": "protection",
+    "displayName": "保护",
+    "description": "减少受到的伤害 %placeholder%%",
+    "type": "vanilla",
+    "rarity": "epic",
+    "targets": ["helmet", "chestplate", "leggings", "boots"],
+    "conflicts": ["fire_protection", "blast_protection", "projectile_protection"],
+    "maxLevel": 4,
+    "tradeable": true,
+    "discoverable": true,
+    "enchantable": true,
+    "effects": [
+        {
+            "id": "damage_reduction",
+            "description": "减少受到的伤害"
+        }
+    ],
+    "values": [
+        {
+            "id": "placeholder",
+            "name": "伤害减免",
+            "formula": "%level% * 4",
+            "unit": "%",
+            "description": "每级减少4%受到的伤害"
+        }
+    ],
+    "conditions": []
+}

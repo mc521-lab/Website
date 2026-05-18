@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ResolvedJewelry, JewelryManifest } from "./types";
+import { ResolvedJewelry, JewelryManifestCategory } from "./types";
 import { JewelryGrid } from "./grid";
 import { JewelryCard } from "./card";
 import { Loader2 } from "lucide-react";
@@ -12,7 +12,7 @@ interface JewelryShowcaseProps {
 }
 
 export function JewelryShowcase({ category, jewelryId }: JewelryShowcaseProps) {
-    const [manifest, setManifest] = useState<JewelryManifest | null>(null);
+    const [manifest, setManifest] = useState<JewelryManifestCategory | null>(null);
     const [jewelries, setJewelries] = useState<ResolvedJewelry[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -25,7 +25,7 @@ export function JewelryShowcase({ category, jewelryId }: JewelryShowcaseProps) {
                 if (!res.ok) throw new Error("无法加载饰品数据");
                 const data = await res.json();
 
-                const manifestData: JewelryManifest = data.manifest;
+                const manifestData: JewelryManifestCategory = data.manifest;
                 setManifest(manifestData);
 
                 let list: ResolvedJewelry[] = data.jewelries ?? [];

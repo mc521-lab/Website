@@ -1,0 +1,32 @@
+{
+    "version": "1.0",
+    "type": "jewelry_index",
+    "colorRef": "colors.json",
+    "jobs": [
+        {
+            "id": "zhanshi",
+            "name": "战士",
+            "entryPrefix": "jewelries/zhanshi"
+        },
+        {
+            "id": "sheshou",
+            "name": "射手",
+            "entryPrefix": "jewelries/sheshou"
+        },
+        {
+            "id": "mushi",
+            "name": "牧师",
+            "entryPrefix": "jewelries/mushi"
+        },
+        {
+            "id": "cike",
+            "name": "刺客",
+            "entryPrefix": "jewelries/cike"
+        },
+        {
+            "id": "fashi",
+            "name": "法师",
+            "entryPrefix": "jewelries/fashi"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "id": "SMBTD",
+    "name": "团队生命币",
+    "quality": "史诗",
+    "type": "道具",
+    "description": "进入地牢后可在指定地点\n为全队多加一条生命",
+    "effect": "",
+    "source": "由副本商人处购买获得"
+}

@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { ResolvedEnchant, EnchantsManifest } from "./types";
 import { loadAllEnchantsData } from "./utils";
 import { EnchantCard } from "./card";
-import { Loader2, Layers, Gem } from "lucide-react";
+import { Loader2, Layers, Gem, Search } from "lucide-react";
 
 export function EnchantsShowcase() {
     const [enchants, setEnchants] = useState<ResolvedEnchant[]>([]);
@@ -13,6 +13,7 @@ export function EnchantsShowcase() {
     const [error, setError] = useState<string | null>(null);
     const [selectedType, setSelectedType] = useState<string | null>(null);
     const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         async function loadData() {
@@ -45,12 +46,19 @@ export function EnchantsShowcase() {
 
     // 过滤附魔
     const filteredEnchants = useMemo(() => {
-        return enchants.filter((e) => {
-            const typeMatch = !selectedType || e.type === selectedType;
-            const rarityMatch = !selectedRarity || e.rarity === selectedRarity;
-            return typeMatch && rarityMatch;
-        });
-    }, [enchants, selectedType, selectedRarity]);
+        let list = enchants;
+        if (selectedType) {
+            list = list.filter((e) => e.type === selectedType);
+        }
+        if (selectedRarity) {
+            list = list.filter((e) => e.rarity === selectedRarity);
+        }
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            list = list.filter((e) => e.displayName.toLowerCase().includes(q) || e.id.toLowerCase().includes(q));
+        }
+        return list;
+    }, [enchants, selectedType, selectedRarity, searchQuery]);
 
     // 按稀有度分组
     const groupedEnchants = useMemo(() => {
@@ -94,6 +102,17 @@ export function EnchantsShowcase() {
 
     return (
         <div className="my-6">
+            <div className="relative mb-6">
+                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+                <input
+                    type="text"
+                    placeholder="搜索附魔名称..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full rounded-lg border border-neutral-800 bg-neutral-900/80 py-2 pr-4 pl-9 text-sm text-neutral-200 placeholder-neutral-600 outline-none focus:border-neutral-600"
+                />
+            </div>
+
             {/* 过滤器 */}
             <div className="mb-6 flex flex-wrap items-start gap-6">
                 {/* 类型筛选 */}

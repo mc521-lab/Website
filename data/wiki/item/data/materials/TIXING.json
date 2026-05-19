@@ -1,0 +1,9 @@
+{
+    "id": "TIXING",
+    "name": "体型卡-体验版",
+    "quality": "普通",
+    "type": "道具",
+    "description": "可设置自身的体型大小\n需要拥有指定权限\n新玩家免费体验12小时",
+    "effect": "右键使用",
+    "source": ""
+}

@@ -25,3 +25,6 @@ items:
   enchantments.mdx:
     title: "📚 附魔图鉴"
     order: 7
+  materials.mdx:
+    title: "📦 材料图鉴"
+    order: 8

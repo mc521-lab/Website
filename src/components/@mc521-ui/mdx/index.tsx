@@ -11,6 +11,7 @@ import { MyImage, MyVideo, MySource } from "./components/html/media";
 import { Blockquote } from "./components/html/quote";
 import { Table, Thead, Tbody, Tr, Th, Td } from "./components/html/table";
 import { Heading, HeadingProps, Paragraph } from "./components/html/title-and-paragraph";
+import { MaterialShowcase } from "./components/custom/itemframe/materials";
 
 // 导出所有组件
 export const mdxComponents = {
@@ -65,4 +66,7 @@ export const mdxComponents = {
 
     // Itemframe components - Enchantments
     EnchantmentShowcase: EnchantsShowcase,
+
+    // Itemframe components - Materials
+    MaterialShowcase,
 };

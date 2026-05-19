@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { ResolvedTool, ToolCategory } from "./types";
 import { loadToolsIndex, resolveTools } from "./utils";
 import { ToolCard } from "./card";
-import { Loader2, Wrench } from "lucide-react";
+import { Loader2, Wrench, Search } from "lucide-react";
 
 export function ToolsShowcase() {
     const [tools, setTools] = useState<ResolvedTool[]>([]);
@@ -12,6 +12,7 @@ export function ToolsShowcase() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         async function loadData() {
@@ -34,11 +35,20 @@ export function ToolsShowcase() {
         loadData();
     }, []);
 
-    // 按类别过滤
+    // 按类别和搜索过滤
     const filteredTools = useMemo(() => {
-        if (!selectedCategory) return tools;
-        return tools.filter((t) => t.category === selectedCategory);
-    }, [tools, selectedCategory]);
+        let list = tools;
+        if (selectedCategory) {
+            list = list.filter((t) => t.category === selectedCategory);
+        }
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            list = list.filter(
+                (t) => t.name.toLowerCase().includes(q) || t.description?.toLowerCase().includes(q) || t.categoryName?.toLowerCase().includes(q)
+            );
+        }
+        return list;
+    }, [tools, selectedCategory, searchQuery]);
 
     // 按类别分组
     const groupedTools = useMemo(() => {
@@ -74,6 +84,17 @@ export function ToolsShowcase() {
 
     return (
         <div className="my-6">
+            <div className="relative mb-6">
+                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+                <input
+                    type="text"
+                    placeholder="搜索工具名称..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full rounded-lg border border-neutral-800 bg-neutral-900/80 py-2 pr-4 pl-9 text-sm text-neutral-200 placeholder-neutral-600 outline-none focus:border-neutral-600"
+                />
+            </div>
+
             {/* 类别过滤器 */}
             <div className="mb-6 flex flex-wrap items-center gap-2">
                 <Wrench className="h-4 w-4 text-neutral-500" />

@@ -140,20 +140,16 @@ function buildEquipment() {
 
 // =================== GEMS ===================
 function buildGems() {
-    const manifest = readJSON("manifest.json");
-    const gemCat = manifest.categories.find((c) => c.id === "gems");
-    if (!gemCat) {
-        console.warn("[build-wiki-data] gems category not found");
-        return;
-    }
-
+    const gemsDir = path.join(DATA_DIR, "gems");
     const gems = [];
-    for (const entry of gemCat.entries) {
+
+    const files = fs.readdirSync(gemsDir).filter((f) => f.endsWith(".json"));
+    for (const file of files) {
         try {
-            const gem = readJSON(entry);
+            const gem = JSON.parse(fs.readFileSync(path.join(gemsDir, file), "utf-8"));
             gems.push(gem);
         } catch (e) {
-            console.warn(`[build-wiki-data] failed to load gem ${entry}:`, e.message);
+            console.warn(`[build-wiki-data] failed to load gem ${file}:`, e.message);
         }
     }
 
@@ -162,14 +158,12 @@ function buildGems() {
 
 // =================== JEWELRIES ===================
 function buildJewelries() {
-    const manifest = readJSON("manifest.json");
-    const jewelryCat = manifest.categories.find((c) => c.id === "jewelries");
-    if (!jewelryCat) {
-        console.warn("[build-wiki-data] jewelries category not found");
-        return;
-    }
-
-    const jobEntries = jewelryCat.metadata?.jobEntries ?? [];
+    const colors = readJSON("colors.json");
+    const index = readJSON("jewelries", "index.json");
+    const jobEntries = (index.jobs ?? []).map((j) => ({
+        ...j,
+        symbolColor: colors.jobs[j.id]?.symbolColor ?? "#767676",
+    }));
     const jobMap = new Map(jobEntries.map((j) => [j.entryPrefix, j]));
 
     const slotMap = {
@@ -205,55 +199,69 @@ function buildJewelries() {
     }
 
     const jewelries = [];
+    const entries = [];
 
-    for (const entry of jewelryCat.entries) {
-        try {
-            const data = readJSON(entry);
-            const filename = entry.split("/").pop()?.replace(".json", "") ?? "";
-            const slotType = slotMap[filename] ?? filename;
-            const isTreasure = slotType === "秘宝";
-            const prefix = entry.split("/").slice(0, 2).join("/");
-            const jobEntry = jobMap.get(prefix);
+    for (const job of jobEntries) {
+        const jobDir = path.join(DATA_DIR, job.entryPrefix);
+        const files = fs.readdirSync(jobDir).filter((f) => f.endsWith(".json"));
 
-            if (data.features) {
-                // JewelryData
-                jewelries.push({
-                    id: data.id,
-                    name: data.name,
-                    type: data.type,
-                    applicableClass: data.applicableClass,
-                    features: data.features.map(normalizeFeature),
-                    jobId: jobEntry?.id,
-                    jobName: jobEntry?.name,
-                    jobColor: jobEntry?.symbolColor,
-                    slotType,
-                    isTreasure,
-                });
-            } else if (data.inherit) {
-                // JewelryInheritData
-                const baseFile = data.inherit.replace("common_", "") + ".json";
-                const baseData = readJSON("jewelries", "_common", baseFile);
-                const resolvedName = resolveJewelryName(baseData.name, data.variables);
+        for (const file of files) {
+            const entry = `${job.entryPrefix}/${file}`;
+            entries.push(entry);
 
-                jewelries.push({
-                    id: data.id,
-                    name: resolvedName,
-                    type: baseData.type,
-                    applicableClass: jobEntry?.name ?? baseData.applicableClass,
-                    features: baseData.features.map(normalizeFeature),
-                    jobId: jobEntry?.id,
-                    jobName: jobEntry?.name,
-                    jobColor: jobEntry?.symbolColor,
-                    slotType,
-                    isTreasure,
-                });
+            try {
+                const data = JSON.parse(fs.readFileSync(path.join(jobDir, file), "utf-8"));
+                const filename = file.replace(".json", "");
+                const slotType = slotMap[filename] ?? filename;
+                const isTreasure = slotType === "秘宝";
+                const jobEntry = jobMap.get(job.entryPrefix);
+
+                if (data.features) {
+                    jewelries.push({
+                        id: data.id,
+                        name: data.name,
+                        type: data.type,
+                        applicableClass: data.applicableClass,
+                        features: data.features.map(normalizeFeature),
+                        jobId: jobEntry?.id,
+                        jobName: jobEntry?.name,
+                        jobColor: jobEntry?.symbolColor,
+                        slotType,
+                        isTreasure,
+                    });
+                } else if (data.inherit) {
+                    const baseFile = data.inherit.replace("common_", "") + ".json";
+                    const baseData = readJSON("jewelries", "_common", baseFile);
+                    const resolvedName = resolveJewelryName(baseData.name, data.variables);
+
+                    jewelries.push({
+                        id: data.id,
+                        name: resolvedName,
+                        type: baseData.type,
+                        applicableClass: jobEntry?.name ?? baseData.applicableClass,
+                        features: baseData.features.map(normalizeFeature),
+                        jobId: jobEntry?.id,
+                        jobName: jobEntry?.name,
+                        jobColor: jobEntry?.symbolColor,
+                        slotType,
+                        isTreasure,
+                    });
+                }
+            } catch (e) {
+                console.warn(`[build-wiki-data] failed to load jewelry ${entry}:`, e.message);
             }
-        } catch (e) {
-            console.warn(`[build-wiki-data] failed to load jewelry ${entry}:`, e.message);
         }
     }
 
-    writeJSON("jewelries", { manifest: jewelryCat, jewelries });
+    const manifest = {
+        id: "jewelries",
+        type: "jewelry",
+        name: "饰品",
+        entries,
+        metadata: { jobEntries },
+    };
+
+    writeJSON("jewelries", { manifest, jewelries });
 }
 
 // =================== TOOLS ===================
@@ -270,6 +278,26 @@ function buildTools() {
     writeJSON("tools", { version: index.version, type: index.type, categories: index.categories, tools });
 }
 
+// =================== MATERIALS ===================
+function buildMaterials() {
+    const index = readJSON("materials", "index.json");
+    const materialsDir = path.join(DATA_DIR, "materials");
+    const materials = [];
+
+    for (const id of index.entries ?? []) {
+        try {
+            const filePath = path.join(materialsDir, `${id}.json`);
+            const material = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+            materials.push(material);
+        } catch (e) {
+            console.warn(`[build-wiki-data] failed to load material ${id}:`, e.message);
+        }
+    }
+
+    // 保持 index.json 中的顺序，不再额外排序
+    writeJSON("materials", { materials });
+}
+
 // =================== MAIN ===================
 async function main() {
     ensureDir(OUT_DIR);
@@ -281,6 +309,7 @@ async function main() {
     buildGems();
     buildJewelries();
     buildTools();
+    buildMaterials();
 
     console.log("[build-wiki-data] done.");
 }

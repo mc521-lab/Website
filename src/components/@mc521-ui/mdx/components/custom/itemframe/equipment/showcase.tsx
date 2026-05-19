@@ -5,7 +5,7 @@ import { ResolvedEquipment, EquipmentJobEntry } from "./types";
 import { EquipmentGrid } from "./grid";
 import { EquipmentCard } from "./card";
 import { loadAllEquipmentData } from "./utils";
-import { Loader2, Users } from "lucide-react";
+import { Loader2, Users, Search } from "lucide-react";
 
 interface EquipmentShowcaseProps {
     jobId?: string;
@@ -14,10 +14,12 @@ interface EquipmentShowcaseProps {
 
 export function EquipmentShowcase({ jobId, equipmentId }: EquipmentShowcaseProps) {
     const [equipments, setEquipments] = useState<ResolvedEquipment[]>([]);
+    const [allEquipments, setAllEquipments] = useState<ResolvedEquipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [jobEntries, setJobEntries] = useState<EquipmentJobEntry[]>([]);
     const [jobColors, setJobColors] = useState<Record<string, string>>({});
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         async function loadData() {
@@ -38,8 +40,8 @@ export function EquipmentShowcase({ jobId, equipmentId }: EquipmentShowcaseProps
                 setJobEntries(data.jobs);
 
                 // 过滤装备
-                const allEquipments = data.equipments.filter((e) => !jobId || e.jobId === jobId);
-                setEquipments(allEquipments);
+                const list = data.equipments.filter((e) => !jobId || e.jobId === jobId);
+                setAllEquipments(list);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "加载失败");
             } finally {
@@ -49,6 +51,24 @@ export function EquipmentShowcase({ jobId, equipmentId }: EquipmentShowcaseProps
 
         loadData();
     }, [jobId, equipmentId]);
+
+    const filteredEquipments = useMemo(() => {
+        let list = allEquipments;
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            list = list.filter(
+                (e) => e.name.toLowerCase().includes(q) || e.setName?.toLowerCase().includes(q) || e.jobName?.toLowerCase().includes(q)
+            );
+        }
+        if (equipmentId) {
+            list = list.filter((e) => e.id === equipmentId);
+        }
+        return list;
+    }, [allEquipments, searchQuery, equipmentId]);
+
+    useEffect(() => {
+        setEquipments(filteredEquipments);
+    }, [filteredEquipments]);
 
     if (loading) {
         return (
@@ -62,7 +82,21 @@ export function EquipmentShowcase({ jobId, equipmentId }: EquipmentShowcaseProps
         return <div className="rounded-lg border border-red-900/30 bg-red-950/20 p-4 text-red-400">加载失败: {error}</div>;
     }
 
-    return <EquipmentGrid equipments={equipments} jobEntries={jobEntries} jobColors={jobColors} />;
+    return (
+        <div className="my-6">
+            <div className="relative mb-6">
+                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+                <input
+                    type="text"
+                    placeholder="搜索装备名称或套装..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full rounded-lg border border-neutral-800 bg-neutral-900/80 py-2 pr-4 pl-9 text-sm text-neutral-200 placeholder-neutral-600 outline-none focus:border-neutral-600"
+                />
+            </div>
+            <EquipmentGrid equipments={equipments} jobEntries={jobEntries} jobColors={jobColors} />
+        </div>
+    );
 }
 
 // 武器展示组件
@@ -74,11 +108,13 @@ const QUALITY_ORDER = ["D", "C", "B", "A", "S"];
 
 export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
     const [weapons, setWeapons] = useState<ResolvedEquipment[]>([]);
+    const [allWeapons, setAllWeapons] = useState<ResolvedEquipment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [jobEntries, setJobEntries] = useState<EquipmentJobEntry[]>([]);
     const [jobColors, setJobColors] = useState<Record<string, string>>({});
     const [selectedJob, setSelectedJob] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         async function loadData() {
@@ -99,8 +135,8 @@ export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
                 setJobEntries(data.jobs);
 
                 // 过滤武器
-                const allWeapons = data.weapons.filter((w) => !jobId || w.jobId === jobId);
-                setWeapons(allWeapons);
+                const list = data.weapons.filter((w) => !jobId || w.jobId === jobId);
+                setAllWeapons(list);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "加载失败");
             } finally {
@@ -113,8 +149,17 @@ export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
 
     // 按职业分组并排序武器
     const groupedWeapons = useMemo(() => {
-        // 先按职业过滤
-        const filtered = selectedJob ? weapons.filter((w) => w.jobId === selectedJob) : weapons;
+        // 先按搜索过滤
+        let filtered = allWeapons;
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            filtered = filtered.filter(
+                (w) => w.name.toLowerCase().includes(q) || w.setName?.toLowerCase().includes(q) || w.jobName?.toLowerCase().includes(q)
+            );
+        }
+
+        // 再按职业过滤
+        filtered = selectedJob ? filtered.filter((w) => w.jobId === selectedJob) : filtered;
 
         // 按职业分组
         const groups = new Map<string, ResolvedEquipment[]>();
@@ -137,7 +182,7 @@ export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
         }
 
         return groups;
-    }, [weapons, selectedJob]);
+    }, [allWeapons, selectedJob, searchQuery]);
 
     // 获取职业颜色的辅助函数
     const getJobColor = (jobId: string): string => {
@@ -164,6 +209,17 @@ export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
 
     return (
         <div className="my-6">
+            <div className="relative mb-6">
+                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+                <input
+                    type="text"
+                    placeholder="搜索武器名称或套装..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full rounded-lg border border-neutral-800 bg-neutral-900/80 py-2 pr-4 pl-9 text-sm text-neutral-200 placeholder-neutral-600 outline-none focus:border-neutral-600"
+                />
+            </div>
+
             {/* 职业过滤器 */}
             <div className="mb-6 flex flex-wrap items-center gap-2">
                 <Users className="h-4 w-4 text-neutral-500" />

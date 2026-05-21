@@ -1,8 +1,9 @@
 // app/api/verify-mc/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { login } from "@/lib/ms-auth/processer";
+import { withApiLog } from "@/lib/pretty-log";
 
-export async function POST(req: NextRequest) {
+async function handler(req: NextRequest) {
     try {
         const body = await req.json();
         const { code, refresh_token } = body;
@@ -50,3 +51,5 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, uuid: null, error: errorMsg, step, code: statusCode }, { status: statusCode });
     }
 }
+
+export const POST = withApiLog(handler, { logBody: true }, "POST /api/mc-genuine/verify");

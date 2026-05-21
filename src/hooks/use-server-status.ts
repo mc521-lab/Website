@@ -30,7 +30,10 @@ export function useMcStatus(host: string, port = 25565) {
     }, [host, port]);
 
     useEffect(() => {
-        fetchStatus();
+        const timer = setTimeout(() => {
+            fetchStatus();
+        }, 0);
+        return () => clearTimeout(timer);
     }, [fetchStatus]);
 
     return { status, loading, fetchStatus };

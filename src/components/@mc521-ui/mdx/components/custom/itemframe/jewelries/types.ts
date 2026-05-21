@@ -26,6 +26,7 @@ export interface JewelryData {
     type: string;
     applicableClass: string;
     features: JewelryFeature[];
+    image?: string | null;
 }
 
 export interface JewelryInheritData {
@@ -79,4 +80,5 @@ export interface ResolvedJewelry {
     slotType?: string;
     // 是否是秘宝类型（三组随机抽一组）
     isTreasure?: boolean;
+    image?: string | null;
 }

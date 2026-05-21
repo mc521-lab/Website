@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase/supabase-server";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
+import { withApiLog } from "@/lib/pretty-log";
 
-export async function POST(req: NextRequest) {
+async function handler(req: NextRequest) {
+    const supabase = getSupabaseClient();
+    
     try {
         const body = await req.json();
 
@@ -49,3 +52,5 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, error: error.message || "Unknown error" }, { status: 500 });
     }
 }
+
+export const POST = withApiLog(handler, { logBody: true }, "POST /api/jira/create");

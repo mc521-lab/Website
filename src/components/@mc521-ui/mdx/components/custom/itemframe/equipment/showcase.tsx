@@ -67,7 +67,10 @@ export function EquipmentShowcase({ jobId, equipmentId }: EquipmentShowcaseProps
     }, [allEquipments, searchQuery, equipmentId]);
 
     useEffect(() => {
-        setEquipments(filteredEquipments);
+        const timer = setTimeout(() => {
+            setEquipments(filteredEquipments);
+        }, 0);
+        return () => clearTimeout(timer);
     }, [filteredEquipments]);
 
     if (loading) {
@@ -137,6 +140,7 @@ export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
                 // 过滤武器
                 const list = data.weapons.filter((w) => !jobId || w.jobId === jobId);
                 setAllWeapons(list);
+                setWeapons(list);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "加载失败");
             } finally {
@@ -146,6 +150,8 @@ export function WeaponShowcase({ jobId }: WeaponShowcaseProps) {
 
         loadData();
     }, [jobId]);
+
+    void weapons;
 
     // 按职业分组并排序武器
     const groupedWeapons = useMemo(() => {

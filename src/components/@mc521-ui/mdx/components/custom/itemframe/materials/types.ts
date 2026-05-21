@@ -6,6 +6,7 @@ export interface MaterialData {
     description: string;
     effect: string;
     source: string;
+    image?: string | null;
 }
 
 export interface MaterialsIndex {

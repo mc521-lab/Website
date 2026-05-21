@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase/supabase-server";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
+import { withApiLog } from "@/lib/pretty-log";
 
-export async function PATCH(req: NextRequest) {
+async function handler(req: NextRequest) {
+    const supabase = getSupabaseClient();
+    
     try {
         const { searchParams } = new URL(req.url);
         const body = await req.json();
@@ -48,3 +51,5 @@ export async function PATCH(req: NextRequest) {
         return NextResponse.json({ success: false, error: error.message || "Unknown error" }, { status: 500 });
     }
 }
+
+export const PATCH = withApiLog(handler, { logBody: true }, "PATCH /api/jira/update");

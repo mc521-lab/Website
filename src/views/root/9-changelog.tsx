@@ -4,14 +4,18 @@ import { Mc521 } from "@/components";
 import { ChangelogItem } from "@/types/api";
 import { ChevronRightIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 
 const daysSince = (d: string, now: number) => Math.floor((now - new Date(d).getTime()) / 86400000);
 
 export function Changelog() {
-    const runningDays = useMemo(() => {
-        if (typeof window === "undefined") return 0;
-        return daysSince("2026-02-26", Date.now());
+    const [runningDays, setRunningDays] = useState(0);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setRunningDays(daysSince("2026-02-26", Date.now()));
+        }, 0);
+        return () => clearTimeout(timer);
     }, []);
 
     const [changelog, setChangelog] = useState<ChangelogItem[]>([]);

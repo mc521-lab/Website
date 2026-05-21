@@ -1,17 +1,18 @@
 import { NextRequest } from "next/server";
 import { put } from "@vercel/blob";
+import { withApiLog } from "@/lib/pretty-log";
 
-// 辅助函数：把 multipart/form-data 转成 ArrayBuffer
-async function parseFileFromRequest(req: NextRequest): Promise<{ data: ArrayBuffer; name: string } | null> {
+async function parseFileFromRequest(req: NextRequest): Promise<{ data: ArrayBuffer; name: string; type: string } | null> {
     const formData = await req.formData();
     const file = formData.get("file");
     if (!file || !(file instanceof File)) return null;
 
     const arrayBuffer = await file.arrayBuffer();
-    return { data: arrayBuffer, name: file.name };
+    return { data: arrayBuffer, name: file.name, type: file.type || "image/png" };
 }
 
-export async function POST(req: NextRequest, { params }: { params: Promise<{ filename?: string }> }) {
+async function handler(req: NextRequest, ...args: unknown[]) {
+    const { params } = args[0] as { params: Promise<{ filename?: string }> };
     // URL 文件名
     const { filename } = await params;
     if (!filename) {
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ fil
 
     // 上传到 Vercel Blob
     try {
-        const { url } = await put(`SkinDrop/${decodedFilename}`, fileData.data, { access: "public" });
+        const { url } = await put(`SkinDrop/${decodedFilename}`, fileData.data, { access: "public", allowOverwrite: true });
 
         // 成功返回
         return new Response(JSON.stringify({ success: true, url }), {
@@ -39,3 +40,5 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ fil
         return new Response(`上传失败：${err.message || err}`, { status: 502 });
     }
 }
+
+export const POST = withApiLog(handler, { logBody: false }, "POST /api/skindrop/upload/:filename");

@@ -59,13 +59,16 @@ export default function SkinDrop() {
 
         skinViewerRef.current = new SkinViewer({
             canvas: canvasRef.current,
-            width: 368,
-            height: 368,
+            width: 256,
+            height: 256,
             skin: skinUrl,
         });
         skinViewerRef.current.animation = new WalkingAnimation();
+
+        return () => URL.revokeObjectURL(skinUrl);
     }, []);
 
+    // 管理 SkinViewer 生命周期
     useEffect(() => {
         if (step === 1) {
             if (skinViewerRef.current) {
@@ -74,37 +77,52 @@ export default function SkinDrop() {
             }
         }
 
-        if (step === 3) {
-            const upload = async () => {
-                if (!skinBlobRef.current) return;
-                const formData = new FormData();
-                formData.append("file", skinBlobRef.current as Blob, file?.name || "");
-                const extension = file ? file.name.split(".").pop() : "png";
-                const filename = encodeURIComponent(`${playerName}.${extension}`);
-                setS3Filename(filename);
-                try {
-                    const res = await fetch(`/api/skindrop/upload/${filename}`, {
-                        method: "POST",
-                        body: formData,
-                    });
-                    if (!res.ok) {
-                        throw new Error(await res.text());
-                    }
-                    setUploadSuccess(true);
-                    setErrorMessage("");
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                } catch (error: any) {
-                    setUploadSuccess(false);
-                    setErrorMessage(error?.data?.statusMessage || error?.message || "上传失败");
-                } finally {
-                    // 跳转到完成页
-                    setStep(4);
-                }
-            };
-            upload();
+        if (step === 2) {
+            const timer = setTimeout(() => {
+                createSkinViewer();
+            }, 0);
+            return () => clearTimeout(timer);
         }
+    }, [step, createSkinViewer]);
 
-        if (step === 5) {
+    // 上传逻辑
+    useEffect(() => {
+        if (step !== 3) return;
+
+        const upload = async () => {
+            if (!skinBlobRef.current) return;
+            const formData = new FormData();
+            formData.append("file", skinBlobRef.current as Blob, file?.name || "");
+            const extension = file ? file.name.split(".").pop() : "png";
+            const filename = encodeURIComponent(`${playerName}.${extension}`);
+            setS3Filename(filename);
+            try {
+                const res = await fetch(`/api/skindrop/upload/${filename}`, {
+                    method: "POST",
+                    body: formData,
+                });
+                if (!res.ok) {
+                    throw new Error(await res.text());
+                }
+                setUploadSuccess(true);
+                setErrorMessage("");
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } catch (error: any) {
+                setUploadSuccess(false);
+                setErrorMessage(error?.data?.statusMessage || error?.message || "上传失败");
+            } finally {
+                // 跳转到完成页
+                setStep(4);
+            }
+        };
+        upload();
+    }, [step, file, playerName]);
+
+    // 重置逻辑
+    useEffect(() => {
+        if (step !== 5) return;
+
+        const timer = setTimeout(() => {
             setFile(null);
             setUrl("");
             setPlayerName("");
@@ -112,33 +130,17 @@ export default function SkinDrop() {
             setErrorMessage("");
             setS3Filename("");
             setStep(1); // 重置流程
-        }
-    }, [step, file, url, createSkinViewer, playerName]);
+        }, 0);
+        return () => clearTimeout(timer);
+    }, [step]);
 
     useEffect(() => {
-        if (!skinBlobRef.current || !canvasRef.current) return;
-
-        // 创建或更新 SkinViewer
-        if (!skinViewerRef.current) {
-            skinViewerRef.current = new SkinViewer({
-                canvas: canvasRef.current,
-                width: 368,
-                height: 368,
-                skin: URL.createObjectURL(skinBlobRef.current),
-            });
-            skinViewerRef.current.animation = new WalkingAnimation();
-        } else {
-            // 只更新皮肤，而不销毁 canvas
-            skinViewerRef.current.loadSkin(URL.createObjectURL(skinBlobRef.current));
-        }
-
         return () => {
             // 组件卸载时销毁
             skinViewerRef.current?.dispose();
             skinViewerRef.current = null;
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [skinBlobRef.current]);
+    }, []);
 
     const gotoStep2 = async () => {
         if (file) {
@@ -181,7 +183,7 @@ export default function SkinDrop() {
                                 此处将显示预览
                             </div>
                         ) : (
-                            <canvas ref={canvasRef} className="-translate-y-6 bg-transparent" width={256} height={256} />
+                            <canvas ref={canvasRef} className="bg-transparent" width={256} height={256} />
                         )}
                     </Radix.CardContent>
                 </Radix.Card>
@@ -284,10 +286,11 @@ export default function SkinDrop() {
                                     </Radix.Alert>
                                 ) : (
                                     <Radix.Alert variant="destructive">
-                                        <Radix.AlertTitle>上传失败</Radix.AlertTitle>
+                                        <Radix.AlertTitle>发生错误</Radix.AlertTitle>
                                         <Radix.AlertDescription>
-                                            {errorMessage}
-                                            <br />
+                                            <pre>
+                                                <code className="selectable">{errorMessage}</code>
+                                            </pre>
                                             如需帮助，请复制错误信息并发给站点管理员 LingyunAwA
                                         </Radix.AlertDescription>
                                     </Radix.Alert>
@@ -306,7 +309,7 @@ export default function SkinDrop() {
                                             onClick={() => {
                                                 setCopied(true);
                                                 copyToClipboard(
-                                                    `/skin url https://a7zzsqcyurqyggvo.public.blob.vercel-storage.com/SkinDrop/${s3Filename}`
+                                                    `/skin url https://a7zzsqcyurqyggvo.public.blob.vercel-storage.com/SkinDrop/${s3Filename}?t=${Date.now()}`
                                                 );
                                                 setTimeout(() => {
                                                     setCopied(false);

@@ -31,14 +31,11 @@ import {
     type VisibilityState,
 } from "@tanstack/react-table";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Badge } from "@/components/@radix-ui/badge";
 import { Button } from "@/components/@radix-ui/button";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/@radix-ui/chart";
-import { Checkbox } from "@/components/@radix-ui/checkbox";
 import {
     Drawer,
     DrawerClose,
@@ -53,8 +50,6 @@ import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/@radix-ui/dropdown-menu";
 import { Input } from "@/components/@radix-ui/input";
@@ -62,15 +57,10 @@ import { Label } from "@/components/@radix-ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/@radix-ui/select";
 import { Separator } from "@/components/@radix-ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/@radix-ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/@radix-ui/tabs";
+import { Tabs, TabsContent } from "@/components/@radix-ui/tabs";
 import {
-    GripVerticalIcon,
-    CircleCheckIcon,
-    LoaderIcon,
-    EllipsisVerticalIcon,
     Columns3Icon,
     ChevronDownIcon,
-    PlusIcon,
     ChevronsLeftIcon,
     ChevronLeftIcon,
     ChevronRightIcon,
@@ -372,6 +362,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
     const isMobile = useIsMobile();
 

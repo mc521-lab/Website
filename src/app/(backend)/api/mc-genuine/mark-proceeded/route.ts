@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
+import { withApiLog } from "@/lib/pretty-log";
 
 async function markPlayerProceeded(playerName: string) {
+    const supabase = getSupabaseClient();
+
     const { data, error } = await supabase
         .from("MinecraftEligibilityVerificationResult")
         .update({ Proceeded: true })
@@ -21,7 +22,7 @@ async function markPlayerProceeded(playerName: string) {
     return data;
 }
 
-export async function POST(req: NextRequest) {
+async function handler(req: NextRequest) {
     try {
         const { playerName } = await req.json();
 
@@ -37,3 +38,5 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, error: err.message }, { status: 500 });
     }
 }
+
+export const POST = withApiLog(handler, { logBody: true }, "POST /api/mc-genuine/mark-proceeded");

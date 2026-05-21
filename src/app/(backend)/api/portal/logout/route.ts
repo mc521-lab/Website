@@ -1,11 +1,14 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { supabase } from "@/lib/supabase/supabase-server";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
+import { withApiLog } from "@/lib/pretty-log";
 
 const JWT_SECRET = process.env.JWT_SECRET!; // 你自己的 secret
 
-export async function POST() {
+async function handler(req: NextRequest) {
+    const supabase = getSupabaseClient();
+    
     const cookieStore = await cookies();
     const cookieJwt = cookieStore.get("portal-jwt");
 
@@ -35,3 +38,5 @@ export async function POST() {
     res.cookies.delete("portal-jwt");
     return res;
 }
+
+export const POST = withApiLog(handler, { logBody: false }, "POST /api/portal/logout");

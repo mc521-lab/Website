@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { GemData } from "./types";
 import { formatValue, getQualityBadgeColor, getQualityGlow } from "./utils";
 import { Diamond, Sparkles } from "lucide-react";
@@ -10,6 +11,7 @@ interface GemCardProps {
 
 export function GemCard({ gem }: GemCardProps) {
     const featureMap = new Map(gem.features.map((f) => [f.id, f.name]));
+    const hasImage = gem.image && gem.image.trim() !== "";
 
     return (
         <div
@@ -29,12 +31,23 @@ export function GemCard({ gem }: GemCardProps) {
                 {/* 头部：图标 + 名称 */}
                 <div className="mb-4 flex items-center gap-3">
                     <div
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg"
+                        className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
                         style={{
                             background: `linear-gradient(135deg, ${gem.symbolColor}20, ${gem.symbolColor}08)`,
                             border: `1px solid ${gem.symbolColor}30`,
                         }}>
-                        <Diamond className="h-6 w-6" style={{ color: gem.symbolColor }} />
+                        {hasImage ? (
+                            <Image
+                                loading="lazy"
+                                width={48}
+                                height={48}
+                                src={gem.image!}
+                                alt={gem.name}
+                                className="h-full w-full object-cover"
+                            />
+                        ) : (
+                            <Diamond className="h-6 w-6" style={{ color: gem.symbolColor }} />
+                        )}
                     </div>
                     <div>
                         <h3 className="text-lg font-bold text-neutral-100">{gem.name}</h3>

@@ -27,7 +27,10 @@ export function Photos() {
     }, []);
 
     useEffect(() => {
-        fetchPhotos();
+        const timer = setTimeout(() => {
+            fetchPhotos();
+        }, 0);
+        return () => clearTimeout(timer);
     }, [fetchPhotos]);
 
     return (

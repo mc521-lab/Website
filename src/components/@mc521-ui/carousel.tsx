@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useMemo, useRef } from "react";
+import { Children, ReactNode, useCallback, useEffect, useMemo, useRef } from "react";
 
 interface CarouselProps {
     children: ReactNode;
@@ -16,7 +16,9 @@ export const Carousel = ({ children, className = "", value, onChange }: Carousel
     const containerRef = useRef<HTMLDivElement>(null);
     const isScrolling = useRef(false);
 
-    const [current, setCurrent] = [value, onChange];
+    const current = value;
+    const setCurrent = onChange;
+    void setCurrent;
 
     // 获取单个 slide 的偏移宽度（容器宽度）
     const getSlideOffset = useCallback(() => {

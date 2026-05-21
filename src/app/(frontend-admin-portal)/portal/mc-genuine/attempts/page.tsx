@@ -38,7 +38,10 @@ export default function Page() {
     };
 
     useEffect(() => {
-        fetchData();
+        const timer = setTimeout(() => {
+            fetchData();
+        }, 0);
+        return () => clearTimeout(timer);
     }, []);
 
     // 尝试表格列配置

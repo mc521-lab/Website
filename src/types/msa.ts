@@ -52,7 +52,7 @@ export interface XstsTokenSuccess {
 
 export interface MinecraftTokenSuccess {
     username: string;
-    roles: any[];
+    roles: unknown[];
     access_token: string;
     token_type: "Bearer";
     expires_in: number;

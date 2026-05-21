@@ -96,7 +96,10 @@ export default function Page() {
     };
 
     useEffect(() => {
-        fetchData();
+        const timer = setTimeout(() => {
+            fetchData();
+        }, 0);
+        return () => clearTimeout(timer);
     }, []);
 
     // 结果表格列配置

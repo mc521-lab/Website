@@ -46,7 +46,10 @@ export default function Page() {
     };
 
     useEffect(() => {
-        fetchData();
+        const timer = setTimeout(() => {
+            fetchData();
+        }, 0);
+        return () => clearTimeout(timer);
     }, []);
 
     // ✅ 修改状态

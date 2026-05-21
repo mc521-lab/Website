@@ -5,5 +5,6 @@
     "type": "材料",
     "description": "表面渗透着未干的血痕\n散发着恐怖的气息",
     "effect": "",
-    "source": "击杀魔塔顶层Boss即可获得"
+    "source": "击杀魔塔顶层Boss即可获得",
+    "image": "materials/TONGC.png"
 }

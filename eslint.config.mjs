@@ -13,6 +13,8 @@ const eslintConfig = defineConfig([
         "build/**",
         "next-env.d.ts",
         "scripts/**",
+        "public/_pagefind/**",
+        "public/_pagefind/**",
     ]),
 ]);
 

@@ -2,12 +2,13 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import mcping from "mcping-js";
+import { withApiLog } from "@/lib/pretty-log";
 
 // 简单的内存缓存
 const cache = new Map<string, { data: any; timestamp: number }>();
 const CACHE_TTL = 30 * 1000; // 30秒缓存
 
-export async function GET(req: NextRequest) {
+async function handler(req: NextRequest) {
     const host = req.nextUrl.searchParams.get("host");
     const port = parseInt(req.nextUrl.searchParams.get("port") ?? "25565");
 
@@ -56,3 +57,5 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ online: null, max: null, error: true }, { status: 500 });
     }
 }
+
+export const GET = withApiLog(handler, { logBody: false }, "GET /api/mc-status");

@@ -5,5 +5,6 @@
     "type": "材料",
     "description": "蕴含强大负能量的精华\n散发着幽暗的气息",
     "effect": "",
-    "source": "由秘境地牢等多种渠道获得"
+    "source": "由秘境地牢等多种渠道获得",
+    "image": "materials/TONGA.png"
 }

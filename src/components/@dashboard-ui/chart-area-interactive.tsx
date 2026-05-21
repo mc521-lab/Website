@@ -125,7 +125,8 @@ export function ChartAreaInteractive() {
 
     React.useEffect(() => {
         if (isMobile) {
-            setTimeRange("7d");
+            const timer = setTimeout(() => setTimeRange("7d"), 0);
+            return () => clearTimeout(timer);
         }
     }, [isMobile]);
 

@@ -1,12 +1,11 @@
 // app/api/minecraft/submit/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
+import { withApiLog } from "@/lib/pretty-log";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseSecret = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-const supabase = createClient(supabaseUrl, supabaseSecret);
-
-export async function POST(req: NextRequest) {
+async function handler(req: NextRequest) {
+    const supabase = getSupabaseClient();
+    
     try {
         const body = await req.json();
         const { playerName, playerUuid, successful, failureReason } = body;
@@ -54,3 +53,5 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, error: err.message || "Unknown error" }, { status: 500 });
     }
 }
+
+export const POST = withApiLog(handler, { logBody: true }, "POST /api/mc-genuine/submit");

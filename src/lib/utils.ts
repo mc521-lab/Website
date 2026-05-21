@@ -87,3 +87,7 @@ export async function copyToClipboard(text: string) {
         }
     }
 }
+
+export function getCardImageRelativeUrl(specificUrl: string) {
+    return `/wiki/itemwiki/${specificUrl}`;
+}

@@ -5,8 +5,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/@radix-ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/@radix-ui/sidebar";

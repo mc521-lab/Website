@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { MaterialData } from "./types";
 import { getQualityColor, getCategoryColor, getMaterialCategory } from "./utils";
 import { Diamond, Sparkles, MapPin } from "lucide-react";
+import { getCardImageRelativeUrl } from "@/lib/utils";
 
 interface MaterialCardProps {
     material: MaterialData;
@@ -11,6 +13,7 @@ interface MaterialCardProps {
 export function MaterialCard({ material }: MaterialCardProps) {
     const qualityColor = getQualityColor(material.quality);
     const categoryColor = getCategoryColor(getMaterialCategory(material));
+    const hasImage = material.image && material.image.trim() !== "";
 
     return (
         <div
@@ -30,12 +33,23 @@ export function MaterialCard({ material }: MaterialCardProps) {
                 {/* 头部：图标 + 名称 + 品质 */}
                 <div className="mb-3 flex items-center gap-2.5">
                     <div
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-xl"
+                        className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg"
                         style={{
                             background: `linear-gradient(135deg, ${categoryColor}20, ${categoryColor}08)`,
                             border: `1px solid ${categoryColor}30`,
                         }}>
-                        <Diamond className="h-5 w-5" style={{ color: categoryColor }} />
+                        {hasImage ? (
+                            <Image
+                                loading="lazy"
+                                width={32}
+                                height={32}
+                                src={getCardImageRelativeUrl(material.image!)}
+                                alt={material.name}
+                                className="object-cover"
+                            />
+                        ) : (
+                            <Diamond className="h-5 w-5" style={{ color: categoryColor }} />
+                        )}
                     </div>
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-1.5">

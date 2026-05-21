@@ -11,11 +11,12 @@ interface MinecraftVerifyCardProps {
     terms: boolean;
     setTerms: (val: boolean) => void;
     loading?: boolean;
+    checkingExisting?: boolean;
     onLaunchLogin: () => void;
 }
 
 const MinecraftVerifyCard = React.forwardRef<HTMLDivElement, MinecraftVerifyCardProps>(
-    ({ playername, setPlayername, terms, setTerms, loading = false, onLaunchLogin }, ref) => {
+    ({ playername, setPlayername, terms, setTerms, loading = false, checkingExisting = false, onLaunchLogin }, ref) => {
         return (
             <Radix.Card ref={ref} className="mt-16 w-full max-w-md">
                 <Radix.CardHeader>
@@ -70,10 +71,10 @@ const MinecraftVerifyCard = React.forwardRef<HTMLDivElement, MinecraftVerifyCard
                     <Radix.Button
                         type="submit"
                         className="w-full cursor-pointer"
-                        disabled={!playername || playername.length < 3 || playername.length > 16 || !terms || loading}
+                        disabled={!playername || playername.length < 3 || playername.length > 16 || !terms || loading || checkingExisting}
                         onClick={onLaunchLogin}>
-                        {loading && <LoaderCircleIcon className="size-3 animate-spin" />}
-                        {loading ? "验证中" : "开始验证"}
+                        {(loading || checkingExisting) && <LoaderCircleIcon className="size-3 animate-spin" />}
+                        {checkingExisting ? "查询中" : loading ? "验证中" : "开始验证"}
                     </Radix.Button>
                 </Radix.CardFooter>
             </Radix.Card>

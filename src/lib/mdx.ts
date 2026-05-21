@@ -8,7 +8,6 @@ import {
     getCategoryOrder,
     getItemTitle,
     getItemOrder,
-    isItemHidden,
     isCategoryExpanded,
     WIKI_DIR,
 } from "./wiki-config";

@@ -1,7 +1,6 @@
 "use client";
 
 import { Mc521 } from "@/components";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 
 const svg = `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">

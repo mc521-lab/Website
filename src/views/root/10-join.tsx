@@ -1,6 +1,6 @@
 "use client";
 
-import { ServerIcon, CopyCheckIcon, CopyIcon, MessageCircleMoreIcon } from "lucide-react";
+import { ServerIcon, CopyIcon, MessageCircleMoreIcon } from "lucide-react";
 import { useState } from "react";
 
 export function Join() {

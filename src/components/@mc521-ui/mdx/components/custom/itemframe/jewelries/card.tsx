@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ResolvedJewelry } from "./types";
 import { formatValue } from "./utils";
 import { Diamond, Zap, Heart, Swords, ShieldCheck, Gauge, Flame, Droplets, Wind, Mountain, Sparkles, Users } from "lucide-react";
@@ -25,6 +26,7 @@ interface JewelryCardProps {
 
 export function JewelryCard({ jewelry }: JewelryCardProps) {
     const accentColor = jewelry.jobColor ?? "#767676";
+    const hasImage = jewelry.image && jewelry.image.trim() !== "";
 
     return (
         <div
@@ -44,12 +46,23 @@ export function JewelryCard({ jewelry }: JewelryCardProps) {
                 {/* 头部：图标 + 名称 + 部位 */}
                 <div className="mb-4 flex items-center gap-3">
                     <div
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg"
+                        className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg"
                         style={{
                             background: `linear-gradient(135deg, ${accentColor}20, ${accentColor}08)`,
                             border: `1px solid ${accentColor}30`,
                         }}>
-                        <Diamond className="h-6 w-6" style={{ color: accentColor }} />
+                        {hasImage ? (
+                            <Image
+                                loading="lazy"
+                                width={48}
+                                height={48}
+                                src={jewelry.image!}
+                                alt={jewelry.name}
+                                className="h-full w-full object-cover"
+                            />
+                        ) : (
+                            <Diamond className="h-6 w-6" style={{ color: accentColor }} />
+                        )}
                     </div>
                     <div className="min-w-0 flex-1">
                         <h3 className="truncate text-lg font-bold text-neutral-100">{jewelry.name}</h3>

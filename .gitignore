@@ -45,3 +45,9 @@ next-env.d.ts
 # nextra postbuild
 /public/_pagefind
 .env*.local
+
+# supabase
+supabase/
+
+# docker
+mc521-nextjs-web.tar

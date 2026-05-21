@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase/supabase-server";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
 import { convertNullsToString } from "@/lib/utils";
+import { withApiLog } from "@/lib/pretty-log";
 
-export async function GET(req: NextRequest) {
+async function handler(req: NextRequest) {
+    const supabase = getSupabaseClient();
+    
     try {
         // 获取 JiraTickets 数据
         const { data: ticketsData, error: ticketsError } = await supabase
@@ -25,3 +28,5 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ success: false, error: error.message || "Unknown error" }, { status: 500 });
     }
 }
+
+export const GET = withApiLog(handler, { logBody: false }, "GET /api/jira/list");

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchSkin } from "@/lib/puppeteer";
+import { withApiLog } from "@/lib/pretty-log";
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ id?: string }> }) {
+async function handler(req: NextRequest, ...args: unknown[]) {
+    const { params } = args[0] as { params: Promise<{ id?: string }> };
     const { id } = await params;
 
     if (!id || !/^[0-9a-fA-F]{6,64}$/.test(id)) {
@@ -41,3 +43,5 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id?:
         });
     }
 }
+
+export const GET = withApiLog(handler, { logBody: false }, "GET /api/skindrop/download/:id");

@@ -1,11 +1,12 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { supabase } from "@/lib/supabase/supabase-server";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
+import { withApiLog } from "@/lib/pretty-log";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
-export async function GET() {
+async function handler(req: NextRequest) {
     const cookieStore = await cookies();
     const cookieJwt = cookieStore.get("portal-jwt");
 
@@ -23,6 +24,8 @@ export async function GET() {
         return res;
     }
 
+    const supabase = getSupabaseClient();
+    
     // 查询用户信息
     const { data: user, error } = await supabase
         .from("Users")
@@ -36,3 +39,5 @@ export async function GET() {
 
     return NextResponse.json({ success: true, user });
 }
+
+export const GET = withApiLog(handler, { logBody: false }, "GET /api/portal/me");

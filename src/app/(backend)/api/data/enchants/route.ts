@@ -1,9 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "fs";
+import { withApiLog } from "@/lib/pretty-log";
 
 const COMPILED_PATH = `${process.cwd()}/public/wiki/item/data/_compiled/enchants.json`;
 
-export async function GET() {
+async function handler(req: NextRequest) {
     const content = await fs.readFile(COMPILED_PATH, "utf-8");
     const data = JSON.parse(content);
 
@@ -13,3 +14,5 @@ export async function GET() {
         },
     });
 }
+
+export const GET = withApiLog(handler, { logBody: false }, "GET /api/data/enchants");

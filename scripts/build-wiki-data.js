@@ -228,6 +228,7 @@ function buildJewelries() {
                         jobColor: jobEntry?.symbolColor,
                         slotType,
                         isTreasure,
+                        image: data.image,
                     });
                 } else if (data.inherit) {
                     const baseFile = data.inherit.replace("common_", "") + ".json";
@@ -245,6 +246,7 @@ function buildJewelries() {
                         jobColor: jobEntry?.symbolColor,
                         slotType,
                         isTreasure,
+                        image: baseData.image,
                     });
                 }
             } catch (e) {

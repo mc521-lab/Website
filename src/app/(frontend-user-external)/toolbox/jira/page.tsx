@@ -4,7 +4,6 @@ import { Radix } from "@/components";
 import {
     AngryIcon,
     AnnoyedIcon,
-    ChevronDownIcon,
     CirclePlusIcon,
     FrownIcon,
     GitPullRequestArrowIcon,
@@ -13,7 +12,6 @@ import {
     GitPullRequestDraftIcon,
     GitPullRequestIcon,
     MehIcon,
-    SearchIcon,
 } from "lucide-react";
 import { DataTable } from "@/components/@dashboard-ui";
 import { useEffect, useState } from "react";
@@ -204,7 +202,10 @@ export default function JiraHome() {
     };
 
     useEffect(() => {
-        fetchData();
+        const timer = setTimeout(() => {
+            fetchData();
+        }, 0);
+        return () => clearTimeout(timer);
     }, []);
 
     // 表格列

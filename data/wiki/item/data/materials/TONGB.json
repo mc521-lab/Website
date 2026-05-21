@@ -5,5 +5,6 @@
     "type": "材料",
     "description": "工匠们梦寐以求的材料\n其价值远不可估量",
     "effect": "",
-    "source": "由秘境地牢等多种渠道获得"
+    "source": "由秘境地牢等多种渠道获得",
+    "image": "materials/TONGB.png"
 }

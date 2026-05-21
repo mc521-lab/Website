@@ -1,4 +1,4 @@
-import { ToolsIndex, ToolData, ToolCategory, ResolvedTool } from "./types";
+import { ToolsIndex, ToolCategory, ResolvedTool } from "./types";
 
 export async function loadToolsIndex(): Promise<ToolsIndex | null> {
     try {

@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase/supabase-server";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
 import { convertNullsToString } from "@/lib/utils";
+import { withApiLog } from "@/lib/pretty-log";
 
-export async function GET(req: NextRequest) {
+async function handler(req: NextRequest) {
+    const supabase = getSupabaseClient();
+    
     try {
         const { searchParams } = new URL(req.url);
 
@@ -43,3 +46,5 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ success: false, error: error.message || "Unknown error" }, { status: 500 });
     }
 }
+
+export const GET = withApiLog(handler, { logBody: false }, "GET /api/jira/search");

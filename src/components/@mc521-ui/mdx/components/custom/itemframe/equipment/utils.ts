@@ -1,4 +1,4 @@
-import { EquipmentData, SetData, ResolvedEquipment, EquipmentJobEntry, SetIndexEntry, JobIndex, ColorConfig } from "./types";
+import { EquipmentData, SetData, ResolvedEquipment, EquipmentJobEntry, JobIndex, ColorConfig } from "./types";
 
 // 缓存颜色配置
 let colorConfigCache: ColorConfig | null = null;

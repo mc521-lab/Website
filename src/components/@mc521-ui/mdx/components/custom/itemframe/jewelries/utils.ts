@@ -129,6 +129,7 @@ export async function resolveJewelryEntry(entryPath: string, jobEntry?: JewelryJ
                 jobColor: jobEntry?.symbolColor,
                 slotType,
                 isTreasure,
+                image: data.image,
             };
         }
 
@@ -152,6 +153,7 @@ export async function resolveJewelryEntry(entryPath: string, jobEntry?: JewelryJ
                 jobColor: jobEntry?.symbolColor,
                 slotType,
                 isTreasure,
+                image: baseData.image,
             };
         }
 

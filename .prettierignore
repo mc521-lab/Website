@@ -44,3 +44,6 @@ next-env.d.ts
 # nextra postbuild
 /public/_pagefind
 .env*.local
+
+# Built Wiki Data
+/public/wiki/item/data/_compiled/*

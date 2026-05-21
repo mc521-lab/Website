@@ -1,10 +1,13 @@
 // app/api/login/route.ts
-import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase/supabase-server";
+import { NextRequest, NextResponse } from "next/server";
+import { getSupabaseClient } from "@/lib/supabase/supabase-server";
+import { withApiLog } from "@/lib/pretty-log";
 import crypto from "node:crypto";
 import jwt from "jsonwebtoken";
 
-export async function POST(req: Request) {
+async function handler(req: NextRequest) {
+    const supabase = getSupabaseClient();
+    
     const { email, password } = await req.json();
 
     const { data, error } = await supabase.from("Users").select().eq("email", email).single();
@@ -34,3 +37,5 @@ export async function POST(req: Request) {
     });
     return res;
 }
+
+export const POST = withApiLog(handler, { logBody: true }, "POST /api/portal/login");

@@ -11,6 +11,7 @@ export default function ToolboxZhengban() {
     const [playername, setPlayername] = useState("");
     const [terms, setTerms] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [checkingExisting, setCheckingExisting] = useState(false);
 
     const codeRef = useRef<string>("");
     const [finished, setFinished] = useState(false);
@@ -31,13 +32,35 @@ export default function ToolboxZhengban() {
 
     function restartVerify() {
         setLoading(false);
+        setCheckingExisting(false);
         setFinished(false);
         setSuccessful(false);
         setAttemptRecordId(null);
         setSuccessRecordId(null);
+        setPlayername("");
+        setTerms(false);
     }
 
-    function launchLogin() {
+    async function launchLogin() {
+        setCheckingExisting(true);
+
+        const checkRes = await fetch("/api/mc-genuine/check-existing", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ playerName: playername }),
+        });
+        const checkData = await checkRes.json();
+
+        if (checkData.success && checkData.exists) {
+            setAttemptRecordId(checkData.attemptRecordId);
+            setSuccessRecordId(checkData.successRecordId);
+            setFinished(true);
+            setSuccessful(true);
+            setCheckingExisting(false);
+            return;
+        }
+
+        setCheckingExisting(false);
         setLoading(true);
         openCentered(LOGIN_URI, 1024, 768);
     }
@@ -124,6 +147,7 @@ export default function ToolboxZhengban() {
             {!finished ? (
                 <ZhengbanSlice.MinecraftVerifyCard
                     loading={loading}
+                    checkingExisting={checkingExisting}
                     playername={playername}
                     setPlayername={setPlayername}
                     terms={terms}

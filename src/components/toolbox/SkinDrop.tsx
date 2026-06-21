@@ -141,7 +141,7 @@ export default function SkinDrop() {
             setS3Filename(filename);
 
             try {
-                const res = await fetch(`${API_BASE}/skindrop/upload/${filename}`, {
+                const res = await fetch(new URL(`/skindrop/upload/${filename}`, new URL(API_BASE)), {
                     method: "POST",
                     body: formData,
                 });

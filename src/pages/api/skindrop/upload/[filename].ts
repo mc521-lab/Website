@@ -1,6 +1,8 @@
 import type { APIRoute } from "astro";
 import { put } from "@vercel/blob";
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ params, request }) => {
     const filename = params.filename;
     if (!filename) {

@@ -9,6 +9,7 @@ export default defineConfig({
     security: {
         checkOrigin: false,
     },
+    output: "static",
     integrations: [
         starlight({
             title: "君庭阁 Wiki",

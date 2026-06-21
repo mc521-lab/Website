@@ -1,8 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import node from "@astrojs/node"
-
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -11,9 +9,6 @@ export default defineConfig({
     security: {
         checkOrigin: false,
     },
-    adapter: node({
-        mode: "standalone",
-    }),
     integrations: [
         starlight({
             title: "君庭阁 Wiki",

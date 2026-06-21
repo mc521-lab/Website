@@ -1,5 +1,7 @@
 "use client";
 
+const API_BASE = (import.meta.env as any).PUBLIC_API_BASE_URL || "";
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { SkinViewer, WalkingAnimation } from "skinview3d";
 import { Button } from "@/components/ui/button";
@@ -139,7 +141,7 @@ export default function SkinDrop() {
             setS3Filename(filename);
 
             try {
-                const res = await fetch(`/api/skindrop/upload/${filename}`, {
+                const res = await fetch(`${API_BASE}/skindrop/upload/${filename}`, {
                     method: "POST",
                     body: formData,
                 });
@@ -187,7 +189,7 @@ export default function SkinDrop() {
                 if (!id) {
                     throw new Error("无效的 URL");
                 }
-                const res = await fetch(`/api/skindrop/download/${id}`);
+                const res = await fetch(`${API_BASE}/skindrop/download/${id}`);
                 if (!res.ok) {
                     throw new Error(await res.text());
                 }

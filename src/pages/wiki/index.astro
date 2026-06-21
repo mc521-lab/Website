@@ -1,0 +1,173 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+const categories = [
+    {
+        name: "新手指南",
+        desc: "初入君庭阁的必备知识",
+        href: "/wiki/beginner/common-commands",
+        links: [
+            { label: "常用指令", href: "/wiki/beginner/common-commands" },
+            { label: "如何圈地", href: "/wiki/beginner/how-to-claim-land" },
+            { label: "如何赚钱", href: "/wiki/beginner/how-to-earn-money" },
+        ],
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+    },
+    {
+        name: "公会系统",
+        desc: "公会管理、石料与维护基金",
+        href: "/wiki/playerguard/update",
+        links: [
+            { label: "公会更新", href: "/wiki/playerguard/update" },
+            { label: "公会石料", href: "/wiki/playerguard/stone" },
+            { label: "维护基金", href: "/wiki/playerguard/maintainance-funds" },
+        ],
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    },
+    {
+        name: "规章制度",
+        desc: "服务器行为规范与处罚条例",
+        href: "/wiki/rules/basic",
+        links: [
+            { label: "基本规则", href: "/wiki/rules/basic" },
+            { label: "裁决机制", href: "/wiki/rules/adjudication" },
+            { label: "处罚条例", href: "/wiki/rules/punishment" },
+        ],
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>`,
+    },
+    {
+        name: "内容图鉴",
+        desc: "装备、武器、宝石、附魔等数据大全",
+        href: "/wiki/item/gems",
+        links: [
+            { label: "宝石图鉴", href: "/wiki/item/gems" },
+            { label: "装备图鉴", href: "/wiki/item/equipment" },
+            { label: "附魔图鉴", href: "/wiki/item/enchantments" },
+        ],
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="m12 22 4-13H8l4 13z"/><path d="M2 9h20"/></svg>`,
+    },
+];
+
+const arrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`;
+const arrowLeft = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>`;
+---
+
+<Layout title="君庭阁百科 · MC521">
+    <div class="mc521-root gufeng-paper min-h-screen w-full overflow-x-hidden">
+        <!-- 主题切换按钮 -->
+        <button
+            id="theme-toggle"
+            type="button"
+            aria-label="切换明暗主题"
+            class="border-primary/40 bg-card/80 text-primary hover:bg-primary hover:text-primary-foreground fixed top-4 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border backdrop-blur-sm transition-colors">
+            <svg
+                class="dark:hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+            <svg
+                class="hidden dark:block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+        </button>
+
+        <!-- Hero 区块 -->
+        <section class="flex flex-col items-center justify-center px-4 py-24 text-center md:py-32">
+            <h1 class="gufeng-kai text-foreground text-5xl font-bold md:text-6xl">君庭阁百科</h1>
+            <p class="gufeng-song text-muted-foreground mt-4 text-lg md:text-xl">服务器的知识宝库，探险者指南</p>
+            <div class="gufeng-divider mt-8 w-full max-w-md">
+                <span class="text-accent">❖</span>
+            </div>
+        </section>
+
+        <!-- 分类卡片 -->
+        <section class="mx-auto px-16! pb-16 sm:px-6 md:pb-24">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {
+                    categories.map((cat) => (
+                        <article class="gufeng-card flex flex-col rounded-lg p-6 md:p-8">
+                            <div class="text-primary mb-4" set:html={cat.icon} />
+                            <h3 class="gufeng-kai text-foreground text-2xl">{cat.name}</h3>
+                            <p class="text-muted-foreground mt-2 text-base leading-relaxed">{cat.desc}</p>
+                            <div class="mt-4 flex flex-col gap-1">
+                                {cat.links.map((link) => (
+                                    <a
+                                        href={link.href}
+                                        class="text-primary hover:underline inline-flex items-center gap-2 py-1 text-base transition-colors">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="14"
+                                            height="14"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            aria-hidden="true">
+                                            <circle cx="12" cy="12" r="1" />
+                                        </svg>
+                                        <span>{link.label}</span>
+                                    </a>
+                                ))}
+                            </div>
+                            <div class="mt-auto pt-6">
+                                <a
+                                    href={cat.href}
+                                    class="gufeng-btn gufeng-btn-primary w-full"
+                                    aria-label={`进入${cat.name}分类`}>
+                                    <span>进入分类</span>
+                                    <span set:html={arrowRight} />
+                                </a>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- 返回主页 -->
+        <section class="mx-auto max-w-5xl px-4 pb-16 text-center sm:px-6 md:pb-24">
+            <a href="/" class="gufeng-btn inline-flex min-h-11 items-center gap-2" aria-label="返回主页">
+                <span set:html={arrowLeft} />
+                <span>返回主页</span>
+            </a>
+        </section>
+    </div>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById("theme-toggle");
+        themeToggle?.addEventListener("click", () => {
+            const isDark = document.documentElement.classList.toggle("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+    </script>
+</Layout>

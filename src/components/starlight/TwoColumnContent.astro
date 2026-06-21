@@ -1,0 +1,16 @@
+<div class="two-column-wrap">
+    <div class="main-pane"><slot /></div>
+</div>
+
+<style>
+    @layer starlight.core {
+        .two-column-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+        .main-pane {
+            width: 100%;
+            min-width: 0;
+        }
+    }
+</style>

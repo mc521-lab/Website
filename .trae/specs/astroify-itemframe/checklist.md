@@ -1,0 +1,20 @@
+- [x] gems.json 在服务端加载成功，GemShowcase.astro 渲染无 React island
+- [x] GemShowcase.astro 样式与功能与原 React 版本一致（图标、品质表格、颜色）
+- [x] gems.mdx 页面搜索过滤可用，无控制台报错
+- [x] equipment.json 在服务端加载成功，EquipmentShowcase.astro 渲染无 React island
+- [x] WeaponShowcase.astro 渲染无 React island
+- [x] equipment.mdx / weapons.mdx 搜索与职业过滤可用，无控制台报错
+- [x] enchants.json 在服务端加载成功，EnchantmentShowcase.astro 渲染无 React island
+- [x] EnchantmentShowcase.astro 等级选择器可用，公式计算结果正确
+- [x] enchantments.mdx 搜索与类型/稀有度过滤可用，无控制台报错
+- [x] tools.json 在服务端加载成功，ToolsShowcase.astro 渲染无 React island
+- [x] tools.mdx 搜索与类别过滤可用，无控制台报错
+- [x] materials.json 在服务端加载成功，MaterialShowcase.astro 渲染无 React island
+- [x] materials.mdx 搜索与类别过滤可用，无控制台报错
+- [x] jewelries.json 在服务端加载成功，JewelryShowcase.astro 渲染无 React island
+- [x] jewelries.mdx 搜索与职业过滤可用，无控制台报错
+- [x] `src/components/starlight/custom/_react/itemframe/` 目录已删除
+- [x] `npx astro check` 通过，无编译错误
+- [x] `node_modules/.vite` 缓存已清除
+- [x] 构建/开发服务器无编译错误
+- [x] 浏览器访问所有 7 个 Wiki 图鉴页面无控制台报错

@@ -1,0 +1,96 @@
+---
+import { itemQualityColors } from "@/lib/const";
+
+export interface Props {
+    equipment: {
+        id: string;
+        name: string;
+        slot: string;
+        slotName: string;
+        quality: string;
+        applicableClass: string;
+        setId?: string;
+        setName: string;
+        stats: Array<{ id: string; name: string; value: number; unit?: string }>;
+        enchantSlots: number;
+        gemSlots: number;
+        materials?: any[];
+        jobId: string;
+        jobName: string;
+        jobColor: string;
+        setEffects?: Record<string, Array<{ id: string; name: string; value: number; unit?: string }>>;
+    };
+}
+
+const { equipment } = Astro.props;
+---
+
+<div class="gufeng-card gufeng-corner h-full p-4" data-item data-name={equipment.name} data-category={equipment.jobId}>
+    <div class="mb-3 flex items-start justify-between gap-2">
+        <h3 class="gufeng-kai mt-0! text-lg font-semibold" style="color: var(--foreground);">{equipment.name}</h3>
+        <div class="flex flex-wrap justify-end gap-1.5">
+            <span
+                class="gufeng-seal-sm"
+                style={`background: ${itemQualityColors[equipment.quality] || "#8b7e6b"}; color: #fff; border-color: ${itemQualityColors[equipment.quality] || "#8b7e6b"};`}>
+                {equipment.quality}
+            </span>
+            <span
+                class="gufeng-seal-sm"
+                style={`background: ${equipment.jobColor}15; color: ${equipment.jobColor}; border-color: ${equipment.jobColor}40;`}>
+                {equipment.jobName}
+            </span>
+        </div>
+    </div>
+
+    <div class="gufeng-song mt-1.5! text-sm" style="color: var(--muted-foreground);">
+        <div class="space-y-1!">
+            {
+                equipment.stats.map((stat) => (
+                    <div class="flex justify-between px-2!">
+                        <span>{stat.name}</span>
+                        <span style="color: var(--foreground);">
+                            {stat.value}
+                            {stat.unit || ""}
+                        </span>
+                    </div>
+                ))
+            }
+            <i class="bg-border! my-2! block! h-px! w-full!"></i>
+            <div class="flex justify-between px-2!">
+                <span>附魔槽</span>
+                <span style="color: var(--foreground);">
+                    {equipment.enchantSlots}
+                </span>
+            </div>
+            <div class="flex justify-between px-2!">
+                <span>宝石槽</span>
+                <span style="color: var(--foreground);">
+                    {equipment.gemSlots}
+                </span>
+            </div>
+        </div>
+
+        <i class="bg-border! my-2! block! h-px! w-full!"></i>
+
+        {
+            equipment.setEffects && Object.keys(equipment.setEffects).length > 0 && (
+                <div class="px-2!">
+                    {Object.entries(equipment.setEffects).map(([pieces, effects]) => (
+                        <div class="mb-1">
+                            <span style="color: var(--accent); font-weight: 600;">{pieces}件套:</span>
+                            <div class="ml-2">
+                                {effects.map((effect) => (
+                                    <span class="mr-2">
+                                        {effect.name} {effect.value > 0 ? "+" : ""}
+                                        {effect.value}
+                                        {effect.unit || ""}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</div>

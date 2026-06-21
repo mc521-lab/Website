@@ -1,0 +1,848 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/noto-sans";
+
+@custom-variant dark (&:is(.dark *, [data-theme="dark"] *));
+
+@theme inline {
+    --font-heading: "LXGW WenKai", "KaiTi", "楷体", serif;
+    --font-sans: "Noto Serif SC", "Songti SC", "宋体", serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --background: #f5f0e6; /* 宣纸米色 */
+    --foreground: #2c2416; /* 墨色 */
+    --card: #faf6ed; /* 素笺 */
+    --card-foreground: #2c2416;
+    --popover: #faf6ed;
+    --popover-foreground: #2c2416;
+    --primary: #b83b2e; /* 朱砂红 */
+    --primary-foreground: #faf6ed;
+    --secondary: #e8dfd0; /* 淡宣 */
+    --secondary-foreground: #4a3f2c;
+    --muted: #e8dfd0;
+    --muted-foreground: #8b7e6b; /* 淡墨 */
+    --accent: #a67c52; /* 赭石 */
+    --accent-foreground: #faf6ed;
+    --destructive: #b83b2e;
+    --border: #d4c9b8; /* 暗宣 */
+    --input: #d4c9b8;
+    --ring: #b83b2e;
+    --chart-1: #b83b2e;
+    --chart-2: #a67c52;
+    --chart-3: #6b8e4e;
+    --chart-4: #4a6fa5;
+    --chart-5: #8b5a2b;
+    --radius: 0.375rem;
+    --sidebar: #ede6d6;
+    --sidebar-foreground: #2c2416;
+    --sidebar-primary: #b83b2e;
+    --sidebar-primary-foreground: #faf6ed;
+    --sidebar-accent: #e8dfd0;
+    --sidebar-accent-foreground: #4a3f2c;
+    --sidebar-border: #d4c9b8;
+    --sidebar-ring: #b83b2e;
+}
+
+.dark,
+:root[data-theme="dark"] {
+    --background: #1a1612; /* 深墨 */
+    --foreground: #e8dfd0; /* 米白 */
+    --card: #252019; /* 浓墨 */
+    --card-foreground: #e8dfd0;
+    --popover: #252019;
+    --popover-foreground: #e8dfd0;
+    --primary: #c84b3e; /* 朱砂 */
+    --primary-foreground: #faf6ed;
+    --secondary: #2e2820;
+    --secondary-foreground: #e8dfd0;
+    --muted: #2e2820;
+    --muted-foreground: #8b7e6b; /* 灰墨 */
+    --accent: #c9a961; /* 暖金 */
+    --accent-foreground: #1a1612;
+    --destructive: #c84b3e;
+    --border: #3d3528;
+    --input: #3d3528;
+    --ring: #c9a961;
+    --chart-1: #c84b3e;
+    --chart-2: #c9a961;
+    --chart-3: #7bae6f;
+    --chart-4: #5b8dbe;
+    --chart-5: #b87d4e;
+    --sidebar: #252019;
+    --sidebar-foreground: #e8dfd0;
+    --sidebar-primary: #c84b3e;
+    --sidebar-primary-foreground: #faf6ed;
+    --sidebar-accent: #2e2820;
+    --sidebar-accent-foreground: #e8dfd0;
+    --sidebar-border: #3d3528;
+    --sidebar-ring: #c9a961;
+}
+
+/* ===== Starlight Wiki 变量覆盖 ===== */
+
+/* Starlight 默认暗色 -> 我们的深墨暗色 */
+:root {
+    --sl-color-white: #e8dfd0;
+    --sl-color-gray-1: #d4c9b8;
+    --sl-color-gray-2: #b0a390;
+    --sl-color-gray-3: #8b7e6b;
+    --sl-color-gray-4: #5c5244;
+    --sl-color-gray-5: #3d3528;
+    --sl-color-gray-6: #2e2820;
+    --sl-color-black: #1a1612;
+    --sl-color-accent: #c84b3e;
+    --sl-color-accent-high: #c9a961;
+    --sl-color-accent-low: #2e2820;
+    --sl-color-text: #e8dfd0;
+    --sl-color-text-accent: #c9a961;
+    --sl-color-text-invert: #1a1612;
+    --sl-color-bg: #1a1612;
+    --sl-color-bg-nav: #252019;
+    --sl-color-bg-sidebar: #252019;
+    --sl-color-bg-inline-code: #2e2820;
+    --sl-color-bg-accent: #c9a961;
+    --sl-color-hairline-light: #3d3528;
+    --sl-color-hairline: #2e2820;
+    --sl-color-hairline-shade: #1a1612;
+    --sl-color-backdrop-overlay: hsla(30, 15%, 10%, 0.66);
+    --sl-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.12), 0px 2px 1px hsla(0, 0%, 0%, 0.24);
+    --sl-shadow-md:
+        0px 8px 4px hsla(0, 0%, 0%, 0.08), 0px 5px 2px hsla(0, 0%, 0%, 0.08), 0px 3px 2px hsla(0, 0%, 0%, 0.12),
+        0px 1px 1px hsla(0, 0%, 0%, 0.15);
+    --sl-shadow-lg:
+        0px 25px 7px hsla(0, 0%, 0%, 0.03), 0px 16px 6px hsla(0, 0%, 0%, 0.1), 0px 9px 5px hsla(30, 15%, 10%, 0.33),
+        0px 4px 4px hsla(0, 0%, 0%, 0.75), 0px 4px 2px hsla(0, 0%, 0%, 0.25);
+    --sl-font-system: "Noto Serif SC", "Songti SC", "宋体", serif;
+    --__sl-font: var(--sl-font, var(--sl-font-system)), var(--sl-font-system);
+    --sl-line-height: 1.75;
+}
+
+/* Starlight 亮色 -> 我们的宣纸亮色 */
+:root[data-theme="light"] {
+    --sl-color-white: #2c2416;
+    --sl-color-gray-1: #4a3f2c;
+    --sl-color-gray-2: #6b5d48;
+    --sl-color-gray-3: #8b7e6b;
+    --sl-color-gray-4: #a99b87;
+    --sl-color-gray-5: #c4b8a6;
+    --sl-color-gray-6: #d4c9b8;
+    --sl-color-gray-7: #e8dfd0;
+    --sl-color-black: #f5f0e6;
+    --sl-color-accent: #b83b2e;
+    --sl-color-accent-high: #b83b2e;
+    --sl-color-accent-low: #faf6ed;
+    --sl-color-text: #2c2416;
+    --sl-color-text-accent: #b83b2e;
+    --sl-color-text-invert: #faf6ed;
+    --sl-color-bg: #f5f0e6;
+    --sl-color-bg-nav: #faf6ed;
+    --sl-color-bg-sidebar: #f5f0e6;
+    --sl-color-bg-inline-code: #e8dfd0;
+    --sl-color-bg-accent: #b83b2e;
+    --sl-color-hairline-light: #d4c9b8;
+    --sl-color-hairline: #e8dfd0;
+    --sl-color-hairline-shade: #d4c9b8;
+    --sl-color-backdrop-overlay: hsla(35, 15%, 36%, 0.66);
+    --sl-shadow-sm: 0px 1px 1px hsla(0, 0%, 0%, 0.06), 0px 2px 1px hsla(0, 0%, 0%, 0.06);
+    --sl-shadow-md:
+        0px 8px 4px hsla(0, 0%, 0%, 0.03), 0px 5px 2px hsla(0, 0%, 0%, 0.03), 0px 3px 2px hsla(0, 0%, 0%, 0.06),
+        0px 1px 1px hsla(0, 0%, 0%, 0.06);
+    --sl-shadow-lg:
+        0px 25px 7px rgba(0, 0, 0, 0.01), 0px 16px 6px hsla(0, 0%, 0%, 0.03), 0px 9px 5px hsla(35, 15%, 10%, 0.08),
+        0px 4px 4px hsla(0, 0%, 0%, 0.16), 0px 4px 2px hsla(0, 0%, 0%, 0.04);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+    html {
+        @apply font-sans;
+    }
+    img {
+        @apply pointer-events-none;
+    }
+}
+
+/* ===== MC521 主页专用样式 ===== */
+@font-face {
+    font-family: "FusionPixel";
+    src: url("/fonts/fusion-pixel-12px-monospaced-zh_hans.otf.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+.pixel-font {
+    font-family: "FusionPixel", monospace !important;
+}
+
+.no-font {
+    font-family: var(--font-sans);
+}
+
+.rendering-pixelated {
+    image-rendering: pixelated;
+}
+
+.scrollbar-none {
+    scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+
+/* 主页根容器内的全局行为（不影响 Starlight 文档） */
+.mc521-root :not(input, textarea, code, pre) {
+    user-select: none;
+}
+.mc521-root code,
+.mc521-root pre {
+    user-select: text;
+}
+.mc521-root img {
+    pointer-events: none;
+}
+
+::-webkit-scrollbar {
+    background: var(--color-accent);
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border: 2px solid var(--color-accent);
+}
+
+@keyframes floatY {
+    0%,
+    100% {
+        transform: translateY(0) scale(0.97);
+    }
+    50% {
+        transform: translateY(16px) scale(1);
+    }
+}
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+}
+
+.animate-float-y {
+    animation: floatY 2.2s ease infinite;
+}
+
+/* ===== 古风装饰工具类 ===== */
+
+/* 古风字体 */
+.gufeng-kai {
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
+}
+.gufeng-song {
+    font-family: "Noto Serif SC", "Songti SC", "宋体", serif;
+}
+
+/* 回纹边框 - 使用 CSS 渐变模拟回纹效果 */
+.gufeng-border {
+    border: 1px solid var(--border);
+    position: relative;
+}
+.gufeng-border::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--border);
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* 古风卡片 - 带双层边框和角花 */
+.gufeng-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    position: relative;
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+.gufeng-card::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--border);
+    pointer-events: none;
+    opacity: 0.4;
+}
+.gufeng-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+/* 古风分隔线 - 中间带装饰符号 */
+.gufeng-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--muted-foreground);
+}
+.gufeng-divider::before,
+.gufeng-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+
+/* 印章样式 */
+.gufeng-seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+/* 卷轴边框 - 上下装饰条 */
+.gufeng-scroll {
+    position: relative;
+    padding: 2rem 1.5rem;
+}
+.gufeng-scroll::before,
+.gufeng-scroll::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--accent) 20%, var(--primary) 50%, var(--accent) 80%, transparent);
+}
+.gufeng-scroll::before {
+    top: 0;
+}
+.gufeng-scroll::after {
+    bottom: 0;
+}
+
+/* 古风按钮 */
+.gufeng-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
+    padding: 0.625rem 1.5rem;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    min-height: 44px;
+}
+.gufeng-btn:hover {
+    background: var(--primary);
+    color: var(--primary-foreground);
+}
+.gufeng-btn-primary {
+    background: var(--primary);
+    color: var(--primary-foreground);
+}
+.gufeng-btn-primary:hover {
+    background: color-mix(in srgb, var(--primary) 85%, black);
+}
+
+/* 宣纸纹理背景 */
+.gufeng-paper {
+    background-color: var(--background);
+    background-image:
+        radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--accent) 4%, transparent) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--primary) 3%, transparent) 0%, transparent 50%);
+}
+
+/* 角花装饰 - 用于卡片四角 */
+.gufeng-corner::before,
+.gufeng-corner::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--accent);
+    opacity: 0.6;
+}
+.gufeng-corner::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+}
+.gufeng-corner::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+}
+
+/* 四角角花 - 用于附魔卡片 */
+.gufeng-corner-all {
+    position: relative;
+}
+.gufeng-corner-all::before,
+.gufeng-corner-all::after,
+.gufeng-corner-all .corner-bl,
+.gufeng-corner-all .corner-br {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid var(--accent);
+    opacity: 0.5;
+    pointer-events: none;
+}
+.gufeng-corner-all::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+}
+.gufeng-corner-all::after {
+    top: -1px;
+    right: -1px;
+    border-left: none;
+    border-bottom: none;
+}
+.gufeng-corner-all .corner-bl {
+    bottom: -1px;
+    left: -1px;
+    border-right: none;
+    border-top: none;
+}
+.gufeng-corner-all .corner-br {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+}
+
+/* 附魔卡片专用 hover 光晕 */
+.gufeng-enchant-card {
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+.gufeng-enchant-card:hover {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--rarity-color, var(--accent)) 12%, transparent);
+}
+
+/* 小型印章标签 */
+.gufeng-seal-sm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "LXGW WenKai", "KaiTi", "楷体", serif;
+    padding: 0.125rem 0.5rem;
+    border-radius: 2px;
+    font-size: 0.625rem;
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+    border: 1px solid;
+}
+
+/* ===== Starlight 组件样式覆盖 ===== */
+
+/* Header 导航栏 */
+.page .header {
+    background-color: var(--sl-color-bg-nav);
+    border-bottom-color: var(--border);
+    backdrop-filter: blur(8px);
+}
+
+.page .header .site-title {
+    font-family: var(--font-heading);
+    color: var(--primary);
+}
+
+.page .header .site-title:hover {
+    color: var(--accent);
+}
+
+/* 侧边栏 */
+.page .sidebar-pane {
+    background-color: var(--sl-color-bg-sidebar);
+    border-inline-end-color: var(--border);
+}
+
+.page .sidebar-content {
+    padding-top: 1.5rem;
+}
+
+/* 侧边栏目录项 */
+.sidebar-content ul a {
+    color: var(--muted-foreground);
+    font-family: var(--font-sans);
+    border-radius: 0.375rem;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.sidebar-content ul a:hover,
+.sidebar-content ul a:focus-visible {
+    color: var(--foreground);
+    background-color: var(--secondary);
+}
+
+.sidebar-content ul a[aria-current="page"],
+.sidebar-content ul a[aria-current="page"]:hover,
+.sidebar-content ul a[aria-current="page"]:focus-visible {
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+    font-weight: 600;
+}
+
+/* 侧边栏分组标题 */
+.sidebar-content summary {
+    color: var(--foreground);
+    font-family: var(--font-heading);
+}
+
+.sidebar-content summary .large {
+    color: var(--foreground);
+    font-family: var(--font-heading);
+}
+
+.sidebar-content ul ul li {
+    border-inline-start-color: var(--border);
+}
+
+/* Markdown 内容区 */
+.sl-markdown-content {
+    font-family: var(--font-sans);
+    line-height: 1.75;
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-heading);
+    color: var(--foreground);
+}
+
+/* h1 标题 */
+.sl-markdown-content h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* h2 标题装饰线 */
+.sl-markdown-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.sl-markdown-content h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 4rem;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    border-radius: 1px;
+}
+
+.sl-markdown-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+.sl-markdown-content h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+}
+
+/* 段落 */
+.sl-markdown-content p {
+    color: var(--foreground);
+    letter-spacing: 0.02em;
+}
+
+/* 链接 */
+.sl-markdown-content a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
+    transition: text-decoration-color 0.2s ease;
+}
+
+.sl-markdown-content a:hover {
+    text-decoration-color: var(--primary);
+}
+
+/* 代码块 */
+.sl-markdown-content code {
+    background-color: var(--sl-color-bg-inline-code);
+    color: var(--foreground);
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.375rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875em;
+}
+
+.sl-markdown-content pre {
+    background-color: #1a1612;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.sl-markdown-content pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.875rem;
+}
+
+/* 引用块 */
+.sl-markdown-content blockquote {
+    border-inline-start: 3px solid var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 4%, transparent);
+    padding: 0.75rem 1rem;
+    border-radius: 0 0.375rem 0.375rem 0;
+    color: var(--muted-foreground);
+    font-style: italic;
+}
+
+.sl-markdown-content blockquote p {
+    margin: 0;
+}
+
+/* 表格 */
+.sl-markdown-content table {
+    display: block;
+    overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.sl-markdown-content th,
+.sl-markdown-content td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    text-align: start;
+    vertical-align: baseline;
+}
+
+.sl-markdown-content th {
+    background-color: color-mix(in srgb, var(--primary) 8%, transparent);
+    color: var(--foreground);
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+.sl-markdown-content tr:nth-child(even) td {
+    background-color: color-mix(in srgb, var(--accent) 3%, transparent);
+}
+
+/* 列表 */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+    padding-inline-start: 1.5rem;
+}
+
+.sl-markdown-content li::marker {
+    color: var(--primary);
+}
+
+/* 水平线 */
+.sl-markdown-content hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 2rem 0;
+}
+
+/* 详情/折叠 */
+.sl-markdown-content details {
+    border-inline-start: 2px solid var(--border);
+    padding-inline-start: 1rem;
+    background-color: color-mix(in srgb, var(--secondary) 30%, transparent);
+    border-radius: 0 0.375rem 0.375rem 0;
+    padding: 0.75rem 1rem;
+}
+
+.sl-markdown-content details summary {
+    font-family: var(--font-heading);
+    color: var(--foreground);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Expressive Code 代码块 */
+.expressive-code {
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+[data-theme="dark"] .expressive-code .frame {
+    background-color: #1a1612 !important;
+}
+
+[data-theme="dark"] .expressive-code .frame .header {
+    background-color: #252019 !important;
+    border-bottom-color: var(--border) !important;
+}
+
+[data-theme="dark"] .expressive-code .frame pre {
+    background-color: #1a1612 !important;
+}
+
+[data-theme="light"] .expressive-code .frame {
+    background-color: #faf6ed !important;
+}
+
+[data-theme="light"] .expressive-code .frame .header {
+    background-color: #f5f0e6 !important;
+    border-bottom-color: var(--border) !important;
+}
+
+[data-theme="light"] .expressive-code .frame pre {
+    background-color: #faf6ed !important;
+}
+
+/* 页面标题 */
+.content-panel h1#_top {
+    font-family: var(--font-heading);
+    color: var(--foreground);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* 移动 TOC */
+starlight-mobile-toc {
+    background-color: var(--sl-color-bg-nav);
+    border-bottom-color: var(--border);
+}
+
+/* 搜索按钮 */
+.page .header button[aria-label*="search"],
+.page .header button[aria-label*="搜索"] {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    border-radius: 0.375rem;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.page .header button[aria-label*="search"]:hover,
+.page .header button[aria-label*="搜索"]:hover {
+    border-color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 8%, var(--card));
+}
+
+/* 分页链接（兜底，如果组件覆盖未生效） */
+.pagination-links a {
+    border-color: var(--border);
+    background-color: var(--card);
+    color: var(--muted-foreground);
+}
+
+.pagination-links a:hover {
+    border-color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 8%, var(--card));
+    color: var(--foreground);
+}
+
+.pagination-links .link-title {
+    color: var(--foreground);
+    font-family: var(--font-heading);
+}
+
+/* Override Starlight content width limit to allow full-width main content */
+@media (min-width: 72rem) {
+    .content-panel .sl-container {
+        max-width: none;
+        padding-left: 1.5rem;
+    }
+}

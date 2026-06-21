@@ -1,0 +1,348 @@
+---
+import type { IEnchantInfo } from "@/lib/types";
+
+export interface Props {
+    enchant: IEnchantInfo;
+}
+
+const { enchant } = Astro.props;
+
+const targetLabels: Record<string, string> = {
+    pickaxe: "镐",
+    sword: "剑",
+    axe: "斧",
+    hoe: "锄",
+    shovel: "锹",
+    boots: "靴子",
+    helmet: "头盔",
+    chestplate: "胸甲",
+    leggings: "护腿",
+    bow: "弓",
+    crossbow: "弩",
+    trident: "三叉戟",
+    fishing_rod: "钓竿",
+    elytra: "鞘翅",
+    mace: "重锤",
+};
+
+const targetText = enchant.targets.map((t) => targetLabels[t] || t).join("、");
+
+function computeValue(formula: string, level: number): string {
+    const expr = formula.replace(/%level%/g, String(level));
+    try {
+        const result = Function('"use strict"; return (' + expr + ")")();
+        return Number(result).toFixed(2).replace(/\.00$/, "");
+    } catch (e) {
+        return expr;
+    }
+}
+
+function getDescriptionWithValues(level: number): string {
+    let desc = enchant.description;
+    enchant.values.forEach((v) => {
+        const val = computeValue(v.formula, level);
+        desc = desc.replace(new RegExp("%" + v.id + "%", "g"), val);
+    });
+    return desc;
+}
+
+const initialDesc = getDescriptionWithValues(1);
+const hasValues = enchant.values.length > 0;
+---
+
+<div
+    class="gufeng-card gufeng-corner gufeng-enchant-card enchant-card h-full"
+    data-enchant-id={enchant.id}
+    style={`--rarity-color: ${enchant.rarityColor};`}>
+    <div class="enchant-card-inner">
+        <div class="enchant-header">
+            <h3 class="gufeng-kai enchant-name mt-0!">{enchant.displayName}</h3>
+            <div class="enchant-badges">
+                <span
+                    class="gufeng-seal-sm enchant-badge-type"
+                    style={`background: ${enchant.typeColor}20; border-color: ${enchant.typeColor}; color: ${enchant.typeColor};`}>
+                    {enchant.typeName}
+                </span>
+                <span
+                    class="gufeng-seal-sm enchant-badge-rarity"
+                    style={`background: ${enchant.rarityColor}20; border-color: ${enchant.rarityColor}; color: ${enchant.rarityColor};`}>
+                    {enchant.rarityName}
+                </span>
+            </div>
+        </div>
+
+        <div class="enchant-meta flex! flex-col! gap-0!">
+            <span class="gufeng-song enchant-level">最高等级: {enchant.maxLevel}</span>
+            <span class="gufeng-song enchant-targets mt-0!">适用: {targetText}</span>
+        </div>
+
+        <p class="gufeng-song enchant-description" data-description-template={enchant.description}>
+            {initialDesc}
+        </p>
+
+        {
+            enchant.conflicts.length > 0 && (
+                <div class="enchant-conflicts">
+                    <span class="conflicts-label">冲突:</span>
+                    <span class="conflicts-list">{enchant.conflicts.join("、")}</span>
+                </div>
+            )
+        }
+
+        {
+            enchant.effects.length > 0 && (
+                <div class="enchant-section">
+                    <h4 class="gufeng-kai section-title">效果</h4>
+                    <ul class="gufeng-song enchant-list">
+                        {enchant.effects.map((effect) => (
+                            <li>{effect.description}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            enchant.conditions.length > 0 && (
+                <div class="enchant-section">
+                    <h4 class="gufeng-kai section-title">条件</h4>
+                    <ul class="gufeng-song enchant-list">
+                        {enchant.conditions.map((condition) => (
+                            <li>{condition.description}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            hasValues && (
+                <div class="enchant-section">
+                    <h4 class="gufeng-kai section-title">数值</h4>
+                    <ul class="gufeng-song enchant-values">
+                        {enchant.values.map((value) => (
+                            <li data-value-id={value.id} data-formula={value.formula} data-unit={value.unit}>
+                                <span class="value-name">{value.name}:</span>
+                                <span class="value-number" data-formula={value.formula}>
+                                    {computeValue(value.formula, 1)}
+                                </span>
+                                <span class="value-unit">{value.unit}</span>
+                                <span class="value-desc">({value.description})</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            enchant.maxLevel > 1 && (
+                <i class="border-b border-border block! h-px! w-full! mt-auto! pt-1!"></i>
+                <div class="enchant-level-selector mt-3!">
+                    <span class="selector-label gufeng-kai">等级:</span>
+                    <div class="level-buttons">
+                        {Array.from({ length: enchant.maxLevel }, (_, i) => i + 1).map((level) => (
+                            <button
+                                type="button"
+                                class={`level-btn gufeng-kai ${level === 1 ? "active" : ""}`}
+                                data-level={level}
+                                aria-label={`等级 ${level}`}>
+                                {level}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )
+        }
+    </div>
+</div>
+
+<script is:inline define:vars={{ enchantId: enchant.id }}>
+    (function () {
+        const card = document.querySelector('[data-enchant-id="' + enchantId + '"]');
+        if (!card) return;
+
+        const levelBtns = card.querySelectorAll("[data-level]");
+        const valueEls = card.querySelectorAll(".value-number");
+        const descEl = card.querySelector("[data-description-template]");
+        const descTemplate = descEl ? descEl.dataset.descriptionTemplate : "";
+
+        function computeValue(formula, level) {
+            const expr = formula.replace(/%level%/g, String(level));
+            try {
+                const result = Function('"use strict"; return (' + expr + ")")();
+                return Number(result).toFixed(2).replace(/\.00$/, "");
+            } catch (e) {
+                return expr;
+            }
+        }
+
+        levelBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const level = parseInt(btn.dataset.level, 10);
+
+                levelBtns.forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                valueEls.forEach((el) => {
+                    const formula = el.dataset.formula;
+                    if (!formula) return;
+                    const result = computeValue(formula, level);
+                    el.textContent = result;
+                });
+
+                if (descEl && descTemplate) {
+                    let desc = descTemplate;
+                    const valueItems = card.querySelectorAll("[data-value-id]");
+                    valueItems.forEach((item) => {
+                        const vid = item.dataset.valueId;
+                        const formula = item.dataset.formula;
+                        if (formula) {
+                            const val = computeValue(formula, level);
+                            desc = desc.replace(new RegExp("%" + vid + "%", "g"), val);
+                        }
+                    });
+                    descEl.textContent = desc;
+                }
+            });
+        });
+    })();
+</script>
+
+<style>
+    .enchant-card {
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .enchant-card-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .enchant-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    .enchant-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--foreground);
+        margin: 0;
+        line-height: 1.4;
+    }
+    .enchant-badges {
+        display: flex;
+        gap: 0.375rem;
+        flex-shrink: 0;
+    }
+    .enchant-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+    }
+    .enchant-description {
+        font-size: 0.9375rem;
+        color: var(--foreground);
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+    }
+    .enchant-conflicts {
+        font-size: 0.8125rem;
+        color: var(--destructive);
+        margin-bottom: 0.75rem;
+    }
+    .conflicts-label {
+        font-weight: 600;
+        margin-right: 0.25rem;
+    }
+    .enchant-section {
+        margin-top: 0.75rem;
+    }
+    .section-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--accent);
+        margin-bottom: 0.375rem;
+    }
+    .enchant-list,
+    .enchant-values {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.875rem;
+        color: var(--foreground);
+    }
+    .enchant-list li,
+    .enchant-values li {
+        padding: 0.25rem 0;
+        border-bottom: 1px dashed var(--border);
+    }
+    .enchant-list li:last-child,
+    .enchant-values li:last-child {
+        border-bottom: none;
+    }
+    .value-name {
+        font-weight: 600;
+        margin-right: 0.25rem;
+    }
+    .value-number {
+        color: var(--primary);
+        font-weight: 600;
+    }
+    .value-unit {
+        color: var(--primary);
+        margin-right: 0.375rem;
+    }
+    .value-desc {
+        color: var(--muted-foreground);
+        font-size: 0.8125rem;
+    }
+    .enchant-level-selector {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+    }
+    .selector-label {
+        font-size: 0.875rem;
+        color: var(--foreground);
+    }
+    .level-buttons {
+        display: flex;
+        gap: 0.375rem;
+    }
+    .level-btn {
+        min-width: 1.5rem;
+        height: 1.5rem;
+        padding: 0 0.5rem;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--foreground);
+        font-size: 0.765rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 2px;
+    }
+    .level-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+    .level-btn.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--primary-foreground);
+    }
+    h3,
+    h4 {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+</style>

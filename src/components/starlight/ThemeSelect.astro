@@ -1,0 +1,89 @@
+---
+
+---
+
+<button
+    id="sl-theme-toggle"
+    type="button"
+    aria-label="切换明暗主题"
+    class="border-primary/40 bg-card/80 text-primary hover:bg-primary hover:text-primary-foreground flex h-9 w-9 items-center justify-center rounded-full border backdrop-blur-sm transition-colors">
+    <svg
+        class="light-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    </svg>
+    <svg
+        class="dark-icon hidden"
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="m4.93 4.93 1.41 1.41"></path>
+        <path d="m17.66 17.66 1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="m6.34 17.66-1.41 1.41"></path>
+        <path d="m19.07 4.93-1.41 1.41"></path>
+    </svg>
+</button>
+
+<script is:inline>
+    (function () {
+        const html = document.documentElement;
+        const btn = document.getElementById("sl-theme-toggle");
+        if (!btn) return;
+
+        function syncIcons() {
+            const isDark = html.dataset.theme === "dark";
+            btn.querySelector(".light-icon")?.classList.toggle("hidden", isDark);
+            btn.querySelector(".dark-icon")?.classList.toggle("hidden", !isDark);
+        }
+
+        function setTheme(theme) {
+            html.dataset.theme = theme;
+            html.classList.toggle("dark", theme === "dark");
+            localStorage.setItem("theme", theme);
+            localStorage.setItem("starlight-theme", theme);
+            if (window.StarlightThemeProvider) {
+                window.StarlightThemeProvider.updatePickers(theme);
+            }
+            syncIcons();
+        }
+
+        btn.addEventListener("click", () => {
+            const next = html.dataset.theme === "dark" ? "light" : "dark";
+            setTheme(next);
+        });
+
+        // 初始化同步主题类和图标
+        html.classList.toggle("dark", html.dataset.theme === "dark");
+        syncIcons();
+
+        // 监听系统主题变化（当 storage 中没有明确设置时）
+        const mql = matchMedia("(prefers-color-scheme: light)");
+        mql.addEventListener("change", () => {
+            const stored = localStorage.getItem("starlight-theme") || localStorage.getItem("theme");
+            if (!stored || stored === "auto") {
+                setTheme(mql.matches ? "light" : "dark");
+            }
+        });
+    })();
+</script>

@@ -1,0 +1,262 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import EnchantCard from "./EnchantCard.astro";
+import type { IEnchantInfo } from "@/lib/types";
+
+const dataPath = path.resolve("public/data/wiki/enchants.json");
+const raw = fs.readFileSync(dataPath, "utf-8");
+const data = JSON.parse(raw);
+
+const enchants = (() => {
+    const _enchants = data.enchants || [];
+    _enchants.forEach((e: IEnchantInfo) => {
+        const _conflictsRaw = e.conflicts || [];
+        const _conflictsNames = _conflictsRaw.map((c) => {
+            return _enchants.find((e: { id: string }) => e.id === c)?.displayName || "";
+        });
+        e.conflicts = _conflictsNames;
+    });
+    return _enchants;
+})();
+
+const typeFilters = [
+    { key: "all", label: "全部" },
+    { key: "vanilla", label: "原版" },
+    { key: "extension", label: "扩展" },
+];
+
+const rarityFilters = [
+    { key: "all", label: "全部" },
+    { key: "common", label: "普通" },
+    { key: "rare", label: "精良" },
+    { key: "epic", label: "史诗" },
+    { key: "special", label: "稀世" },
+    { key: "curse", label: "诅咒" },
+];
+---
+
+<div class="enchant-showcase not-content" data-enchant-showcase>
+    <div class="enchant-filters">
+        <div class="filter-group">
+            <input type="text" class="gufeng-song enchant-search" placeholder="搜索附魔名称或描述..." data-filter="search" />
+        </div>
+        <div class="filter-group">
+            <span class="filter-label gufeng-kai">类型:</span>
+            <div class="filter-buttons">
+                {
+                    typeFilters.map((f) => (
+                        <button
+                            type="button"
+                            class={`gufeng-kai filter-btn ${f.key === "all" ? "active" : ""}`}
+                            data-type={f.key}>
+                            {f.label}
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+        <div class="filter-group">
+            <span class="filter-label gufeng-kai">稀有度:</span>
+            <div class="filter-buttons">
+                {
+                    rarityFilters.map((f) => (
+                        <button
+                            type="button"
+                            class={`gufeng-kai filter-btn ${f.key === "all" ? "active" : ""}`}
+                            data-rarity={f.key}>
+                            {f.label}
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="enchant-grid not-content">
+        {
+            enchants.map((enchant: any) => (
+                <div
+                    class="enchant-grid-item h-full"
+                    data-enchant-type={enchant.type}
+                    data-enchant-rarity={enchant.rarity}
+                    data-enchant-name={enchant.displayName}
+                    data-enchant-desc={enchant.description}>
+                    <EnchantCard enchant={enchant} />
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="enchant-empty" data-empty-state>
+        <p class="gufeng-kai">未找到符合条件的附魔</p>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const showcase = document.querySelector("[data-enchant-showcase]");
+        if (!showcase) return;
+
+        const searchInput = showcase.querySelector('[data-filter="search"]') as HTMLInputElement | null;
+        const typeBtns = showcase.querySelectorAll("[data-type]");
+        const rarityBtns = showcase.querySelectorAll("[data-rarity]");
+        const items = showcase.querySelectorAll("[data-enchant-type]");
+        const emptyState = showcase.querySelector("[data-empty-state]") as HTMLElement | null;
+
+        let currentType = "all";
+        let currentRarity = "all";
+        let currentSearch = "";
+
+        function filter() {
+            let visibleCount = 0;
+            items.forEach((item) => {
+                const type = item.getAttribute("data-enchant-type") || "";
+                const rarity = item.getAttribute("data-enchant-rarity") || "";
+                const name = item.getAttribute("data-enchant-name") || "";
+                const desc = item.getAttribute("data-enchant-desc") || "";
+
+                const typeMatch = currentType === "all" || type === currentType;
+                const rarityMatch = currentRarity === "all" || rarity === currentRarity;
+                const searchMatch = !currentSearch || name.includes(currentSearch) || desc.includes(currentSearch);
+
+                const visible = typeMatch && rarityMatch && searchMatch;
+                (item as HTMLElement).style.display = visible ? "" : "none";
+                if (visible) visibleCount++;
+            });
+
+            if (emptyState) {
+                emptyState.style.display = visibleCount === 0 ? "" : "none";
+            }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener("input", () => {
+                currentSearch = searchInput.value.trim().toLowerCase();
+                filter();
+            });
+        }
+
+        typeBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                typeBtns.forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentType = btn.getAttribute("data-type") || "all";
+                filter();
+            });
+        });
+
+        rarityBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                rarityBtns.forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentRarity = btn.getAttribute("data-rarity") || "all";
+                filter();
+            });
+        });
+    })();
+</script>
+
+<style>
+    .enchant-showcase {
+        margin-top: 1.5rem;
+    }
+    .enchant-filters {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        position: relative;
+    }
+    @media (min-width: 768px) {
+        .enchant-filters {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+    .enchant-filters::before {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border: 1px solid var(--border);
+        pointer-events: none;
+        opacity: 0.4;
+    }
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+    }
+    .enchant-search {
+        width: 100%;
+        max-width: 24rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border);
+        background: var(--background);
+        color: var(--foreground);
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s ease;
+    }
+    .enchant-search:focus {
+        border-color: var(--primary);
+    }
+    .filter-label {
+        font-size: 0.875rem;
+        color: var(--foreground);
+        white-space: nowrap;
+    }
+    .filter-buttons {
+        display: flex;
+        gap: 0.375rem;
+        flex-wrap: wrap;
+    }
+    .filter-btn {
+        padding: 0.375rem 0.75rem;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--foreground);
+        font-size: 0.8125rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 2px;
+    }
+    .filter-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+    .filter-btn.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--primary-foreground);
+    }
+    .enchant-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+    @media (min-width: 640px) {
+        .enchant-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (min-width: 1024px) {
+        .enchant-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    .enchant-empty {
+        display: none;
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--muted-foreground);
+        font-size: 1rem;
+    }
+</style>

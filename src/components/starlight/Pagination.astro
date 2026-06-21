@@ -1,0 +1,112 @@
+---
+const { dir, pagination } = Astro.locals.starlightRoute;
+const { prev, next } = pagination;
+const isRtl = dir === "rtl";
+---
+
+<div class="pagination-links print:hidden" dir={dir}>
+    {
+        prev && (
+            <a href={prev.href} rel="prev">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+                    {isRtl ? <path d="m9 18 6-6-6-6" /> : <path d="m15 18-6-6 6-6" />}
+                </svg>
+                <span>
+                    上一页
+                    <br />
+                    <span class="link-title">{prev.label}</span>
+                </span>
+            </a>
+        )
+    }
+    {
+        next && (
+            <a href={next.href} rel="next">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+                    {isRtl ? <path d="m15 18-6-6 6-6" /> : <path d="m9 18 6-6-6-6" />}
+                </svg>
+                <span>
+                    下一页
+                    <br />
+                    <span class="link-title">{next.label}</span>
+                </span>
+            </a>
+        )
+    }
+</div>
+
+<style>
+    @layer starlight.core {
+        .pagination-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+            gap: 1rem;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.5rem;
+            width: 100%;
+            flex-basis: calc(50% - 0.5rem);
+            flex-grow: 1;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--muted-foreground);
+            background-color: var(--card);
+            box-shadow: none;
+            overflow-wrap: anywhere;
+            transition:
+                border-color 0.3s ease,
+                background-color 0.3s ease,
+                color 0.3s ease;
+        }
+
+        [rel="next"] {
+            justify-content: end;
+            text-align: end;
+            flex-direction: row-reverse;
+        }
+
+        a:hover {
+            border-color: var(--primary);
+            background-color: color-mix(in srgb, var(--primary) 8%, var(--card));
+            color: var(--foreground);
+        }
+
+        .link-title {
+            color: var(--foreground);
+            font-family: var(--font-heading);
+            font-size: var(--sl-text-xl);
+            line-height: var(--sl-line-height-headings);
+        }
+
+        svg {
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+    }
+</style>

@@ -1,0 +1,21 @@
+---
+interface Props {
+    src: string;
+    type?: string;
+    width?: number;
+    height?: number;
+    class?: string;
+}
+
+const {
+    src,
+    type = "video/webm",
+    width = 1024,
+    height = 768,
+    class: className = "my-6 rounded-lg border border-neutral-800",
+} = Astro.props;
+---
+
+<video width={width} height={height} class={className} autoplay muted loop playsinline>
+    <source src={src} type={type} />
+</video>

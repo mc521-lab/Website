@@ -1,0 +1,976 @@
+{
+    "manifest": {
+        "id": "jewelries",
+        "type": "jewelry",
+        "name": "饰品",
+        "entries": [
+            "jewelries/zhanshi/bracelet.json",
+            "jewelries/zhanshi/gloves.json",
+            "jewelries/zhanshi/necklace.json",
+            "jewelries/zhanshi/ring_left.json",
+            "jewelries/zhanshi/ring_right.json",
+            "jewelries/zhanshi/treasure.json",
+            "jewelries/sheshou/bracelet.json",
+            "jewelries/sheshou/gloves.json",
+            "jewelries/sheshou/necklace.json",
+            "jewelries/sheshou/ring_left.json",
+            "jewelries/sheshou/ring_right.json",
+            "jewelries/sheshou/treasure.json",
+            "jewelries/mushi/bracelet.json",
+            "jewelries/mushi/gloves.json",
+            "jewelries/mushi/necklace.json",
+            "jewelries/mushi/ring_left.json",
+            "jewelries/mushi/ring_right.json",
+            "jewelries/mushi/treasure.json",
+            "jewelries/cike/bracelet.json",
+            "jewelries/cike/gloves.json",
+            "jewelries/cike/necklace.json",
+            "jewelries/cike/ring_left.json",
+            "jewelries/cike/ring_right.json",
+            "jewelries/cike/treasure.json",
+            "jewelries/fashi/bracelet.json",
+            "jewelries/fashi/gloves.json",
+            "jewelries/fashi/necklace.json",
+            "jewelries/fashi/ring_left.json",
+            "jewelries/fashi/ring_right.json",
+            "jewelries/fashi/treasure.json"
+        ],
+        "metadata": {
+            "jobEntries": [
+                { "id": "zhanshi", "name": "战士", "entryPrefix": "jewelries/zhanshi", "symbolColor": "#FF0000" },
+                { "id": "sheshou", "name": "射手", "entryPrefix": "jewelries/sheshou", "symbolColor": "#F0B100" },
+                { "id": "mushi", "name": "牧师", "entryPrefix": "jewelries/mushi", "symbolColor": "#868686" },
+                { "id": "cike", "name": "刺客", "entryPrefix": "jewelries/cike", "symbolColor": "#00C853" },
+                { "id": "fashi", "name": "法师", "entryPrefix": "jewelries/fashi", "symbolColor": "#01B2E3" }
+            ]
+        }
+    },
+    "jewelries": [
+        {
+            "id": "zhanshi_bracelet",
+            "name": "烈焰手镯",
+            "type": "饰品",
+            "applicableClass": "战士",
+            "features": [
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "values": [{ "id": "staminaBonus", "name": "体力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "values": [{ "id": "manaBonus", "name": "法力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "staminaAndMana",
+                    "name": "体力加成+法力加成",
+                    "values": [
+                        { "id": "staminaBonus", "name": "体力加成", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "zhanshi",
+            "jobName": "战士",
+            "jobColor": "#FF0000",
+            "slotType": "手镯",
+            "isTreasure": false
+        },
+        {
+            "id": "zhanshi_gloves",
+            "name": "烈焰手套",
+            "type": "饰品",
+            "applicableClass": "战士",
+            "features": [
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "values": [{ "id": "critDamage", "name": "暴击伤害", "value": [2, 10] }]
+                },
+                { "id": "critRate", "name": "暴击几率", "values": [{ "id": "critRate", "name": "暴击几率", "value": [1, 3] }] },
+                {
+                    "id": "critCombo",
+                    "name": "暴击伤害+暴击几率",
+                    "values": [
+                        { "id": "critDamage", "name": "暴击伤害", "value": [1, 2] },
+                        { "id": "critRate", "name": "暴击几率", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "zhanshi",
+            "jobName": "战士",
+            "jobColor": "#FF0000",
+            "slotType": "手套",
+            "isTreasure": false
+        },
+        {
+            "id": "zhanshi_necklace",
+            "name": "烈焰项链",
+            "type": "饰品",
+            "applicableClass": "战士",
+            "features": [
+                {
+                    "id": "pvpDamageReduction",
+                    "name": "PVP伤害减免",
+                    "values": [{ "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 5] }]
+                },
+                {
+                    "id": "pveDamageReduction",
+                    "name": "PVE伤害减免",
+                    "values": [{ "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [5, 10] }]
+                },
+                {
+                    "id": "damageReductionCombo",
+                    "name": "PVP+PVE伤害减免",
+                    "values": [
+                        { "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 2] },
+                        { "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "zhanshi",
+            "jobName": "战士",
+            "jobColor": "#FF0000",
+            "slotType": "项链",
+            "isTreasure": false
+        },
+        {
+            "id": "zhanshi_ring_left",
+            "name": "烈焰戒指-左",
+            "type": "饰品",
+            "applicableClass": "战士",
+            "features": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "values": [{ "id": "healthBonus", "name": "生命加成", "value": [1, 3] }]
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "values": [{ "id": "damageReduction", "name": "防御减伤", "value": [0.2, 1] }]
+                },
+                {
+                    "id": "healthAndReduction",
+                    "name": "生命加成+减伤",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [1, 2] },
+                        { "id": "damageReduction", "name": "防御减伤", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "zhanshi",
+            "jobName": "战士",
+            "jobColor": "#FF0000",
+            "slotType": "戒指-左",
+            "isTreasure": false
+        },
+        {
+            "id": "zhanshi_ring_right",
+            "name": "烈焰戒指-右",
+            "type": "饰品",
+            "applicableClass": "战士",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "values": [{ "id": "baseAttack", "name": "基础攻击", "value": [0.3, 1.5] }]
+                },
+                { "id": "pveAttack", "name": "PVE攻击", "values": [{ "id": "pveAttack", "name": "PVE攻击", "value": [1, 5] }] },
+                {
+                    "id": "attackCombo",
+                    "name": "基础攻击+PVE攻击",
+                    "values": [
+                        { "id": "baseAttack", "name": "基础攻击", "value": [1, 2] },
+                        { "id": "pveAttack", "name": "PVE攻击", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "zhanshi",
+            "jobName": "战士",
+            "jobColor": "#FF0000",
+            "slotType": "戒指-右",
+            "isTreasure": false
+        },
+        {
+            "id": "zhanshi_lieyan_treasure",
+            "name": "烈焰秘宝",
+            "type": "饰品",
+            "applicableClass": "战士",
+            "features": [
+                {
+                    "id": "singleAttribute",
+                    "name": "随机1个属性",
+                    "values": [{ "id": "healthBonus", "name": "生命加成", "value": [4, 8] }]
+                },
+                {
+                    "id": "doubleAttribute",
+                    "name": "随机2个属性",
+                    "values": [
+                        { "id": "damageReduction", "name": "防御减伤", "value": [2, 5] },
+                        { "id": "maxRage", "name": "最大怒气值", "value": [3, 5] }
+                    ]
+                },
+                {
+                    "id": "tripleAttribute",
+                    "name": "三个属性组合",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [1, 2] },
+                        { "id": "damageReduction", "name": "防御减伤", "value": [1, 2] },
+                        { "id": "maxRage", "name": "最大怒气值", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "zhanshi",
+            "jobName": "战士",
+            "jobColor": "#FF0000",
+            "slotType": "秘宝",
+            "isTreasure": true
+        },
+        {
+            "id": "sheshou_bracelet",
+            "name": "光羽手镯",
+            "type": "饰品",
+            "applicableClass": "射手",
+            "features": [
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "values": [{ "id": "staminaBonus", "name": "体力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "values": [{ "id": "manaBonus", "name": "法力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "staminaAndMana",
+                    "name": "体力加成+法力加成",
+                    "values": [
+                        { "id": "staminaBonus", "name": "体力加成", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "sheshou",
+            "jobName": "射手",
+            "jobColor": "#F0B100",
+            "slotType": "手镯",
+            "isTreasure": false
+        },
+        {
+            "id": "sheshou_gloves",
+            "name": "光羽手套",
+            "type": "饰品",
+            "applicableClass": "射手",
+            "features": [
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "values": [{ "id": "critDamage", "name": "暴击伤害", "value": [2, 10] }]
+                },
+                { "id": "critRate", "name": "暴击几率", "values": [{ "id": "critRate", "name": "暴击几率", "value": [1, 3] }] },
+                {
+                    "id": "critCombo",
+                    "name": "暴击伤害+暴击几率",
+                    "values": [
+                        { "id": "critDamage", "name": "暴击伤害", "value": [1, 2] },
+                        { "id": "critRate", "name": "暴击几率", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "sheshou",
+            "jobName": "射手",
+            "jobColor": "#F0B100",
+            "slotType": "手套",
+            "isTreasure": false
+        },
+        {
+            "id": "sheshou_necklace",
+            "name": "光羽项链",
+            "type": "饰品",
+            "applicableClass": "射手",
+            "features": [
+                {
+                    "id": "pvpDamageReduction",
+                    "name": "PVP伤害减免",
+                    "values": [{ "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 5] }]
+                },
+                {
+                    "id": "pveDamageReduction",
+                    "name": "PVE伤害减免",
+                    "values": [{ "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [5, 10] }]
+                },
+                {
+                    "id": "damageReductionCombo",
+                    "name": "PVP+PVE伤害减免",
+                    "values": [
+                        { "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 2] },
+                        { "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "sheshou",
+            "jobName": "射手",
+            "jobColor": "#F0B100",
+            "slotType": "项链",
+            "isTreasure": false
+        },
+        {
+            "id": "sheshou_ring_left",
+            "name": "光羽戒指-左",
+            "type": "饰品",
+            "applicableClass": "射手",
+            "features": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "values": [{ "id": "healthBonus", "name": "生命加成", "value": [1, 3] }]
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "values": [{ "id": "damageReduction", "name": "防御减伤", "value": [0.2, 1] }]
+                },
+                {
+                    "id": "healthAndReduction",
+                    "name": "生命加成+减伤",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [1, 2] },
+                        { "id": "damageReduction", "name": "防御减伤", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "sheshou",
+            "jobName": "射手",
+            "jobColor": "#F0B100",
+            "slotType": "戒指-左",
+            "isTreasure": false
+        },
+        {
+            "id": "sheshou_ring_right",
+            "name": "光羽戒指-右",
+            "type": "饰品",
+            "applicableClass": "射手",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "values": [{ "id": "baseAttack", "name": "基础攻击", "value": [0.3, 1.5] }]
+                },
+                { "id": "pveAttack", "name": "PVE攻击", "values": [{ "id": "pveAttack", "name": "PVE攻击", "value": [1, 5] }] },
+                {
+                    "id": "attackCombo",
+                    "name": "基础攻击+PVE攻击",
+                    "values": [
+                        { "id": "baseAttack", "name": "基础攻击", "value": [1, 2] },
+                        { "id": "pveAttack", "name": "PVE攻击", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "sheshou",
+            "jobName": "射手",
+            "jobColor": "#F0B100",
+            "slotType": "戒指-右",
+            "isTreasure": false
+        },
+        {
+            "id": "sheshou_guangyu_secret",
+            "name": "光羽秘宝",
+            "type": "饰品",
+            "applicableClass": "射手",
+            "features": [
+                {
+                    "id": "combo1",
+                    "name": "组合1",
+                    "values": [
+                        { "id": "attackBonus", "name": "攻击加成", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [2.5, 5] }
+                    ]
+                },
+                {
+                    "id": "combo2",
+                    "name": "组合2",
+                    "values": [
+                        { "id": "dodgeRate", "name": "闪避几率", "value": [1, 5] },
+                        { "id": "staminaBonus", "name": "体力加成", "value": [2.5, 5] }
+                    ]
+                },
+                {
+                    "id": "combo3",
+                    "name": "组合3",
+                    "values": [
+                        { "id": "attackBonus", "name": "攻击加成", "value": [1, 2] },
+                        { "id": "dodgeRate", "name": "闪避几率", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [1, 2] },
+                        { "id": "staminaBonus", "name": "体力加成", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "sheshou",
+            "jobName": "射手",
+            "jobColor": "#F0B100",
+            "slotType": "秘宝",
+            "isTreasure": true
+        },
+        {
+            "id": "mushi_bracelet",
+            "name": "牧灵手镯",
+            "type": "饰品",
+            "applicableClass": "牧师",
+            "features": [
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "values": [{ "id": "staminaBonus", "name": "体力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "values": [{ "id": "manaBonus", "name": "法力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "staminaAndMana",
+                    "name": "体力加成+法力加成",
+                    "values": [
+                        { "id": "staminaBonus", "name": "体力加成", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "mushi",
+            "jobName": "牧师",
+            "jobColor": "#868686",
+            "slotType": "手镯",
+            "isTreasure": false
+        },
+        {
+            "id": "mushi_gloves",
+            "name": "牧灵手套",
+            "type": "饰品",
+            "applicableClass": "牧师",
+            "features": [
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "values": [{ "id": "critDamage", "name": "暴击伤害", "value": [2, 10] }]
+                },
+                { "id": "critRate", "name": "暴击几率", "values": [{ "id": "critRate", "name": "暴击几率", "value": [1, 3] }] },
+                {
+                    "id": "critCombo",
+                    "name": "暴击伤害+暴击几率",
+                    "values": [
+                        { "id": "critDamage", "name": "暴击伤害", "value": [1, 2] },
+                        { "id": "critRate", "name": "暴击几率", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "mushi",
+            "jobName": "牧师",
+            "jobColor": "#868686",
+            "slotType": "手套",
+            "isTreasure": false
+        },
+        {
+            "id": "mushi_necklace",
+            "name": "牧灵项链",
+            "type": "饰品",
+            "applicableClass": "牧师",
+            "features": [
+                {
+                    "id": "pvpDamageReduction",
+                    "name": "PVP伤害减免",
+                    "values": [{ "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 5] }]
+                },
+                {
+                    "id": "pveDamageReduction",
+                    "name": "PVE伤害减免",
+                    "values": [{ "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [5, 10] }]
+                },
+                {
+                    "id": "damageReductionCombo",
+                    "name": "PVP+PVE伤害减免",
+                    "values": [
+                        { "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 2] },
+                        { "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "mushi",
+            "jobName": "牧师",
+            "jobColor": "#868686",
+            "slotType": "项链",
+            "isTreasure": false
+        },
+        {
+            "id": "mushi_ring_left",
+            "name": "牧灵戒指-左",
+            "type": "饰品",
+            "applicableClass": "牧师",
+            "features": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "values": [{ "id": "healthBonus", "name": "生命加成", "value": [1, 3] }]
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "values": [{ "id": "damageReduction", "name": "防御减伤", "value": [0.2, 1] }]
+                },
+                {
+                    "id": "healthAndReduction",
+                    "name": "生命加成+减伤",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [1, 2] },
+                        { "id": "damageReduction", "name": "防御减伤", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "mushi",
+            "jobName": "牧师",
+            "jobColor": "#868686",
+            "slotType": "戒指-左",
+            "isTreasure": false
+        },
+        {
+            "id": "mushi_ring_right",
+            "name": "牧灵戒指-右",
+            "type": "饰品",
+            "applicableClass": "牧师",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "values": [{ "id": "baseAttack", "name": "基础攻击", "value": [0.3, 1.5] }]
+                },
+                { "id": "pveAttack", "name": "PVE攻击", "values": [{ "id": "pveAttack", "name": "PVE攻击", "value": [1, 5] }] },
+                {
+                    "id": "attackCombo",
+                    "name": "基础攻击+PVE攻击",
+                    "values": [
+                        { "id": "baseAttack", "name": "基础攻击", "value": [1, 2] },
+                        { "id": "pveAttack", "name": "PVE攻击", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "mushi",
+            "jobName": "牧师",
+            "jobColor": "#868686",
+            "slotType": "戒指-右",
+            "isTreasure": false
+        },
+        {
+            "id": "mushi_muling_treasure",
+            "name": "牧灵秘宝",
+            "type": "饰品",
+            "applicableClass": "牧师",
+            "features": [
+                {
+                    "id": "combo1",
+                    "name": "组合1",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [3, 4] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [2, 4] }
+                    ]
+                },
+                {
+                    "id": "combo2",
+                    "name": "组合2",
+                    "values": [
+                        { "id": "rescue", "name": "生命恢复", "value": [0.05, 0.15] },
+                        { "id": "staminaBonus", "name": "体力加成", "value": [2, 4] }
+                    ]
+                },
+                {
+                    "id": "combo3",
+                    "name": "组合3",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [1, 2] },
+                        { "id": "rescue", "name": "生命恢复", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [1, 2] },
+                        { "id": "staminaBonus", "name": "体力加成", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "mushi",
+            "jobName": "牧师",
+            "jobColor": "#868686",
+            "slotType": "秘宝",
+            "isTreasure": true
+        },
+        {
+            "id": "cike_bracelet",
+            "name": "瞬影手镯",
+            "type": "饰品",
+            "applicableClass": "刺客",
+            "features": [
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "values": [{ "id": "staminaBonus", "name": "体力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "values": [{ "id": "manaBonus", "name": "法力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "staminaAndMana",
+                    "name": "体力加成+法力加成",
+                    "values": [
+                        { "id": "staminaBonus", "name": "体力加成", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "cike",
+            "jobName": "刺客",
+            "jobColor": "#00C853",
+            "slotType": "手镯",
+            "isTreasure": false
+        },
+        {
+            "id": "cike_gloves",
+            "name": "瞬影手套",
+            "type": "饰品",
+            "applicableClass": "刺客",
+            "features": [
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "values": [{ "id": "critDamage", "name": "暴击伤害", "value": [2, 10] }]
+                },
+                { "id": "critRate", "name": "暴击几率", "values": [{ "id": "critRate", "name": "暴击几率", "value": [1, 3] }] },
+                {
+                    "id": "critCombo",
+                    "name": "暴击伤害+暴击几率",
+                    "values": [
+                        { "id": "critDamage", "name": "暴击伤害", "value": [1, 2] },
+                        { "id": "critRate", "name": "暴击几率", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "cike",
+            "jobName": "刺客",
+            "jobColor": "#00C853",
+            "slotType": "手套",
+            "isTreasure": false
+        },
+        {
+            "id": "cike_necklace",
+            "name": "瞬影项链",
+            "type": "饰品",
+            "applicableClass": "刺客",
+            "features": [
+                {
+                    "id": "pvpDamageReduction",
+                    "name": "PVP伤害减免",
+                    "values": [{ "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 5] }]
+                },
+                {
+                    "id": "pveDamageReduction",
+                    "name": "PVE伤害减免",
+                    "values": [{ "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [5, 10] }]
+                },
+                {
+                    "id": "damageReductionCombo",
+                    "name": "PVP+PVE伤害减免",
+                    "values": [
+                        { "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 2] },
+                        { "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "cike",
+            "jobName": "刺客",
+            "jobColor": "#00C853",
+            "slotType": "项链",
+            "isTreasure": false
+        },
+        {
+            "id": "cike_ring_left",
+            "name": "瞬影戒指-左",
+            "type": "饰品",
+            "applicableClass": "刺客",
+            "features": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "values": [{ "id": "healthBonus", "name": "生命加成", "value": [1, 3] }]
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "values": [{ "id": "damageReduction", "name": "防御减伤", "value": [0.2, 1] }]
+                },
+                {
+                    "id": "healthAndReduction",
+                    "name": "生命加成+减伤",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [1, 2] },
+                        { "id": "damageReduction", "name": "防御减伤", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "cike",
+            "jobName": "刺客",
+            "jobColor": "#00C853",
+            "slotType": "戒指-左",
+            "isTreasure": false
+        },
+        {
+            "id": "cike_ring_right",
+            "name": "瞬影戒指-右",
+            "type": "饰品",
+            "applicableClass": "刺客",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "values": [{ "id": "baseAttack", "name": "基础攻击", "value": [0.3, 1.5] }]
+                },
+                { "id": "pveAttack", "name": "PVE攻击", "values": [{ "id": "pveAttack", "name": "PVE攻击", "value": [1, 5] }] },
+                {
+                    "id": "attackCombo",
+                    "name": "基础攻击+PVE攻击",
+                    "values": [
+                        { "id": "baseAttack", "name": "基础攻击", "value": [1, 2] },
+                        { "id": "pveAttack", "name": "PVE攻击", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "cike",
+            "jobName": "刺客",
+            "jobColor": "#00C853",
+            "slotType": "戒指-右",
+            "isTreasure": false
+        },
+        {
+            "id": "cike_shunying_treasure",
+            "name": "瞬影秘宝",
+            "type": "饰品",
+            "applicableClass": "刺客",
+            "features": [
+                {
+                    "id": "combo1",
+                    "name": "组合1",
+                    "values": [
+                        { "id": "attackBonus", "name": "攻击加成", "value": [1.5, 3] },
+                        { "id": "pveDamage", "name": "PVE加成", "value": [4, 8] }
+                    ]
+                },
+                {
+                    "id": "combo2",
+                    "name": "组合2",
+                    "values": [
+                        { "id": "moveSpeed", "name": "移速加成", "value": [0.01, 0.04] },
+                        { "id": "critDamage", "name": "暴击伤害", "value": [2, 5] }
+                    ]
+                },
+                {
+                    "id": "combo3",
+                    "name": "组合3",
+                    "values": [
+                        { "id": "attackBonus", "name": "攻击加成", "value": [1, 2] },
+                        { "id": "pveDamage", "name": "PVE加成", "value": [1, 2] },
+                        { "id": "moveSpeed", "name": "移速加成", "value": [1, 2] },
+                        { "id": "critDamage", "name": "暴击伤害", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "cike",
+            "jobName": "刺客",
+            "jobColor": "#00C853",
+            "slotType": "秘宝",
+            "isTreasure": true
+        },
+        {
+            "id": "fashi_bracelet",
+            "name": "奥术手镯",
+            "type": "饰品",
+            "applicableClass": "法师",
+            "features": [
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "values": [{ "id": "staminaBonus", "name": "体力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "values": [{ "id": "manaBonus", "name": "法力加成", "value": [0.5, 2.5] }]
+                },
+                {
+                    "id": "staminaAndMana",
+                    "name": "体力加成+法力加成",
+                    "values": [
+                        { "id": "staminaBonus", "name": "体力加成", "value": [1, 2] },
+                        { "id": "manaBonus", "name": "法力加成", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "fashi",
+            "jobName": "法师",
+            "jobColor": "#01B2E3",
+            "slotType": "手镯",
+            "isTreasure": false
+        },
+        {
+            "id": "fashi_gloves",
+            "name": "奥术手套",
+            "type": "饰品",
+            "applicableClass": "法师",
+            "features": [
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "values": [{ "id": "critDamage", "name": "暴击伤害", "value": [2, 10] }]
+                },
+                { "id": "critRate", "name": "暴击几率", "values": [{ "id": "critRate", "name": "暴击几率", "value": [1, 3] }] },
+                {
+                    "id": "critCombo",
+                    "name": "暴击伤害+暴击几率",
+                    "values": [
+                        { "id": "critDamage", "name": "暴击伤害", "value": [1, 2] },
+                        { "id": "critRate", "name": "暴击几率", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "fashi",
+            "jobName": "法师",
+            "jobColor": "#01B2E3",
+            "slotType": "手套",
+            "isTreasure": false
+        },
+        {
+            "id": "fashi_necklace",
+            "name": "奥术项链",
+            "type": "饰品",
+            "applicableClass": "法师",
+            "features": [
+                {
+                    "id": "pvpDamageReduction",
+                    "name": "PVP伤害减免",
+                    "values": [{ "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 5] }]
+                },
+                {
+                    "id": "pveDamageReduction",
+                    "name": "PVE伤害减免",
+                    "values": [{ "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [5, 10] }]
+                },
+                {
+                    "id": "damageReductionCombo",
+                    "name": "PVP+PVE伤害减免",
+                    "values": [
+                        { "id": "pvpDamageReduction", "name": "PVP伤害减免", "value": [1, 2] },
+                        { "id": "pveDamageReduction", "name": "PVE伤害减免", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "fashi",
+            "jobName": "法师",
+            "jobColor": "#01B2E3",
+            "slotType": "项链",
+            "isTreasure": false
+        },
+        {
+            "id": "fashi_ring_left",
+            "name": "奥术戒指-左",
+            "type": "饰品",
+            "applicableClass": "法师",
+            "features": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "values": [{ "id": "healthBonus", "name": "生命加成", "value": [1, 3] }]
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "values": [{ "id": "damageReduction", "name": "防御减伤", "value": [0.2, 1] }]
+                },
+                {
+                    "id": "healthAndReduction",
+                    "name": "生命加成+减伤",
+                    "values": [
+                        { "id": "healthBonus", "name": "生命加成", "value": [1, 2] },
+                        { "id": "damageReduction", "name": "防御减伤", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "fashi",
+            "jobName": "法师",
+            "jobColor": "#01B2E3",
+            "slotType": "戒指-左",
+            "isTreasure": false
+        },
+        {
+            "id": "fashi_ring_right",
+            "name": "奥术戒指-右",
+            "type": "饰品",
+            "applicableClass": "法师",
+            "features": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "values": [{ "id": "baseAttack", "name": "基础攻击", "value": [0.3, 1.5] }]
+                },
+                { "id": "pveAttack", "name": "PVE攻击", "values": [{ "id": "pveAttack", "name": "PVE攻击", "value": [1, 5] }] },
+                {
+                    "id": "attackCombo",
+                    "name": "基础攻击+PVE攻击",
+                    "values": [
+                        { "id": "baseAttack", "name": "基础攻击", "value": [1, 2] },
+                        { "id": "pveAttack", "name": "PVE攻击", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "fashi",
+            "jobName": "法师",
+            "jobColor": "#01B2E3",
+            "slotType": "戒指-右",
+            "isTreasure": false
+        },
+        {
+            "id": "fashi_aoshu_treasure",
+            "name": "奥术秘宝",
+            "type": "饰品",
+            "applicableClass": "法师",
+            "features": [
+                {
+                    "id": "combo1",
+                    "name": "组合1",
+                    "values": [
+                        { "id": "attackBonus", "name": "攻击加成", "value": [1, 2] },
+                        { "id": "manaBoost", "name": "法力提升", "value": [5, 10] }
+                    ]
+                },
+                {
+                    "id": "combo2",
+                    "name": "组合2",
+                    "values": [
+                        { "id": "parryChance", "name": "招架几率", "value": [1, 5] },
+                        { "id": "staminaBoost", "name": "体力提升", "value": [5, 10] }
+                    ]
+                },
+                {
+                    "id": "combo3",
+                    "name": "组合3",
+                    "values": [
+                        { "id": "attackBonus", "name": "攻击加成", "value": [1, 2] },
+                        { "id": "manaBoost", "name": "法力提升", "value": [1, 2] },
+                        { "id": "parryChance", "name": "招架几率", "value": [1, 2] },
+                        { "id": "staminaBoost", "name": "体力提升", "value": [1, 2] }
+                    ]
+                }
+            ],
+            "jobId": "fashi",
+            "jobName": "法师",
+            "jobColor": "#01B2E3",
+            "slotType": "秘宝",
+            "isTreasure": true
+        }
+    ]
+}

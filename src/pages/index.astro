@@ -1,0 +1,414 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+const zones = [
+    {
+        name: "生存区",
+        tag: "探险刺激",
+        desc: "宏伟的地形在生存区中铺展开，高耸的山脉、蜿蜒的河流和密林深处的阴影，仿佛每一步都隐藏着未知的冒险与挑战。",
+        img: "/images/ecosystem/vc-sc.webp",
+    },
+    { name: "主城区", tag: "核心枢纽", desc: "主城承载交易与社交，是服务器运转的中心。", img: "/images/ecosystem/vc-zc.webp" },
+    {
+        name: "资源区",
+        tag: "挖掘积累",
+        desc: "该区定期重置，可以随机传送，随意收集资源。",
+        img: "/images/ecosystem/vc-ziyuan.webp",
+    },
+    {
+        name: "地皮区",
+        tag: "安居乐业",
+        desc: "玩家可以免费领取地皮，建造属于自己的家园。",
+        img: "/images/ecosystem/vc-dipi.webp",
+    },
+    {
+        name: "钓鱼区",
+        tag: "休闲养老",
+        desc: "每日举办多场钓鱼竞赛，挑战自己的钓鱼技巧。",
+        img: "/images/ecosystem/vc-diaoyu.webp",
+    },
+    {
+        name: "魔塔区",
+        tag: "刷材圣地",
+        desc: "魔塔构筑高效稳定的资源产出循环，是重要的材料获取区域。",
+        img: "/images/ecosystem/vc-mota.webp",
+    },
+    {
+        name: "副本区",
+        tag: "挑战极限",
+        desc: "挑战强敌与特殊机制，体验更加丰富的战斗内容。",
+        img: "/images/ecosystem/vc-fuben.webp",
+    },
+    {
+        name: "游戏区",
+        tag: "娱乐竞技",
+        desc: "提供多种休闲娱乐玩法，为玩家创造轻松互动的空间。",
+        img: "/images/ecosystem/vc-youxi.webp",
+    },
+    {
+        name: "更多内容",
+        tag: "敬请期待",
+        desc: "服务器将持续推出新的玩法与活动，为每位玩家带来更多探索与成长的机会。",
+        img: "/images/ecosystem/more.webp",
+    },
+];
+
+const playerTypes = [
+    { icon: "home", text: "喜欢挖矿、建造与长期发展的生存玩家" },
+    { icon: "cog", text: "热衷大型红石工程与自动化机器的技术玩家" },
+    { icon: "sword", text: "喜欢技能成长、挑战精英怪与副本内容的冒险玩家" },
+    { icon: "coins", text: "希望通过市场交易与资源经营积累财富的商业玩家" },
+];
+
+const icons: Record<string, string> = {
+    home: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    cog: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`,
+    sword: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/></svg>`,
+    coins: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>`,
+};
+---
+
+<Layout title="君庭阁 · MC521">
+    <div class="mc521-root gufeng-paper min-h-screen w-full overflow-x-hidden">
+        <!-- 主题切换按钮 -->
+        <button
+            id="theme-toggle"
+            type="button"
+            aria-label="切换明暗主题"
+            class="border-primary/40 bg-card/80 text-primary hover:bg-primary hover:text-primary-foreground fixed top-4 right-4 z-50 flex h-11 w-11 items-center justify-center rounded-full border backdrop-blur-sm transition-colors">
+            <svg
+                class="dark:hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+            <svg
+                class="hidden dark:block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+        </button>
+
+        <!-- Hero 区块 -->
+        <section class="relative flex min-h-screen items-center justify-center overflow-hidden">
+            <video autoplay muted loop playsinline aria-hidden="true" class="absolute inset-0 h-full w-full object-cover">
+                <source src="/videos/mc-background-video.webm" type="video/webm" />
+            </video>
+            <div class="from-background/70 via-background/50 to-background absolute inset-0 bg-linear-to-b"></div>
+
+            <div class="relative z-10 flex flex-col items-center px-4 text-center">
+                <h1 class="gufeng-kai text-5xl font-bold drop-shadow-lg md:text-7xl lg:text-8xl">
+                    <span class="text-[#E55A4E]">MC</span><span class="text-foreground">521</span>
+                </h1>
+                <p class="gufeng-kai text-foreground/90 mt-4 text-lg drop-shadow md:text-2xl">二十余年，同在一片方块天</p>
+                <div class="mt-8 flex flex-col gap-3 rounded-xl sm:flex-row sm:gap-4">
+                    <button
+                        id="hero-start"
+                        type="button"
+                        class="gufeng-btn gufeng-btn-primary text-base backdrop-blur-sm"
+                        aria-label="开始游戏，跳转到加入我们区块">
+                        开始游戏
+                    </button>
+                    <a href="/wiki" class="gufeng-btn text-base backdrop-blur-sm" aria-label="查看百科，跳转到百科页面">
+                        查看百科
+                    </a>
+                    <a href="/toolbox" class="gufeng-btn text-base backdrop-blur-sm" aria-label="打开工具箱，跳转到工具箱页面">
+                        打开工具箱
+                    </a>
+                </div>
+            </div>
+
+            <button
+                id="scroll-down"
+                type="button"
+                aria-label="向下滚动到服务器介绍"
+                class="text-foreground/70 hover:text-foreground absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transition-colors">
+                <svg
+                    class="animate-float-y"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="36"
+                    height="36"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+                    <path d="M12 5v14"></path>
+                    <path d="m19 12-7 7-7-7"></path>
+                </svg>
+            </button>
+        </section>
+
+        <!-- 服务器介绍区块 -->
+        <section id="intro" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+            <div class="mb-12 text-center">
+                <h2 class="gufeng-kai text-foreground text-3xl md:text-4xl">服务器介绍</h2>
+                <div class="text-muted-foreground mt-3 flex items-center justify-center gap-2">
+                    <span class="bg-border h-px w-12"></span>
+                    <span class="text-accent">❖</span>
+                    <span class="bg-border h-px w-12"></span>
+                </div>
+            </div>
+
+            <div class="gufeng-scroll bg-card/40 rounded-lg">
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="gufeng-kai text-primary mb-3 text-xl md:text-2xl">关于君庭阁</h3>
+                        <p class="text-foreground/90 text-base leading-relaxed md:text-lg">
+                            君庭阁我的世界服务器是一款以轻松冒险为核心的公益 Minecraft 服务器。
+                        </p>
+                        <p class="text-foreground/90 mt-3 text-base leading-relaxed md:text-lg">
+                            服务器融合了深度 RPG
+                            成长体系与经典生存玩法，在保证游玩自由度的同时，持续进行性能优化与体验改进，为玩家提供稳定流畅的游戏环境。
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="gufeng-kai text-primary mb-4 text-xl md:text-2xl">适合哪些玩家？</h3>
+                        <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            {
+                                playerTypes.map((p) => (
+                                    <li class="border-border/60 bg-card/50 flex items-start gap-3 rounded-lg border p-4">
+                                        <span class="text-primary mt-0.5 shrink-0" set:html={icons[p.icon]} />
+                                        <span class="text-foreground/90 text-base leading-relaxed">{p.text}</span>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+
+                    <p class="gufeng-kai text-foreground/90 text-base leading-relaxed md:text-lg">
+                        无论你的游玩风格如何，都能在 MC521 找到属于自己的乐趣与归属。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分隔线 -->
+        <div class="gufeng-divider mx-auto max-w-6xl px-4 py-4">
+            <span class="text-accent">❖</span>
+        </div>
+
+        <!-- 分区介绍区块 -->
+        <section id="zones" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+            <div class="mb-12 text-center">
+                <h2 class="gufeng-kai text-foreground text-3xl md:text-4xl">分区介绍</h2>
+                <div class="text-muted-foreground mt-3 flex items-center justify-center gap-2">
+                    <span class="bg-border h-px w-12"></span>
+                    <span class="text-accent">❖</span>
+                    <span class="bg-border h-px w-12"></span>
+                </div>
+                <p class="text-muted-foreground mx-auto mt-6 max-w-2xl text-base leading-relaxed md:text-lg">
+                    MC521 由多个特色分区组成，每个区域都拥有独立的玩法定位与成长路线。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {
+                    zones.map((z) => (
+                        <article class="gufeng-card overflow-hidden rounded-lg">
+                            <div class="aspect-video w-full overflow-hidden">
+                                <img
+                                    src={z.img}
+                                    alt={`${z.name}分区展示`}
+                                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="p-5">
+                                <div class="mb-3 flex items-center justify-between gap-2">
+                                    <h3 class="gufeng-kai text-foreground text-xl">{z.name}</h3>
+                                    <span class="gufeng-seal">{z.tag}</span>
+                                </div>
+                                <p class="text-muted-foreground text-sm leading-relaxed">{z.desc}</p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- 分隔线 -->
+        <div class="gufeng-divider mx-auto max-w-6xl px-4 py-4">
+            <span class="text-accent">❖</span>
+        </div>
+
+        <!-- 社区活动区块 -->
+        <section id="activities" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+            <div class="mb-12 text-center">
+                <h2 class="gufeng-kai text-foreground text-3xl md:text-4xl">社区活动</h2>
+                <div class="text-muted-foreground mt-3 flex items-center justify-center gap-2">
+                    <span class="bg-border h-px w-12"></span>
+                    <span class="text-accent">❖</span>
+                    <span class="bg-border h-px w-12"></span>
+                </div>
+                <p class="text-muted-foreground mx-auto mt-6 max-w-2xl text-base leading-relaxed md:text-lg">
+                    这里将展示服务器当前正在进行的限时活动、节日庆典、特殊挑战以及社区任务。
+                </p>
+            </div>
+
+            <div class="gufeng-card mx-auto flex max-w-2xl flex-col items-center rounded-lg px-6 py-12 text-center">
+                <span class="text-accent mb-4">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-calendar-x-icon lucide-calendar-x"
+                        ><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"
+                        ></rect><path d="M3 10h18"></path><path d="m14 14-4 4"></path><path d="m10 14 4 4"></path></svg
+                    >
+                </span>
+                <p class="gufeng-kai text-foreground text-lg md:text-xl">目前暂无正在进行的活动</p>
+                <p class="text-muted-foreground mt-3 text-sm leading-relaxed md:text-base">
+                    请关注游戏内公告、QQ群或社区平台，以获取最新活动信息。
+                </p>
+            </div>
+        </section>
+
+        <!-- 分隔线 -->
+        <div class="gufeng-divider mx-auto max-w-6xl px-4 py-4">
+            <span class="text-accent">❖</span>
+        </div>
+
+        <!-- 加入我们区块 -->
+        <section id="join" class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+            <div class="gufeng-card mx-auto max-w-3xl rounded-lg px-6 py-12 text-center md:px-12">
+                <h2 class="gufeng-kai text-foreground text-3xl md:text-4xl">准备好加入了吗？</h2>
+                <p class="text-muted-foreground mx-auto mt-4 max-w-xl text-base leading-relaxed md:text-lg">
+                    加入我们的 QQ 群！获取社区最新活动、下载客户端或寻找搭子！
+                </p>
+
+                <div class="mt-8 flex flex-col items-center gap-6">
+                    <!-- 服务器地址 -->
+                    <div class="flex flex-col items-center">
+                        <span class="text-muted-foreground mb-2 text-sm">服务器地址</span>
+                        <button
+                            id="copy-address"
+                            type="button"
+                            class="group border-border/60 bg-card/50 hover:border-primary/50 flex items-center gap-2 rounded-lg border px-5 py-2 transition-colors"
+                            aria-label="点击复制服务器地址 mc521.cc">
+                            <span class="gufeng-kai text-primary text-2xl md:text-3xl">mc521.cc</span>
+                            <span class="text-muted-foreground group-hover:text-primary transition-colors">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                                </svg>
+                            </span>
+                        </button>
+                        <span class="text-muted-foreground mt-2 text-xs">点击即可复制服务器地址</span>
+                    </div>
+
+                    <!-- QQ 群按钮 -->
+                    <div class="flex flex-col items-center gap-3">
+                        <a
+                            href="https://qm.qq.com/q/nLEPToNgpq"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="gufeng-btn gufeng-btn-primary text-base"
+                            aria-label="加入官方 QQ 群，链接将在新窗口打开">
+                            加入官方 QQ 群
+                        </a>
+                        <p class="text-muted-foreground max-w-md text-sm leading-relaxed">
+                            加入官方 QQ 群，与其他玩家交流、获取帮助、参与活动，并第一时间了解服务器动态。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast 提示 -->
+    <div class="pointer-events-none fixed bottom-8 left-1/2 z-50 -translate-x-1/2">
+        <div
+            id="toast"
+            class="border-primary/30 bg-card text-foreground gufeng-kai translate-y-4 rounded-lg border px-6 py-3 opacity-0 shadow-lg transition-all duration-300">
+            已复制服务器地址
+        </div>
+    </div>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById("theme-toggle");
+        themeToggle?.addEventListener("click", () => {
+            const isDark = document.documentElement.classList.toggle("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+
+        // Hero "开始游戏" 按钮 → 平滑滚动到 #join
+        document.getElementById("hero-start")?.addEventListener("click", () => {
+            document.getElementById("join")?.scrollIntoView({ behavior: "smooth" });
+        });
+
+        // 向下滚动提示 → 平滑滚动到 #intro
+        document.getElementById("scroll-down")?.addEventListener("click", () => {
+            document.getElementById("intro")?.scrollIntoView({ behavior: "smooth" });
+        });
+
+        // 服务器地址复制
+        const copyBtn = document.getElementById("copy-address");
+        const toast = document.getElementById("toast");
+        copyBtn?.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText("mc521.cc");
+            } catch {
+                const ta = document.createElement("textarea");
+                ta.value = "mc521.cc";
+                ta.style.position = "fixed";
+                ta.style.opacity = "0";
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand("copy");
+                document.body.removeChild(ta);
+            }
+            if (toast) {
+                toast.classList.remove("translate-y-4", "opacity-0");
+                setTimeout(() => {
+                    toast.classList.add("translate-y-4", "opacity-0");
+                }, 3000);
+            }
+        });
+    </script>
+</Layout>

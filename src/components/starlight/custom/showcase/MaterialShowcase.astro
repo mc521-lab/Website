@@ -1,0 +1,115 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import MaterialCard from "./MaterialCard.astro";
+
+const dataPath = path.resolve("public/data/wiki/materials.json");
+const raw = fs.readFileSync(dataPath, "utf-8");
+const data = JSON.parse(raw);
+const materials = data.materials || [];
+---
+
+<div id="material-showcase" class="not-content" data-material-showcase>
+    <div class="material-filters">
+        <div class="filter-group">
+            <input
+                type="text"
+                data-search
+                placeholder="搜索材料名称或描述..."
+                class="gufeng-song material-search"
+            />
+        </div>
+    </div>
+
+    <div class="not-content grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {materials.map((material: any) => <MaterialCard material={material} />)}
+    </div>
+
+    <div class="material-empty" data-empty-state>
+        <p class="gufeng-kai">未找到符合条件的材料</p>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const container = document.querySelector("[data-material-showcase]");
+        if (!container) return;
+        const searchInput = container.querySelector("[data-search]");
+        const items = container.querySelectorAll("[data-item]");
+        const emptyState = container.querySelector("[data-empty-state]") as HTMLElement | null;
+
+        function filter() {
+            const query = (searchInput as HTMLInputElement)?.value.toLowerCase().trim() || "";
+            let visibleCount = 0;
+            items.forEach((item) => {
+                const name = (item.getAttribute("data-name") || "").toLowerCase();
+                const description = (item.getAttribute("data-description") || "").toLowerCase();
+                const visible = !query || name.includes(query) || description.includes(query);
+                (item as HTMLElement).style.display = visible ? "" : "none";
+                if (visible) visibleCount++;
+            });
+            if (emptyState) {
+                emptyState.style.display = visibleCount === 0 ? "" : "none";
+            }
+        }
+
+        if (searchInput) searchInput.addEventListener("input", filter);
+    })();
+</script>
+
+<style>
+    .material-filters {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        position: relative;
+    }
+    @media (min-width: 768px) {
+        .material-filters {
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+    .material-filters::before {
+        content: "";
+        position: absolute;
+        inset: 5px;
+        border: 1px solid var(--border);
+        pointer-events: none;
+        opacity: 0.4;
+    }
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+    }
+    .material-search {
+        width: 100%;
+        max-width: 24rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border);
+        background: var(--background);
+        color: var(--foreground);
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s ease;
+    }
+    .material-search:focus {
+        border-color: var(--primary);
+    }
+    .material-empty {
+        display: none;
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--muted-foreground);
+        font-size: 1rem;
+    }
+</style>

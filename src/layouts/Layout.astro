@@ -1,0 +1,35 @@
+---
+import "@/styles/global.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const {
+    title,
+    description = "君庭阁我的世界服务器 - 二十余年，同在一片方块天。重度 RPG 体验与生存乐趣并存，纯粹公益、优化极致。",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={description} />
+        <meta name="keywords" content="Minecraft,我的世界,MC521,君庭阁,服务器,RPG,生存" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet" />
+        <title>{title}</title>
+    </head>
+    <body class="bg-background text-foreground min-h-screen overflow-x-hidden antialiased">
+        <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+            <slot />
+        </ThemeProvider>
+    </body>
+</html>

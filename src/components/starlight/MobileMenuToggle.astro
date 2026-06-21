@@ -1,0 +1,137 @@
+---
+
+---
+
+<!-- 我们保留 Starlight 的原始结构和脚本，只修改样式 -->
+<starlight-menu-button class="print:hidden">
+    <button
+        aria-expanded="false"
+        aria-label={Astro.locals.t("menuButton.accessibleLabel")}
+        aria-controls="starlight__sidebar"
+        class="sl-flex md:sl-hidden">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="open-menu"
+            aria-hidden="true">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="close-menu"
+            aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+        </svg>
+    </button>
+</starlight-menu-button>
+
+<script>
+    class StarlightMenuButton extends HTMLElement {
+        btn = this.querySelector("button")!;
+
+        constructor() {
+            super();
+            this.btn.addEventListener("click", () => this.toggleExpanded());
+            const parentNav = this.closest("nav");
+            if (parentNav) {
+                parentNav.addEventListener("keyup", (e) => this.closeOnEscape(e));
+            }
+        }
+
+        setExpanded(expanded: boolean) {
+            this.setAttribute("aria-expanded", String(expanded));
+            document.body.toggleAttribute("data-mobile-menu-expanded", expanded);
+        }
+
+        toggleExpanded() {
+            this.setExpanded(this.getAttribute("aria-expanded") !== "true");
+        }
+
+        closeOnEscape(e: KeyboardEvent) {
+            if (e.code === "Escape") {
+                this.setExpanded(false);
+                this.btn.focus();
+            }
+        }
+    }
+
+    customElements.define("starlight-menu-button", StarlightMenuButton);
+</script>
+
+<style>
+    @layer starlight.core {
+        button {
+            position: fixed;
+            top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+            inset-inline-end: var(--sl-nav-pad-x);
+            z-index: var(--sl-z-index-navbar);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: var(--sl-menu-button-size);
+            height: var(--sl-menu-button-size);
+            padding: 0.5rem;
+            background-color: var(--card);
+            color: var(--foreground);
+            box-shadow: none;
+            cursor: pointer;
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        button:hover,
+        button:focus-visible {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            border-color: var(--primary);
+        }
+
+        [aria-expanded="true"] button {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            border-color: var(--primary);
+            box-shadow: none;
+        }
+
+        [aria-expanded="true"] button .open-menu {
+            display: none;
+        }
+
+        :not([aria-expanded="true"]) button .close-menu {
+            display: none;
+        }
+    }
+</style>
+
+<style is:global>
+    @layer starlight.core {
+        [data-mobile-menu-expanded] {
+            overflow: hidden;
+        }
+
+        @media (min-width: 50rem) {
+            [data-mobile-menu-expanded] {
+                overflow: auto;
+            }
+        }
+    }
+</style>

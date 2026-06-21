@@ -1,0 +1,219 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ToolboxNav from "@/components/toolbox/ToolboxNav.astro";
+---
+
+<Layout title="护甲减伤计算器 · 君庭阁工具箱">
+    <div class="gufeng-paper flex min-h-screen w-full flex-col overflow-x-hidden">
+        <ToolboxNav title="护甲减伤计算器" />
+        <main class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 sm:px-6">
+            <div class="my-auto py-8 md:py-10">
+                <section class="mb-4 text-center">
+                    <h1 class="gufeng-kai text-foreground mb-2 text-3xl font-medium">护甲减伤计算器</h1>
+                    <p class="gufeng-kai text-muted-foreground text-base">Minecraft 护甲机制实时计算</p>
+                </section>
+
+                <div class="gufeng-divider text-muted-foreground mb-6">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        ></path>
+                    </svg>
+                </div>
+
+                <div class="gufeng-card rounded-lg p-5 md:p-6">
+                    <!-- 原始伤害 -->
+                    <div class="mb-4">
+                        <label class="gufeng-kai text-foreground mb-2 block text-sm">原始伤害 (d)</label>
+                        <div class="flex items-center gap-3">
+                            <input id="damage-range" type="range" min="0" max="100" step="0.25" value="10" class="flex-1" />
+                            <input id="damage" type="number" min="0" max="100" step="0.25" value="10" class="w-20" />
+                        </div>
+                    </div>
+
+                    <!-- 防御减伤 -->
+                    <div class="mb-4">
+                        <label class="gufeng-kai text-foreground mb-2 block text-sm">防御减伤 (r)</label>
+                        <div class="flex items-center gap-3">
+                            <input id="reduce-range" type="range" min="0" max="100" step="0.5" value="0" class="flex-1" />
+                            <input id="reduce" type="number" min="0" max="100" step="0.5" value="0" class="w-20" />
+                        </div>
+                    </div>
+
+                    <!-- 护甲数值 -->
+                    <div class="mb-4">
+                        <label class="gufeng-kai text-foreground mb-2 block text-sm">护甲数值 (v)</label>
+                        <div class="flex items-center gap-3">
+                            <input id="armor-range" type="range" min="0" max="100" step="0.5" value="20" class="flex-1" />
+                            <input id="armor" type="number" min="0" max="100" step="0.5" value="20" class="w-20" />
+                        </div>
+                    </div>
+
+                    <!-- 盔甲韧性 -->
+                    <div class="mb-4">
+                        <label class="gufeng-kai text-foreground mb-2 block text-sm">盔甲韧性 (t)</label>
+                        <div class="flex items-center gap-3">
+                            <input id="toughness-range" type="range" min="0" max="20" step="0.5" value="0" class="flex-1" />
+                            <input id="toughness" type="number" min="0" max="20" step="0.5" value="0" class="w-20" />
+                        </div>
+                    </div>
+
+                    <!-- 附魔系数 -->
+                    <div class="mb-6">
+                        <label class="gufeng-kai text-foreground mb-2 block text-sm">附魔系数 (k%)</label>
+                        <div class="flex items-center gap-3">
+                            <input id="enchantment-range" type="range" min="0" max="100" step="1" value="100" class="flex-1" />
+                            <input id="enchantment" type="number" min="0" max="100" step="1" value="100" class="w-20" />
+                        </div>
+                    </div>
+
+                    <!-- 结果 -->
+                    <div class="gufeng-divider text-muted-foreground mb-6"></div>
+                    <div class="mb-6 text-center">
+                        <p class="gufeng-kai text-foreground mb-2 text-base">实际伤害:</p>
+                        <p id="result" class="gufeng-kai text-4xl font-medium" style="color: var(--primary);">0.000</p>
+                    </div>
+
+                    <!-- 参考链接 -->
+                    <div class="text-center">
+                        <a
+                            href="https://zh.minecraft.wiki/w/%E7%9B%94%E7%94%B2%E6%9C%BA%E5%88%B6#%E4%BC%A4%E5%AE%B3%E5%87%8F%E5%85%8D"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="gufeng-btn inline-flex items-center gap-2">
+                            <span>计算公式参考</span>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" x2="21" y1="14" y2="3"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--card);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--card);
+        }
+
+        input[type="number"] {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--foreground);
+            padding: 0.375rem 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+    </style>
+
+    <script>
+        function armorDamageReduction(d: number, v: number, t: number, p = 0) {
+            if (d <= 0) return 0;
+            if (p !== 0) {
+                throw new Error("当前仅支持 p=0");
+            }
+            if (v <= 20) {
+                const threshold = 1.6 * v + 0.2 * v * t;
+                if (d <= threshold) {
+                    return (1 / (6.25 * t + 50)) * d * d + (1 - v / 25) * d;
+                } else {
+                    return (1 - v / 125) * d;
+                }
+            } else {
+                const inner = Math.max(0.2 * v, v - d / (2 + 0.5 * t));
+                const armorTerm = Math.min(20, inner);
+                const reduction = armorTerm / 25;
+                const multiplier = Math.min(1, 1 - reduction);
+                return d * multiplier;
+            }
+        }
+
+        function calculate() {
+            const damage = Number((document.getElementById("damage") as HTMLInputElement).value) || 0;
+            const reduce = Number((document.getElementById("reduce") as HTMLInputElement).value) || 0;
+            const armor = Number((document.getElementById("armor") as HTMLInputElement).value) || 0;
+            const toughness = Number((document.getElementById("toughness") as HTMLInputElement).value) || 0;
+            const enchantment = Number((document.getElementById("enchantment") as HTMLInputElement).value) || 100;
+
+            try {
+                const baseDamage = Math.max(0, damage - reduce);
+                const r = armorDamageReduction(baseDamage, armor, toughness, 0);
+                const result = r * (enchantment / 100);
+                document.getElementById("result")!.textContent = result.toFixed(3);
+            } catch (e) {
+                document.getElementById("result")!.textContent = (e as Error).message;
+            }
+        }
+
+        // 联动 range 与 number
+        const pairs = [
+            ["damage-range", "damage"],
+            ["reduce-range", "reduce"],
+            ["armor-range", "armor"],
+            ["toughness-range", "toughness"],
+            ["enchantment-range", "enchantment"],
+        ];
+
+        for (const [rangeId, numberId] of pairs) {
+            const rangeEl = document.getElementById(rangeId) as HTMLInputElement | null;
+            const numberEl = document.getElementById(numberId) as HTMLInputElement | null;
+            if (rangeEl && numberEl) {
+                rangeEl.addEventListener("input", () => {
+                    numberEl.value = rangeEl.value;
+                    calculate();
+                });
+                numberEl.addEventListener("input", () => {
+                    rangeEl.value = numberEl.value;
+                    calculate();
+                });
+            }
+        }
+
+        calculate(); // 初始计算
+    </script>
+</Layout>

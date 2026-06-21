@@ -1,0 +1,89 @@
+---
+import { itemQualityColors } from "@/lib/const";
+
+export interface Props {
+    tool: {
+        id: string;
+        name: string;
+        category: string;
+        material: string;
+        quality: string;
+        type: string;
+        description: string;
+        unbreakable?: boolean;
+        trial?: boolean;
+        maxDurability?: number;
+        timeLimit?: string;
+        enchants: Array<{ name: string; level: number }>;
+        categoryName: string;
+        categoryIcon: string;
+    };
+}
+
+const { tool } = Astro.props;
+---
+
+<article
+    class="gufeng-card gufeng-corner relative flex h-full flex-col gap-3 p-5"
+    data-item
+    data-name={tool.name}
+    data-category={tool.category}>
+    <div class="flex items-start justify-between gap-2">
+        <h3 class="gufeng-kai text-foreground mt-0! text-lg leading-tight font-semibold">
+            {tool.name}
+        </h3>
+        <span
+            class="gufeng-seal-sm shrink-0"
+            style={`border-color: ${itemQualityColors[tool.quality] || "var(--muted-foreground)"}; color: ${itemQualityColors[tool.quality] || "var(--muted-foreground)"};`}>
+            {tool.quality}级
+        </span>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+        <span class="gufeng-seal-sm border-border text-muted-foreground text-sm!">
+            {tool.categoryName[0]}
+        </span>
+        {
+            tool.unbreakable && (
+                <span class="gufeng-seal-sm text-sm!" style="border-color: var(--primary); color: var(--primary);">
+                    无限耐久
+                </span>
+            )
+        }
+        {
+            tool.trial && (
+                <span class="gufeng-seal-sm text-sm!" style="border-color: var(--accent); color: var(--accent);">
+                    体验版
+                </span>
+            )
+        }
+    </div>
+
+    <p class="gufeng-song text-muted-foreground text-sm leading-relaxed">
+        {tool.description}
+    </p>
+
+    {
+        tool.trial && (
+            <div class="gufeng-song text-muted-foreground space-y-1 text-xs">
+                {tool.maxDurability !== undefined && <p>最大耐久: {tool.maxDurability}</p>}
+                {tool.timeLimit && <p>时限: {tool.timeLimit}</p>}
+            </div>
+        )
+    }
+
+    {
+        tool.enchants && tool.enchants.length > 0 && (
+            <div class="border-border mt-auto border-t pt-3">
+                <p class="gufeng-song text-muted-foreground mb-2! text-sm!">附魔</p>
+                <div class="flex flex-wrap gap-2">
+                    {tool.enchants.map((enchant) => (
+                        <span class="gufeng-seal-sm border-border text-muted-foreground text-sm!">
+                            {enchant.name} {enchant.level}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+</article>

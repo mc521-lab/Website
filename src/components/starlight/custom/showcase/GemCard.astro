@@ -1,0 +1,80 @@
+---
+interface Feature {
+    id: string;
+    name: string;
+}
+
+interface QualityFeature {
+    id: string;
+    value: number | [number, number | null];
+}
+
+interface Quality {
+    id: string;
+    name: string;
+    description: string;
+    features: QualityFeature[];
+}
+
+interface Gem {
+    id: string;
+    name: string;
+    symbolColor: string;
+    description: string;
+    image: string | null;
+    features: Feature[];
+    qualitys: Quality[];
+}
+
+interface Props {
+    gem: Gem;
+}
+
+const { gem } = Astro.props;
+
+function formatValue(val: number | [number, number | null]): string {
+    if (Array.isArray(val)) {
+        const [min, max] = val;
+        if (max === null || max === undefined) return `${min}+`;
+        return `${min} ~ ${max}`;
+    }
+    return String(val);
+}
+---
+
+<div class="gufeng-card gufeng-corner p-5 h-full" data-item data-name={gem.name}>
+    <div class="mb-3 flex items-center gap-2">
+        <span class="inline-block h-3 w-3 rounded-full" style={`background-color: ${gem.symbolColor};`}></span>
+        <h3 class="gufeng-kai mt-0! text-lg font-semibold" style={`color: ${gem.symbolColor};`}>
+            {gem.name}
+        </h3>
+    </div>
+
+    <div class="gufeng-song text-muted-foreground mb-3! text-sm">
+        {gem.features.map((f) => f.name).join(" / ")}
+    </div>
+
+    <div class="space-y-2!">
+        {
+            gem.qualitys.map((q) => (
+                <div class="border-border rounded border px-3 py-2">
+                    <div class="mb-1 flex items-center justify-between">
+                        <span class="gufeng-kai text-foreground text-sm font-medium">{q.name}</span>
+                        <span class="gufeng-song text-muted-foreground text-xs">{q.description}</span>
+                    </div>
+                    <div class="space-y-1">
+                        {q.features.map((qf) => {
+                            const featureName = gem.features.find((f) => f.id === qf.id)?.name || qf.id;
+                            return (
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="gufeng-song text-muted-foreground">{featureName}</span>
+                                    <span class="gufeng-song text-foreground font-medium">{formatValue(qf.value)}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</div>

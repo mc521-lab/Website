@@ -1,0 +1,20 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ToolboxNav from "@/components/toolbox/ToolboxNav.astro";
+import SkinDrop from "@/components/toolbox/SkinDrop";
+---
+
+<Layout title="换皮肤工具 · 君庭阁工具箱">
+    <div class="gufeng-paper flex min-h-screen w-full flex-col overflow-x-hidden">
+        <ToolboxNav title="换皮肤工具" />
+        <main class="mx-auto flex w-full max-w-4xl flex-1 flex-col px-4 sm:px-6">
+            <div class="my-auto py-8 md:py-12">
+                <h1 class="gufeng-kai text-foreground text-center text-3xl md:text-4xl">换皮肤工具</h1>
+                <div class="gufeng-divider mx-auto mt-4 mb-8 max-w-md">
+                    <span class="text-accent">❖</span>
+                </div>
+                <SkinDrop client:load />
+            </div>
+        </main>
+    </div>
+</Layout>

@@ -1,0 +1,9 @@
+---
+title: "附魔图鉴"
+---
+
+import EnchantShowcase from "@/components/starlight/custom/showcase/EnchantShowcase.astro";
+
+君庭阁服务器中的附魔系统为装备提供强大的额外效果，包含原版附魔与扩展附魔两大类，助力冒险者在探索与战斗中获得独特优势。
+
+<EnchantShowcase />

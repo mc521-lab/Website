@@ -24,7 +24,7 @@ export default defineConfig({
             },
             sidebar: [
                 {
-                    label: "新手指南",
+                    label: "⭐ 新手指南",
                     items: [
                         { slug: "wiki/beginner/common-commands" },
                         { slug: "wiki/beginner/how-to-claim-land" },
@@ -35,7 +35,7 @@ export default defineConfig({
                     ],
                 },
                 {
-                    label: "公会系统",
+                    label: "🏠 公会系统",
                     items: [
                         { slug: "wiki/playerguard/update" },
                         { slug: "wiki/playerguard/stone" },
@@ -44,7 +44,7 @@ export default defineConfig({
                     ],
                 },
                 {
-                    label: "规章制度",
+                    label: "📑 规章制度",
                     items: [
                         { slug: "wiki/rules/basic" },
                         { slug: "wiki/rules/adjudication" },

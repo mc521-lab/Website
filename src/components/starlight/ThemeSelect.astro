@@ -3,10 +3,9 @@
 ---
 
 <button
-    id="sl-theme-toggle"
     type="button"
     aria-label="切换明暗主题"
-    class="border-primary/40 bg-card/80 text-primary hover:bg-primary hover:text-primary-foreground flex h-9 w-9 items-center justify-center rounded-full border backdrop-blur-sm transition-colors">
+    class="sl-theme-toggle border-primary/40 bg-card/80 text-primary hover:bg-primary hover:text-primary-foreground flex h-9 w-9 items-center justify-center rounded-full border backdrop-blur-sm transition-colors">
     <svg
         class="light-icon"
         xmlns="http://www.w3.org/2000/svg"
@@ -48,13 +47,14 @@
 <script is:inline>
     (function () {
         const html = document.documentElement;
-        const btn = document.getElementById("sl-theme-toggle");
-        if (!btn) return;
 
         function syncIcons() {
             const isDark = html.dataset.theme === "dark";
-            btn.querySelector(".light-icon")?.classList.toggle("hidden", isDark);
-            btn.querySelector(".dark-icon")?.classList.toggle("hidden", !isDark);
+            // 同步当前 DOM 中所有的主题切换按钮（Header 与移动端菜单各渲染一次）
+            document.querySelectorAll(".sl-theme-toggle").forEach((btn) => {
+                btn.querySelector(".light-icon")?.classList.toggle("hidden", isDark);
+                btn.querySelector(".dark-icon")?.classList.toggle("hidden", !isDark);
+            });
         }
 
         function setTheme(theme) {
@@ -68,22 +68,31 @@
             syncIcons();
         }
 
-        btn.addEventListener("click", () => {
-            const next = html.dataset.theme === "dark" ? "light" : "dark";
-            setTheme(next);
-        });
-
-        // 初始化同步主题类和图标
+        // 每次组件渲染时同步主题类与图标（内联脚本会随组件实例执行多次）
         html.classList.toggle("dark", html.dataset.theme === "dark");
         syncIcons();
 
-        // 监听系统主题变化（当 storage 中没有明确设置时）
-        const mql = matchMedia("(prefers-color-scheme: light)");
-        mql.addEventListener("change", () => {
-            const stored = localStorage.getItem("starlight-theme") || localStorage.getItem("theme");
-            if (!stored || stored === "auto") {
-                setTheme(mql.matches ? "light" : "dark");
-            }
-        });
+        // 全局监听器仅注册一次：使用事件委托兼容多实例按钮
+        if (!window.__slThemeToggleReady) {
+            window.__slThemeToggleReady = true;
+
+            document.addEventListener("click", (e) => {
+                const target = e.target;
+                if (!(target instanceof Element)) return;
+                const btn = target.closest(".sl-theme-toggle");
+                if (!btn) return;
+                const next = html.dataset.theme === "dark" ? "light" : "dark";
+                setTheme(next);
+            });
+
+            // 监听系统主题变化（当 storage 中没有明确设置时）
+            const mql = matchMedia("(prefers-color-scheme: light)");
+            mql.addEventListener("change", () => {
+                const stored = localStorage.getItem("starlight-theme") || localStorage.getItem("theme");
+                if (!stored || stored === "auto") {
+                    setTheme(mql.matches ? "light" : "dark");
+                }
+            });
+        }
     })();
 </script>

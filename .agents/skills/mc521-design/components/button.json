@@ -1,0 +1,63 @@
+{
+    "slug": "button",
+    "schemaVersion": 2,
+    "name": "Button",
+    "category": "interactive",
+    "sourceKind": "from-scratch",
+    "confidence": "medium",
+    "semanticTypeCandidates": [
+        { "type": "Button", "evidence": "Primary CTA '加入QQ群' in landing page, amber/orange filled button" }
+    ],
+    "variantDimensions": [
+        { "axis": "variant", "values": ["primary", "secondary", "ghost"] },
+        { "axis": "size", "values": ["sm", "md", "lg"] }
+    ],
+    "representativeVariants": [
+        {
+            "id": "primary-md",
+            "whySelected": "Main CTA button matching the amber '加入QQ群' button",
+            "traits": {
+                "variant": "primary",
+                "size": "md",
+                "bg": "var(--color-primary)",
+                "text": "var(--color-on-primary)",
+                "radius": "var(--radius-md)",
+                "height": "var(--size-button-md)"
+            },
+            "childrenDigest": "Single text label, optional icon prefix"
+        },
+        {
+            "id": "secondary-md",
+            "whySelected": "Secondary action with outlined or glass style",
+            "traits": {
+                "variant": "secondary",
+                "size": "md",
+                "bg": "transparent",
+                "text": "var(--color-primary)",
+                "border": "1px solid var(--color-border)",
+                "radius": "var(--radius-md)",
+                "height": "var(--size-button-md)"
+            },
+            "childrenDigest": "Single text label, optional icon"
+        },
+        {
+            "id": "ghost-sm",
+            "whySelected": "Tertiary/ghost button for subtle actions",
+            "traits": {
+                "variant": "ghost",
+                "size": "sm",
+                "bg": "transparent",
+                "text": "var(--color-foreground)",
+                "radius": "var(--radius-sm)",
+                "height": "var(--size-button-sm)"
+            },
+            "childrenDigest": "Text only, no border"
+        }
+    ],
+    "anatomy": ["icon?", "label"],
+    "structurePatterns": ["inline-flex", "centered content", "gap for icon+text"],
+    "usageHints": { "priorityHint": "core", "density": "normal" },
+    "doNotInvent": ["loading state", "icon-only toggle", "button group"],
+    "unknowns": ["exact hover animation timing", "pressed state shadow change"],
+    "keyInsightSeed": "Amber-gold CTA with warm glow hover states"
+}

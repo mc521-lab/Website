@@ -1,0 +1,51 @@
+{
+    "slug": "input",
+    "schemaVersion": 2,
+    "name": "Input",
+    "category": "form",
+    "sourceKind": "from-scratch",
+    "confidence": "medium",
+    "semanticTypeCandidates": [
+        {
+            "type": "TextInput",
+            "evidence": "Search bar in Wiki header, dark glass input with placeholder text and keyboard shortcut hint"
+        }
+    ],
+    "variantDimensions": [{ "axis": "variant", "values": ["default", "search"] }],
+    "representativeVariants": [
+        {
+            "id": "default",
+            "whySelected": "Standard text input for forms",
+            "traits": {
+                "variant": "default",
+                "bg": "rgba(0,0,0,0.3)",
+                "border": "1px solid var(--color-border)",
+                "radius": "var(--radius-md)",
+                "height": "var(--size-input)",
+                "text": "var(--color-foreground)",
+                "placeholder": "var(--color-muted-foreground)"
+            },
+            "childrenDigest": "Placeholder text or value text"
+        },
+        {
+            "id": "search",
+            "whySelected": "Search input with icon and shortcut hint",
+            "traits": {
+                "variant": "search",
+                "bg": "rgba(0,0,0,0.3)",
+                "border": "1px solid var(--color-border)",
+                "radius": "var(--radius-md)",
+                "height": "var(--size-input)",
+                "icon-left": "search",
+                "shortcut-hint": "right-aligned muted text"
+            },
+            "childrenDigest": "Search icon, placeholder, optional shortcut badge"
+        }
+    ],
+    "anatomy": ["icon-left?", "text", "shortcut-badge?"],
+    "structurePatterns": ["inline-flex", "icon prefix", "text input fills remaining width"],
+    "usageHints": { "priorityHint": "core", "density": "normal" },
+    "doNotInvent": ["textarea", "input with label above", "input group"],
+    "unknowns": ["focus ring color", "error state border style"],
+    "keyInsightSeed": "Dark glass-style input with warm focus ring"
+}

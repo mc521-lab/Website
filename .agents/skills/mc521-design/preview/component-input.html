@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input — 君庭阁 Design System</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-body); color: var(--color-on-surface); }
+.row { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-2); flex-wrap: wrap; }
+.label { font-size: var(--font-size-caption); color: var(--color-on-surface-variant); text-transform: uppercase; letter-spacing: 0.05em; min-width: 92px; flex-shrink: 0; }
+.divider { border: none; border-top: 1px solid var(--color-border); margin: var(--space-3) 0; }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.input { display: inline-flex; align-items: center; background: rgba(0,0,0,0.3); border: 1px solid var(--color-border); border-radius: var(--radius-md); height: var(--size-input-height); padding: 0 var(--space-3); color: var(--color-on-surface); font-family: var(--font-body); font-size: var(--font-size-body); outline: none; transition: border-color .15s; flex-shrink: 0; min-width: 200px; box-sizing: border-box; }
+.input::placeholder { color: var(--color-on-surface-variant); }
+.input:hover { border-color: var(--muted-foreground); }
+.input:focus { border-color: var(--color-primary); }
+.input:disabled { opacity: 0.5; cursor: not-allowed; }
+.input-search { gap: var(--space-2); padding: 0 var(--space-2); min-width: 260px; }
+.input-search:focus-within { border-color: var(--color-primary); }
+.input-search .search-icon { flex-shrink: 0; width: var(--size-icon-sm); height: var(--size-icon-sm); }
+.input-search .search-field { flex: 1; min-width: 0; background: none; border: none; outline: none; color: var(--color-on-surface); font-family: var(--font-body); font-size: var(--font-size-body); }
+.input-search .search-field::placeholder { color: var(--color-on-surface-variant); }
+.input-search .shortcut { font-size: var(--font-size-caption); color: var(--color-on-surface-variant); flex-shrink: 0; white-space: nowrap; }
+.input-search.disabled { opacity: 0.5; pointer-events: none; }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="row" data-evidence-sample="default">
+  <span class="label">默认</span>
+  <input class="input" type="text" placeholder="输入内容...">
+</div>
+<div class="row">
+  <span class="label">禁用</span>
+  <input class="input" type="text" placeholder="输入内容..." disabled>
+</div>
+<hr class="divider">
+<div class="row" data-evidence-sample="search">
+  <span class="label">搜索</span>
+  <div class="input input-search">
+    <img class="search-icon" src="https://cdn.jsdelivr.net/npm/lucide-static@1.8.0/icons/search.svg" width="16" height="16" alt="search">
+    <input class="search-field" type="text" placeholder="搜索 Wiki...">
+    <span class="shortcut">⌘K</span>
+  </div>
+</div>
+<div class="row">
+  <span class="label">禁用</span>
+  <div class="input input-search disabled">
+    <img class="search-icon" src="https://cdn.jsdelivr.net/npm/lucide-static@1.8.0/icons/search.svg" width="16" height="16" alt="search">
+    <input class="search-field" type="text" placeholder="搜索 Wiki..." disabled>
+    <span class="shortcut">⌘K</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card — 君庭阁</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 12px; background: var(--color-surface); font-family: var(--font-body); color: var(--color-on-surface); }
+    .specimen { max-width: 960px; }
+    .header { display: flex; align-items: baseline; gap: var(--space-2); margin-bottom: var(--space-4); }
+    .header h2 { font-family: var(--font-heading); font-size: var(--font-size-h4); font-weight: var(--font-weight-h4); color: var(--color-on-surface); margin: 0; }
+    .header .slug { font-family: var(--font-mono); font-size: var(--font-size-caption); color: var(--color-on-surface-variant); }
+    .stage { display: flex; flex-direction: column; gap: var(--space-3); }
+    .story { display: flex; align-items: center; gap: var(--space-3); }
+    .story-label { min-width: 92px; font-size: var(--font-size-caption); font-weight: 500; color: var(--color-on-surface-variant); text-transform: uppercase; letter-spacing: 0.05em; flex-shrink: 0; }
+    .rail { display: flex; gap: var(--space-4); flex-wrap: wrap; align-items: stretch; flex: 1; min-width: 0; }
+    .divider { border: none; border-top: 1px solid var(--color-outline); margin: var(--space-2) 0; }
+    /* @component-css-start */
+    .card { display: flex; flex-direction: column; align-items: center; width: 260px; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); padding: var(--space-6); text-align: center; transition: filter .15s; flex-shrink: 0; }
+    .card-icon { width: var(--size-icon-lg); height: var(--size-icon-lg); color: var(--color-primary); margin-bottom: var(--space-3); flex-shrink: 0; }
+    .card-title { font-family: var(--font-heading); font-size: var(--font-size-h4); font-weight: var(--font-weight-h4); color: var(--color-on-surface); margin: 0 0 var(--space-2) 0; }
+    .card-subtitle { font-size: var(--font-size-body); font-weight: var(--font-weight-body); color: var(--color-on-surface-variant); line-height: var(--line-height-body); margin: 0; }
+    .card-cta { margin-top: var(--space-3); font-size: var(--font-size-body); font-weight: var(--font-weight-body); color: var(--color-primary); text-decoration: none; white-space: nowrap; }
+    .card-cta:hover { text-decoration: underline; }
+    .card.interactive { cursor: pointer; }
+    .card.interactive:hover { filter: brightness(0.97); }
+    /* @component-css-end */
+  </style>
+</head>
+<body>
+<div class="specimen">
+  <div class="header">
+    <h2>Card</h2>
+    <span class="slug">card</span>
+  </div>
+  <div class="stage">
+    <div class="story" data-evidence-sample="default">
+      <span class="story-label">Default</span>
+      <div class="rail">
+        <div class="card">
+          <i data-lucide="shield" class="card-icon"></i>
+          <div class="card-title">纯净生存</div>
+          <div class="card-subtitle">无模组无作弊，享受最纯粹的原版生存体验</div>
+        </div>
+        <div class="card">
+          <i data-lucide="users" class="card-icon"></i>
+          <div class="card-title">友好社区</div>
+          <div class="card-subtitle">公平·友好·长久的社区文化与互助氛围</div>
+        </div>
+        <div class="card">
+          <i data-lucide="clock" class="card-icon"></i>
+          <div class="card-title">长期稳定</div>
+          <div class="card-subtitle">持续稳定运营，您的建筑与数据安全有保障</div>
+        </div>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="story" data-evidence-sample="interactive">
+      <span class="story-label">Interactive</span>
+      <div class="rail">
+        <div class="card interactive">
+          <i data-lucide="trophy" class="card-icon"></i>
+          <div class="card-title">公平竞技</div>
+          <div class="card-subtitle">完善的竞技规则与反作弊机制</div>
+          <a href="#" class="card-cta" onclick="event.preventDefault()">查看规则</a>
+        </div>
+        <div class="card interactive">
+          <i data-lucide="trending-up" class="card-icon"></i>
+          <div class="card-title">角色成长</div>
+          <div class="card-subtitle">多元化的等级与技能成长体系</div>
+          <a href="#" class="card-cta" onclick="event.preventDefault()">了解系统</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

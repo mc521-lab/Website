@@ -1,0 +1,46 @@
+{
+    "slug": "navigation",
+    "schemaVersion": 2,
+    "name": "Navigation",
+    "category": "layout",
+    "sourceKind": "from-scratch",
+    "confidence": "medium",
+    "semanticTypeCandidates": [
+        {
+            "type": "NavigationBar",
+            "evidence": "Top centered nav with icon+text items, amber underline on active, glass background"
+        }
+    ],
+    "variantDimensions": [{ "axis": "variant", "values": ["topbar", "sidebar"] }],
+    "representativeVariants": [
+        {
+            "id": "topbar",
+            "whySelected": "Primary horizontal navigation matching the landing page header",
+            "traits": {
+                "variant": "topbar",
+                "bg": "rgba(0,0,0,0.3)",
+                "backdrop-filter": "blur(8px)",
+                "border-bottom": "1px solid rgba(255,255,255,0.06)",
+                "height": "var(--size-button-lg)"
+            },
+            "childrenDigest": "Logo left, nav items center, CTA button right"
+        },
+        {
+            "id": "sidebar",
+            "whySelected": "Left sidebar navigation matching the Wiki layout",
+            "traits": {
+                "variant": "sidebar",
+                "bg": "rgba(0,0,0,0.2)",
+                "width": "260px",
+                "border-right": "1px solid rgba(255,255,255,0.06)"
+            },
+            "childrenDigest": "Logo top, collapsible nav groups, each with items"
+        }
+    ],
+    "anatomy": ["logo", "nav-items[]", "cta?"],
+    "structurePatterns": ["horizontal flex for topbar", "vertical stack for sidebar", "icon+text per item"],
+    "usageHints": { "priorityHint": "core", "density": "normal" },
+    "doNotInvent": ["mega menu", "breadcrumb", "tab-style nav switcher"],
+    "unknowns": ["mobile hamburger behavior", "dropdown submenu"],
+    "keyInsightSeed": "Centered nav with icon+text items and active amber underline"
+}

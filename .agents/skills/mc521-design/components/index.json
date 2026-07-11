@@ -1,0 +1,64 @@
+{
+    "components": [
+        {
+            "slug": "button",
+            "name": "Button",
+            "category": "interactive",
+            "sourceKind": "from-scratch",
+            "confidence": "medium",
+            "variantCount": 3,
+            "priorityHint": "core",
+            "keyInsightSeed": "Amber-gold CTA with warm glow hover states"
+        },
+        {
+            "slug": "card",
+            "name": "Card",
+            "category": "container",
+            "sourceKind": "from-scratch",
+            "confidence": "medium",
+            "variantCount": 2,
+            "priorityHint": "core",
+            "keyInsightSeed": "Glass-morphism panels with warm border accents"
+        },
+        {
+            "slug": "navigation",
+            "name": "Navigation",
+            "category": "layout",
+            "sourceKind": "from-scratch",
+            "confidence": "medium",
+            "variantCount": 2,
+            "priorityHint": "core",
+            "keyInsightSeed": "Centered nav with icon+text items and active amber underline"
+        },
+        {
+            "slug": "input",
+            "name": "Input",
+            "category": "form",
+            "sourceKind": "from-scratch",
+            "confidence": "medium",
+            "variantCount": 2,
+            "priorityHint": "core",
+            "keyInsightSeed": "Dark glass-style input with warm focus ring"
+        },
+        {
+            "slug": "badge",
+            "name": "Badge",
+            "category": "display",
+            "sourceKind": "from-scratch",
+            "confidence": "medium",
+            "variantCount": 2,
+            "priorityHint": "support",
+            "keyInsightSeed": "Status indicators with green online / blue version tags"
+        },
+        {
+            "slug": "table",
+            "name": "Table",
+            "category": "data",
+            "sourceKind": "from-scratch",
+            "confidence": "medium",
+            "variantCount": 1,
+            "priorityHint": "support",
+            "keyInsightSeed": "Command reference table with alternating row backgrounds"
+        }
+    ]
+}

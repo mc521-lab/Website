@@ -1,0 +1,49 @@
+{
+    "slug": "card",
+    "schemaVersion": 2,
+    "name": "Card",
+    "category": "container",
+    "sourceKind": "from-scratch",
+    "confidence": "medium",
+    "semanticTypeCandidates": [
+        {
+            "type": "Card",
+            "evidence": "Feature cards '纯净生存', '友好社区', '长期稳定' with icon, title, subtitle on dark glass panels"
+        }
+    ],
+    "variantDimensions": [{ "axis": "variant", "values": ["default", "interactive"] }],
+    "representativeVariants": [
+        {
+            "id": "default",
+            "whySelected": "Feature info card with glass-morphism background",
+            "traits": {
+                "variant": "default",
+                "bg": "rgba(0,0,0,0.5)",
+                "backdrop-filter": "blur(12px)",
+                "border": "1px solid rgba(255,255,255,0.08)",
+                "radius": "var(--radius-lg)",
+                "padding": "var(--space-6)"
+            },
+            "childrenDigest": "Icon, title, subtitle stacked vertically"
+        },
+        {
+            "id": "interactive",
+            "whySelected": "Clickable action card with hover elevation",
+            "traits": {
+                "variant": "interactive",
+                "bg": "rgba(0,0,0,0.5)",
+                "border": "1px solid rgba(255,255,255,0.08)",
+                "radius": "var(--radius-lg)",
+                "padding": "var(--space-6)",
+                "cursor": "pointer"
+            },
+            "childrenDigest": "Icon, title, description, optional CTA link"
+        }
+    ],
+    "anatomy": ["icon", "title", "subtitle?", "cta?"],
+    "structurePatterns": ["flex-column", "centered icon", "text left-aligned below icon"],
+    "usageHints": { "priorityHint": "core", "density": "normal" },
+    "doNotInvent": ["media card with image", "horizontal card layout", "card grid"],
+    "unknowns": ["hover background change detail", "border glow on hover"],
+    "keyInsightSeed": "Glass-morphism panels with warm border accents"
+}

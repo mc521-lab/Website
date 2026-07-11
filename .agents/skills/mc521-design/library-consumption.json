@@ -1,0 +1,18 @@
+{
+    "schemaVersion": 1,
+    "tokenSource": "css.json",
+    "recommendedReadOrder": [
+        "SKILL.md",
+        "css.json",
+        "components/index.json",
+        "preview/component-button.html",
+        "preview/component-card.html",
+        "preview/component-navigation.html",
+        "preview/component-input.html",
+        "preview/component-badge.html",
+        "preview/component-table.html",
+        "ui_kits/website/index.html"
+    ],
+    "coreComponents": ["button", "card", "navigation", "input"],
+    "supportComponents": ["badge", "table"]
+}

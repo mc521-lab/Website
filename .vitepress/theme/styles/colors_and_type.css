@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap");
+
+/* @group-priority: primary, success, info, warning */
+
+:root {
+    /* primary */
+    --jtg-amber-50: #fef9f0;
+    --jtg-amber-100: #fdf0db;
+    --jtg-amber-200: #fbe0b5;
+    --jtg-amber-300: #f7c882;
+    --jtg-amber-400: #f2a94d;
+    --jtg-amber-500: #d4893a;
+    --jtg-amber-600: #b8722e;
+    --jtg-amber-700: #8c5523;
+    --jtg-amber-800: #5e3a1b;
+    --jtg-amber-900: #3a2312;
+    --primary: var(--jtg-amber-500);
+    --primary-foreground: #ffffff;
+
+    /* success */
+    --jtg-success-50: #edfcf2;
+    --jtg-success-100: #d3f8de;
+    --jtg-success-200: #aaf0c1;
+    --jtg-success-300: #72e29c;
+    --jtg-success-400: #3fcc6f;
+    --jtg-success-500: #22b554;
+    --jtg-success-600: #18a045;
+    --jtg-success-700: #13803a;
+    --jtg-success-800: #116533;
+    --jtg-success-900: #0e522c;
+    --jtg-success-500: #22b554;
+
+    /* warning */
+    --jtg-warning-50: #fffbeb;
+    --jtg-warning-100: #fef3c7;
+    --jtg-warning-200: #fde68a;
+    --jtg-warning-300: #fcd34d;
+    --jtg-warning-400: #fbbf24;
+    --jtg-warning-500: #f59e0b;
+    --jtg-warning-600: #d97706;
+    --jtg-warning-700: #b45309;
+    --jtg-warning-800: #92400e;
+    --jtg-warning-900: #78350f;
+    --jtg-warning-500: #f59e0b;
+
+    /* error */
+    --jtg-error-50: #fef2f2;
+    --jtg-error-100: #fee2e2;
+    --jtg-error-200: #fecaca;
+    --jtg-error-300: #fca5a5;
+    --jtg-error-400: #f87171;
+    --jtg-error-500: #ef4444;
+    --jtg-error-600: #dc2626;
+    --jtg-error-700: #b91c1c;
+    --jtg-error-800: #991b1b;
+    --jtg-error-900: #7f1d1d;
+    --jtg-error-500: #ef4444;
+
+    /* info */
+    --jtg-info-50: #eff6ff;
+    --jtg-info-100: #dbeafe;
+    --jtg-info-200: #bfdbfe;
+    --jtg-info-300: #93c5fd;
+    --jtg-info-400: #60a5fa;
+    --jtg-info-500: #3b82f6;
+    --jtg-info-600: #2563eb;
+    --jtg-info-700: #1d4ed8;
+    --jtg-info-800: #1e40af;
+    --jtg-info-900: #1e3a8a;
+    --jtg-info-500: #3b82f6;
+
+    /* surface */
+    --background: #1a1612;
+    --surface: #241e18;
+    --surface-dim: #1a1612;
+    --surface-container-lowest: #141110;
+    --surface-container-low: #2a231c;
+    --surface-container: #322a22;
+    --surface-container-high: #3d332a;
+    --surface-container-highest: #4a3f34;
+    --card: #241e18;
+    --popover: #2a231c;
+    --muted: #4a3f34;
+    --jtg-surface-600: #3d332a;
+
+    /* text */
+    --foreground: #fef3e2;
+    --muted-foreground: #a89279;
+    --jtg-text-500: #a89279;
+
+    /* border */
+    --border: #5c4d3d;
+    --ring: var(--primary);
+    --jtg-border-400: #5c4d3d;
+
+    /* Semantic aliases */
+    --accent: var(--jtg-amber-400);
+    --accent-hover: var(--jtg-amber-500);
+    --bg: var(--background);
+    --fg: var(--foreground);
+    --rule: var(--border);
+    --link: var(--jtg-amber-400);
+    --muted: var(--muted-foreground);
+
+    /* === Typography === */
+    --font-display: "Noto Serif SC", serif;
+    --font-heading: "Noto Serif SC", serif;
+    --font-body: "Noto Sans SC", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --font-size-display: 56px;
+    --font-size-h1: 40px;
+    --font-size-h2: 32px;
+    --font-size-h3: 24px;
+    --font-size-h4: 20px;
+    --font-size-body: 16px;
+    --font-size-lead: 18px;
+    --font-size-caption: 12px;
+    --font-size-mono: 14px;
+    --font-weight-display: 700;
+    --font-weight-h1: 700;
+    --font-weight-h2: 600;
+    --font-weight-h3: 600;
+    --font-weight-h4: 600;
+    --font-weight-body: 400;
+    --font-weight-lead: 400;
+    --font-weight-caption: 400;
+    --font-weight-mono: 400;
+    --line-height-display: 1.1;
+    --line-height-h1: 1.2;
+    --line-height-h2: 1.25;
+    --line-height-h3: 1.3;
+    --line-height-h4: 1.4;
+    --line-height-body: 1.6;
+    --line-height-lead: 1.7;
+    --line-height-caption: 1.5;
+    --line-height-mono: 1.6;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* Sizing */
+    --size-icon-sm: 16px;
+    --size-icon-md: 20px;
+    --size-icon-lg: 24px;
+    --size-input-height: 36px;
+    --size-button-sm: 32px;
+    --size-button-md: 40px;
+    --size-button-lg: 48px;
+
+    /* Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle */
+    --shadow-2: 0 4px 8px rgba(0, 0, 0, 0.35); /* Card */
+    --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.45); /* Float */
+    --shadow-4: 0 16px 40px rgba(0, 0, 0, 0.55); /* Modal */
+    --shadow-5: 0 24px 60px rgba(0, 0, 0, 0.65); /* Overlay */
+
+    /* ============================================
+     SEMANTIC ALIAS LAYER
+     ============================================ */
+    --color-background: var(--bg);
+    --color-foreground: var(--fg);
+    --color-surface: var(--surface);
+    --color-surface-dim: var(--surface-dim);
+    --color-surface-container: var(--surface-container);
+    --color-surface-container-low: var(--surface-container-low);
+    --color-surface-container-high: var(--surface-container-high);
+    --color-surface-container-highest: var(--surface-container-highest);
+    --color-card: var(--card);
+    --color-on-surface: var(--fg);
+    --color-on-surface-variant: var(--muted);
+    --color-muted-foreground: var(--muted);
+    --color-primary: var(--accent);
+    --color-primary-hover: var(--accent-hover);
+    --color-on-primary: #ffffff;
+    --color-primary-container: var(--jtg-amber-50);
+    --color-on-primary-container: var(--jtg-amber-900);
+    --color-outline: var(--rule);
+    --color-border: var(--rule);
+    --color-success: var(--jtg-success-600);
+    --color-warning: var(--jtg-warning-600);
+    --color-error: var(--jtg-error-600);
+    --color-info: var(--jtg-info-600);
+    --color-radius-sm: 4px;
+    --color-radius-md: 8px;
+    --color-radius-lg: 12px;
+    --color-radius-xl: 16px;
+    --color-radius-full: 9999px;
+    --font-family-base: var(--font-body);
+}
+
+.dark {
+    --background: #110e0b;
+    --surface: #1a1510;
+    --surface-dim: #110e0b;
+    --surface-container-lowest: #0d0a08;
+    --surface-container-low: #1e1914;
+    --surface-container: #26201a;
+    --surface-container-high: #302920;
+    --surface-container-highest: #3b3228;
+    --card: #1a1510;
+    --popover: #1e1914;
+    --muted: #3b3228;
+    --foreground: #f5e6d0;
+    --muted-foreground: #8c7a63;
+    --border: #4a3e30;
+}
+
+/* Typography Classes */
+.jtg-display {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: var(--font-weight-display);
+    line-height: var(--line-height-display);
+    letter-spacing: -0.02em;
+}
+.jtg-h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-h1);
+    line-height: var(--line-height-h1);
+}
+.jtg-h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: var(--font-weight-h2);
+    line-height: var(--line-height-h2);
+}
+.jtg-h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-h3);
+    line-height: var(--line-height-h3);
+}
+.jtg-h4 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-h4);
+    line-height: var(--line-height-h4);
+}
+.jtg-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+}
+.jtg-lead {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-lead);
+    line-height: var(--line-height-lead);
+}
+.jtg-caption {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-caption);
+    line-height: var(--line-height-caption);
+}
+.jtg-mono {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-mono);
+    line-height: var(--line-height-mono);
+}

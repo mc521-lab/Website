@@ -1,0 +1,462 @@
+/* ═══════════════════════════════════════════════════════════════
+   components.css — Design System Component Definitions
+   Auto-extracted from preview/component-*.html
+   DO NOT EDIT MANUALLY — regenerate via extract-components-css.mjs
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Badge ─────────────────────────────────────────────────── */
+/* @anatomy
+   <span class="label">在线状态</span> <span class="badge badge-status" data-evidence-sample="status"><span class="dot"></span>在线玩家 42人</span>
+*/
+/* Component definitions — extracted to components.css by deterministic script */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    white-space: nowrap;
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-caption);
+    flex-shrink: 0;
+}
+.badge-status {
+    color: var(--color-foreground);
+    min-width: 18px;
+}
+.badge-status .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: #22c55e;
+    flex-shrink: 0;
+}
+.badge-tag {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    padding: 2px 8px;
+    color: var(--color-muted-foreground);
+    min-width: 22px;
+}
+
+/* ── Button ────────────────────────────────────────────────── */
+/* @anatomy
+   <span class="label">Primary</span><button class="btn btn-primary btn-sm" data-evidence-sample="primary-sm">领取奖励</button><button class="btn btn-primary" data-evidence-sample="primary-md">加入QQ群</button><button class="btn btn-primary btn-lg" data-evidence-sample="primary-lg">立即开始冒险</button>
+*/
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family-base);
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+}
+.btn:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+.btn-primary {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-md);
+    height: var(--size-button-md);
+    padding: 0 var(--space-5);
+    min-width: var(--size-button-md);
+}
+.btn-primary:hover {
+    background: var(--color-primary-hover);
+}
+.btn-primary:active {
+    filter: brightness(0.92);
+}
+.btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.btn-primary:disabled:hover {
+    background: var(--color-primary);
+    filter: none;
+}
+.btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    height: var(--size-button-md);
+    padding: 0 var(--space-5);
+    min-width: var(--size-button-md);
+}
+.btn-secondary:hover {
+    background: var(--color-surface-container-low);
+    border-color: var(--color-primary);
+}
+.btn-secondary:active {
+    filter: brightness(0.92);
+}
+.btn-secondary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.btn-secondary:disabled:hover {
+    background: transparent;
+    border-color: var(--color-border);
+    filter: none;
+}
+.btn-ghost {
+    background: transparent;
+    color: var(--color-on-surface);
+    border-radius: var(--radius-sm);
+    height: var(--size-button-sm);
+    padding: 0 var(--space-3);
+    min-width: var(--size-button-sm);
+}
+.btn-ghost:hover {
+    background: var(--color-surface-container-low);
+}
+.btn-ghost:active {
+    filter: brightness(0.92);
+}
+.btn-ghost:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.btn-ghost:disabled:hover {
+    background: transparent;
+    filter: none;
+}
+.btn-sm {
+    height: var(--size-button-sm);
+    min-width: var(--size-button-sm);
+    padding: 0 var(--space-3);
+    font-size: 12px;
+}
+.btn-md {
+    height: var(--size-button-md);
+    min-width: var(--size-button-md);
+    padding: 0 var(--space-5);
+}
+.btn-lg {
+    height: var(--size-button-lg);
+    min-width: var(--size-button-lg);
+    padding: 0 var(--space-6);
+    font-size: 16px;
+}
+
+/* ── Card ──────────────────────────────────────────────────── */
+/* @anatomy
+   <div class="card"> <i data-lucide="shield" class="card-icon"></i> <div class="card-title">纯净生存
+*/
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 260px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+    transition: filter 0.15s;
+    flex-shrink: 0;
+}
+.card-icon {
+    width: var(--size-icon-lg);
+    height: var(--size-icon-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+    flex-shrink: 0;
+}
+.card-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-h4);
+    color: var(--color-on-surface);
+    margin: 0 0 var(--space-2) 0;
+}
+.card-subtitle {
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    color: var(--color-on-surface-variant);
+    line-height: var(--line-height-body);
+    margin: 0;
+}
+.card-cta {
+    margin-top: var(--space-3);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    color: var(--color-primary);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.card-cta:hover {
+    text-decoration: underline;
+}
+.card.interactive {
+    cursor: pointer;
+}
+.card.interactive:hover {
+    filter: brightness(0.97);
+}
+
+/* ── Input ─────────────────────────────────────────────────── */
+/* @anatomy
+   <span class="label">默认</span> <input class="input" type="text" placeholder="输入内容...">
+*/
+/* Component definitions — extracted to components.css by deterministic script */
+.input {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    height: var(--size-input-height);
+    padding: 0 var(--space-3);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    outline: none;
+    transition: border-color 0.15s;
+    flex-shrink: 0;
+    min-width: 200px;
+    box-sizing: border-box;
+}
+.input::placeholder {
+    color: var(--color-on-surface-variant);
+}
+.input:hover {
+    border-color: var(--muted-foreground);
+}
+.input:focus {
+    border-color: var(--color-primary);
+}
+.input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.input-search {
+    gap: var(--space-2);
+    padding: 0 var(--space-2);
+    min-width: 260px;
+}
+.input-search:focus-within {
+    border-color: var(--color-primary);
+}
+.input-search .search-icon {
+    flex-shrink: 0;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+}
+.input-search .search-field {
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+}
+.input-search .search-field::placeholder {
+    color: var(--color-on-surface-variant);
+}
+.input-search .shortcut {
+    font-size: var(--font-size-caption);
+    color: var(--color-on-surface-variant);
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.input-search.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ── Navigation ────────────────────────────────────────────── */
+/* @anatomy
+   <span class="label">顶栏</span>
+*/
+/* Shared nav link */
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-on-surface-variant);
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        color 0.15s,
+        background 0.15s;
+}
+.nav-link:hover {
+    color: var(--color-on-surface);
+}
+
+/* Topbar */
+.topbar {
+    width: 100%;
+    height: var(--size-button-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-5);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+.topbar-logo {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-h3);
+    color: var(--color-on-surface);
+    white-space: nowrap;
+}
+.topbar-items {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    height: 100%;
+}
+.topbar-link {
+    padding: 0 var(--space-1);
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+}
+.topbar-link.active {
+    color: var(--color-on-surface);
+    border-bottom-color: var(--accent);
+}
+.topbar-link:hover {
+    color: var(--color-on-surface);
+    background: rgba(255, 255, 255, 0.04);
+}
+.topbar-cta {
+    background: var(--accent);
+    color: var(--color-on-primary);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+    height: 36px;
+    min-width: 36px;
+}
+.topbar-cta:hover {
+    background: var(--accent-hover);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) 0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.sidebar-logo {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-h3);
+    color: var(--color-on-surface);
+    padding: 0 var(--space-4) var(--space-4);
+    white-space: nowrap;
+}
+.sidebar-group {
+    margin-bottom: var(--space-2);
+}
+.sidebar-group-label {
+    font-size: var(--font-size-caption);
+    color: var(--color-on-surface-variant);
+    padding: var(--space-2) var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+.sidebar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    width: 100%;
+    border-left: 2px solid transparent;
+    transition:
+        background 0.15s,
+        color 0.15s,
+        border-color 0.15s;
+}
+.sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-on-surface);
+}
+.sidebar-link.active {
+    color: var(--color-on-surface);
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: var(--accent);
+}
+
+/* ── Table ─────────────────────────────────────────────────── */
+/* @anatomy
+   <span class="label">默认</span>
+*/
+.table-wrap {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-body);
+    color: var(--color-foreground);
+}
+.table thead {
+    background: rgba(255, 255, 255, 0.04);
+}
+.table th {
+    padding: var(--space-2) var(--space-4);
+    text-align: left;
+    font-weight: 600;
+    font-size: var(--font-size-caption);
+    color: var(--color-muted-foreground);
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.table td {
+    padding: var(--space-2) var(--space-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.table tbody tr {
+    transition: filter 0.15s ease;
+}
+.table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+.table tbody tr:hover {
+    filter: brightness(0.97);
+}
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+.table-wrap.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap");
+
+/* @group-priority: primary, success, info, warning */
+
+:root {
+    /* primary */
+    --jtg-amber-50: #fef9f0; /* AI-generated */
+    --jtg-amber-100: #fdf0db; /* AI-generated */
+    --jtg-amber-200: #fbe0b5; /* AI-generated */
+    --jtg-amber-300: #f7c882; /* AI-generated */
+    --jtg-amber-400: #f2a94d; /* @primary */
+    --jtg-amber-500: #d4893a; /* AI-generated */
+    --jtg-amber-600: #b8722e; /* AI-generated */
+    --jtg-amber-700: #8c5523; /* AI-generated */
+    --jtg-amber-800: #5e3a1b; /* AI-generated */
+    --jtg-amber-900: #3a2312; /* AI-generated */
+    --primary: var(--jtg-amber-500);
+    --primary-foreground: #ffffff; /* AI-generated */
+
+    /* success */
+    --jtg-success-50: #edfcf2; /* AI-generated */
+    --jtg-success-100: #d3f8de; /* AI-generated */
+    --jtg-success-200: #aaf0c1; /* AI-generated */
+    --jtg-success-300: #72e29c; /* AI-generated */
+    --jtg-success-400: #3fcc6f; /* AI-generated */
+    --jtg-success-500: #22b554; /* AI-generated */
+    --jtg-success-600: #18a045; /* AI-generated */
+    --jtg-success-700: #13803a; /* AI-generated */
+    --jtg-success-800: #116533; /* AI-generated */
+    --jtg-success-900: #0e522c; /* AI-generated */
+    --jtg-success-500: #22b554; /* @primary */
+
+    /* warning */
+    --jtg-warning-50: #fffbeb; /* AI-generated */
+    --jtg-warning-100: #fef3c7; /* AI-generated */
+    --jtg-warning-200: #fde68a; /* AI-generated */
+    --jtg-warning-300: #fcd34d; /* AI-generated */
+    --jtg-warning-400: #fbbf24; /* AI-generated */
+    --jtg-warning-500: #f59e0b; /* AI-generated */
+    --jtg-warning-600: #d97706; /* AI-generated */
+    --jtg-warning-700: #b45309; /* AI-generated */
+    --jtg-warning-800: #92400e; /* AI-generated */
+    --jtg-warning-900: #78350f; /* AI-generated */
+    --jtg-warning-500: #f59e0b; /* @primary */
+
+    /* error */
+    --jtg-error-50: #fef2f2; /* AI-generated */
+    --jtg-error-100: #fee2e2; /* AI-generated */
+    --jtg-error-200: #fecaca; /* AI-generated */
+    --jtg-error-300: #fca5a5; /* AI-generated */
+    --jtg-error-400: #f87171; /* AI-generated */
+    --jtg-error-500: #ef4444; /* AI-generated */
+    --jtg-error-600: #dc2626; /* AI-generated */
+    --jtg-error-700: #b91c1c; /* AI-generated */
+    --jtg-error-800: #991b1b; /* AI-generated */
+    --jtg-error-900: #7f1d1d; /* AI-generated */
+    --jtg-error-500: #ef4444; /* @primary */
+
+    /* info */
+    --jtg-info-50: #eff6ff; /* AI-generated */
+    --jtg-info-100: #dbeafe; /* AI-generated */
+    --jtg-info-200: #bfdbfe; /* AI-generated */
+    --jtg-info-300: #93c5fd; /* AI-generated */
+    --jtg-info-400: #60a5fa; /* AI-generated */
+    --jtg-info-500: #3b82f6; /* AI-generated */
+    --jtg-info-600: #2563eb; /* AI-generated */
+    --jtg-info-700: #1d4ed8; /* AI-generated */
+    --jtg-info-800: #1e40af; /* AI-generated */
+    --jtg-info-900: #1e3a8a; /* AI-generated */
+    --jtg-info-500: #3b82f6; /* @primary */
+
+    /* surface */
+    --background: #1a1612; /* AI-generated */
+    --surface: #241e18; /* AI-generated */
+    --surface-dim: #1a1612; /* AI-generated */
+    --surface-container-lowest: #141110; /* AI-generated */
+    --surface-container-low: #2a231c; /* AI-generated */
+    --surface-container: #322a22; /* AI-generated */
+    --surface-container-high: #3d332a; /* AI-generated */
+    --surface-container-highest: #4a3f34; /* AI-generated */
+    --card: #241e18; /* AI-generated */
+    --popover: #2a231c; /* AI-generated */
+    --muted: #4a3f34; /* AI-generated */
+    --jtg-surface-600: #3d332a; /* @primary */
+
+    /* text */
+    --foreground: #fef3e2; /* AI-generated */
+    --muted-foreground: #a89279; /* AI-generated */
+    --jtg-text-500: #a89279; /* @primary */
+
+    /* border */
+    --border: #5c4d3d; /* AI-generated */
+    --ring: var(--primary);
+    --jtg-border-400: #5c4d3d; /* @primary */
+
+    /* Semantic aliases */
+    --accent: var(--jtg-amber-400);
+    --accent-hover: var(--jtg-amber-500);
+    --bg: var(--background);
+    --fg: var(--foreground);
+    --rule: var(--border);
+    --link: var(--jtg-amber-400);
+    --muted: var(--muted-foreground);
+
+    /* === Typography === */
+    --font-display: "Noto Serif SC", serif;
+    --font-heading: "Noto Serif SC", serif;
+    --font-body: "Noto Sans SC", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --font-size-display: 56px;
+    --font-size-h1: 40px;
+    --font-size-h2: 32px;
+    --font-size-h3: 24px;
+    --font-size-h4: 20px;
+    --font-size-body: 16px;
+    --font-size-lead: 18px;
+    --font-size-caption: 12px;
+    --font-size-mono: 14px;
+    --font-weight-display: 700;
+    --font-weight-h1: 700;
+    --font-weight-h2: 600;
+    --font-weight-h3: 600;
+    --font-weight-h4: 600;
+    --font-weight-body: 400;
+    --font-weight-lead: 400;
+    --font-weight-caption: 400;
+    --font-weight-mono: 400;
+    --line-height-display: 1.1;
+    --line-height-h1: 1.2;
+    --line-height-h2: 1.25;
+    --line-height-h3: 1.3;
+    --line-height-h4: 1.4;
+    --line-height-body: 1.6;
+    --line-height-lead: 1.7;
+    --line-height-caption: 1.5;
+    --line-height-mono: 1.6;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* Sizing */
+    --size-icon-sm: 16px;
+    --size-icon-md: 20px;
+    --size-icon-lg: 24px;
+    --size-input-height: 36px;
+    --size-button-sm: 32px;
+    --size-button-md: 40px;
+    --size-button-lg: 48px;
+
+    /* Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle */
+    --shadow-2: 0 4px 8px rgba(0, 0, 0, 0.35); /* Card */
+    --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.45); /* Float */
+    --shadow-4: 0 16px 40px rgba(0, 0, 0, 0.55); /* Modal */
+    --shadow-5: 0 24px 60px rgba(0, 0, 0, 0.65); /* Overlay */
+
+    /* ============================================
+     SEMANTIC ALIAS LAYER
+     ============================================ */
+    --color-background: var(--bg);
+    --color-foreground: var(--fg);
+    --color-surface: var(--surface);
+    --color-surface-dim: var(--surface-dim);
+    --color-surface-container: var(--surface-container);
+    --color-surface-container-low: var(--surface-container-low);
+    --color-surface-container-high: var(--surface-container-high);
+    --color-surface-container-highest: var(--surface-container-highest);
+    --color-card: var(--card);
+    --color-on-surface: var(--fg);
+    --color-on-surface-variant: var(--muted);
+    --color-muted-foreground: var(--muted);
+    --color-primary: var(--accent);
+    --color-primary-hover: var(--accent-hover);
+    --color-on-primary: #ffffff;
+    --color-primary-container: var(--jtg-amber-50);
+    --color-on-primary-container: var(--jtg-amber-900);
+    --color-outline: var(--rule);
+    --color-border: var(--rule);
+    --color-success: var(--jtg-success-600);
+    --color-warning: var(--jtg-warning-600);
+    --color-error: var(--jtg-error-600);
+    --color-info: var(--jtg-info-600);
+    --color-radius-sm: 4px;
+    --color-radius-md: 8px;
+    --color-radius-lg: 12px;
+    --color-radius-xl: 16px;
+    --color-radius-full: 9999px;
+    --font-family-base: var(--font-body);
+}
+
+.dark {
+    --background: #110e0b; /* AI-generated */
+    --surface: #1a1510; /* AI-generated */
+    --surface-dim: #110e0b; /* AI-generated */
+    --surface-container-lowest: #0d0a08; /* AI-generated */
+    --surface-container-low: #1e1914; /* AI-generated */
+    --surface-container: #26201a; /* AI-generated */
+    --surface-container-high: #302920; /* AI-generated */
+    --surface-container-highest: #3b3228; /* AI-generated */
+    --card: #1a1510; /* AI-generated */
+    --popover: #1e1914; /* AI-generated */
+    --muted: #3b3228; /* AI-generated */
+    --foreground: #f5e6d0; /* AI-generated */
+    --muted-foreground: #8c7a63; /* AI-generated */
+    --border: #4a3e30; /* AI-generated */
+}
+
+/* Typography Classes */
+.jtg-display {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: var(--font-weight-display);
+    line-height: var(--line-height-display);
+    letter-spacing: -0.02em;
+}
+.jtg-h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-h1);
+    line-height: var(--line-height-h1);
+}
+.jtg-h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: var(--font-weight-h2);
+    line-height: var(--line-height-h2);
+}
+.jtg-h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-h3);
+    line-height: var(--line-height-h3);
+}
+.jtg-h4 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-h4);
+    line-height: var(--line-height-h4);
+}
+.jtg-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+}
+.jtg-lead {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-lead);
+    line-height: var(--line-height-lead);
+}
+.jtg-caption {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-caption);
+    line-height: var(--line-height-caption);
+}
+.jtg-mono {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-mono);
+    line-height: var(--line-height-mono);
+}

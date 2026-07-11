@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navigation — 君庭阁</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-background); font-family: var(--font-body); color: var(--color-on-surface); }
+.row { display: flex; gap: var(--space-2); align-items: center; margin-bottom: var(--space-2); flex-wrap: wrap; }
+.label { font-size: var(--font-size-caption); color: var(--color-on-surface-variant); text-transform: uppercase; letter-spacing: .05em; min-width: 92px; flex-shrink: 0; white-space: nowrap; }
+.divider { border: none; border-top: 1px solid var(--color-border); margin: var(--space-3) 0; }
+
+/* @component-css-start */
+/* Shared nav link */
+.nav-link { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--color-on-surface-variant); text-decoration: none; white-space: nowrap; transition: color .15s, background .15s; }
+.nav-link:hover { color: var(--color-on-surface); }
+
+/* Topbar */
+.topbar { width: 100%; height: var(--size-button-lg); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-5); background: rgba(0,0,0,.3); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,.06); border-radius: var(--radius-md); overflow: hidden; }
+.topbar-logo { font-family: var(--font-heading); font-size: var(--font-size-h4); font-weight: var(--font-weight-h3); color: var(--color-on-surface); white-space: nowrap; }
+.topbar-items { display: flex; align-items: center; gap: var(--space-5); height: 100%; }
+.topbar-link { padding: 0 var(--space-1); height: 100%; display: inline-flex; align-items: center; border-bottom: 2px solid transparent; }
+.topbar-link.active { color: var(--color-on-surface); border-bottom-color: var(--accent); }
+.topbar-link:hover { color: var(--color-on-surface); background: rgba(255,255,255,.04); }
+.topbar-cta { background: var(--accent); color: var(--color-on-primary); border: none; border-radius: var(--radius-full); padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-size: var(--font-size-body); font-weight: var(--font-weight-body); cursor: pointer; white-space: nowrap; transition: background .15s; height: 36px; min-width: 36px; }
+.topbar-cta:hover { background: var(--accent-hover); }
+
+/* Sidebar */
+.sidebar { width: 260px; background: rgba(0,0,0,.2); border-right: 1px solid rgba(255,255,255,.06); border-radius: var(--radius-md); padding: var(--space-4) 0; overflow: hidden; flex-shrink: 0; }
+.sidebar-logo { font-family: var(--font-heading); font-size: var(--font-size-h4); font-weight: var(--font-weight-h3); color: var(--color-on-surface); padding: 0 var(--space-4) var(--space-4); white-space: nowrap; }
+.sidebar-group { margin-bottom: var(--space-2); }
+.sidebar-group-label { font-size: var(--font-size-caption); color: var(--color-on-surface-variant); padding: var(--space-2) var(--space-4); text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+.sidebar-link { display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); width: 100%; border-left: 2px solid transparent; transition: background .15s, color .15s, border-color .15s; }
+.sidebar-link:hover { background: rgba(255,255,255,.04); color: var(--color-on-surface); }
+.sidebar-link.active { color: var(--color-on-surface); background: rgba(255,255,255,.06); border-left-color: var(--accent); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="row"><span class="label">顶栏</span></div>
+<div class="row">
+<nav class="topbar">
+<div class="topbar-logo">君庭阁</div>
+<div class="topbar-items">
+<a href="#" class="nav-link topbar-link active"><i data-lucide="home" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>首页</a>
+<a href="#" class="nav-link topbar-link"><i data-lucide="book-open" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>新手指南</a>
+<a href="#" class="nav-link topbar-link"><i data-lucide="users" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>公会系统</a>
+<a href="#" class="nav-link topbar-link"><i data-lucide="scroll-text" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>更新日志</a>
+</div>
+<button class="topbar-cta">加入社区</button>
+</nav>
+</div>
+<hr class="divider">
+<div class="row"><span class="label">侧栏</span></div>
+<div class="row">
+<nav class="sidebar">
+<div class="sidebar-logo">君庭阁</div>
+<div class="sidebar-group">
+<div class="sidebar-group-label">游戏世界</div>
+<a href="#" class="nav-link sidebar-link active"><i data-lucide="home" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>首页</a>
+<a href="#" class="nav-link sidebar-link"><i data-lucide="book-open" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>新手指南</a>
+</div>
+<div class="sidebar-group">
+<div class="sidebar-group-label">社区</div>
+<a href="#" class="nav-link sidebar-link"><i data-lucide="users" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>公会系统</a>
+<a href="#" class="nav-link sidebar-link"><i data-lucide="scroll-text" style="width:18px;height:18px;display:inline-block;flex-shrink:0"></i>更新日志</a>
+</div>
+</nav>
+</div>
+<script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+    "slug": "table",
+    "schemaVersion": 2,
+    "name": "Table",
+    "category": "data",
+    "sourceKind": "from-scratch",
+    "confidence": "medium",
+    "semanticTypeCandidates": [
+        {
+            "type": "DataTable",
+            "evidence": "Command reference table in Wiki with command/function columns, rounded corners, alternating rows"
+        }
+    ],
+    "variantDimensions": [{ "axis": "variant", "values": ["default"] }],
+    "representativeVariants": [
+        {
+            "id": "default",
+            "whySelected": "Standard data table matching the Wiki command reference",
+            "traits": {
+                "variant": "default",
+                "bg": "transparent",
+                "header-bg": "rgba(255,255,255,0.04)",
+                "row-alt-bg": "rgba(255,255,255,0.02)",
+                "border": "1px solid rgba(255,255,255,0.06)",
+                "radius": "var(--radius-md)",
+                "text": "var(--color-foreground)",
+                "header-text": "var(--color-muted-foreground)"
+            },
+            "childrenDigest": "Header row + N data rows, each with 2+ columns"
+        }
+    ],
+    "anatomy": ["thead", "tbody", "tr[]", "td[]"],
+    "structurePatterns": ["semantic table", "rounded container", "alternating row backgrounds"],
+    "usageHints": { "priorityHint": "support", "density": "normal" },
+    "doNotInvent": ["sortable columns", "pagination", "row selection"],
+    "unknowns": ["column width strategy", "cell padding"],
+    "keyInsightSeed": "Command reference table with alternating row backgrounds"
+}

@@ -1,0 +1,51 @@
+---
+title: "🔨 附录：惩罚制度"
+---
+
+## 2.1 安全区内非法击杀
+
+- 首次：<span style="color: #D22D8D">**关监狱 1 小时**</span> + <span style="color: #117CEE">**收回武器**</span>
+- 再次：<span style="color: #DF2A3F">**永久封禁**</span>
+
+## 2.2 宣传外挂或违规内容
+
+- 故意刷屏宣传的：<span style="color: #DF2A3F">**永久封禁**</span>
+- 诱导性宣传的
+    - 首次：<span style="color: #ED740C">**封禁 7 个自然日**</span>
+    - 再次：<span style="color: #DF2A3F">**永久封禁**</span>
+
+## 2.3 侮辱或不当行为
+
+- <u>不知情情况下违反的</u>：<span style="color: #1DC0C9">**警告**</span>
+- 首次：<span style="color: #ECAA04">**关监狱 24 小时**</span>
+- 再次：<span style="color: #DF2A3F">**永久封禁**</span>
+
+## 2.4 线下交易（RMB交易）
+
+- <span style="color: #DF2A3F">**永久封禁**</span>
+
+## 2.5 滥用恶性 Bug
+
+- 依据情节轻重，给予 <span style="color: #ED740C">**封禁 1 个自然日**</span> 至 <span style="color: #DF2A3F">**永久封禁**</span> 的处罚
+
+## 2.6 作弊行为
+
+#### 2.6.1 小游戏活动中
+
+- 首次：<span style="color: #74B602">**取消资格**</span>
+- 二次：<span style="color: #FBDE28">**禁赛 7 个自然日**</span>
+- 再次：<span style="color: #DF2A3F">**永久禁赛**</span>
+
+#### 2.6.2 使用违规辅助
+
+- 首次：<span style="color: #ED740C">**封禁 1 小时**</span>
+- 二次：<span style="color: #ED740C">**封禁 1 个自然日**</span>
+- 再次：<span style="color: #DF2A3F">**永久封禁**</span>
+
+## 2.7 针对或孤立举报者
+
+- <span style="color: #DF2A3F">**连坐**</span>，情节严重的附加<span style="color: #DF2A3F">**额外处罚**</span>
+
+## 4.1, 4.2, 4.3, 4.4, 4.5 描述的造谣行为
+
+- <span style="color: #DF2A3F">**永久封禁**</span>

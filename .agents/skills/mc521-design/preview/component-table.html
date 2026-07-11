@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table - 君庭阁</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-background); font-family: var(--font-family-base); color: var(--color-on-surface); }
+.specimen { max-width: 720px; }
+.stage { display: flex; flex-direction: column; gap: var(--space-3); }
+.row { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
+.label { font-size: var(--font-size-caption); font-weight: 600; color: var(--color-on-surface-variant); text-transform: uppercase; letter-spacing: 0.05em; min-width: 92px; flex-shrink: 0; }
+.divider { border: none; border-top: 1px solid var(--color-border); margin: var(--space-2) 0; }
+
+/* @component-css-start */
+.table-wrap { width: 100%; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); overflow: hidden; }
+.table { width: 100%; border-collapse: collapse; font-family: var(--font-family-base); font-size: var(--font-size-body); color: var(--color-foreground); }
+.table thead { background: rgba(255,255,255,0.04); }
+.table th { padding: var(--space-2) var(--space-4); text-align: left; font-weight: 600; font-size: var(--font-size-caption); color: var(--color-muted-foreground); white-space: nowrap; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.table td { padding: var(--space-2) var(--space-4); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.table tbody tr { transition: filter .15s ease; }
+.table tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.table tbody tr:hover { filter: brightness(0.97); }
+.table tbody tr:last-child td { border-bottom: none; }
+.table-wrap.disabled { opacity: 0.5; pointer-events: none; }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="specimen">
+<div class="stage">
+<div class="row"><span class="label">默认</span></div>
+<div class="row">
+<div class="table-wrap" data-evidence-sample="default">
+<table class="table">
+<thead><tr><th>指令</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td>/tpa [玩家名]</td><td>申请传送到指定玩家</td></tr>
+<tr><td>/back</td><td>返回到上一个传送点</td></tr>
+<tr><td>/rtp</td><td>随机传送</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="divider">
+<div class="row"><span class="label">禁用</span></div>
+<div class="row">
+<div class="table-wrap disabled">
+<table class="table">
+<thead><tr><th>指令</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td>/home</td><td>传送回家</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

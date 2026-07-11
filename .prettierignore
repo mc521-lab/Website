@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build outputs
+dist/
+build/
+.next/
+.nuxt/
+.output/
+coverage/
+/apps/desktop/src-tauri/target/
+/apps/desktop/src-tauri/gen/schemas
+
+# lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# test / coverage
+.nyc_output/
+
+# temp files
+.temp/

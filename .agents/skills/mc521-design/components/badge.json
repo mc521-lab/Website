@@ -1,0 +1,48 @@
+{
+    "slug": "badge",
+    "schemaVersion": 2,
+    "name": "Badge",
+    "category": "display",
+    "sourceKind": "from-scratch",
+    "confidence": "medium",
+    "semanticTypeCandidates": [
+        {
+            "type": "Badge",
+            "evidence": "Status indicators: green dot for online players, blue icon for version, globe icon for IP in the status bar"
+        }
+    ],
+    "variantDimensions": [{ "axis": "variant", "values": ["status", "tag"] }],
+    "representativeVariants": [
+        {
+            "id": "status",
+            "whySelected": "Online status dot with label matching the player count indicator",
+            "traits": {
+                "variant": "status",
+                "dot-color": "#22c55e",
+                "text": "var(--color-foreground)",
+                "font-size": "var(--font-size-caption)"
+            },
+            "childrenDigest": "Colored dot + text label"
+        },
+        {
+            "id": "tag",
+            "whySelected": "Small tag badge for version or category labels",
+            "traits": {
+                "variant": "tag",
+                "bg": "rgba(0,0,0,0.4)",
+                "border": "1px solid rgba(255,255,255,0.1)",
+                "radius": "var(--radius-sm)",
+                "text": "var(--color-muted-foreground)",
+                "font-size": "var(--font-size-caption)",
+                "padding": "2px 8px"
+            },
+            "childrenDigest": "Icon + short text"
+        }
+    ],
+    "anatomy": ["indicator?", "label"],
+    "structurePatterns": ["inline-flex", "dot+text or text-only"],
+    "usageHints": { "priorityHint": "support", "density": "compact" },
+    "doNotInvent": ["count badge on avatar", "removable badge", "badge group"],
+    "unknowns": ["pulse animation for online dot", "border glow"],
+    "keyInsightSeed": "Status indicators with green online / blue version tags"
+}

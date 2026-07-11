@@ -11,25 +11,25 @@ title: "💰 如何赚取金币"
 1. 前往主城回收商人处，查看商人回收哪些物品，然后去收集然后卖给他们，这是金币的主要来源方式！但是会有回收限制，也就是每天只回收指定数量，第二天才会刷新！
 
     <img
-        src="/wiki/beginner/money/1772944447230-15e72dfc-b27a-41c4-9a6a-9ca314f5f8d6.webp"
-        width="1024"
-        height="768"
-        class="my-6 rounded-lg border border-neutral-800"
-    />
+         src="/wiki/beginner/money/1772944447230-15e72dfc-b27a-41c4-9a6a-9ca314f5f8d6.webp"
+         width="1024"
+         height="768"
+         class="my-6 rounded-lg border border-neutral-800"
+     />
 
 2. 每天 【10:00 - 24:00】每隔两小时就会有钓鱼比赛的活动，只要参与就可以获得金币奖励！
    如果你能拿到比赛的前几名，例如第一名，那么你将会获得 3000 金币以及其他稀有物品的奖励！\
    **钓到的鱼还可以卖给旁边的鱼类回收商人，还能再赚取 3000 金币！**
 
     <img
-        src="/wiki/beginner/money/1743591669106-670dde0f-9996-445b-b3a0-6b8a0898470b.webp"
-        width="1024"
-        height="768"
-        class="my-6 rounded-lg border border-neutral-800"
-    />
+         src="/wiki/beginner/money/1743591669106-670dde0f-9996-445b-b3a0-6b8a0898470b.webp"
+         width="1024"
+         height="768"
+         class="my-6 rounded-lg border border-neutral-800"
+     />
 
 3. 每完成一个称号任务，都可以获得 1500-6000 金币的奖励！ 而且不仅有金币还有更多稀有物品，请查看下方动图了解！
 
-    <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/money/1743592565220-099ebf3a-6e54-407d-9927-57a9f556ce0b.webm" />
+     <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/money/1743592565220-099ebf3a-6e54-407d-9927-57a9f556ce0b.webm" />
 
 4. 每提升一次阶级，你都可以获得超级丰厚的奖励！

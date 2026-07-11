@@ -100,11 +100,7 @@
     .hero-overlay {
         position: absolute;
         inset: 0;
-        background: radial-gradient(
-            ellipse at center,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.5) 100%
-        );
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
         pointer-events: none;
     }
 
@@ -192,7 +188,9 @@
         background: rgba(255, 250, 242, 0.95);
         border-radius: var(--radius-xl);
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        transition: transform 0.15s, background 0.15s;
+        transition:
+            transform 0.15s,
+            background 0.15s;
     }
 
     .feature-card:hover {
@@ -242,7 +240,9 @@
         text-decoration: none;
         color: inherit;
         text-align: left;
-        transition: transform 0.15s, background 0.15s;
+        transition:
+            transform 0.15s,
+            background 0.15s;
     }
 
     .cta-card:hover {

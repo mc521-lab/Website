@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { fileURLToPath, URL } from 'node:url'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -13,7 +14,14 @@ export default defineConfig({
   appearance: 'dark',
 
   vite: {
-    publicDir: '../public'
+    publicDir: '../public',
+    resolve: {
+      alias: {
+        '@theme': fileURLToPath(new URL('./theme', import.meta.url)),
+        '@data': fileURLToPath(new URL('./data', import.meta.url)),
+        '@wiki': fileURLToPath(new URL('../.temp/wiki', import.meta.url))
+      }
+    }
   },
 
   themeConfig: {

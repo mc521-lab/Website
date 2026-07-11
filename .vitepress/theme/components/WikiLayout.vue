@@ -46,11 +46,7 @@
         content: "";
         position: fixed;
         inset: 0;
-        background: radial-gradient(
-            ellipse at center,
-            rgba(0, 0, 0, 0.25) 0%,
-            rgba(0, 0, 0, 0.6) 100%
-        );
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.6) 100%);
         z-index: 0;
         pointer-events: none;
     }

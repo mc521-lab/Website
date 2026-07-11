@@ -102,6 +102,13 @@
     --link: var(--jtg-amber-400);
     --muted: var(--muted-foreground);
 
+    /* Job colors */
+    --job-zhanshi: #ff0000;
+    --job-sheshou: #f0b100;
+    --job-mushi: #868686;
+    --job-cike: #00c853;
+    --job-fashi: #01b2e3;
+
     /* === Typography === */
     --font-display: "Noto Serif SC", serif;
     --font-heading: "Noto Serif SC", serif;

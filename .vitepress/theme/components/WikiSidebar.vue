@@ -58,8 +58,7 @@
             .replace(/\/index$/, "")
             .replace(/\/$/, "");
 
-    const isActive = (link: string) =>
-        normalizePath(page.value.relativePath ?? "") === normalizePath(link);
+    const isActive = (link: string) => normalizePath(page.value.relativePath ?? "") === normalizePath(link);
 </script>
 
 <template>

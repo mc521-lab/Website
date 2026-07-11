@@ -2,7 +2,9 @@
 title: "材料图鉴"
 ---
 
-import MaterialShowcase from "@/components/starlight/custom/showcase/MaterialShowcase.astro";
+<script setup>
+import MaterialShowcase from '@theme/components/showcase/MaterialShowcase.vue'
+</script>
 
 君庭阁服务器中的材料系统涵盖了宠食、道具、材料、货币等多种类型，是冒险者在探索与成长过程中不可或缺的资源。
 

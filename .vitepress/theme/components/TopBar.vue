@@ -7,20 +7,21 @@
     const menuOpen = ref(false);
 
     const navItems = [
-        { text: "首页", link: "/", icon: "home" },
-        { text: "官网Wiki", link: "/wiki/", icon: "wiki" },
-        { text: "更换皮肤", link: "#", icon: "skin" },
-        { text: "伤害计算", link: "#", icon: "sword" },
-        { text: "更新日志", link: "#", icon: "log" },
+        { text: "首页", link: "/", icon: "lucide:home" },
+        { text: "官网Wiki", link: "/wiki/rules/basic", icon: "lucide:book-open", activePattern: "/wiki" },
+        { text: "更换皮肤", link: "#", icon: "lucide:sparkles" },
+        { text: "伤害计算", link: "#", icon: "lucide:sword" },
+        { text: "更新日志", link: "#", icon: "lucide:clipboard-list" },
     ];
 
-    const qqGroupLink = "#";
+    const qqGroupLink = "https://qm.qq.com/q/cA73mE5jR6";
 
-    const isActive = (link: string) => {
-        if (link === "#") return false;
+    const isActive = (item: { link: string; activePattern?: string }) => {
+        if (item.link === "#") return false;
         const path = page.value.relativePath ?? "";
-        if (link === "/") return path === "index.md";
-        return path.startsWith(link.replace(/^\//, ""));
+        if (item.link === "/") return path === "index.md";
+        if (item.activePattern) return path.startsWith(item.activePattern.replace(/^\//, ""));
+        return path.startsWith(item.link.replace(/^\//, ""));
     };
 </script>
 
@@ -35,23 +36,19 @@
         </a>
 
         <nav class="nav-desktop">
-            <a
-                v-for="item in navItems"
-                :key="item.text"
-                :href="item.link"
-                :class="['nav-link', { active: isActive(item.link) }]">
-                <Icon :name="item.icon" :size="18" />
+            <a v-for="item in navItems" :key="item.text" :href="item.link" :class="['nav-link', { active: isActive(item) }]">
+                <Icon :name="item.icon" :size="18" style="transform: translateY(1px)" />
                 <span>{{ item.text }}</span>
             </a>
         </nav>
 
         <a :href="qqGroupLink" class="cta">
-            <Icon name="users" :size="18" />
+            <Icon name="lucide:users" :size="18" />
             <span>加入QQ群</span>
         </a>
 
         <button class="menu-toggle" aria-label="打开菜单" @click="menuOpen = !menuOpen">
-            <Icon name="menu" :size="22" />
+            <Icon name="lucide:menu" :size="22" />
         </button>
 
         <div v-show="menuOpen" class="nav-mobile">
@@ -59,13 +56,13 @@
                 v-for="item in navItems"
                 :key="item.text"
                 :href="item.link"
-                :class="['nav-link mobile', { active: isActive(item.link) }]"
+                :class="['nav-link mobile', { active: isActive(item) }]"
                 @click="menuOpen = false">
                 <Icon :name="item.icon" :size="20" />
                 <span>{{ item.text }}</span>
             </a>
             <a :href="qqGroupLink" class="cta mobile" @click="menuOpen = false">
-                <Icon name="users" :size="18" />
+                <Icon name="lucide:users" :size="18" />
                 <span>加入QQ群</span>
             </a>
         </div>
@@ -125,13 +122,13 @@
     .nav-desktop {
         display: flex;
         align-items: center;
-        gap: var(--space-5);
+        gap: var(--space-6);
     }
 
     .nav-link {
         display: inline-flex;
         align-items: center;
-        gap: var(--space-1);
+        gap: calc(var(--space-1) + calc(var(--space-1) / 2));
         color: rgba(255, 255, 255, 0.85);
         text-decoration: none;
         font-size: var(--font-size-body);

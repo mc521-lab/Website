@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { computed } from "vue";
     import { data } from "@data/enchants.data";
+    import ShowcaseCard from "./ShowcaseCard.vue";
 
     const { enchants } = data;
 
@@ -20,14 +21,19 @@
         <div v-for="(list, typeName) in byType" :key="typeName" class="group">
             <h2 class="group-title">{{ typeName }}</h2>
             <div class="grid">
-                <article v-for="enchant in list" :key="enchant.id" class="card">
-                    <header class="card-header">
-                        <h3 class="card-title">{{ enchant.displayName }}</h3>
+                <ShowcaseCard
+                    v-for="enchant in list"
+                    :key="enchant.id"
+                    class="card"
+                    :title="enchant.displayName"
+                    :badge="enchant.rarityName"
+                    icon="lucide:sparkles">
+                    <template #badge>
                         <span class="badge" :style="{ borderColor: enchant.rarityColor }">
                             <span class="badge-dot" :style="{ backgroundColor: enchant.rarityColor }" />
                             {{ enchant.rarityName }}
                         </span>
-                    </header>
+                    </template>
                     <p class="card-desc">{{ enchant.description }}</p>
                     <dl class="meta-list">
                         <div class="meta-row">
@@ -43,7 +49,7 @@
                             <dd>{{ enchant.conflicts.join("、") }}</dd>
                         </div>
                     </dl>
-                </article>
+                </ShowcaseCard>
             </div>
         </div>
     </section>
@@ -66,27 +72,7 @@
         gap: 14px;
     }
     .card {
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 12px;
-        padding: 14px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-        transition: border-color 0.2s ease;
-    }
-    .card:hover {
-        border-color: rgba(184, 114, 46, 0.5);
-    }
-    .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    .card-title {
-        font-size: 0.9375rem;
-        margin: 0;
-        color: #1a1612;
+        width: 100%;
     }
     .badge {
         display: inline-flex;
@@ -107,10 +93,10 @@
         flex-shrink: 0;
     }
     .card-desc {
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
         color: #5c4d3d;
         line-height: 1.5;
-        margin-bottom: 12px;
+        margin: 0;
     }
     .meta-list {
         display: flex;

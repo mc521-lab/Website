@@ -1,24 +1,24 @@
 <script setup lang="ts">
-    import Icon, { IconName } from "./Icon.vue";
+    import Icon from "./Icon.vue";
 
     const features = [
-        { title: "纯净生存", sub: "公平 · 友好 · 长久", icon: "leaf" },
-        { title: "友好社区", sub: "互助 · 温暖 · 和谐", icon: "shield" },
-        { title: "长期稳定", sub: "稳定运行 · 用心维护", icon: "landmark" },
+        { title: "纯净生存", sub: "公平 · 友好 · 长久", icon: "mingcute:maple-leaf-line", size: 32 },
+        { title: "友好社区", sub: "互助 · 温暖 · 和谐", icon: "lucide:shield" },
+        { title: "长期稳定", sub: "稳定运行 · 用心维护", icon: "lucide:landmark" },
     ];
 
     const ctas = [
         {
             title: "游戏活动",
             sub: "丰富活动和奖励等你获取",
-            icon: "gift",
+            icon: "lucide:gift",
             link: "#",
             iconBg: "#f2a94d",
         },
         {
             title: "反馈问题",
             sub: "建言献策 · 遇见问题找我们",
-            icon: "message",
+            icon: "lucide:message-square",
             link: "#",
             iconBg: "#e87d2a",
         },
@@ -26,8 +26,8 @@
 
     const status = [
         { type: "dot", text: "在线玩家 42人", color: "#22c55e" },
-        { type: "icon", text: "版本 1.21.4", icon: "leaf" },
-        { type: "icon", text: "IP mc521.cc", icon: "globe" },
+        { type: "icon", text: "版本 1.21.4", icon: "lucide:leaf" },
+        { type: "icon", text: "IP mc521.cc", icon: "lucide:globe" },
     ];
 </script>
 
@@ -37,9 +37,9 @@
 
         <div class="hero-content">
             <h1 class="hero-title">
-                <Icon name="leaf" :size="40" class="title-leaf left" />
+                <Icon name="emojione-v1:maple-leaf" :size="40" class="title-leaf left" />
                 <span class="hero-title-text">君庭阁</span>
-                <Icon name="leaf" :size="40" class="title-leaf right" />
+                <Icon name="emojione-v1:maple-leaf" :size="40" class="title-leaf right" />
             </h1>
 
             <p class="hero-tagline">
@@ -52,7 +52,7 @@
 
             <div class="feature-cards">
                 <div v-for="item in features" :key="item.title" class="feature-card">
-                    <Icon :name="item.icon as IconName" :size="28" class="feature-icon" />
+                    <Icon :name="item.icon" :size="item.size ?? 28" class="feature-icon" />
                     <div class="feature-text">
                         <div class="feature-title">{{ item.title }}</div>
                         <div class="feature-sub">{{ item.sub }}</div>
@@ -63,7 +63,7 @@
             <div class="cta-cards">
                 <a v-for="item in ctas" :key="item.title" :href="item.link" class="cta-card">
                     <div class="cta-icon-bg" :style="{ background: item.iconBg }">
-                        <Icon :name="item.icon as IconName" :size="20" class="cta-icon" />
+                        <Icon :name="item.icon" :size="20" class="cta-icon" />
                     </div>
                     <div class="cta-text">
                         <div class="cta-title">{{ item.title }}</div>
@@ -76,7 +76,7 @@
         <div class="status-bar">
             <div v-for="(item, idx) in status" :key="idx" class="status-item">
                 <span v-if="item.type === 'dot'" class="status-dot" :style="{ background: item.color }" />
-                <Icon v-else-if="item.type === 'icon'" :name="item.icon as IconName" :size="16" class="status-icon" />
+                <Icon v-else-if="item.type === 'icon'" :name="item.icon" :size="16" class="status-icon" />
                 <span>{{ item.text }}</span>
             </div>
         </div>
@@ -121,6 +121,7 @@
         font-size: clamp(3.5rem, 10vw, 6rem);
         font-weight: 700;
         margin: 0;
+        margin-bottom: var(--space-4);
         display: flex;
         align-items: center;
         justify-content: center;

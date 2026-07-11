@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import { computed } from "vue";
     import { data } from "@data/jewelries.data";
+    import type { WikiJewelryFeatureValue } from "../../../types/wiki";
+    import ShowcaseCard from "./ShowcaseCard.vue";
 
     const { manifest, jewelries } = data;
 
@@ -25,6 +27,13 @@
         if (!Array.isArray(value)) return String(value);
         return value.join(" ~ ");
     }
+
+    function formatFeatureValues(feature: (typeof jewelries)[number]["features"][number], isTreasure: boolean): string {
+        if (isTreasure) {
+            return feature.values.map((v: WikiJewelryFeatureValue) => `${v.name} ${formatValue(v.value)}`).join(" / ");
+        }
+        return feature.values.map((v: WikiJewelryFeatureValue) => formatValue(v.value)).join(" / ");
+    }
 </script>
 
 <template>
@@ -34,22 +43,19 @@
                 {{ jobMap[jobId] ?? jobId }}
             </h2>
             <div class="grid">
-                <article v-for="item in list" :key="item.id" class="card" :class="{ treasure: item.isTreasure }">
-                    <header class="card-header">
-                        <h3 class="card-title">{{ item.name }}</h3>
-                        <span class="badge">{{ item.slotType }}</span>
-                    </header>
-                    <div class="features">
-                        <div v-for="feature in item.features" :key="feature.id" class="feature">
-                            <div class="feature-name">{{ feature.name }}</div>
-                            <div class="feature-values">
-                                <span v-for="value in feature.values" :key="value.id" class="value-tag">
-                                    {{ value.name }} {{ formatValue(value.value) }}
-                                </span>
-                            </div>
-                        </div>
+                <ShowcaseCard
+                    v-for="item in list"
+                    :key="item.id"
+                    class="card"
+                    :class="[`job-${jobId}`, { treasure: item.isTreasure }]"
+                    :title="item.name"
+                    :badge="item.slotType"
+                    icon="lucide:gem">
+                    <div v-for="feature in item.features" :key="feature.id" class="stat">
+                        <span class="stat-name">{{ feature.name }}</span>
+                        <span class="stat-value">{{ formatFeatureValues(feature, item.isTreasure) }}</span>
                     </div>
-                </article>
+                </ShowcaseCard>
             </div>
         </div>
     </section>
@@ -64,86 +70,65 @@
     .group-title {
         font-size: 1.25rem;
         margin-bottom: 16px;
-        padding-left: 12px;
-        border-left: 4px solid;
         color: #1a1612;
-    }
-    .group-title.job-zhanshi {
-        border-left-color: var(--job-zhanshi);
-    }
-    .group-title.job-sheshou {
-        border-left-color: var(--job-sheshou);
-    }
-    .group-title.job-mushi {
-        border-left-color: var(--job-mushi);
-    }
-    .group-title.job-cike {
-        border-left-color: var(--job-cike);
-    }
-    .group-title.job-fashi {
-        border-left-color: var(--job-fashi);
     }
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+    }
+    @media (max-width: 900px) {
+        .grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    @media (max-width: 480px) {
+        .grid {
+            grid-template-columns: 1fr;
+        }
     }
     .card {
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 12px;
-        padding: 14px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        --card-base: rgba(255, 255, 255, 0.72);
+        width: 100%;
+    }
+    .card.job-zhanshi {
+        --card-base: color-mix(in srgb, var(--job-zhanshi) 5%, rgba(255, 255, 255, 0.72));
+    }
+    .card.job-sheshou {
+        --card-base: color-mix(in srgb, var(--job-sheshou) 5%, rgba(255, 255, 255, 0.72));
+    }
+    .card.job-mushi {
+        --card-base: color-mix(in srgb, var(--job-mushi) 5%, rgba(255, 255, 255, 0.72));
+    }
+    .card.job-cike {
+        --card-base: color-mix(in srgb, var(--job-cike) 5%, rgba(255, 255, 255, 0.72));
+    }
+    .card.job-fashi {
+        --card-base: color-mix(in srgb, var(--job-fashi) 5%, rgba(255, 255, 255, 0.72));
     }
     .card.treasure {
         border-color: rgba(184, 114, 46, 0.55);
         box-shadow: 0 1px 4px rgba(184, 114, 46, 0.1);
     }
-    .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    .card-title {
-        font-size: 0.9375rem;
-        margin: 0;
-        color: #1a1612;
-    }
-    .badge {
-        font-size: 0.75rem;
-        padding: 2px 7px;
-        border-radius: 999px;
-        background: rgba(0, 0, 0, 0.05);
-        color: #5c4d3d;
-        white-space: nowrap;
-    }
-    .features {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-    .feature {
-        background: rgba(0, 0, 0, 0.04);
-        border-radius: 8px;
-        padding: 8px;
-    }
-    .feature-name {
-        font-size: 0.75rem;
-        color: #7c6b55;
-        margin-bottom: 4px;
-    }
-    .feature-values {
+    .stat {
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
-    }
-    .value-tag {
+        justify-content: space-between;
+        gap: 2px 8px;
         font-size: 0.75rem;
-        padding: 2px 7px;
+        padding: 5px 8px;
         border-radius: 6px;
-        background: rgba(255, 255, 255, 0.6);
+        background: rgba(0, 0, 0, 0.04);
+    }
+    .stat-name {
+        color: #7c6b55;
+        flex-shrink: 0;
+    }
+    .stat-value {
         color: #1a1612;
+        font-weight: 500;
+        text-align: right;
+        min-width: 0;
+        word-break: break-word;
     }
 </style>

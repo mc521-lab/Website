@@ -1,5 +1,7 @@
 <script setup lang="ts">
     import { data } from "@data/gems.data";
+    import type { WikiGemQuality, WikiGemQualityFeature } from "../../../types/wiki";
+    import ShowcaseCard from "./ShowcaseCard.vue";
 
     const { gems } = data;
 
@@ -13,18 +15,22 @@
         }
         return String(value);
     }
+
+    function imageUrl(path: string | null): string | undefined {
+        if (!path) return undefined;
+        return `/wiki/itemwiki/${path}`;
+    }
 </script>
 
 <template>
     <section class="showcase">
-        <article v-for="gem in gems" :key="gem.id" class="card">
-            <header class="card-header">
-                <span class="symbol" :style="{ borderColor: gem.symbolColor, backgroundColor: gem.symbolColor + '18' }">
-                    {{ gem.name.charAt(0) }}
-                </span>
-                <h3 class="card-title">{{ gem.name }}</h3>
-            </header>
-
+        <ShowcaseCard
+            v-for="gem in gems"
+            :key="gem.id"
+            class="card"
+            :title="gem.name"
+            :image="imageUrl(gem.image)"
+            icon="lucide:diamond">
             <table class="quality-table">
                 <thead>
                     <tr>
@@ -37,20 +43,23 @@
                     <tr
                         v-for="q in gem.qualitys
                             .slice()
-                            .sort((a, b) => qualityOrder.indexOf(a.id) - qualityOrder.indexOf(b.id))"
+                            .sort(
+                                (a: WikiGemQuality, b: WikiGemQuality) =>
+                                    qualityOrder.indexOf(a.id) - qualityOrder.indexOf(b.id)
+                            )"
                         :key="q.id">
                         <td class="quality-cell">{{ qualityName[q.id as keyof typeof qualityName] }} 级</td>
                         <td class="desc-cell">{{ q.description }}</td>
                         <td v-for="feature in gem.features" :key="feature.id">
-                            <template v-if="q.features.find((f) => f.id === feature.id)">
-                                {{ formatValue(q.features.find((f) => f.id === feature.id)!.value) }}
+                            <template v-if="q.features.find((f: WikiGemQualityFeature) => f.id === feature.id)">
+                                {{ formatValue(q.features.find((f: WikiGemQualityFeature) => f.id === feature.id)!.value) }}
                             </template>
                             <template v-else>-</template>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </article>
+        </ShowcaseCard>
     </section>
 </template>
 
@@ -61,34 +70,7 @@
         gap: 24px;
     }
     .card {
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    }
-    .card-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 14px;
-    }
-    .symbol {
-        width: 34px;
-        height: 34px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        border: 1px solid;
-        font-weight: 700;
-        font-size: 1rem;
-        color: #1a1612;
-    }
-    .card-title {
-        font-size: 1.1rem;
-        margin: 0;
-        color: #1a1612;
+        width: 100%;
     }
     .quality-table {
         width: 100%;

@@ -1,52 +1,52 @@
 <script setup lang="ts">
     import { useData } from "vitepress";
-    import Icon, { IconName } from "./Icon.vue";
+    import Icon from "./Icon.vue";
 
     const { page } = useData();
 
-    type NavItem = { text: string; link: string; icon: IconName };
+    type NavItem = { text: string; link: string; icon: string };
     type NavGroup = { label: string; items: NavItem[] };
 
     const groups: NavGroup[] = [
         {
             label: "服务器规则",
             items: [
-                { text: "基本规则", link: "/wiki/rules/basic.html", icon: "book" },
-                { text: "附录：裁定标准", link: "/wiki/rules/adjudication.html", icon: "check-circle" },
-                { text: "附录：惩罚制度", link: "/wiki/rules/punishment.html", icon: "hammer" },
-                { text: "附录：处理政策", link: "/wiki/rules/policy.html", icon: "message" },
+                { text: "基本规则", link: "/wiki/rules/basic.html", icon: "lucide:book" },
+                { text: "附录：裁定标准", link: "/wiki/rules/adjudication.html", icon: "lucide:circle-check" },
+                { text: "附录：惩罚制度", link: "/wiki/rules/punishment.html", icon: "lucide:gavel" },
+                { text: "附录：处理政策", link: "/wiki/rules/policy.html", icon: "lucide:message-square" },
             ],
         },
         {
             label: "新手指引",
             items: [
-                { text: "常用指令", link: "/wiki/beginner/common-commands.html", icon: "command" },
-                { text: "如何圈地", link: "/wiki/beginner/how-to-claim-land.html", icon: "landmark" },
-                { text: "如何赚取金币", link: "/wiki/beginner/how-to-earn-money.html", icon: "coin" },
-                { text: "如何创建箱子商店", link: "/wiki/beginner/how-to-create-quickshop.html", icon: "chest" },
-                { text: "如何更换皮肤", link: "/wiki/beginner/how-to-change-skin.html", icon: "skin" },
-                { text: "如何绑定 Bilibili", link: "/wiki/beginner/how-to-bind-bilibili.html", icon: "video" },
+                { text: "常用指令", link: "/wiki/beginner/common-commands.html", icon: "lucide:command" },
+                { text: "如何圈地", link: "/wiki/beginner/how-to-claim-land.html", icon: "lucide:landmark" },
+                { text: "如何赚取金币", link: "/wiki/beginner/how-to-earn-money.html", icon: "lucide:coins" },
+                { text: "如何创建箱子商店", link: "/wiki/beginner/how-to-create-quickshop.html", icon: "lucide:package-open" },
+                { text: "如何更换皮肤", link: "/wiki/beginner/how-to-change-skin.html", icon: "lucide:sparkles" },
+                { text: "如何绑定 Bilibili", link: "/wiki/beginner/how-to-bind-bilibili.html", icon: "lucide:video" },
             ],
         },
         {
             label: "物品图鉴",
             items: [
-                { text: "职业武器", link: "/wiki/item/weapons.html", icon: "sword" },
-                { text: "职业套装", link: "/wiki/item/equipment.html", icon: "briefcase" },
-                { text: "饰品图鉴", link: "/wiki/item/jewelries.html", icon: "gem" },
-                { text: "宝石图鉴", link: "/wiki/item/gems.html", icon: "gem" },
-                { text: "材料图鉴", link: "/wiki/item/materials.html", icon: "apple" },
-                { text: "工具图鉴", link: "/wiki/item/tools.html", icon: "hammer" },
-                { text: "附魔图鉴", link: "/wiki/item/enchantments.html", icon: "star" },
+                { text: "职业武器", link: "/wiki/item/weapons.html", icon: "lucide:sword" },
+                { text: "职业套装", link: "/wiki/item/equipment.html", icon: "lucide:briefcase" },
+                { text: "饰品图鉴", link: "/wiki/item/jewelries.html", icon: "lucide:gem" },
+                { text: "宝石图鉴", link: "/wiki/item/gems.html", icon: "lucide:diamond" },
+                { text: "材料图鉴", link: "/wiki/item/materials.html", icon: "lucide:apple" },
+                { text: "工具图鉴", link: "/wiki/item/tools.html", icon: "lucide:hammer" },
+                { text: "附魔图鉴", link: "/wiki/item/enchantments.html", icon: "lucide:star" },
             ],
         },
         {
             label: "公会系统",
             items: [
-                { text: "公会神石", link: "/wiki/playerguard/stone.html", icon: "gem" },
-                { text: "公会维护资金", link: "/wiki/playerguard/maintainance-funds.html", icon: "wallet" },
-                { text: "公会升级", link: "/wiki/playerguard/update.html", icon: "arrow-up" },
-                { text: "常见问题", link: "/wiki/playerguard/common-questions.html", icon: "help-circle" },
+                { text: "公会神石", link: "/wiki/playerguard/stone.html", icon: "lucide:gem" },
+                { text: "公会维护资金", link: "/wiki/playerguard/maintainance-funds.html", icon: "lucide:wallet" },
+                { text: "公会升级", link: "/wiki/playerguard/update.html", icon: "lucide:arrow-up" },
+                { text: "常见问题", link: "/wiki/playerguard/common-questions.html", icon: "lucide:circle-help" },
             ],
         },
     ];
@@ -63,7 +63,7 @@
 
 <template>
     <aside class="wiki-sidebar">
-        <a href="/wiki/rules/basic.html" class="sidebar-logo">君庭阁 Wiki</a>
+        <span class="sidebar-logo">君庭阁 Wiki</span>
 
         <div v-for="group in groups" :key="group.label" class="sidebar-group">
             <div class="sidebar-group-label">{{ group.label }}</div>
@@ -100,10 +100,6 @@
         text-decoration: none;
         padding: 0 var(--space-4) var(--space-4);
         white-space: nowrap;
-    }
-
-    .sidebar-logo:hover {
-        color: var(--accent-hover);
     }
 
     .sidebar-group {

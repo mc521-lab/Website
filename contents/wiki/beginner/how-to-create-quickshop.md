@@ -1,5 +1,5 @@
 ---
-title: "💵 如何创建箱子商店"
+title: "如何创建箱子商店"
 ---
 
 ## 箱子的作用
@@ -12,11 +12,11 @@ title: "💵 如何创建箱子商店"
 
 1. 比如你要出售你的铁锭，那么请拿着铁锭按照下方动图操作
 
-     <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/qs/1743534175615-5ff02da0-604f-42c5-866f-8bd485acc2fd.webm" />
+       <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/qs/1743534175615-5ff02da0-604f-42c5-866f-8bd485acc2fd.webm" />
 
 2. 如果你想把箱子商店转为收购模式，或者想修改箱子商店的价格，请对着箱子右键！然后按照下方的动图进行操作即可！
 
-     <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/qs/1743534872032-063ca83f-8f37-4a58-9925-44b13cdf05e2.webm" />
+       <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/qs/1743534872032-063ca83f-8f37-4a58-9925-44b13cdf05e2.webm" />
 
 ## 如何定价格
 

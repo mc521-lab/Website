@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { computed } from "vue";
     import { data } from "@data/materials.data";
+    import ShowcaseCard from "./ShowcaseCard.vue";
 
     const { materials } = data;
 
@@ -13,6 +14,11 @@
         }
         return groups;
     });
+
+    function imageUrl(path?: string): string | undefined {
+        if (!path) return undefined;
+        return `/wiki/itemwiki/${path}`;
+    }
 </script>
 
 <template>
@@ -20,15 +26,24 @@
         <div v-for="(list, typeName) in byType" :key="typeName" class="group">
             <h2 class="group-title">{{ typeName }}</h2>
             <div class="grid">
-                <article v-for="item in list" :key="item.id" class="card">
-                    <header class="card-header">
-                        <h3 class="card-title">{{ item.name }}</h3>
-                        <span class="badge">{{ item.quality }}</span>
-                    </header>
+                <ShowcaseCard
+                    v-for="item in list"
+                    :key="item.id"
+                    class="card"
+                    :title="item.name"
+                    :badge="item.quality"
+                    :image="imageUrl(item.image)"
+                    icon="lucide:box">
                     <p class="card-desc">{{ item.description }}</p>
-                    <div v-if="item.effect" class="effect"><strong>效果：</strong>{{ item.effect }}</div>
-                    <div v-if="item.source" class="source"><strong>来源：</strong>{{ item.source }}</div>
-                </article>
+                    <div v-if="item.effect" class="meta-row">
+                        <span class="meta-label">效果</span>
+                        <span class="meta-value">{{ item.effect }}</span>
+                    </div>
+                    <div v-if="item.source" class="meta-row">
+                        <span class="meta-label">来源</span>
+                        <span class="meta-value">{{ item.source }}</span>
+                    </div>
+                </ShowcaseCard>
             </div>
         </div>
     </section>
@@ -51,51 +66,26 @@
         gap: 14px;
     }
     .card {
-        background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 12px;
-        padding: 14px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    }
-    .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    .card-title {
-        font-size: 0.9375rem;
-        margin: 0;
-        color: #1a1612;
-    }
-    .badge {
-        font-size: 0.75rem;
-        padding: 2px 7px;
-        border-radius: 999px;
-        background: rgba(0, 0, 0, 0.05);
-        color: #5c4d3d;
-        white-space: nowrap;
+        width: 100%;
     }
     .card-desc {
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
         color: #5c4d3d;
         line-height: 1.5;
-        margin-bottom: 12px;
+        margin: 0;
         white-space: pre-line;
     }
-    .effect,
-    .source {
+    .meta-row {
+        display: flex;
+        gap: 8px;
         font-size: 0.8125rem;
         line-height: 1.5;
-        color: #1a1612;
     }
-    .effect strong,
-    .source strong {
+    .meta-label {
         color: #7c6b55;
-        font-weight: 500;
+        flex-shrink: 0;
     }
-    .effect {
-        margin-bottom: 6px;
+    .meta-value {
+        color: #1a1612;
     }
 </style>

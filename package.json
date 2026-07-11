@@ -8,15 +8,23 @@
         "dev": "vitepress dev",
         "build": "vitepress build",
         "preview": "vitepress preview",
-        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,vue,md,css,yaml,json}\""
+        "type-check": "vue-tsc --noEmit",
+        "format": "prettier --write \"**/*.{js,jsx,ts,mts,tsx,vue,md,css,yaml,json}\""
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "packageManager": "pnpm@11.11.0",
     "devDependencies": {
+        "@types/node": "^26.1.1",
         "prettier": "^3.9.5",
+        "typescript": "^5.9.3",
+        "vite": "^8.1.4",
         "vitepress": "2.0.0-alpha.18",
-        "vue": "^3.5.39"
+        "vue": "^3.5.39",
+        "vue-tsc": "^3.3.7"
+    },
+    "dependencies": {
+        "@iconify/vue": "^5.0.1"
     }
 }

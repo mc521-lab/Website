@@ -19,6 +19,6 @@ title: "如何更换皮肤"
 
 1. 方法一：输入指令 `/skins` 然后按照下方图片进行操作 （缺点是大家都可以用,不能独一无二）
 
-       <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/skin/1743532315199-5b67c561-2a34-41d2-9e02-a56bf6ca533a.webm" />
+     <video muted autoplay loop style="width: 1024px; height: auto;" src="/wiki/beginner/skin/1743532315199-5b67c561-2a34-41d2-9e02-a56bf6ca533a.webm" />
 
 2. 方法二：观看该视频：[更换皮肤教程](https://www.bilibili.com/video/BV1z3vFzBEQ8) （保证一看就会，学会后可更换上千万个皮肤！）

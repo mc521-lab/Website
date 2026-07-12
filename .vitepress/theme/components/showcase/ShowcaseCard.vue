@@ -85,8 +85,8 @@
         color: #7c6b55;
     }
     .media-image {
-        width: 100%;
-        height: 100%;
+        width: 85%;
+        height: 85%;
         object-fit: contain;
         border-radius: 8px;
     }

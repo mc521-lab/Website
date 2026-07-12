@@ -42,7 +42,7 @@
             </a>
         </nav>
 
-        <a :href="qqGroupLink" class="cta">
+        <a :href="qqGroupLink" target="_blank" rel="noopener noreferrer" class="cta">
             <Icon name="lucide:users" :size="18" />
             <span>加入QQ群</span>
         </a>

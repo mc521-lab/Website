@@ -1,5 +1,5 @@
 ---
-title: "装备图鉴"
+title: "职业套装"
 ---
 
 <script setup>

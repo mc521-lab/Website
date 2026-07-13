@@ -74,7 +74,7 @@
     }
     .grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 10px;
     }
     @media (max-width: 900px) {
@@ -92,18 +92,23 @@
         width: 100%;
     }
     .card.job-zhanshi {
+        --card-mix: var(--job-zhanshi);
         --card-base: color-mix(in srgb, var(--job-zhanshi) 5%, rgba(255, 255, 255, 0.72));
     }
     .card.job-sheshou {
+        --card-mix: var(--job-sheshou);
         --card-base: color-mix(in srgb, var(--job-sheshou) 5%, rgba(255, 255, 255, 0.72));
     }
     .card.job-mushi {
+        --card-mix: var(--job-mushi);
         --card-base: color-mix(in srgb, var(--job-mushi) 5%, rgba(255, 255, 255, 0.72));
     }
     .card.job-cike {
+        --card-mix: var(--job-cike);
         --card-base: color-mix(in srgb, var(--job-cike) 5%, rgba(255, 255, 255, 0.72));
     }
     .card.job-fashi {
+        --card-mix: var(--job-fashi);
         --card-base: color-mix(in srgb, var(--job-fashi) 5%, rgba(255, 255, 255, 0.72));
     }
     .card.treasure {

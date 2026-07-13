@@ -10,7 +10,7 @@
 </script>
 
 <template>
-    <article class="showcase-card">
+    <article :class="['showcase-card', title.includes('秘宝') ? 'treasure' : '']">
         <header class="card-header">
             <h3 class="card-title">{{ title }}</h3>
             <slot name="badge">
@@ -40,6 +40,10 @@
         padding: 12px;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         overflow: hidden;
+    }
+    .treasure {
+        grid-column: span 3;
+        background: color-mix(in srgb, var(--card-mix) 5%, var(--card-base, rgba(255, 255, 255, 0.72)));
     }
     .card-header {
         display: flex;

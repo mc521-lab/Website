@@ -1,14 +1,22 @@
 <script setup lang="ts">
-    import { computed } from "vue";
+    import { computed, ref } from "vue";
     import { data } from "@data/jewelries.data";
-    import type { WikiJewelryFeatureValue } from "../../../types/wiki";
-    import ShowcaseCard from "./ShowcaseCard.vue";
+    import type { WikiJewelry } from "../../../types/wiki";
+    import JewelryCard from "./JewelryCard.vue";
+    import Icon from "../Icon.vue";
 
-    const { manifest, jewelries } = data;
+    const { jobs, jewelries } = data;
+
+    const selectedJob = ref<string>("all");
+
+    const filteredJewelries = computed(() => {
+        if (selectedJob.value === "all") return jewelries;
+        return jewelries.filter((item: WikiJewelry) => item.jobId === selectedJob.value);
+    });
 
     const byJob = computed(() => {
         const groups: Record<string, typeof jewelries> = {};
-        for (const item of jewelries) {
+        for (const item of filteredJewelries.value) {
             groups[item.jobId] ??= [];
             groups[item.jobId].push(item);
         }
@@ -17,46 +25,48 @@
 
     const jobMap = computed(() => {
         const map: Record<string, string> = {};
-        for (const job of manifest.metadata.jobEntries) {
+        for (const job of jobs) {
             map[job.id] = job.name;
         }
         return map;
     });
-
-    function formatValue(value: number[]): string {
-        if (!Array.isArray(value)) return String(value);
-        return value.join(" ~ ");
-    }
-
-    function formatFeatureValues(feature: (typeof jewelries)[number]["features"][number], isTreasure: boolean): string {
-        if (isTreasure) {
-            return feature.values.map((v: WikiJewelryFeatureValue) => `${v.name} ${formatValue(v.value)}`).join(" / ");
-        }
-        return feature.values.map((v: WikiJewelryFeatureValue) => formatValue(v.value)).join(" / ");
-    }
 </script>
 
 <template>
     <section class="showcase">
-        <div v-for="(list, jobId) in byJob" :key="jobId" class="group">
-            <h2 class="group-title" :class="`job-${jobId}`">
-                {{ jobMap[jobId] ?? jobId }}
-            </h2>
-            <div class="grid">
-                <ShowcaseCard
-                    v-for="item in list"
-                    :key="item.id"
-                    class="card"
-                    :class="[`job-${jobId}`, { treasure: item.isTreasure }]"
-                    :title="item.name"
-                    :badge="item.slotType"
-                    icon="lucide:gem">
-                    <div v-for="feature in item.features" :key="feature.id" class="stat">
-                        <span class="stat-name">{{ feature.name }}</span>
-                        <span class="stat-value">{{ formatFeatureValues(feature, item.isTreasure) }}</span>
-                    </div>
-                </ShowcaseCard>
+        <div class="filter-bar">
+            <div class="filter-group">
+                <span class="filter-label">
+                    <Icon name="lucide:user" :size="16" />
+                    职业
+                </span>
+                <div class="filter-pills">
+                    <button
+                        class="filter-pill"
+                        :class="{ active: selectedJob === 'all' }"
+                        @click="selectedJob = 'all'">
+                        全部
+                    </button>
+                    <button
+                        v-for="job in jobs"
+                        :key="job.id"
+                        class="filter-pill"
+                        :class="{ active: selectedJob === job.id }"
+                        @click="selectedJob = job.id">
+                        {{ job.name }}
+                    </button>
+                </div>
             </div>
+        </div>
+        <div v-for="(list, jobId) in byJob" :key="jobId" class="group">
+            <h2 class="group-title">{{ jobMap[jobId] ?? jobId }}</h2>
+            <div class="grid">
+                <JewelryCard v-for="item in list" :key="item.id" :item="item" />
+            </div>
+        </div>
+        <div v-if="Object.keys(byJob).length === 0" class="empty-state">
+            <Icon name="lucide:search-x" :size="32" />
+            <p>没有符合条件的饰品</p>
         </div>
     </section>
 </template>
@@ -65,75 +75,108 @@
     .showcase {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 20px;
     }
+
+    .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        padding: 12px 14px;
+        border-radius: var(--radius-xl);
+        background: rgba(255, 250, 242, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        margin-bottom: -32px;
+    }
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .filter-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: #5c4d3d;
+        flex-shrink: 0;
+    }
+
+    .filter-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .filter-pill {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.6);
+        color: #5c4d3d;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+            background 0.15s ease,
+            color 0.15s ease,
+            border-color 0.15s ease,
+            box-shadow 0.15s ease;
+    }
+
+    .filter-pill:hover {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(184, 114, 46, 0.4);
+    }
+
+    .filter-pill.active {
+        background: rgba(184, 114, 46, 0.15);
+        color: #1a1612;
+        border-color: rgba(184, 114, 46, 0.5);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 48px 16px;
+        color: #7c6b55;
+        font-size: 0.9375rem;
+    }
+
+    .empty-state p {
+        margin: 0;
+    }
+
     .group-title {
         font-size: 1.25rem;
+        margin-top: 8px;
         margin-bottom: 16px;
         color: #1a1612;
     }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 10px;
+        gap: 14px;
     }
-    @media (max-width: 900px) {
+
+    @media (max-width: 1100px) {
         .grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
     }
-    @media (max-width: 480px) {
+
+    @media (max-width: 640px) {
         .grid {
             grid-template-columns: 1fr;
         }
-    }
-    .card {
-        --card-base: rgba(255, 255, 255, 0.72);
-        width: 100%;
-    }
-    .card.job-zhanshi {
-        --card-mix: var(--job-zhanshi);
-        --card-base: color-mix(in srgb, var(--job-zhanshi) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-sheshou {
-        --card-mix: var(--job-sheshou);
-        --card-base: color-mix(in srgb, var(--job-sheshou) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-mushi {
-        --card-mix: var(--job-mushi);
-        --card-base: color-mix(in srgb, var(--job-mushi) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-cike {
-        --card-mix: var(--job-cike);
-        --card-base: color-mix(in srgb, var(--job-cike) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-fashi {
-        --card-mix: var(--job-fashi);
-        --card-base: color-mix(in srgb, var(--job-fashi) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.treasure {
-        border-color: rgba(184, 114, 46, 0.55);
-        box-shadow: 0 1px 4px rgba(184, 114, 46, 0.1);
-    }
-    .stat {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 2px 8px;
-        font-size: 0.75rem;
-        padding: 5px 8px;
-        border-radius: 6px;
-        background: rgba(0, 0, 0, 0.04);
-    }
-    .stat-name {
-        color: #7c6b55;
-        flex-shrink: 0;
-    }
-    .stat-value {
-        color: #1a1612;
-        font-weight: 500;
-        text-align: right;
-        min-width: 0;
-        word-break: break-word;
     }
 </style>

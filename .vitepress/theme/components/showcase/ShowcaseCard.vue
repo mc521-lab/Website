@@ -34,16 +34,24 @@
     .showcase-card {
         display: flex;
         flex-direction: column;
-        background: var(--card-base, rgba(255, 255, 255, 0.72));
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 12px;
+        background: var(--card-base, rgba(255, 250, 242, 0.95));
+        border: 1px solid var(--card-border, rgba(0, 0, 0, 0.08));
+        border-radius: var(--radius-xl);
         padding: 12px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         overflow: hidden;
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease;
     }
+
+    .showcase-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
     .treasure {
         grid-column: span 3;
-        background: color-mix(in srgb, var(--card-mix) 5%, var(--card-base, rgba(255, 255, 255, 0.72)));
     }
     .card-header {
         display: flex;

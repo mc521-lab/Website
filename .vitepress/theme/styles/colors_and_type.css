@@ -28,7 +28,6 @@
     --jtg-success-700: #13803a;
     --jtg-success-800: #116533;
     --jtg-success-900: #0e522c;
-    --jtg-success-500: #22b554;
 
     /* warning */
     --jtg-warning-50: #fffbeb;
@@ -41,7 +40,6 @@
     --jtg-warning-700: #b45309;
     --jtg-warning-800: #92400e;
     --jtg-warning-900: #78350f;
-    --jtg-warning-500: #f59e0b;
 
     /* error */
     --jtg-error-50: #fef2f2;
@@ -54,7 +52,6 @@
     --jtg-error-700: #b91c1c;
     --jtg-error-800: #991b1b;
     --jtg-error-900: #7f1d1d;
-    --jtg-error-500: #ef4444;
 
     /* info */
     --jtg-info-50: #eff6ff;
@@ -67,7 +64,6 @@
     --jtg-info-700: #1d4ed8;
     --jtg-info-800: #1e40af;
     --jtg-info-900: #1e3a8a;
-    --jtg-info-500: #3b82f6;
 
     /* surface */
     --background: #1a1612;

@@ -34,10 +34,6 @@
                 { text: "职业武器", link: "/wiki/item/weapons.html", icon: "lucide:sword" },
                 { text: "职业套装", link: "/wiki/item/equipment.html", icon: "lucide:briefcase" },
                 { text: "饰品图鉴", link: "/wiki/item/jewelries.html", icon: "lucide:gem" },
-                { text: "宝石图鉴", link: "/wiki/item/gems.html", icon: "lucide:diamond" },
-                { text: "材料图鉴", link: "/wiki/item/materials.html", icon: "lucide:apple" },
-                { text: "工具图鉴", link: "/wiki/item/tools.html", icon: "lucide:hammer" },
-                { text: "附魔图鉴", link: "/wiki/item/enchantments.html", icon: "lucide:star" },
             ],
         },
         {

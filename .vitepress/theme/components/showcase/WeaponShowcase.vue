@@ -1,13 +1,22 @@
 <script setup lang="ts">
-    import { computed } from "vue";
-    import { data } from "@data/equipment.data";
-    import ShowcaseCard from "./ShowcaseCard.vue";
+    import { computed, ref } from "vue";
+    import { data } from "@data/weapon.data";
+    import type { WikiEquipment } from "../../../types/wiki";
+    import WeaponCard from "./WeaponCard.vue";
+    import Icon from "../Icon.vue";
 
     const { jobs, weapons } = data;
 
+    const selectedJob = ref<string>("all");
+
+    const filteredWeapons = computed(() => {
+        if (selectedJob.value === "all") return weapons;
+        return weapons.filter((item: WikiEquipment) => item.jobId === selectedJob.value);
+    });
+
     const byJob = computed(() => {
         const groups: Record<string, typeof weapons> = {};
-        for (const item of weapons) {
+        for (const item of filteredWeapons.value) {
             groups[item.jobId] ??= [];
             groups[item.jobId].push(item);
         }
@@ -25,29 +34,44 @@
 
 <template>
     <section class="showcase">
+        <div class="filter-bar">
+            <div class="filter-group">
+                <span class="filter-label">
+                    <Icon name="lucide:user" :size="16" />
+                    职业
+                </span>
+                <div class="filter-pills">
+                    <button
+                        class="filter-pill"
+                        :class="{ active: selectedJob === 'all' }"
+                        @click="selectedJob = 'all'">
+                        全部
+                    </button>
+                    <button
+                        v-for="job in jobs"
+                        :key="job.id"
+                        class="filter-pill"
+                        :class="{ active: selectedJob === job.id }"
+                        @click="selectedJob = job.id">
+                        {{ job.name }}
+                    </button>
+                </div>
+            </div>
+        </div>
         <div v-for="(list, jobId) in byJob" :key="jobId" class="group">
             <h2 class="group-title">{{ jobMap[jobId] ?? jobId }}</h2>
             <div class="grid">
-                <ShowcaseCard
+                <WeaponCard
                     v-for="item in list"
                     :key="item.id"
                     class="card"
                     :class="`job-${jobId}`"
-                    :title="item.name"
-                    :badge="item.quality"
-                    icon="lucide:sword">
-                    <div class="stats">
-                        <div v-for="stat in item.stats" :key="stat.id" class="stat">
-                            <span class="stat-name">{{ stat.name }}</span>
-                            <span class="stat-value">{{ stat.value }}{{ stat.unit ?? "" }}</span>
-                        </div>
-                    </div>
-                    <div class="slots">
-                        <span>附魔槽 {{ item.enchantSlots }}</span>
-                        <span>宝石槽 {{ item.gemSlots }}</span>
-                    </div>
-                </ShowcaseCard>
+                    :item="item" />
             </div>
+        </div>
+        <div v-if="Object.keys(byJob).length === 0" class="empty-state">
+            <Icon name="lucide:search-x" :size="32" />
+            <p>没有符合条件的武器</p>
         </div>
     </section>
 </template>
@@ -56,10 +80,88 @@
     .showcase {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 20px;
+    }
+
+    .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        padding: 12px 14px;
+        border-radius: var(--radius-xl);
+        background: rgba(255, 250, 242, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        margin-bottom: -32px;
+    }
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .filter-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        color: #5c4d3d;
+        flex-shrink: 0;
+    }
+
+    .filter-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .filter-pill {
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(255, 255, 255, 0.6);
+        color: #5c4d3d;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+            background 0.15s ease,
+            color 0.15s ease,
+            border-color 0.15s ease,
+            box-shadow 0.15s ease;
+    }
+
+    .filter-pill:hover {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(184, 114, 46, 0.4);
+    }
+
+    .filter-pill.active {
+        background: rgba(184, 114, 46, 0.15);
+        color: #1a1612;
+        border-color: rgba(184, 114, 46, 0.5);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 48px 16px;
+        color: #7c6b55;
+        font-size: 0.9375rem;
+    }
+
+    .empty-state p {
+        margin: 0;
     }
     .group-title {
         font-size: 1.25rem;
+        margin-top: 8px;
         margin-bottom: 16px;
         color: #1a1612;
     }
@@ -69,56 +171,7 @@
         gap: 12px;
     }
     .card {
-        --card-base: rgba(255, 255, 255, 0.72);
         width: 100%;
-    }
-    .card.job-zhanshi {
-        --card-base: color-mix(in srgb, var(--job-zhanshi) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-sheshou {
-        --card-base: color-mix(in srgb, var(--job-sheshou) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-mushi {
-        --card-base: color-mix(in srgb, var(--job-mushi) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-cike {
-        --card-base: color-mix(in srgb, var(--job-cike) 5%, rgba(255, 255, 255, 0.72));
-    }
-    .card.job-fashi {
-        --card-base: color-mix(in srgb, var(--job-fashi) 5%, rgba(255, 255, 255, 0.72));
-    }
-    :deep(.badge) {
-        background: rgba(212, 137, 58, 0.12);
-        color: #b8722e;
-    }
-    .stats {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-    .stat {
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
-        font-size: 0.75rem;
-        padding: 5px 6px;
-        border-radius: 6px;
-        background: rgba(0, 0, 0, 0.04);
-    }
-    .stat-name {
-        color: #7c6b55;
-    }
-    .stat-value {
-        color: #1a1612;
-        font-weight: 500;
-    }
-    .slots {
-        display: flex;
-        gap: 10px;
-        font-size: 0.75rem;
-        color: #7c6b55;
-        margin-top: auto;
-        padding-top: 4px;
     }
     @media (max-width: 1200px) {
         .grid {

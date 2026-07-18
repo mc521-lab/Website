@@ -34,6 +34,7 @@
                 { text: "职业武器", link: "/wiki/item/weapons.html", icon: "lucide:sword" },
                 { text: "职业套装", link: "/wiki/item/equipment.html", icon: "lucide:briefcase" },
                 { text: "饰品图鉴", link: "/wiki/item/jewelries.html", icon: "lucide:gem" },
+                { text: "宝石图鉴", link: "/wiki/item/gems.html", icon: "lucide:diamond" },
             ],
         },
         {

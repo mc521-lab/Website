@@ -82,3 +82,34 @@ export interface WikiJewelries {
     jobs: { id: string; name: string }[];
     jewelries: WikiJewelry[];
 }
+
+export interface WikiGemFeature {
+    id: string;
+    name: string;
+}
+
+export interface WikiGemQualityFeature {
+    id: string;
+    value: number | number[] | null;
+}
+
+export interface WikiGemQuality {
+    id: string;
+    name: string;
+    description: string;
+    features: WikiGemQualityFeature[];
+}
+
+export interface WikiGem {
+    id: string;
+    name: string;
+    symbolColor: string;
+    description: string;
+    image: string | null;
+    features: WikiGemFeature[];
+    qualitys: WikiGemQuality[];
+}
+
+export interface WikiGems {
+    gems: WikiGem[];
+}

@@ -14,3 +14,8 @@ declare module "@data/jewelries.data" {
     import type { WikiJewelries } from "./types/wiki";
     export const data: WikiJewelries;
 }
+
+declare module "@data/gems.data" {
+    import type { WikiGems } from "./types/wiki";
+    export const data: WikiGems;
+}

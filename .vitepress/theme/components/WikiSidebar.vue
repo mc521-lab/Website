@@ -35,6 +35,7 @@
                 { text: "职业套装", link: "/wiki/item/equipment.html", icon: "lucide:briefcase" },
                 { text: "饰品图鉴", link: "/wiki/item/jewelries.html", icon: "lucide:gem" },
                 { text: "宝石图鉴", link: "/wiki/item/gems.html", icon: "lucide:diamond" },
+                { text: "附魔图鉴", link: "/wiki/item/enchantments.html", icon: "lucide:book-open" },
             ],
         },
         {

@@ -113,3 +113,62 @@ export interface WikiGem {
 export interface WikiGems {
     gems: WikiGem[];
 }
+
+export interface WikiManifestType {
+    name: string;
+    color: string;
+}
+
+export interface WikiManifestRarity {
+    name: string;
+    color: string;
+    order: number;
+}
+
+export interface WikiEnchantEffect {
+    id: string;
+    description: string;
+    [key: string]: unknown;
+}
+
+export interface WikiEnchantValue {
+    id: string;
+    name: string;
+    formula: string;
+    unit: string;
+    description: string;
+}
+
+export interface WikiEnchantCondition {
+    id: string;
+    description: string;
+}
+
+export interface WikiEnchant {
+    id: string;
+    displayName: string;
+    description: string;
+    type: "vanilla" | "extension";
+    rarity: string;
+    targets: string[];
+    conflicts: string[];
+    maxLevel: number;
+    tradeable: boolean;
+    discoverable: boolean;
+    enchantable: boolean;
+    effects: WikiEnchantEffect[];
+    values: WikiEnchantValue[];
+    conditions: WikiEnchantCondition[];
+    typeName: string;
+    rarityName: string;
+}
+
+export interface WikiEnchants {
+    manifest: {
+        version: string;
+        types: Record<string, WikiManifestType>;
+        rarities: Record<string, WikiManifestRarity>;
+        enchants: string[];
+    };
+    enchants: WikiEnchant[];
+}

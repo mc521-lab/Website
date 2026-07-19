@@ -19,3 +19,8 @@ declare module "@data/gems.data" {
     import type { WikiGems } from "./types/wiki";
     export const data: WikiGems;
 }
+
+declare module "@data/enchantments.data" {
+    import type { WikiEnchants } from "./types/wiki";
+    export const data: WikiEnchants;
+}

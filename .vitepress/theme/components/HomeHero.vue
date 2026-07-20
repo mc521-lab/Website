@@ -24,9 +24,9 @@
         },
     ];
 
-    const status = [
-        { type: "dot", text: "在线玩家 42人", color: "#22c55e" },
-        { type: "icon", text: "版本 1.21.4", icon: "lucide:leaf" },
+    const status: Array<{ type: "dot" | "icon"; text: string; icon?: string; color?: string }> = [
+        // { type: "dot", text: "在线玩家 42人", color: "#22c55e" },
+        { type: "icon", text: "版本 1.21.11", icon: "lucide:leaf" },
         { type: "icon", text: "IP mc521.cc", icon: "lucide:globe" },
     ];
 </script>

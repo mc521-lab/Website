@@ -106,81 +106,78 @@
 <template>
     <section class="showcase">
         <div class="filter-bar">
-            <div class="filter-group">
-                <span class="filter-label">
-                    <Icon name="lucide:tags" :size="16" />
-                    类型
-                </span>
-                <div class="filter-pills">
-                    <button
-                        class="filter-pill"
-                        :class="{ active: selectedType === 'all' }"
-                        @click="selectedType = 'all'">
-                        全部
-                    </button>
-                    <button
-                        class="filter-pill type-pill"
-                        :class="{ active: selectedType === 'armor' }"
-                        :style="selectedType === 'armor' ? { background: '#3b82f620', color: '#2563eb', borderColor: '#3b82f650' } : {}"
-                        @click="selectedType = 'armor'">
-                        防具
-                    </button>
-                    <button
-                        class="filter-pill type-pill"
-                        :class="{ active: selectedType === 'weapon' }"
-                        :style="selectedType === 'weapon' ? { background: '#ef444420', color: '#dc2626', borderColor: '#ef444450' } : {}"
-                        @click="selectedType = 'weapon'">
-                        武器
-                    </button>
-                    <button
-                        class="filter-pill type-pill"
-                        :class="{ active: selectedType === 'tool' }"
-                        :style="selectedType === 'tool' ? { background: '#10b98120', color: '#059669', borderColor: '#10b98150' } : {}"
-                        @click="selectedType = 'tool'">
-                        工具
-                    </button>
-                </div>
+            <div class="filter-group filter-search">
+                <Icon name="lucide:search" :size="16" class="search-icon" />
+                <input
+                    v-model="searchQuery"
+                    type="text"
+                    placeholder="输入附魔名称..."
+                    class="search-input" />
+                <button
+                    v-if="searchQuery"
+                    class="search-clear"
+                    @click="searchQuery = ''">
+                    <Icon name="lucide:x" :size="14" />
+                </button>
             </div>
-            <div class="filter-group">
-                <span class="filter-label">
-                    <Icon name="lucide:award" :size="16" />
-                    稀有度
-                </span>
-                <div class="filter-pills">
-                    <button
-                        class="filter-pill"
-                        :class="{ active: selectedRarity === 'all' }"
-                        @click="selectedRarity = 'all'">
-                        全部
-                    </button>
-                    <button
-                        v-for="id in rarityIds"
-                        :key="id"
-                        class="filter-pill rarity-pill"
-                        :class="{ active: selectedRarity === id }"
-                        :style="selectedRarity === id ? { background: manifest.rarities[id].color + '25', color: manifest.rarities[id].color, borderColor: manifest.rarities[id].color + '50' } : {}"
-                        @click="selectedRarity = id">
-                        {{ manifest.rarities[id].name }}
-                    </button>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <span class="filter-label">
+                        <Icon name="lucide:tags" :size="16" />
+                        类型
+                    </span>
+                    <div class="filter-pills">
+                        <button
+                            class="filter-pill"
+                            :class="{ active: selectedType === 'all' }"
+                            @click="selectedType = 'all'">
+                            全部
+                        </button>
+                        <button
+                            class="filter-pill type-pill"
+                            :class="{ active: selectedType === 'armor' }"
+                            :style="selectedType === 'armor' ? { background: '#3b82f620', color: '#2563eb', borderColor: '#3b82f650' } : {}"
+                            @click="selectedType = 'armor'">
+                            防具
+                        </button>
+                        <button
+                            class="filter-pill type-pill"
+                            :class="{ active: selectedType === 'weapon' }"
+                            :style="selectedType === 'weapon' ? { background: '#ef444420', color: '#dc2626', borderColor: '#ef444450' } : {}"
+                            @click="selectedType = 'weapon'">
+                            武器
+                        </button>
+                        <button
+                            class="filter-pill type-pill"
+                            :class="{ active: selectedType === 'tool' }"
+                            :style="selectedType === 'tool' ? { background: '#10b98120', color: '#059669', borderColor: '#10b98150' } : {}"
+                            @click="selectedType = 'tool'">
+                            工具
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="filter-group search-group">
-                <span class="filter-label">
-                    <Icon name="lucide:search" :size="16" />
-                    搜索
-                </span>
-                <div class="search-input-wrapper">
-                    <input
-                        v-model="searchQuery"
-                        type="text"
-                        placeholder="输入附魔名称..."
-                        class="search-input" />
-                    <button
-                        v-if="searchQuery"
-                        class="search-clear"
-                        @click="searchQuery = ''">
-                        <Icon name="lucide:x" :size="14" />
-                    </button>
+                <div class="filter-group">
+                    <span class="filter-label">
+                        <Icon name="lucide:award" :size="16" />
+                        稀有度
+                    </span>
+                    <div class="filter-pills">
+                        <button
+                            class="filter-pill"
+                            :class="{ active: selectedRarity === 'all' }"
+                            @click="selectedRarity = 'all'">
+                            全部
+                        </button>
+                        <button
+                            v-for="id in rarityIds"
+                            :key="id"
+                            class="filter-pill rarity-pill"
+                            :class="{ active: selectedRarity === id }"
+                            :style="selectedRarity === id ? { background: manifest.rarities[id].color + '25', color: manifest.rarities[id].color, borderColor: manifest.rarities[id].color + '50' } : {}"
+                            @click="selectedRarity = id">
+                            {{ manifest.rarities[id].name }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -222,14 +219,20 @@
 
     .filter-bar {
         display: flex;
-        flex-wrap: wrap;
-        gap: 10px 20px;
+        flex-direction: column;
+        gap: 12px;
         padding: 12px 14px;
         border-radius: var(--radius-xl);
         background: rgba(255, 250, 242, 0.95);
         border: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         margin-bottom: -32px;
+    }
+
+    .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
     }
 
     .filter-group {
@@ -252,10 +255,15 @@
     .filter-pills {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         gap: 8px;
     }
 
     .filter-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
         padding: 8px 16px;
         border-radius: 8px;
         border: 1px solid rgba(0, 0, 0, 0.08);
@@ -311,33 +319,27 @@
         gap: 14px;
     }
 
-    .search-group {
-        flex: 1;
-        min-width: 220px;
-    }
-
-    .search-input-wrapper {
+    .filter-search {
+        width: 100%;
         position: relative;
-        display: flex;
-        align-items: center;
-        flex: 1;
-        min-width: 0;
     }
 
     .search-icon {
         position: absolute;
         left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
         color: #8c7b65;
         pointer-events: none;
     }
 
     .search-input {
         width: 100%;
-        padding: 8px 8px;
+        padding: 8px 28px 8px 36px;
         border-radius: 8px;
         border: 1px solid rgba(0, 0, 0, 0.08);
         background: rgba(255, 255, 255, 0.6);
-        color: #5c4d3d;
+        color: #1a1612;
         font-size: 0.875rem;
         font-weight: 500;
         outline: none;
@@ -360,6 +362,8 @@
     .search-clear {
         position: absolute;
         right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -394,6 +398,13 @@
     @media (max-width: 900px) {
         .items-grid {
             flex-direction: column;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .filter-row {
+            flex-direction: column;
+            align-items: flex-start;
         }
     }
 </style>

@@ -19,6 +19,21 @@
                 return "lucide:activity";
         }
     }
+
+    function statIconColor(name: string) {
+        switch (name) {
+            case "基础伤害":
+                return "#ef4444";
+            case "攻击速度":
+                return "#3b82f6";
+            case "暴击伤害":
+                return "#f97316";
+            case "暴击概率":
+                return "#a855f7";
+            default:
+                return "#8c7b65";
+        }
+    }
 </script>
 
 <template>
@@ -39,7 +54,7 @@
             <div class="stats">
                 <div v-for="stat in item.stats" :key="stat.id" class="stat-row">
                     <div class="stat-label">
-                        <Icon :name="statIcon(stat.name)" :size="16" />
+                        <Icon :name="statIcon(stat.name)" :size="16" :style="{ color: statIconColor(stat.name) }" />
                         <span>{{ stat.name }}</span>
                     </div>
                     <span class="stat-value">{{ stat.value }}{{ stat.unit ?? "" }}</span>

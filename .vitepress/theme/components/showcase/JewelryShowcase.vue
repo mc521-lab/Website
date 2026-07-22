@@ -110,10 +110,15 @@
     .filter-pills {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         gap: 8px;
     }
 
     .filter-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
         padding: 8px 16px;
         border-radius: 8px;
         border: 1px solid rgba(0, 0, 0, 0.08);

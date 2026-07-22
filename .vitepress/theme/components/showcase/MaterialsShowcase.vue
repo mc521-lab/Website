@@ -99,7 +99,7 @@
                         <Icon name="lucide:award" :size="16" />
                         品质
                     </span>
-                    <div class="filter-pills">
+                    <div class="filter-pills quality-pills">
                         <button
                             class="filter-pill"
                             :class="{ active: selectedQuality === 'all' }"
@@ -212,10 +212,15 @@
     .filter-pills {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
         gap: 8px;
     }
 
     .filter-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
         padding: 8px 16px;
         border-radius: 8px;
         border: 1px solid rgba(0, 0, 0, 0.08);
@@ -243,9 +248,13 @@
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
     }
 
+    .filter-pills.quality-pills {
+        gap: 16px;
+    }
+
     .filter-pill.quality {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
         padding: 0;
         display: flex;
         align-items: center;

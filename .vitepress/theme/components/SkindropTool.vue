@@ -1,589 +1,854 @@
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
-import { useSkindrop, type ResolvedSkin } from "@theme/composables/useSkindrop";
-import SkinView3D from "./SkinView3D.vue";
+    import { ref, computed, watch } from "vue";
+    import { useSkindrop, type ResolvedSkin } from "@theme/composables/useSkindrop";
+    import SkinView3D from "./SkinView3D.vue";
 
-type Tab = "upload" | "namemc";
-type Step = "select" | "preview" | "result";
+    type Tab = "upload" | "namemc";
+    type Step = "select" | "preview" | "result";
 
-const step = ref<Step>("select");
-const activeTab = ref<Tab>("upload");
-const { loading, error, resolve, upload } = useSkindrop();
+    const step = ref<Step>("select");
+    const activeTab = ref<Tab>("upload");
+    const { loading, error, resolve, upload } = useSkindrop();
 
-const skinSource = ref<ResolvedSkin & { filename: string } | null>(null);
-const playerName = ref("");
-const uploadedUrl = ref<string | null>(null);
-let fileObjectUrl: string | null = null;
+    const skinSource = ref<(ResolvedSkin & { filename: string }) | null>(null);
+    const playerName = ref("");
+    const uploadedUrl = ref<string | null>(null);
+    let fileObjectUrl: string | null = null;
 
-function revokeFileObjectUrl(): void {
-    if (fileObjectUrl) {
-        URL.revokeObjectURL(fileObjectUrl);
-        fileObjectUrl = null;
+    const isDragOver = ref(false);
+
+    function revokeFileObjectUrl(): void {
+        if (fileObjectUrl) {
+            URL.revokeObjectURL(fileObjectUrl);
+            fileObjectUrl = null;
+        }
     }
-}
 
-function resetAll(): void {
-    step.value = "select";
-    activeTab.value = "upload";
-    revokeFileObjectUrl();
-    skinSource.value = null;
-    playerName.value = "";
-    uploadedUrl.value = null;
-    error.value = null;
-    selectedFile.value = null;
-    nameMcInput.value = "";
-}
-
-watch(activeTab, () => {
-    revokeFileObjectUrl();
-    skinSource.value = null;
-    uploadedUrl.value = null;
-    playerName.value = "";
-    error.value = null;
-    selectedFile.value = null;
-    nameMcInput.value = "";
-});
-
-// Select step - upload
-const selectedFile = ref<File | null>(null);
-
-const uploadFilename = computed(() => {
-    return selectedFile.value?.name ?? "";
-});
-
-const canProceedFromUpload = computed(() => selectedFile.value !== null && !loading.value);
-
-function onFileChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0] ?? null;
-    selectedFile.value = file;
-    revokeFileObjectUrl();
-
-    if (file) {
-        fileObjectUrl = URL.createObjectURL(file);
+    function resetAll(): void {
+        step.value = "select";
+        activeTab.value = "upload";
+        revokeFileObjectUrl();
+        skinSource.value = null;
+        playerName.value = "";
+        uploadedUrl.value = null;
+        error.value = null;
+        selectedFile.value = null;
+        nameMcInput.value = "";
     }
-}
 
-async function proceedFromUpload() {
-    const file = selectedFile.value;
-    if (!file || !fileObjectUrl) return;
+    watch(activeTab, () => {
+        revokeFileObjectUrl();
+        skinSource.value = null;
+        uploadedUrl.value = null;
+        playerName.value = "";
+        error.value = null;
+        selectedFile.value = null;
+        nameMcInput.value = "";
+        step.value = "select";
+    });
 
-    skinSource.value = {
-        id: file.name.replace(/\.png$/i, ""),
-        url: fileObjectUrl,
-        blob: file,
-        filename: file.name,
-    };
-    step.value = "preview";
-}
+    // Select step - upload
+    const selectedFile = ref<File | null>(null);
 
-// Select step - NameMC
-const nameMcInput = ref("");
+    const uploadFilename = computed(() => {
+        return selectedFile.value?.name ?? "";
+    });
 
-const canProceedFromNameMc = computed(() => nameMcInput.value.trim().length > 0 && !loading.value);
+    const canProceedFromUpload = computed(() => selectedFile.value !== null && !loading.value);
 
-async function proceedFromNameMc() {
-    const input = nameMcInput.value;
-    if (!input.trim()) return;
-
-    const result = await resolve(input);
-    if (!result) return;
-
-    skinSource.value = {
-        ...result,
-        filename: `${result.id}.png`,
-    };
-    step.value = "preview";
-}
-
-// Preview step
-const canConfirm = computed(() => playerName.value.trim().length > 0 && skinSource.value !== null && !loading.value);
-
-async function confirmUpload() {
-    if (!skinSource.value) return;
-
-    const filename = `${playerName.value.trim()}.png`;
-    const file = new File([skinSource.value.blob], filename, { type: "image/png" });
-
-    const url = await upload(filename, file);
-    if (url) {
-        uploadedUrl.value = url;
-        step.value = "result";
+    function onFileChange(event: Event) {
+        const input = event.target as HTMLInputElement;
+        const file = input.files?.[0] ?? null;
+        setUploadFile(file);
     }
-}
 
-const skinCommand = computed(() => {
-    if (!uploadedUrl.value) return "";
-    return `/skin url ${uploadedUrl.value}`;
-});
+    function setUploadFile(file: File | null) {
+        selectedFile.value = file;
+        revokeFileObjectUrl();
 
-const copied = ref(false);
-let copiedTimeout: ReturnType<typeof setTimeout> | null = null;
-
-async function copyCommand() {
-    if (!skinCommand.value) return;
-    try {
-        await navigator.clipboard.writeText(skinCommand.value);
-        copied.value = true;
-        if (copiedTimeout) clearTimeout(copiedTimeout);
-        copiedTimeout = setTimeout(() => {
-            copied.value = false;
-        }, 2000);
-    } catch {
-        // ignore
+        if (file) {
+            fileObjectUrl = URL.createObjectURL(file);
+            skinSource.value = {
+                id: file.name.replace(/\.png$/i, ""),
+                url: fileObjectUrl,
+                blob: file,
+                filename: file.name,
+            };
+        } else {
+            skinSource.value = null;
+        }
     }
-}
+
+    function onDragOver(event: DragEvent) {
+        event.preventDefault();
+        isDragOver.value = true;
+    }
+
+    function onDragLeave(event: DragEvent) {
+        event.preventDefault();
+        isDragOver.value = false;
+    }
+
+    function onDrop(event: DragEvent) {
+        event.preventDefault();
+        isDragOver.value = false;
+        const file = event.dataTransfer?.files?.[0] ?? null;
+        if (file && file.type === "image/png") {
+            setUploadFile(file);
+            activeTab.value = "upload";
+        }
+    }
+
+    async function proceedFromUpload() {
+        const file = selectedFile.value;
+        if (!file || !fileObjectUrl) return;
+
+        skinSource.value = {
+            id: file.name.replace(/\.png$/i, ""),
+            url: fileObjectUrl,
+            blob: file,
+            filename: file.name,
+        };
+        step.value = "preview";
+    }
+
+    // Select step - NameMC
+    const nameMcInput = ref("");
+
+    const canProceedFromNameMc = computed(() => nameMcInput.value.trim().length > 0 && !loading.value);
+
+    async function proceedFromNameMc() {
+        const input = nameMcInput.value;
+        if (!input.trim()) return;
+
+        const result = await resolve(input);
+        if (!result) return;
+
+        skinSource.value = {
+            ...result,
+            filename: `${result.id}.png`,
+        };
+        step.value = "preview";
+    }
+
+    // Preview step
+    const canConfirm = computed(() => playerName.value.trim().length > 0 && skinSource.value !== null && !loading.value);
+
+    async function confirmUpload() {
+        if (!skinSource.value) return;
+
+        const filename = `${playerName.value.trim()}.png`;
+        const file = new File([skinSource.value.blob], filename, { type: "image/png" });
+
+        const url = await upload(filename, file);
+        if (url) {
+            uploadedUrl.value = url;
+            step.value = "result";
+        }
+    }
+
+    const skinCommand = computed(() => {
+        if (!uploadedUrl.value) return "";
+        return `/skin url ${uploadedUrl.value}`;
+    });
+
+    const copied = ref(false);
+    let copiedTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    async function copyCommand() {
+        if (!skinCommand.value) return;
+        try {
+            await navigator.clipboard.writeText(skinCommand.value);
+            copied.value = true;
+            if (copiedTimeout) clearTimeout(copiedTimeout);
+            copiedTimeout = setTimeout(() => {
+                copied.value = false;
+            }, 2000);
+        } catch {
+            // ignore
+        }
+    }
+
+    const currentSourceLabel = computed(() => {
+        if (!skinSource.value) return "尚未选择";
+        return skinSource.value.filename;
+    });
+
+    function onBackToSelect() {
+        step.value = "select";
+        playerName.value = "";
+    }
 </script>
 
 <template>
     <div class="skindrop-hero">
         <div class="hero-overlay" />
 
-        <div class="skindrop-card" :class="{ wide: step === 'preview' || step === 'result' }">
-            <h1 class="card-title">皮肤投递</h1>
-            <p class="card-subtitle">上传或引用皮肤图片，开始你的换装之旅</p>
+        <div class="skindrop-station">
+            <header class="station-header">
+                <h1 class="station-title">皮肤驿站</h1>
+                <p class="station-desc">上传皮肤、确认角色、复制指令，三步完成换装。</p>
+            </header>
 
-            <!-- Step: select -->
-            <template v-if="step === 'select'">
-                <div class="tabs">
-                    <button
-                        class="tab"
-                        :class="{ active: activeTab === 'upload' }"
-                        @click="activeTab = 'upload'"
-                    >
-                        上传图片
-                    </button>
-                    <button
-                        class="tab"
-                        :class="{ active: activeTab === 'namemc' }"
-                        @click="activeTab = 'namemc'"
-                    >
-                        NameMC 地址
-                    </button>
+            <nav class="stepper">
+                <div class="step" :class="{ active: step === 'select', completed: step === 'preview' || step === 'result' }">
+                    <span class="step-number">1</span>
+                    <span class="step-label">选择皮肤</span>
                 </div>
-
-                <div class="tab-panel">
-                    <template v-if="activeTab === 'upload'">
-                        <p class="panel-desc">选择本地 PNG 皮肤文件。</p>
-
-                        <label class="file-input-wrapper">
-                            <input type="file" accept="image/png" @change="onFileChange" />
-                            <span class="btn btn-secondary upload-btn">
-                                {{ uploadFilename || "选择文件" }}
-                            </span>
-                        </label>
-
-                        <button
-                            class="btn btn-primary submit-btn"
-                            :disabled="!canProceedFromUpload"
-                            @click="proceedFromUpload"
-                        >
-                            下一步
-                        </button>
-                    </template>
-
-                    <template v-else>
-                        <p class="panel-desc">粘贴 NameMC 皮肤页面链接或皮肤图片链接。</p>
-
-                        <input
-                            v-model="nameMcInput"
-                            class="input"
-                            type="text"
-                            placeholder="https://zh.namemc.com/skin/4f0932f4d85b1609"
-                        />
-
-                        <button
-                            class="btn btn-primary submit-btn"
-                            :disabled="!canProceedFromNameMc"
-                            @click="proceedFromNameMc"
-                        >
-                            下一步
-                        </button>
-                    </template>
+                <div class="step-divider" />
+                <div class="step" :class="{ active: step === 'preview', completed: step === 'result' }">
+                    <span class="step-number">2</span>
+                    <span class="step-label">预览确认</span>
                 </div>
-            </template>
+                <div class="step-divider" />
+                <div class="step" :class="{ active: step === 'result' }">
+                    <span class="step-number">3</span>
+                    <span class="step-label">复制指令</span>
+                </div>
+            </nav>
 
-            <!-- Step: preview -->
-            <template v-if="step === 'preview'">
-                <div class="preview-layout">
-                    <div class="preview-card slide-in-left">
-                        <h2 class="preview-title">效果预览</h2>
-                        <SkinView3D :skin="skinSource?.url ?? null" />
+            <main class="station-body">
+                <!-- Left: preview -->
+                <section class="panel preview-panel">
+                    <div class="panel-header">
+                        <span class="panel-en">SKIN PREVIEW</span>
+                        <h2 class="panel-title">皮肤预览</h2>
                     </div>
 
-                    <div class="confirm-card slide-in-right">
-                        <h2 class="preview-title">确认使用这张图？</h2>
+                    <div class="preview-stage" :class="{ empty: !skinSource }">
+                        <SkinView3D :skin="skinSource?.url ?? null" />
+                        <div v-if="!skinSource" class="preview-placeholder">
+                            <span>加载一张皮肤先</span>
+                        </div>
+                    </div>
+
+                    <div class="source-info">
+                        <span class="source-label">当前来源</span>
+                        <span class="source-value">{{ currentSourceLabel }}</span>
+                    </div>
+                </section>
+
+                <!-- Right: controls -->
+                <section class="panel control-panel">
+                    <!-- Step select -->
+                    <template v-if="step === 'select'">
+                        <div class="panel-header compact">
+                            <h2 class="panel-title">从哪里获取皮肤？</h2>
+                        </div>
+
+                        <div class="tabs">
+                            <button class="tab" :class="{ active: activeTab === 'upload' }" @click="activeTab = 'upload'">
+                                本地上传
+                            </button>
+                            <button class="tab" :class="{ active: activeTab === 'namemc' }" @click="activeTab = 'namemc'">
+                                NameMC / 图片地址
+                            </button>
+                        </div>
+
+                        <div v-if="activeTab === 'upload'" class="tab-panel">
+                            <div
+                                class="drop-zone"
+                                :class="{ dragover: isDragOver, hasfile: selectedFile }"
+                                @dragover="onDragOver"
+                                @dragleave="onDragLeave"
+                                @drop="onDrop">
+                                <input type="file" accept="image/png" class="drop-input" @change="onFileChange" />
+                                <div class="drop-content">
+                                    <span class="drop-icon">+</span>
+                                    <p class="drop-title">{{ uploadFilename || "把 PNG 拖到这里" }}</p>
+                                    <p class="drop-hint">或点击选择文件，仅支持 .png 格式</p>
+                                </div>
+                            </div>
+
+                            <button
+                                class="btn btn-primary next-btn"
+                                :disabled="!canProceedFromUpload"
+                                @click="proceedFromUpload">
+                                下一步：预览并确认 →
+                            </button>
+                        </div>
+
+                        <div v-else class="tab-panel">
+                            <p class="panel-desc">粘贴 NameMC 皮肤页面链接或皮肤图片直链。</p>
+
+                            <input
+                                v-model="nameMcInput"
+                                class="input"
+                                type="text"
+                                placeholder="https://zh.namemc.com/skin/4f0932f4d85b1609" />
+
+                            <button
+                                class="btn btn-primary next-btn"
+                                :disabled="!canProceedFromNameMc"
+                                @click="proceedFromNameMc">
+                                下一步：预览并确认 →
+                            </button>
+                        </div>
+                    </template>
+
+                    <!-- Step preview -->
+                    <template v-if="step === 'preview'">
+                        <div class="panel-header compact">
+                            <h2 class="panel-title">确认使用这张图？</h2>
+                        </div>
+
                         <p class="panel-desc">输入你的玩家名，我们将把皮肤上传到你的账户。</p>
 
-                        <input
-                            v-model="playerName"
-                            class="input"
-                            type="text"
-                            placeholder="例如：Steve"
-                            maxlength="32"
-                        />
+                        <input v-model="playerName" class="input" type="text" placeholder="例如：Steve" maxlength="32" />
 
-                        <button
-                            class="btn btn-primary submit-btn"
-                            :disabled="!canConfirm"
-                            @click="confirmUpload"
-                        >
+                        <button class="btn btn-primary next-btn" :disabled="!canConfirm" @click="confirmUpload">
                             确认上传
                         </button>
 
-                        <button class="btn btn-text" @click="step = 'select'">返回重新选择</button>
+                        <button class="btn btn-text" @click="onBackToSelect">返回重新选择</button>
+                    </template>
+
+                    <!-- Step result -->
+                    <template v-if="step === 'result'">
+                        <div class="panel-header compact">
+                            <h2 class="panel-title">上传成功</h2>
+                        </div>
+
+                        <div class="result-box">
+                            <p class="panel-desc small">
+                                点击下方按钮复制换皮肤命令， 在游戏中按 <kbd>T</kbd> 打开对话栏，<br />再按下 <kbd>Ctrl</kbd> +
+                                <kbd>V</kbd> 粘贴复制好的命令，<br />最后按 <kbd>Enter</kbd> 以更换皮肤。
+                            </p>
+                            <code class="command-code">{{ skinCommand }}</code>
+                        </div>
+
+                        <button class="btn btn-primary next-btn" @click="copyCommand">
+                            {{ copied ? "已复制" : "复制命令" }}
+                        </button>
+
+                        <button class="btn btn-text" @click="resetAll">再换一张</button>
+                    </template>
+
+                    <div class="privacy-tip">
+                        <span class="tip-tag">隐私提示</span>
+                        <p class="tip-text">皮肤图片会上传至服务器并生成公开可访问链接，请勿上传包含个人隐私信息的图片。</p>
                     </div>
-                </div>
-            </template>
 
-            <!-- Step: result -->
-            <template v-if="step === 'result'">
-                <div class="result-step">
-                    <div class="result-box">
-                        <span class="result-label">上传成功</span>
-                        <p class="panel-desc">点击下方复制命令按钮，复制换皮肤命令</p>
-                        <p class="panel-desc">在游戏中按 <kbd>T</kbd> 打开对话栏，再按下 <kbd>Ctrl</kbd> + <kbd>V</kbd> 粘贴复制好的命令，最后按 <kbd>Enter</kbd>以更换皮肤</p>
-                        <code class="command-code">{{ skinCommand }}</code>
+                    <div v-if="error" class="error-box">
+                        {{ error }}
                     </div>
-
-                    <button class="btn btn-primary submit-btn" @click="copyCommand">
-                        {{ copied ? "已复制" : "复制命令" }}
-                    </button>
-                    <button class="btn btn-text" @click="resetAll">再换一张</button>
-                </div>
-            </template>
-
-            <div v-if="error" class="error-box">
-                {{ error }}
-            </div>
+                </section>
+            </main>
         </div>
     </div>
 </template>
 
 <style scoped>
-.skindrop-hero {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    min-height: calc(100vh - var(--vp-nav-height, 64px));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-5);
-    background: url("/images/background.png") center / cover no-repeat;
-    box-sizing: border-box;
-}
+    .skindrop-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        min-height: calc(100vh - var(--vp-nav-height, 64px));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-5);
+        background: url("/images/background.png") center / cover no-repeat;
+        box-sizing: border-box;
+    }
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.55) 100%);
-    pointer-events: none;
-}
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.6) 100%);
+        pointer-events: none;
+    }
 
-.skindrop-card {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 480px;
-    background: rgba(14, 11, 9, 0.96);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-xl);
-    padding: var(--space-6);
-    box-shadow: var(--shadow-4);
-    transition: max-width 0.3s ease;
-}
+    .skindrop-station {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 980px;
+        background: rgba(14, 11, 9, 0.96);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-xl);
+        padding: var(--space-6);
+        box-shadow: var(--shadow-4);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+    }
 
-.skindrop-card.wide {
-    max-width: 840px;
-}
+    /* Header */
+    .station-header {
+        text-align: center;
+    }
 
-.card-title {
-    font-family: var(--font-heading);
-    font-size: var(--font-size-h2);
-    font-weight: var(--font-weight-h2);
-    color: #fff;
-    text-align: center;
-    margin: 0 0 var(--space-2) 0;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
+    .brand-line {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        margin-bottom: var(--space-3);
+    }
 
-.card-subtitle {
-    font-size: var(--font-size-body);
-    color: rgba(255, 250, 242, 0.92);
-    text-align: center;
-    margin: 0 0 var(--space-5) 0;
-}
+    .brand-name {
+        font-family: var(--font-mono, monospace);
+        font-size: var(--font-size-caption);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: rgba(255, 250, 242, 0.7);
+    }
 
-.tabs {
-    display: flex;
-    gap: var(--space-2);
-    margin-bottom: var(--space-5);
-    padding: var(--space-1);
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: var(--radius-lg);
-}
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-1);
+        padding: 0.2em 0.7em;
+        background: rgba(34, 181, 84, 0.12);
+        border: 1px solid rgba(34, 181, 84, 0.25);
+        border-radius: var(--radius-full, 999px);
+        font-size: var(--font-size-caption);
+        color: var(--jtg-success-400);
+        font-weight: 500;
+    }
 
-.tab {
-    flex: 1;
-    height: var(--size-button-md);
-    border: none;
-    border-radius: var(--radius-md);
-    background: transparent;
-    color: rgba(255, 250, 242, 0.85);
-    font-family: var(--font-family-base);
-    font-size: var(--font-size-body);
-    font-weight: 500;
-    cursor: pointer;
-    transition:
-        background 0.15s,
-        color 0.15s;
-}
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--jtg-success-400);
+        box-shadow: 0 0 6px var(--jtg-success-400);
+    }
 
-.tab:hover {
-    color: #fff;
-}
+    .station-title {
+        font-family: var(--font-heading);
+        font-size: var(--font-size-h2);
+        font-weight: var(--font-weight-h2);
+        color: #fff;
+        margin: 0 0 var(--space-2) 0;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
 
-.tab.active {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-}
+    .station-desc {
+        font-size: var(--font-size-body);
+        color: rgba(255, 250, 242, 0.85);
+        margin: 0;
+    }
 
-.tab-panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-}
+    /* Stepper */
+    .stepper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-3);
+        padding: var(--space-4);
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+    }
 
-.panel-desc {
-    font-size: var(--font-size-body);
-    color: rgba(255, 250, 242, 0.88);
-    margin: 0;
-}
+    .step {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        color: rgba(255, 250, 242, 0.55);
+        font-weight: 500;
+        transition: color 0.2s;
+    }
 
-.file-input-wrapper {
-    position: relative;
-    display: flex;
-    cursor: pointer;
-}
+    .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: var(--font-size-caption);
+        font-weight: 600;
+        transition:
+            background 0.2s,
+            color 0.2s;
+    }
 
-.file-input-wrapper input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-}
+    .step.active {
+        color: #fff;
+    }
 
-.upload-btn {
-    width: 100%;
-    justify-content: flex-start;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    background: rgba(0, 0, 0, 0.35);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: rgba(255, 250, 242, 0.9);
-}
+    .step.active .step-number {
+        background: var(--color-primary);
+        color: #fff;
+    }
 
-.upload-btn:hover {
-    background: rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.25);
-    color: #fff;
-}
+    .step.completed {
+        color: rgba(255, 250, 242, 0.85);
+    }
 
-.submit-btn {
-    width: 100%;
-}
+    .step.completed .step-number {
+        background: rgba(34, 181, 84, 0.25);
+        color: var(--jtg-success-400);
+    }
 
-.input {
-    width: 100%;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.45);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: #fff;
-}
+    .step-divider {
+        width: 48px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.12);
+    }
 
-.input::placeholder {
-    color: rgba(255, 250, 242, 0.6);
-}
+    /* Body */
+    .station-body {
+        display: grid;
+        grid-template-columns: 1fr 1.35fr;
+        gap: var(--space-5);
+    }
 
-.input:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-}
+    .panel {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+    }
 
-.input:focus {
-    border-color: var(--color-primary);
-}
+    .panel-header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        padding-bottom: var(--space-3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-.btn-primary:disabled {
-    opacity: 1;
-    background: rgba(212, 137, 58, 0.35);
-    color: rgba(255, 255, 255, 0.7);
-}
+    .panel-header.compact {
+        padding-bottom: var(--space-2);
+    }
 
-.btn-primary:disabled:hover {
-    background: rgba(212, 137, 58, 0.35);
-    filter: none;
-}
+    .panel-en {
+        font-family: var(--font-mono, monospace);
+        font-size: var(--font-size-caption);
+        letter-spacing: 0.06em;
+        color: rgba(255, 250, 242, 0.5);
+    }
 
-.btn-secondary:disabled {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.14);
-    color: rgba(255, 250, 242, 0.72);
-}
+    .panel-title {
+        font-family: var(--font-heading);
+        font-size: var(--font-size-h4);
+        font-weight: var(--font-weight-h4);
+        color: #fff;
+        margin: 0;
+    }
 
-.btn-secondary:disabled:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.14);
-    filter: none;
-}
+    /* Preview panel */
+    .preview-stage {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px dashed rgba(255, 255, 255, 0.12);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+    }
 
-.btn-text {
-    width: 100%;
-    border: none;
-    background: transparent;
-    color: rgba(255, 250, 242, 0.72);
-    font-family: var(--font-family-base);
-    font-size: var(--font-size-body);
-    font-weight: 500;
-    cursor: pointer;
-    padding: var(--space-2);
-    transition: color 0.15s;
-}
+    .preview-stage.empty {
+        border-style: dashed;
+    }
 
-.btn-text:hover {
-    color: #fff;
-}
+    .preview-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 250, 242, 0.5);
+        font-size: var(--font-size-body);
+        pointer-events: none;
+    }
 
-.preview-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-5);
-}
+    .source-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        padding: var(--space-3);
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-md);
+    }
 
-.preview-card,
-.confirm-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-lg);
-    padding: var(--space-5);
-}
+    .source-label {
+        font-size: var(--font-size-caption);
+        color: rgba(255, 250, 242, 0.6);
+        font-weight: 500;
+    }
 
-.preview-title {
-    font-family: var(--font-heading);
-    font-size: var(--font-size-h4);
-    font-weight: var(--font-weight-h4);
-    color: #fff;
-    margin: 0;
-    text-align: center;
-}
+    .source-value {
+        font-size: var(--font-size-body);
+        color: #fff;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 60%;
+    }
 
-.slide-in-left {
-    animation: slideInLeft 0.35s ease-out;
-}
+    .privacy-tip {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+        padding: var(--space-3);
+        background: rgba(255, 193, 7, 0.06);
+        border: 1px solid rgba(255, 193, 7, 0.15);
+        border-radius: var(--radius-md);
+    }
 
-.slide-in-right {
-    animation: slideInRight 0.35s ease-out;
-}
+    .tip-tag {
+        align-self: flex-start;
+        padding: 0.15em 0.5em;
+        background: rgba(255, 193, 7, 0.12);
+        border-radius: var(--radius-sm);
+        font-size: var(--font-size-caption);
+        color: #ffc107;
+        font-weight: 500;
+    }
 
-@keyframes slideInLeft {
-    from {
+    .tip-text {
+        margin: 0;
+        font-size: var(--font-size-caption);
+        color: rgba(255, 250, 242, 0.7);
+        line-height: 1.5;
+    }
+
+    /* Control panel */
+    .tabs {
+        display: flex;
+        gap: var(--space-1);
+        padding: var(--space-1);
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: var(--radius-lg);
+    }
+
+    .tab {
+        flex: 1;
+        height: var(--size-button-md);
+        border: none;
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: rgba(255, 250, 242, 0.8);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body);
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+            background 0.15s,
+            color 0.15s;
+    }
+
+    .tab:hover {
+        color: #fff;
+    }
+
+    .tab.active {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+    }
+
+    .tab-panel {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .panel-desc {
+        font-size: var(--font-size-body);
+        color: rgba(255, 250, 242, 0.85);
+        margin: 0;
+    }
+
+    .panel-desc.small {
+        font-size: calc(var(--font-size-body) / 1.1);
+    }
+
+    /* Drop zone */
+    .drop-zone {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 180px;
+        padding: var(--space-5);
+        background: rgba(0, 0, 0, 0.25);
+        border: 2px dashed rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius-md);
+        transition:
+            border-color 0.2s,
+            background 0.2s;
+        cursor: pointer;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.dragover {
+        border-color: var(--color-primary);
+        background: rgba(212, 137, 58, 0.06);
+    }
+
+    .drop-zone.hasfile {
+        border-style: solid;
+        border-color: rgba(34, 181, 84, 0.35);
+        background: rgba(34, 181, 84, 0.06);
+    }
+
+    .drop-input {
+        position: absolute;
+        inset: 0;
         opacity: 0;
-        transform: translateX(-24px);
+        cursor: pointer;
     }
-    to {
+
+    .drop-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-2);
+        pointer-events: none;
+        text-align: center;
+    }
+
+    .drop-icon {
+        font-size: 32px;
+        color: rgba(255, 250, 242, 0.4);
+        line-height: 1;
+    }
+
+    .drop-title {
+        margin: 0;
+        font-size: var(--font-size-body);
+        color: #fff;
+        font-weight: 500;
+        word-break: break-all;
+    }
+
+    .drop-hint {
+        margin: 0;
+        font-size: var(--font-size-caption);
+        color: rgba(255, 250, 242, 0.55);
+    }
+
+    /* Inputs and buttons */
+    .input {
+        width: 100%;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius-md);
+        padding: 0.85em 1em;
+        color: #fff;
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body);
+        outline: none;
+        transition: border-color 0.15s;
+    }
+
+    .input::placeholder {
+        color: rgba(255, 250, 242, 0.5);
+    }
+
+    .input:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .input:focus {
+        border-color: var(--color-primary);
+    }
+
+    .next-btn {
+        width: 100%;
+    }
+
+    .btn-text {
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: rgba(255, 250, 242, 0.72);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body);
+        font-weight: 500;
+        cursor: pointer;
+        padding: var(--space-2);
+        transition: color 0.15s;
+    }
+
+    .btn-text:hover {
+        color: #fff;
+    }
+
+    .btn-primary:disabled {
         opacity: 1;
-        transform: translateX(0);
+        background: rgba(212, 137, 58, 0.35);
+        color: rgba(255, 255, 255, 0.7);
     }
-}
 
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(24px);
+    .btn-primary:disabled:hover {
+        background: rgba(212, 137, 58, 0.35);
+        filter: none;
     }
-    to {
-        opacity: 1;
-        transform: translateX(0);
+
+    /* Result */
+    .result-box {
+        padding: var(--space-4);
+        background: rgba(34, 181, 84, 0.08);
+        border: 1px solid rgba(34, 181, 84, 0.25);
+        border-radius: var(--radius-md);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
     }
-}
 
-.result-step {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-}
-
-.result-box {
-    padding: var(--space-4);
-    background: rgba(34, 181, 84, 0.12);
-    border: 1px solid rgba(34, 181, 84, 0.3);
-    border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-}
-
-.result-label {
-    font-size: var(--font-size-caption);
-    color: var(--jtg-success-400);
-    font-weight: 500;
-}
-
-.command-code {
-    display: block;
-    padding: var(--space-3);
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: var(--radius-md);
-    color: #fff;
-    font-family: var(--font-mono, monospace);
-    font-size: var(--font-size-body);
-    word-break: break-all;
-}
-
-.result-link {
-    font-size: var(--font-size-body);
-    color: var(--color-primary);
-    word-break: break-all;
-    text-decoration: none;
-}
-
-.result-link:hover {
-    text-decoration: underline;
-}
-
-kbd {
-    display: inline-block;
-    padding: 0.15em 0.5em;
-    background: rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--radius-sm);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
-    color: #fff;
-    font-family: var(--font-mono, monospace);
-    font-size: 0.85em;
-    line-height: 1.4;
-}
-
-.error-box {
-    margin-top: var(--space-4);
-    padding: var(--space-3);
-    background: rgba(239, 68, 68, 0.12);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    border-radius: var(--radius-md);
-    color: var(--jtg-error-400);
-    font-size: var(--font-size-body);
-}
-
-@media (max-width: 720px) {
-    .preview-layout {
-        grid-template-columns: 1fr;
+    .command-code {
+        display: block;
+        padding: var(--space-3);
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: var(--radius-md);
+        color: #fff;
+        font-family: var(--font-mono, monospace);
+        font-size: var(--font-size-body);
+        word-break: break-all;
     }
-}
+
+    kbd {
+        display: inline-block;
+        padding: 0.15em 0.5em;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius-sm);
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+        color: #fff;
+        font-family: var(--font-mono, monospace);
+        font-size: 0.85em;
+        line-height: 1.4;
+    }
+
+    .error-box {
+        margin-top: var(--space-2);
+        padding: var(--space-3);
+        background: rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: var(--radius-md);
+        color: var(--jtg-error-400);
+        font-size: var(--font-size-body);
+    }
+
+    @media (max-width: 860px) {
+        .station-body {
+            grid-template-columns: 1fr;
+        }
+
+        .stepper {
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .step-divider {
+            display: none;
+        }
+    }
 </style>
+

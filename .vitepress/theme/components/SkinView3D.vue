@@ -15,6 +15,7 @@ function createViewer(canvas: HTMLCanvasElement): SkinViewer {
         width: 320,
         height: 400,
         enableControls: true,
+        zoom: 0.6,
     });
 
     instance.animation = new IdleAnimation();

@@ -29,18 +29,10 @@
             "jobId": "zhanshi",
             "jobName": "战士",
             "jobColor": "#FF0000",
-            "image": "/wiki/item/jewelries/0d5524020b14a2241862ff0da05bc639.png",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
-                {
-                    "id": "staminaBonus",
-                    "name": "体力加成",
-                    "min": 0.5,
-                    "max": 2.5,
-                    "icon": "heart",
-                    "iconColor": "#dc2626"
-                },
                 {
                     "id": "manaBonus",
                     "name": "法力加成",
@@ -48,6 +40,14 @@
                     "max": 2.5,
                     "icon": "shield",
                     "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 0.5,
+                    "max": 2.5,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
                 }
             ]
         },
@@ -58,6 +58,7 @@
             "jobId": "zhanshi",
             "jobName": "战士",
             "jobColor": "#FF0000",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -86,6 +87,7 @@
             "jobId": "zhanshi",
             "jobName": "战士",
             "jobColor": "#FF0000",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -114,6 +116,7 @@
             "jobId": "zhanshi",
             "jobName": "战士",
             "jobColor": "#FF0000",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -142,6 +145,7 @@
             "jobId": "zhanshi",
             "jobName": "战士",
             "jobColor": "#FF0000",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -165,11 +169,12 @@
         },
         {
             "id": "zhanshi_lieyan_treasure",
-            "name": "烈焰秘宝",
+            "name": "烈焰密宝",
             "slotType": "秘宝",
             "jobId": "zhanshi",
             "jobName": "战士",
             "jobColor": "#FF0000",
+            "image": null,
             "randomMin": 1,
             "randomMax": 3,
             "attributes": [
@@ -180,6 +185,22 @@
                     "max": 8,
                     "icon": "heart",
                     "iconColor": "#dc2626"
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤",
+                    "min": 2,
+                    "max": 5,
+                    "icon": "shield",
+                    "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "min": 3,
+                    "max": 5,
+                    "icon": "shield",
+                    "iconColor": "#3b82f6"
                 }
             ]
         },
@@ -190,17 +211,10 @@
             "jobId": "sheshou",
             "jobName": "射手",
             "jobColor": "#F0B100",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
-                {
-                    "id": "staminaBonus",
-                    "name": "体力加成",
-                    "min": 0.5,
-                    "max": 2.5,
-                    "icon": "heart",
-                    "iconColor": "#dc2626"
-                },
                 {
                     "id": "manaBonus",
                     "name": "法力加成",
@@ -208,6 +222,14 @@
                     "max": 2.5,
                     "icon": "shield",
                     "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 0.5,
+                    "max": 2.5,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
                 }
             ]
         },
@@ -218,6 +240,7 @@
             "jobId": "sheshou",
             "jobName": "射手",
             "jobColor": "#F0B100",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -246,6 +269,7 @@
             "jobId": "sheshou",
             "jobName": "射手",
             "jobColor": "#F0B100",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -274,6 +298,7 @@
             "jobId": "sheshou",
             "jobName": "射手",
             "jobColor": "#F0B100",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -302,6 +327,7 @@
             "jobId": "sheshou",
             "jobName": "射手",
             "jobColor": "#F0B100",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -324,15 +350,41 @@
             ]
         },
         {
-            "id": "sheshou_guangyu_secret",
-            "name": "光羽秘宝",
+            "id": "sheshou_guangyu_treasure",
+            "name": "光羽密宝",
             "slotType": "秘宝",
             "jobId": "sheshou",
             "jobName": "射手",
             "jobColor": "#F0B100",
+            "image": null,
             "randomMin": 1,
-            "randomMax": 4,
-            "attributes": []
+            "randomMax": 3,
+            "attributes": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "min": 1,
+                    "max": 2,
+                    "icon": "sword",
+                    "iconColor": "#b8722e"
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "min": 2.5,
+                    "max": 5,
+                    "icon": "shield",
+                    "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 2.5,
+                    "max": 5,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
+                }
+            ]
         },
         {
             "id": "mushi_bracelet",
@@ -341,17 +393,10 @@
             "jobId": "mushi",
             "jobName": "牧师",
             "jobColor": "#868686",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
-                {
-                    "id": "staminaBonus",
-                    "name": "体力加成",
-                    "min": 0.5,
-                    "max": 2.5,
-                    "icon": "heart",
-                    "iconColor": "#dc2626"
-                },
                 {
                     "id": "manaBonus",
                     "name": "法力加成",
@@ -359,6 +404,14 @@
                     "max": 2.5,
                     "icon": "shield",
                     "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 0.5,
+                    "max": 2.5,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
                 }
             ]
         },
@@ -369,6 +422,7 @@
             "jobId": "mushi",
             "jobName": "牧师",
             "jobColor": "#868686",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -392,11 +446,12 @@
         },
         {
             "id": "mushi_necklace",
-            "name": "牧灵项链",
+            "name": "牧灵之链",
             "slotType": "项链",
             "jobId": "mushi",
             "jobName": "牧师",
             "jobColor": "#868686",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -425,6 +480,7 @@
             "jobId": "mushi",
             "jobName": "牧师",
             "jobColor": "#868686",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -453,6 +509,7 @@
             "jobId": "mushi",
             "jobName": "牧师",
             "jobColor": "#868686",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -476,14 +533,40 @@
         },
         {
             "id": "mushi_muling_treasure",
-            "name": "牧灵秘宝",
+            "name": "牧灵密宝",
             "slotType": "秘宝",
             "jobId": "mushi",
             "jobName": "牧师",
             "jobColor": "#868686",
+            "image": null,
             "randomMin": 1,
-            "randomMax": 4,
-            "attributes": []
+            "randomMax": 3,
+            "attributes": [
+                {
+                    "id": "healthBonus",
+                    "name": "生命加成",
+                    "min": 3,
+                    "max": 4,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "min": 2,
+                    "max": 4,
+                    "icon": "shield",
+                    "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 2,
+                    "max": 4,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
+                }
+            ]
         },
         {
             "id": "cike_bracelet",
@@ -492,17 +575,10 @@
             "jobId": "cike",
             "jobName": "刺客",
             "jobColor": "#00C853",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
-                {
-                    "id": "staminaBonus",
-                    "name": "体力加成",
-                    "min": 0.5,
-                    "max": 2.5,
-                    "icon": "heart",
-                    "iconColor": "#dc2626"
-                },
                 {
                     "id": "manaBonus",
                     "name": "法力加成",
@@ -510,6 +586,14 @@
                     "max": 2.5,
                     "icon": "shield",
                     "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 0.5,
+                    "max": 2.5,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
                 }
             ]
         },
@@ -520,6 +604,7 @@
             "jobId": "cike",
             "jobName": "刺客",
             "jobColor": "#00C853",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -543,11 +628,12 @@
         },
         {
             "id": "cike_necklace",
-            "name": "瞬影项链",
+            "name": "瞬影之链",
             "slotType": "项链",
             "jobId": "cike",
             "jobName": "刺客",
             "jobColor": "#00C853",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -576,6 +662,7 @@
             "jobId": "cike",
             "jobName": "刺客",
             "jobColor": "#00C853",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -604,6 +691,7 @@
             "jobId": "cike",
             "jobName": "刺客",
             "jobColor": "#00C853",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -627,14 +715,40 @@
         },
         {
             "id": "cike_shunying_treasure",
-            "name": "瞬影秘宝",
+            "name": "瞬影密宝",
             "slotType": "秘宝",
             "jobId": "cike",
             "jobName": "刺客",
             "jobColor": "#00C853",
+            "image": null,
             "randomMin": 1,
-            "randomMax": 4,
-            "attributes": []
+            "randomMax": 3,
+            "attributes": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "min": 1.5,
+                    "max": 3,
+                    "icon": "sword",
+                    "iconColor": "#b8722e"
+                },
+                {
+                    "id": "pveAttack",
+                    "name": "PVE攻击",
+                    "min": 4,
+                    "max": 8,
+                    "icon": "sword",
+                    "iconColor": "#b8722e"
+                },
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害",
+                    "min": 2,
+                    "max": 5,
+                    "icon": "sword",
+                    "iconColor": "#b8722e"
+                }
+            ]
         },
         {
             "id": "fashi_bracelet",
@@ -643,17 +757,10 @@
             "jobId": "fashi",
             "jobName": "法师",
             "jobColor": "#01B2E3",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
-                {
-                    "id": "staminaBonus",
-                    "name": "体力加成",
-                    "min": 0.5,
-                    "max": 2.5,
-                    "icon": "heart",
-                    "iconColor": "#dc2626"
-                },
                 {
                     "id": "manaBonus",
                     "name": "法力加成",
@@ -661,6 +768,14 @@
                     "max": 2.5,
                     "icon": "shield",
                     "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 0.5,
+                    "max": 2.5,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
                 }
             ]
         },
@@ -671,6 +786,7 @@
             "jobId": "fashi",
             "jobName": "法师",
             "jobColor": "#01B2E3",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -694,11 +810,12 @@
         },
         {
             "id": "fashi_necklace",
-            "name": "奥术项链",
+            "name": "奥术魔链",
             "slotType": "项链",
             "jobId": "fashi",
             "jobName": "法师",
             "jobColor": "#01B2E3",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -727,6 +844,7 @@
             "jobId": "fashi",
             "jobName": "法师",
             "jobColor": "#01B2E3",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -755,6 +873,7 @@
             "jobId": "fashi",
             "jobName": "法师",
             "jobColor": "#01B2E3",
+            "image": null,
             "randomMin": 1,
             "randomMax": 2,
             "attributes": [
@@ -778,14 +897,40 @@
         },
         {
             "id": "fashi_aoshu_treasure",
-            "name": "奥术秘宝",
+            "name": "奥术密宝",
             "slotType": "秘宝",
             "jobId": "fashi",
             "jobName": "法师",
             "jobColor": "#01B2E3",
+            "image": null,
             "randomMin": 1,
-            "randomMax": 4,
-            "attributes": []
+            "randomMax": 3,
+            "attributes": [
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击",
+                    "min": 1,
+                    "max": 2,
+                    "icon": "sword",
+                    "iconColor": "#b8722e"
+                },
+                {
+                    "id": "manaBonus",
+                    "name": "法力加成",
+                    "min": 5,
+                    "max": 10,
+                    "icon": "shield",
+                    "iconColor": "#3b82f6"
+                },
+                {
+                    "id": "staminaBonus",
+                    "name": "体力加成",
+                    "min": 0.5,
+                    "max": 1,
+                    "icon": "heart",
+                    "iconColor": "#dc2626"
+                }
+            ]
         }
     ]
 }

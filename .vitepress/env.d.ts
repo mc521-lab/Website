@@ -24,3 +24,8 @@ declare module "@data/enchantments.data" {
     import type { WikiEnchants } from "./types/wiki";
     export const data: WikiEnchants;
 }
+
+declare module "@data/materials.data" {
+    import type { WikiMaterials } from "./types/wiki";
+    export const data: WikiMaterials;
+}

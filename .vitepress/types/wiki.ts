@@ -72,7 +72,7 @@ export interface WikiJewelry {
     jobId: string;
     jobName: string;
     jobColor: string;
-    image?: string;
+    image: string | null;
     randomMin: number;
     randomMax: number;
     attributes: WikiJewelryAttribute[];
@@ -137,6 +137,24 @@ export interface WikiEnchantValue {
     formula: string;
     unit: string;
     description: string;
+}
+
+export interface WikiMaterial {
+    id: string;
+    name: string;
+    quality: string;
+    type: string;
+    description: string;
+    usage: string;
+    effect: string;
+    limit: string;
+    exchange: string;
+    source: string;
+    image: string | null;
+}
+
+export interface WikiMaterials {
+    materials: WikiMaterial[];
 }
 
 export interface WikiEnchantCondition {

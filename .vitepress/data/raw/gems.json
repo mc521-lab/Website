@@ -1,14 +1,20 @@
 {
     "gems": [
         {
-            "id": "baoji",
-            "name": "暴击宝石",
-            "symbolColor": "#D80071",
+            "id": "fenxin",
+            "name": "焚心宝石",
+            "symbolColor": "#FF0000",
             "description": "",
             "image": null,
             "features": [
-                { "id": "critRate", "name": "暴击几率" },
-                { "id": "critDamage", "name": "暴击伤害" }
+                {
+                    "id": "maxHealth",
+                    "name": "最大生命值"
+                },
+                {
+                    "id": "healthRegen",
+                    "name": "生命恢复"
+                }
             ],
             "qualitys": [
                 {
@@ -16,8 +22,20 @@
                     "name": "C 级",
                     "description": "随机一个属性",
                     "features": [
-                        { "id": "critRate", "value": [1, 1.5] },
-                        { "id": "critDamage", "value": [2, 4] }
+                        {
+                            "id": "maxHealth",
+                            "value": [
+                                1,
+                                1.5
+                            ]
+                        },
+                        {
+                            "id": "healthRegen",
+                            "value": [
+                                0.02,
+                                0.05
+                            ]
+                        }
                     ]
                 },
                 {
@@ -25,8 +43,20 @@
                     "name": "B 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "critRate", "value": [1.5, 2] },
-                        { "id": "critDamage", "value": [4, 6] }
+                        {
+                            "id": "maxHealth",
+                            "value": [
+                                1.5,
+                                2
+                            ]
+                        },
+                        {
+                            "id": "healthRegen",
+                            "value": [
+                                0.03,
+                                0.06
+                            ]
+                        }
                     ]
                 },
                 {
@@ -34,17 +64,41 @@
                     "name": "A 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "critRate", "value": [2, 2.5] },
-                        { "id": "critDamage", "value": [6, 8] }
+                        {
+                            "id": "maxHealth",
+                            "value": [
+                                2,
+                                2.5
+                            ]
+                        },
+                        {
+                            "id": "healthRegen",
+                            "value": [
+                                0.05,
+                                0.08
+                            ]
+                        }
                     ]
                 },
                 {
                     "id": "s",
                     "name": "S 级",
-                    "description": "两个属性",
+                    "description": "随机2个属性",
                     "features": [
-                        { "id": "critRate", "value": [2.5, 3] },
-                        { "id": "critDamage", "value": [8, 10] }
+                        {
+                            "id": "maxHealth",
+                            "value": [
+                                2.5,
+                                3
+                            ]
+                        },
+                        {
+                            "id": "healthRegen",
+                            "value": [
+                                0.07,
+                                0.1
+                            ]
+                        }
                     ]
                 }
             ]
@@ -56,8 +110,14 @@
             "description": "",
             "image": null,
             "features": [
-                { "id": "maxMana", "name": "最大法力值" },
-                { "id": "manaRegen", "name": "法力恢复" }
+                {
+                    "id": "maxMana",
+                    "name": "最大法力值"
+                },
+                {
+                    "id": "manaRegen",
+                    "name": "法力恢复"
+                }
             ],
             "qualitys": [
                 {
@@ -65,8 +125,20 @@
                     "name": "C 级",
                     "description": "随机一个属性",
                     "features": [
-                        { "id": "maxMana", "value": [0.5, 1] },
-                        { "id": "manaRegen", "value": [0.04, 0.08] }
+                        {
+                            "id": "maxMana",
+                            "value": [
+                                0.5,
+                                1
+                            ]
+                        },
+                        {
+                            "id": "manaRegen",
+                            "value": [
+                                0.04,
+                                0.08
+                            ]
+                        }
                     ]
                 },
                 {
@@ -74,8 +146,20 @@
                     "name": "B 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "maxMana", "value": [1, 1.5] },
-                        { "id": "manaRegen", "value": [0.08, 0.12] }
+                        {
+                            "id": "maxMana",
+                            "value": [
+                                1,
+                                1.5
+                            ]
+                        },
+                        {
+                            "id": "manaRegen",
+                            "value": [
+                                0.08,
+                                0.12
+                            ]
+                        }
                     ]
                 },
                 {
@@ -83,17 +167,41 @@
                     "name": "A 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "maxMana", "value": [1.5, 2] },
-                        { "id": "manaRegen", "value": [0.12, 0.14] }
+                        {
+                            "id": "maxMana",
+                            "value": [
+                                1.5,
+                                2
+                            ]
+                        },
+                        {
+                            "id": "manaRegen",
+                            "value": [
+                                0.12,
+                                0.14
+                            ]
+                        }
                     ]
                 },
                 {
                     "id": "s",
                     "name": "S 级",
-                    "description": "两个属性",
+                    "description": "随机2个属性",
                     "features": [
-                        { "id": "maxMana", "value": [2, null] },
-                        { "id": "manaRegen", "value": 0.14 }
+                        {
+                            "id": "maxMana",
+                            "value": [
+                                2,
+                                2.5
+                            ]
+                        },
+                        {
+                            "id": "manaRegen",
+                            "value": [
+                                0.14,
+                                0.18
+                            ]
+                        }
                     ]
                 }
             ]
@@ -105,57 +213,14 @@
             "description": "",
             "image": null,
             "features": [
-                { "id": "maxStamina", "name": "最大体力值" },
-                { "id": "staminaRegen", "name": "体力恢复" }
-            ],
-            "qualitys": [
                 {
-                    "id": "c",
-                    "name": "C 级",
-                    "description": "随机一个属性",
-                    "features": [
-                        { "id": "maxStamina", "value": [0.5, 1] },
-                        { "id": "staminaRegen", "value": [0.04, 0.08] }
-                    ]
+                    "id": "maxStamina",
+                    "name": "最大体力值"
                 },
                 {
-                    "id": "b",
-                    "name": "B 级",
-                    "description": "随机一到两个属性",
-                    "features": [
-                        { "id": "maxStamina", "value": [1, 1.5] },
-                        { "id": "staminaRegen", "value": [0.08, 0.12] }
-                    ]
-                },
-                {
-                    "id": "a",
-                    "name": "A 级",
-                    "description": "随机一到两个属性",
-                    "features": [
-                        { "id": "maxStamina", "value": [1.5, 2] },
-                        { "id": "staminaRegen", "value": [0.12, 0.14] }
-                    ]
-                },
-                {
-                    "id": "s",
-                    "name": "S 级",
-                    "description": "两个属性",
-                    "features": [
-                        { "id": "maxStamina", "value": [2, null] },
-                        { "id": "staminaRegen", "value": 0.14 }
-                    ]
+                    "id": "staminaRegen",
+                    "name": "体力恢复"
                 }
-            ]
-        },
-        {
-            "id": "fenxin",
-            "name": "焚心宝石",
-            "symbolColor": "#FF0000",
-            "description": "",
-            "image": null,
-            "features": [
-                { "id": "maxHealth", "name": "最大生命值" },
-                { "id": "rescue", "name": "生命恢复" }
             ],
             "qualitys": [
                 {
@@ -163,8 +228,20 @@
                     "name": "C 级",
                     "description": "随机一个属性",
                     "features": [
-                        { "id": "maxHealth", "value": [1, 1.5] },
-                        { "id": "rescue", "value": [0.02, 0.05] }
+                        {
+                            "id": "maxStamina",
+                            "value": [
+                                0.5,
+                                1
+                            ]
+                        },
+                        {
+                            "id": "staminaRegen",
+                            "value": [
+                                0.04,
+                                0.08
+                            ]
+                        }
                     ]
                 },
                 {
@@ -172,8 +249,20 @@
                     "name": "B 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "maxHealth", "value": [1.5, 2] },
-                        { "id": "rescue", "value": [0.03, 0.06] }
+                        {
+                            "id": "maxStamina",
+                            "value": [
+                                1,
+                                1.5
+                            ]
+                        },
+                        {
+                            "id": "staminaRegen",
+                            "value": [
+                                0.08,
+                                0.12
+                            ]
+                        }
                     ]
                 },
                 {
@@ -181,17 +270,41 @@
                     "name": "A 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "maxHealth", "value": [2, 2.5] },
-                        { "id": "rescue", "value": [0.05, 0.08] }
+                        {
+                            "id": "maxStamina",
+                            "value": [
+                                1.5,
+                                2
+                            ]
+                        },
+                        {
+                            "id": "staminaRegen",
+                            "value": [
+                                0.12,
+                                0.14
+                            ]
+                        }
                     ]
                 },
                 {
                     "id": "s",
                     "name": "S 级",
-                    "description": "两个属性",
+                    "description": "随机2个属性",
                     "features": [
-                        { "id": "maxHealth", "value": [2.5, 3] },
-                        { "id": "rescue", "value": 0.07 }
+                        {
+                            "id": "maxStamina",
+                            "value": [
+                                2,
+                                2.5
+                            ]
+                        },
+                        {
+                            "id": "staminaRegen",
+                            "value": [
+                                0.14,
+                                0.18
+                            ]
+                        }
                     ]
                 }
             ]
@@ -203,8 +316,14 @@
             "description": "",
             "image": null,
             "features": [
-                { "id": "dodgeRate", "name": "闪避几率" },
-                { "id": "damageReduction", "name": "防御减伤" }
+                {
+                    "id": "dodgeRate",
+                    "name": "闪避几率"
+                },
+                {
+                    "id": "damageReduction",
+                    "name": "防御减伤"
+                }
             ],
             "qualitys": [
                 {
@@ -212,8 +331,20 @@
                     "name": "C 级",
                     "description": "随机一个属性",
                     "features": [
-                        { "id": "dodgeRate", "value": [0.5, 1] },
-                        { "id": "damageReduction", "value": [0.2, 0.4] }
+                        {
+                            "id": "dodgeRate",
+                            "value": [
+                                0.5,
+                                1
+                            ]
+                        },
+                        {
+                            "id": "damageReduction",
+                            "value": [
+                                0.2,
+                                0.4
+                            ]
+                        }
                     ]
                 },
                 {
@@ -221,8 +352,20 @@
                     "name": "B 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "dodgeRate", "value": [1, 1.5] },
-                        { "id": "damageReduction", "value": [0.2, 0.6] }
+                        {
+                            "id": "dodgeRate",
+                            "value": [
+                                1,
+                                1.5
+                            ]
+                        },
+                        {
+                            "id": "damageReduction",
+                            "value": [
+                                0.2,
+                                0.6
+                            ]
+                        }
                     ]
                 },
                 {
@@ -230,17 +373,41 @@
                     "name": "A 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "dodgeRate", "value": [1.5, 2] },
-                        { "id": "damageReduction", "value": [0.4, 0.8] }
+                        {
+                            "id": "dodgeRate",
+                            "value": [
+                                1.5,
+                                2
+                            ]
+                        },
+                        {
+                            "id": "damageReduction",
+                            "value": [
+                                0.4,
+                                0.8
+                            ]
+                        }
                     ]
                 },
                 {
                     "id": "s",
                     "name": "S 级",
-                    "description": "两个属性",
+                    "description": "随机2个属性",
                     "features": [
-                        { "id": "dodgeRate", "value": [2, null] },
-                        { "id": "damageReduction", "value": [0.6, 1] }
+                        {
+                            "id": "dodgeRate",
+                            "value": [
+                                2,
+                                2.5
+                            ]
+                        },
+                        {
+                            "id": "damageReduction",
+                            "value": [
+                                0.6,
+                                1
+                            ]
+                        }
                     ]
                 }
             ]
@@ -252,8 +419,14 @@
             "description": "",
             "image": null,
             "features": [
-                { "id": "baseAttack", "name": "基础攻击" },
-                { "id": "pveAttack", "name": "PVE攻击" }
+                {
+                    "id": "baseAttack",
+                    "name": "基础攻击"
+                },
+                {
+                    "id": "pveAttack",
+                    "name": "PVE攻击"
+                }
             ],
             "qualitys": [
                 {
@@ -261,8 +434,20 @@
                     "name": "C 级",
                     "description": "随机一个属性",
                     "features": [
-                        { "id": "baseAttack", "value": [0.3, 0.6] },
-                        { "id": "pveAttack", "value": [1, 2] }
+                        {
+                            "id": "baseAttack",
+                            "value": [
+                                0.3,
+                                0.6
+                            ]
+                        },
+                        {
+                            "id": "pveAttack",
+                            "value": [
+                                1,
+                                2
+                            ]
+                        }
                     ]
                 },
                 {
@@ -270,8 +455,20 @@
                     "name": "B 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "baseAttack", "value": [0.6, 0.9] },
-                        { "id": "pveAttack", "value": [2, 3] }
+                        {
+                            "id": "baseAttack",
+                            "value": [
+                                0.6,
+                                0.9
+                            ]
+                        },
+                        {
+                            "id": "pveAttack",
+                            "value": [
+                                2,
+                                3
+                            ]
+                        }
                     ]
                 },
                 {
@@ -279,17 +476,144 @@
                     "name": "A 级",
                     "description": "随机一到两个属性",
                     "features": [
-                        { "id": "baseAttack", "value": [0.9, 1.2] },
-                        { "id": "pveAttack", "value": [3, 4] }
+                        {
+                            "id": "baseAttack",
+                            "value": [
+                                0.9,
+                                1.2
+                            ]
+                        },
+                        {
+                            "id": "pveAttack",
+                            "value": [
+                                3,
+                                4
+                            ]
+                        }
                     ]
                 },
                 {
                     "id": "s",
                     "name": "S 级",
-                    "description": "两个属性",
+                    "description": "随机2个属性",
                     "features": [
-                        { "id": "baseAttack", "value": [1.2, 1.5] },
-                        { "id": "pveAttack", "value": [4, 5] }
+                        {
+                            "id": "baseAttack",
+                            "value": [
+                                1.2,
+                                1.5
+                            ]
+                        },
+                        {
+                            "id": "pveAttack",
+                            "value": [
+                                4,
+                                5
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "baoji",
+            "name": "暴击宝石",
+            "symbolColor": "#D80071",
+            "description": "",
+            "image": null,
+            "features": [
+                {
+                    "id": "critRate",
+                    "name": "暴击几率"
+                },
+                {
+                    "id": "critDamage",
+                    "name": "暴击伤害"
+                }
+            ],
+            "qualitys": [
+                {
+                    "id": "c",
+                    "name": "C 级",
+                    "description": "随机一个属性",
+                    "features": [
+                        {
+                            "id": "critRate",
+                            "value": [
+                                1,
+                                1.5
+                            ]
+                        },
+                        {
+                            "id": "critDamage",
+                            "value": [
+                                2,
+                                4
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "b",
+                    "name": "B 级",
+                    "description": "随机一到两个属性",
+                    "features": [
+                        {
+                            "id": "critRate",
+                            "value": [
+                                1.5,
+                                2
+                            ]
+                        },
+                        {
+                            "id": "critDamage",
+                            "value": [
+                                4,
+                                6
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "a",
+                    "name": "A 级",
+                    "description": "随机一到两个属性",
+                    "features": [
+                        {
+                            "id": "critRate",
+                            "value": [
+                                2,
+                                2.5
+                            ]
+                        },
+                        {
+                            "id": "critDamage",
+                            "value": [
+                                6,
+                                8
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "s",
+                    "name": "S 级",
+                    "description": "随机2个属性",
+                    "features": [
+                        {
+                            "id": "critRate",
+                            "value": [
+                                2.5,
+                                3
+                            ]
+                        },
+                        {
+                            "id": "critDamage",
+                            "value": [
+                                8,
+                                10
+                            ]
+                        }
                     ]
                 }
             ]

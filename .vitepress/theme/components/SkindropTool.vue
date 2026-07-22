@@ -241,7 +241,8 @@ async function copyCommand() {
                 <div class="result-step">
                     <div class="result-box">
                         <span class="result-label">上传成功</span>
-                        <p class="panel-desc">在游戏中输入以下命令应用皮肤：</p>
+                        <p class="panel-desc">点击下方复制命令按钮，复制换皮肤命令</p>
+                        <p class="panel-desc">在游戏中按 <kbd>T</kbd> 打开对话栏，再按下 <kbd>Ctrl</kbd> + <kbd>V</kbd> 粘贴复制好的命令，最后按 <kbd>Enter</kbd>以更换皮肤</p>
                         <code class="command-code">{{ skinCommand }}</code>
                     </div>
 
@@ -555,6 +556,19 @@ async function copyCommand() {
 
 .result-link:hover {
     text-decoration: underline;
+}
+
+kbd {
+    display: inline-block;
+    padding: 0.15em 0.5em;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85em;
+    line-height: 1.4;
 }
 
 .error-box {

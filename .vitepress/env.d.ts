@@ -1,5 +1,13 @@
 /// <reference types="vitepress/client" />
 
+interface ImportMetaEnv {
+    readonly VITE_API_BASE_URL?: string;
+}
+
+interface ImportMeta {
+    readonly env: ImportMetaEnv;
+}
+
 declare module "@data/weapon.data" {
     import type { WikiWeaponData } from "./types/wiki";
     export const data: WikiWeaponData;

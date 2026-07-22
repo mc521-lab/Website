@@ -9,8 +9,8 @@
     const navItems = [
         { text: "首页", link: "/", icon: "lucide:home" },
         { text: "官网Wiki", link: "/wiki/rules/basic", icon: "lucide:book-open", activePattern: "/wiki" },
-        { text: "更换皮肤", link: "#", icon: "lucide:sparkles" },
-        { text: "伤害计算", link: "#", icon: "lucide:sword" },
+        { text: "更换皮肤", link: "/tools/skindrop", icon: "lucide:sparkles" },
+        { text: "伤害计算", link: "/tools/damage", icon: "lucide:sword" },
         { text: "更新日志", link: "#", icon: "lucide:clipboard-list" },
     ];
 

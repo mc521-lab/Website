@@ -26,6 +26,7 @@
         "vue-tsc": "^3.3.7"
     },
     "dependencies": {
-        "@iconify/vue": "^5.0.1"
+        "@iconify/vue": "^5.0.1",
+        "skinview3d": "^3.4.2"
     }
 }

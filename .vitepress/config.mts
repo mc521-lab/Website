@@ -27,8 +27,8 @@ export default defineConfig({
         nav: [
             { text: "首页", link: "/" },
             { text: "官网Wiki", link: "/wiki/" },
-            { text: "更换皮肤", link: "#" },
-            { text: "伤害计算", link: "#" },
+            { text: "更换皮肤", link: "/tools/skindrop" },
+            { text: "伤害计算", link: "/tools/damage" },
             { text: "更新日志", link: "#" },
         ],
 

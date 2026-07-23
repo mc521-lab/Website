@@ -311,8 +311,8 @@
 
                         <div class="result-box">
                             <p class="panel-desc small">
-                                点击下方按钮复制换皮肤命令， 在游戏中按 <kbd>T</kbd> 打开对话栏，<br />再按下 <kbd>Ctrl</kbd> +
-                                <kbd>V</kbd> 粘贴复制好的命令，<br />最后按 <kbd>Enter</kbd> 以更换皮肤。
+                                1. 点击下方按钮复制换皮肤命令， <br />2. 在游戏中按 <kbd>T</kbd> 打开对话栏，<br />3. 按下
+                                <kbd>Ctrl</kbd> + <kbd>V</kbd> 粘贴复制好的命令，<br />4. 按 <kbd>Enter</kbd> 以更换皮肤。
                             </p>
                             <code class="command-code">{{ skinCommand }}</code>
                         </div>

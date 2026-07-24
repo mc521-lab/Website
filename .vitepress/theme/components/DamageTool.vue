@@ -6,7 +6,7 @@ const rawDamage = ref(10);      // d
 const defenseReduction = ref(0); // r
 const armorValue = ref(20);     // v
 const armorToughness = ref(0);  // t
-const enchantmentFactor = ref(100); // k%
+const enchantmentFactor = ref(0); // k%
 
 const piercingLevel = 0; // 默认 p = 0，未提供滑块
 
@@ -31,7 +31,7 @@ function calculateArmorDamage(d: number, v: number, t: number, p: number): numbe
 const finalDamage = computed(() => {
     const armorDamage = calculateArmorDamage(rawDamage.value, armorValue.value, armorToughness.value, piercingLevel);
     const afterDefense = armorDamage * (1 - defenseReduction.value / 100);
-    const afterEnchantment = afterDefense * (enchantmentFactor.value / 100);
+    const afterEnchantment = afterDefense * (1 - enchantmentFactor.value / 100);
     return Math.max(0, afterEnchantment);
 });
 
@@ -96,7 +96,7 @@ const sliders: SliderConfig[] = [
         step: 1,
         unit: "%",
         icon: "lucide:book-open",
-        description: "附魔保护效果的生效比例，100% 完整计算，0% 不计算。",
+        description: "附魔保护效果的生效比例|每件保护 4 为 16%，每件保护 5 为 20%",
     },
 ];
 
@@ -188,7 +188,10 @@ function sliderBackground(slider: SliderConfig): string {
                                 <Icon :name="slider.icon" :size="16" class="explanation-icon" />
                                 <span class="explanation-label">{{ slider.label }}</span>
                             </div>
-                            <p class="explanation-text">{{ slider.description }}</p>
+                            <p v-if="slider.description.includes('|')" v-for="value in slider.description.split('|')" class="explanation-text">
+                                {{ value }}
+                            </p>
+                            <p class="explanation-text" v-else>{{ slider.description }}</p>
                             <ul v-if="slider.bullets" class="explanation-bullets">
                                 <li v-for="bullet in slider.bullets" :key="bullet">{{ bullet }}</li>
                             </ul>

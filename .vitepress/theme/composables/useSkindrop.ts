@@ -16,6 +16,7 @@ export interface ResolvedSkin {
 export interface UseSkindropReturn {
     loading: Ref<boolean>;
     error: Ref<string | null>;
+    lastError: Ref<unknown>;
     getDownloadUrl: (id: string) => string;
     download: (id: string) => Promise<Blob | null>;
     resolve: (input: string) => Promise<ResolvedSkin | null>;
@@ -35,13 +36,16 @@ function formatError(err: unknown): string {
 export function useSkindrop(): UseSkindropReturn {
     const loading = ref(false);
     const error = ref<string | null>(null);
+    const lastError = ref<unknown>(null);
 
     async function download(id: string): Promise<Blob | null> {
         loading.value = true;
         error.value = null;
+        lastError.value = null;
         try {
             return await downloadSkin(id);
         } catch (err) {
+            lastError.value = err;
             error.value = formatError(err);
             return null;
         } finally {
@@ -52,6 +56,7 @@ export function useSkindrop(): UseSkindropReturn {
     async function resolve(input: string): Promise<ResolvedSkin | null> {
         loading.value = true;
         error.value = null;
+        lastError.value = null;
         try {
             const id = resolveSkinId(input);
             if (!id) {
@@ -61,6 +66,7 @@ export function useSkindrop(): UseSkindropReturn {
             const url = URL.createObjectURL(blob);
             return { id, url, blob };
         } catch (err) {
+            lastError.value = err;
             error.value = formatError(err);
             return null;
         } finally {
@@ -71,10 +77,12 @@ export function useSkindrop(): UseSkindropReturn {
     async function upload(filename: string, file: File): Promise<string | null> {
         loading.value = true;
         error.value = null;
+        lastError.value = null;
         try {
             const result = await uploadSkin(filename, file);
             return result.url;
         } catch (err) {
+            lastError.value = err;
             error.value = formatError(err);
             return null;
         } finally {
@@ -85,6 +93,7 @@ export function useSkindrop(): UseSkindropReturn {
     return {
         loading,
         error,
+        lastError,
         getDownloadUrl: getSkinDownloadUrl,
         download,
         resolve,

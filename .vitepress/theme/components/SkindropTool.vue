@@ -8,7 +8,7 @@
 
     const step = ref<Step>("select");
     const activeTab = ref<Tab>("upload");
-    const { loading, error, resolve, upload } = useSkindrop();
+    const { loading, error, lastError, resolve, upload } = useSkindrop();
 
     const skinSource = ref<(ResolvedSkin & { filename: string }) | null>(null);
     const playerName = ref("");
@@ -163,6 +163,40 @@
             if (copiedTimeout) clearTimeout(copiedTimeout);
             copiedTimeout = setTimeout(() => {
                 copied.value = false;
+            }, 2000);
+        } catch {
+            // ignore
+        }
+    }
+
+    const debugCopied = ref(false);
+    let debugCopiedTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    function getDebugInfo(): string {
+        const raw = lastError.value;
+        const errorStack = raw instanceof Error ? raw.stack || "(no stack)" : "(no stack available)";
+        return [
+            "Diagnostic Report (Skindrop Module)",
+            "------------------",
+            `Time: ${new Date().toISOString()}`,
+            `Current Step: ${step.value}`,
+            `Current Tab: ${activeTab.value}`,
+            `Player Name: ${playerName.value || "(Empty)"}`,
+            `Source: ${skinSource.value?.filename || "(Unknown)"}`,
+            `Upload URL: ${uploadedUrl.value || "(Empty)"}`,
+            `User Agent: ${navigator.userAgent}`,
+            "------------------",
+            `Error:\n${errorStack}`,
+        ].join("\n");
+    }
+
+    async function copyDebugInfo() {
+        try {
+            await navigator.clipboard.writeText(getDebugInfo());
+            debugCopied.value = true;
+            if (debugCopiedTimeout) clearTimeout(debugCopiedTimeout);
+            debugCopiedTimeout = setTimeout(() => {
+                debugCopied.value = false;
             }, 2000);
         } catch {
             // ignore
@@ -330,7 +364,10 @@
                     </div>
 
                     <div v-if="error" class="error-box">
-                        {{ error }}
+                        <span class="error-message">{{ error }}</span>
+                        <button class="error-debug-btn" @click="copyDebugInfo">
+                            {{ debugCopied ? "已复制" : "复制调试信息" }}
+                        </button>
                     </div>
                 </section>
             </main>
@@ -834,6 +871,36 @@
         border-radius: var(--radius-md);
         color: var(--jtg-error-400);
         font-size: var(--font-size-body);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+    }
+
+    .error-message {
+        line-height: 1.5;
+    }
+
+    .error-debug-btn {
+        flex-shrink: 0;
+        border: 1px solid rgba(239, 68, 68, 0.45);
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--jtg-error-400);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-caption);
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0.45em 0.9em;
+        border-radius: var(--radius-md);
+        transition:
+            background 0.15s,
+            border-color 0.15s;
+        white-space: nowrap;
+    }
+
+    .error-debug-btn:hover {
+        background: rgba(239, 68, 68, 0.25);
+        border-color: rgba(239, 68, 68, 0.6);
     }
 
     @media (max-width: 860px) {

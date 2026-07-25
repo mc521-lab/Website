@@ -39,4 +39,14 @@ export default defineConfig({
             copyright: "Copyright © 2026 君庭阁",
         },
     },
+
+    head: [
+        [
+            "link",
+            {
+                rel: "icon",
+                href: "/favicon.ico",
+            },
+        ],
+    ],
 });

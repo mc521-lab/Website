@@ -1,8 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { gallery_jewelry_data } from "@/.velite";
@@ -177,12 +175,6 @@ function effectIcon(effect: string): string | undefined {
     return EFFECT_ICON[effect];
 }
 
-function entryStatCount(item: JewelryItem): number {
-    const entries = item.modifiers?.entries;
-    if (!entries) return 0;
-    return Object.keys(entries).length;
-}
-
 /* -------------------------------------------------------------------------- */
 /*  Sub-components                                                            */
 /* -------------------------------------------------------------------------- */
@@ -193,74 +185,6 @@ function SpecialBadge({ special }: { special: boolean }) {
         <span className="inline-flex items-center justify-center rounded bg-amber-500/15 px-2 py-0.5 text-xs font-semibold tracking-wide text-amber-600 dark:text-amber-400">
             推荐
         </span>
-    );
-}
-
-function StatRow({ label, icon, value, suffix = "" }: { label: string; icon?: string; value: string; suffix?: string }) {
-    if (value === "—") return null;
-    return (
-        <div className="flex justify-between gap-2 text-sm">
-            <span className="text-muted-foreground flex shrink-0 items-center gap-2">
-                {icon &&
-                    (icon.includes("|") ? (
-                        <IconifyIcon icon={icon.split("|")[0]} style={{ color: icon.split("|")[1] }} width={16} height={16} />
-                    ) : (
-                        <IconifyIcon icon={icon} width={16} height={16} />
-                    ))}
-                {label}
-            </span>
-            <span className="text-right font-medium tabular-nums">
-                {value}
-                {suffix}
-            </span>
-        </div>
-    );
-}
-
-function JewelryCard({ item, onSelect }: { item: JewelryItem; onSelect: (item: JewelryItem) => void }) {
-    const jobCode = resolveJob(item);
-    const posCode = resolvePosition(item);
-    const jobLabel = jobCode === "UNKNOWN" ? "未知职业" : JOB_LABEL[jobCode];
-    const posLabel = posCode === "UNKNOWN" ? "未知部位" : POSITION_LABEL[posCode];
-    const entryCount = entryStatCount(item);
-
-    return (
-        <button
-            type="button"
-            onClick={() => onSelect(item)}
-            className={cn(
-                "group bg-card hover:border-primary/40 focus-visible:ring-ring flex flex-col rounded-xl border p-4 text-left shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:outline-none",
-                item.basic.special ? "flashing-border border-dashed" : "border-border"
-            )}
-            style={
-                {
-                    "--border-1": "oklch(from var(--primary) l c h / 0.5)",
-                    "--border-2": "oklch(from var(--primary) l c h / 1)",
-                } as React.CSSProperties
-            }>
-            <div className="mb-3 flex items-start gap-2">
-                <Image
-                    src={`/gallery/${item.basic.name}.png`}
-                    alt={item.basic.name}
-                    width={16}
-                    height={16}
-                    className="size-8"
-                />
-                <div className="min-w-0">
-                    <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
-                    <p className="text-muted-foreground mt-0.5 text-xs">
-                        {jobLabel} · {posLabel}
-                    </p>
-                </div>
-                <div className="ml-auto">
-                    <SpecialBadge special={item.basic.special} />
-                </div>
-            </div>
-
-            <div className="border-border/60 mt-auto space-y-1 border-t pt-3">
-                <StatRow label="随机效果" value={entryCount > 0 ? `${entryCount} 选 1` : "—"} />
-            </div>
-        </button>
     );
 }
 
@@ -283,7 +207,7 @@ function ModifierStatLines({ stats }: { stats: JewelryStatEntry[] }) {
                                 ) : (
                                     <IconifyIcon icon={icon} width={14} height={14} />
                                 ))}
-                            <span className="translate-y-0.5">{effectLabel(s.effect)}</span>
+                            <span className="translate-y-[1.5px]">{effectLabel(s.effect)}</span>
                         </span>
                         <span className="text-foreground font-medium tabular-nums">{formatRange(s.min, s.max)}</span>
                     </div>
@@ -295,8 +219,8 @@ function ModifierStatLines({ stats }: { stats: JewelryStatEntry[] }) {
 
 function ModifierEntryRow({ entry }: { entry: JewelryModifierEntry }) {
     return (
-        <div className="border-foreground/50 rounded-md border border-dashed px-3 py-2">
-            <div className="mb-1 flex items-center justify-between gap-2">
+        <div className="border-border/50 bg-muted/60 rounded-md border px-2.5 py-1.5">
+            <div className="mb-0.5 flex items-center justify-between gap-2">
                 <span className="text-muted-foreground text-xs">
                     生效概率 <span className="text-foreground font-medium">{formatPercent(entry.probability)}</span>
                 </span>
@@ -306,7 +230,7 @@ function ModifierEntryRow({ entry }: { entry: JewelryModifierEntry }) {
     );
 }
 
-function DetailPanel({ item, onClose }: { item: JewelryItem; onClose: () => void }) {
+function JewelryCard({ item }: { item: JewelryItem }) {
     const jobCode = resolveJob(item);
     const posCode = resolvePosition(item);
     const jobLabel = jobCode === "UNKNOWN" ? "未知职业" : JOB_LABEL[jobCode];
@@ -314,54 +238,54 @@ function DetailPanel({ item, onClose }: { item: JewelryItem; onClose: () => void
     const entries = item.modifiers?.entries ? Object.entries(item.modifiers.entries) : [];
 
     return (
-        <Dialog open={!!item}>
-            <DialogContent showCloseButton={false} className="mt-8">
-                <div className="relative w-full" onClick={(e) => e.stopPropagation()}>
-                    <Button
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={onClose}
-                        className="text-muted-foreground hover:bg-muted hover:text-foreground absolute top-0 right-0 rounded-md p-1"
-                        aria-label="关闭">
-                        ✕
-                    </Button>
-
-                    <div className="mb-4 flex items-center gap-3">
-                        <Image
-                            src={`/gallery/${item.basic.name}.png`}
-                            alt={item.basic.name}
-                            width={16}
-                            height={16}
-                            className="size-12"
-                        />
-                        <div>
-                            <h2 className="text-xl font-bold">{item.basic.name}</h2>
-                            <p className="text-muted-foreground text-sm">
-                                {jobLabel} · {posLabel}
-                            </p>
-                        </div>
-                    </div>
-
-                    <section className="space-y-4">
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                随机属性
-                            </h3>
-                            <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                {entries.length === 0 && <p className="text-muted-foreground text-sm">无随机属性</p>}
-                                {entries.length > 0 && (
-                                    <div className="space-y-2">
-                                        {entries.map(([id, entry]) => (
-                                            <ModifierEntryRow key={id} entry={entry} />
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </section>
+        <article
+            className={cn(
+                "border-border bg-card flex flex-col rounded-xl border p-4 shadow-sm",
+                item.basic.special ? "flashing-border" : ""
+            )}
+            style={
+                {
+                    "--border-1": "oklch(from var(--primary) l c h / 0.5)",
+                    "--border-2": "oklch(from var(--primary) l c h / 1)",
+                } as React.CSSProperties
+            }>
+            {/* Header */}
+            <div className="mb-3 flex items-start gap-2">
+                <Image
+                    src={`/gallery/${item.basic.name}.png`}
+                    alt={item.basic.name}
+                    width={32}
+                    height={32}
+                    className="size-8 shrink-0"
+                />
+                <div className="min-w-0">
+                    <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
+                    <p className="text-muted-foreground mt-0.5 text-xs">
+                        {jobLabel} · {posLabel}
+                    </p>
                 </div>
-            </DialogContent>
-        </Dialog>
+                <SpecialBadge special={item.basic.special} />
+            </div>
+
+            {/* 随机属性 */}
+            <div>
+                <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
+                    属性组
+                    {entries.length > 0 ? `（${entries.length}）` : ""}
+                </h4>
+                {entries.length === 0 ? (
+                    <div className="bg-muted/40 rounded-lg p-2.5">
+                        <p className="text-muted-foreground text-sm">无随机属性</p>
+                    </div>
+                ) : (
+                    <div className="space-y-1.5">
+                        {entries.map(([id, entry]) => (
+                            <ModifierEntryRow key={id} entry={entry} />
+                        ))}
+                    </div>
+                )}
+            </div>
+        </article>
     );
 }
 
@@ -372,8 +296,10 @@ function DetailPanel({ item, onClose }: { item: JewelryItem; onClose: () => void
 function FilterBar({
     job,
     position,
+    special,
     onJobChange,
     onPositionChange,
+    onSpecialChange,
     total,
     filtered,
 }: {
@@ -426,10 +352,24 @@ function FilterBar({
                 </Field>
             </div>
 
+            <div className="flex flex-col gap-1">
+                <Field>
+                    <FieldLabel className="text-muted-foreground -mb-2 text-xs">特效</FieldLabel>
+                    <Select value={special} onValueChange={(v) => onSpecialChange(v as "all" | "yes" | "no")}>
+                        <SelectTrigger className="bg-background! w-36!">
+                            <SelectValue placeholder="全部" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                            <SelectItem value="all">全部</SelectItem>
+                            <SelectItem value="yes">有特效</SelectItem>
+                            <SelectItem value="no">无特效</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </Field>
+            </div>
+
             <p className="text-muted-foreground ml-auto self-center text-right text-sm">
                 正在展示 <span className="text-foreground font-medium">{filtered}</span> / {total} 件
-                <br />
-                点击卡片查看详情
             </p>
         </div>
     );
@@ -453,7 +393,6 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
     const [jobFilter, setJobFilter] = useState<JewelryJob | "all">("all");
     const [positionFilter, setPositionFilter] = useState<JewelryPosition | "all">("all");
     const [specialFilter, setSpecialFilter] = useState<"all" | "yes" | "no">("all");
-    const [selected, setSelected] = useState<JewelryItem | null>(null);
 
     const filtered = useMemo(() => {
         return items
@@ -508,14 +447,12 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
                     <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {filtered.map((item) => (
-                        <JewelryCard key={item.id} item={item} onSelect={setSelected} />
+                        <JewelryCard key={item.id} item={item} />
                     ))}
                 </div>
             )}
-
-            {selected && <DetailPanel item={selected} onClose={() => setSelected(null)} />}
         </div>
     );
 }

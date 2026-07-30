@@ -1,8 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { gallery_gem_data } from "@/.velite";
@@ -36,8 +34,8 @@ export interface GemModifierEntry {
 }
 
 export interface GemModifiers {
-    min: number;
-    max: number;
+    min?: number;
+    max?: number;
     entries?: Record<string, GemModifierEntry>;
 }
 
@@ -47,7 +45,7 @@ export interface GemItem {
     type?: GemType | string;
     basic: GemBasic;
     gem?: GemMeta;
-    modifiers: GemModifiers;
+    modifiers?: GemModifiers;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -207,74 +205,30 @@ function StatRow({ label, icon, value, suffix = "" }: { label: string; icon?: st
     );
 }
 
-function GemCard({ item, onSelect }: { item: GemItem; onSelect: (item: GemItem) => void }) {
-    const typeCode = resolveType(item);
-    const typeLabel = typeCode === "UNKNOWN" ? item.basic.name : TYPE_LABEL[typeCode];
-    const entryCount = item.modifiers?.entries ? Object.keys(item.modifiers.entries).length : 0;
-
-    return (
-        <button
-            type="button"
-            onClick={() => onSelect(item)}
-            className="group border-border bg-card hover:border-primary/40 focus-visible:ring-ring flex flex-col rounded-xl border p-4 text-left shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:outline-none">
-            <div className="mb-3 flex items-start gap-2">
-                <Image
-                    src={`/gallery/${item.basic.name}-${item.basic.quality}级.png`}
-                    alt={item.basic.name}
-                    width={16}
-                    height={16}
-                    className="size-8"
-                />
-                <div className="min-w-0">
-                    <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
-                    <p className="text-muted-foreground mt-0.5 text-xs">{typeLabel.slice(0, 2)}</p>
-                </div>
-                <div className="ml-auto">
-                    <QualityBadge quality={item.basic.quality} />
-                </div>
-            </div>
-
-            <div className="border-border/60 mt-auto space-y-1 border-t pt-3">
-                <StatRow
-                    label="镶嵌成功率"
-                    value={item.gem?.["success-rate"] !== undefined ? formatPercent(item.gem["success-rate"]) : "—"}
-                />
-                <StatRow label="消耗容量" value={formatNumber(item.gem?.consume, 0)} />
-                <StatRow
-                    label="效果"
-                    value={entryCount > 0 ? `${formatRange(item.modifiers?.min, item.modifiers?.max)} / ${entryCount} 项` : "—"}
-                />
-            </div>
-        </button>
-    );
-}
-
-function ModifierEntryRow({ entry, isAllPossible }: { entry: GemModifierEntry; isAllPossible: boolean }) {
+function ModifierEntryRow({ entry }: { entry: GemModifierEntry }) {
     const icon = effectIcon(entry.effect);
     return (
-        <div className="border-foreground/50 flex items-center justify-between rounded-md border border-dashed px-3 py-2">
+        <div className="border-border/50 bg-background/50 rounded-md border px-2.5 py-1.5">
             <div className="mb-0.5 flex items-center justify-between gap-2">
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 text-sm font-medium">
                     {icon &&
                         (icon.includes("|") ? (
                             <IconifyIcon
                                 icon={icon.split("|")[0]}
                                 style={{ color: icon.split("|")[1] }}
-                                width={16}
-                                height={16}
+                                width={14}
+                                height={14}
                             />
                         ) : (
-                            <IconifyIcon icon={icon} width={16} height={16} />
+                            <IconifyIcon icon={icon} width={14} height={14} />
                         ))}
-                    <span className="text-sm font-medium">{effectLabel(entry.effect)}</span>
+                    {effectLabel(entry.effect)}
                 </span>
             </div>
-            <div className="text-muted-foreground flex flex-wrap gap-x-4 gap-y-0.5 text-xs">
-                {!isAllPossible && (
-                    <span>
-                        生效概率 <span className="text-foreground font-medium">{formatPercent(entry.probability)}</span>
-                    </span>
-                )}
+            <div className="text-muted-foreground flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
+                <span>
+                    概率 <span className="text-foreground font-medium">{formatPercent(entry.probability)}</span>
+                </span>
                 <span>
                     数值 <span className="text-foreground font-medium tabular-nums">{formatRange(entry.min, entry.max)}</span>
                 </span>
@@ -283,90 +237,73 @@ function ModifierEntryRow({ entry, isAllPossible }: { entry: GemModifierEntry; i
     );
 }
 
-function DetailPanel({ item, onClose }: { item: GemItem; onClose: () => void }) {
+function GemCard({ item }: { item: GemItem }) {
     const typeCode = resolveType(item);
-    const typeLabel = typeCode === "UNKNOWN" ? "未知类型" : TYPE_LABEL[typeCode];
+    const typeLabel = typeCode === "UNKNOWN" ? item.basic.name : TYPE_LABEL[typeCode];
     const entries = item.modifiers?.entries ? Object.entries(item.modifiers.entries) : [];
 
     return (
-        <Dialog open={!!item}>
-            <DialogContent showCloseButton={false} className="mt-8">
-                <div className="relative w-full" onClick={(e) => e.stopPropagation()}>
-                    <Button
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={onClose}
-                        className="text-muted-foreground hover:bg-muted hover:text-foreground absolute top-0 right-0 rounded-md p-1"
-                        aria-label="关闭">
-                        ✕
-                    </Button>
-
-                    <div className="mb-4 flex items-center gap-3">
-                        <Image
-                            src={`/gallery/${item.basic.name}-${item.basic.quality}级.png`}
-                            alt={item.basic.name}
-                            width={16}
-                            height={16}
-                            className="size-12"
-                        />
-                        <div>
-                            <h2 className="flex items-center gap-2 text-xl font-bold">
-                                {item.basic.name} <QualityBadge quality={item.basic.quality} />
-                            </h2>
-                            <p className="text-muted-foreground text-sm">{typeLabel.slice(0, 2)}</p>
-                        </div>
-                    </div>
-
-                    <section className="space-y-4">
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                镶嵌信息
-                            </h3>
-                            <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                <StatRow
-                                    label="镶嵌成功率"
-                                    icon="lucide:percent|#22c55e"
-                                    value={
-                                        item.gem?.["success-rate"] !== undefined ? formatPercent(item.gem["success-rate"]) : "—"
-                                    }
-                                />
-                                <StatRow
-                                    label="消耗容量"
-                                    icon="lucide:package-minus|#a1a1aa"
-                                    value={formatNumber(item.gem?.consume, 0)}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">效果</h3>
-                            <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                <StatRow
-                                    label="生效数量"
-                                    icon="lucide:layers|#6366f1"
-                                    value={formatRange(item.modifiers?.min, item.modifiers?.max)}
-                                />
-                                {entries.length === 0 && <p className="text-muted-foreground text-sm">无效果</p>}
-                                {entries.length > 0 && (
-                                    <div className="mt-3 space-y-2">
-                                        {entries.map(([id, entry]) => (
-                                            <ModifierEntryRow
-                                                key={id}
-                                                isAllPossible={
-                                                    item.modifiers?.min === item.modifiers?.max &&
-                                                    item.modifiers?.min === entries.length
-                                                }
-                                                entry={entry}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </section>
+        <article className="border-border bg-card flex flex-col rounded-xl border p-4 shadow-sm">
+            {/* Header */}
+            <div className="mb-3 flex items-start gap-2">
+                <Image
+                    src={`/gallery/${item.basic.name}-${item.basic.quality}级.png`}
+                    alt={item.basic.name}
+                    width={32}
+                    height={32}
+                    className="size-8 shrink-0"
+                />
+                <div className="min-w-0">
+                    <h3 className="flex items-center gap-2 truncate text-base leading-tight font-semibold">
+                        {item.basic.name} <QualityBadge quality={item.basic.quality} />
+                    </h3>
+                    <p className="text-muted-foreground mt-0.5 text-xs">{typeLabel.slice(0, 2)}</p>
                 </div>
-            </DialogContent>
-        </Dialog>
+            </div>
+
+            <div className="space-y-3">
+                {/* 镶嵌信息 */}
+                <div>
+                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">镶嵌信息</h4>
+                    <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
+                        <StatRow
+                            label="安装成功率"
+                            icon="lucide:percent|#22c55e"
+                            value={item.gem?.["success-rate"] !== undefined ? formatPercent(item.gem["success-rate"]) : "—"}
+                        />
+                        <StatRow
+                            label="消耗容量"
+                            icon="lucide:package-minus|#a1a1aa"
+                            value={formatNumber(item.gem?.consume, 0)}
+                        />
+                        <StatRow
+                            label="属性生效"
+                            icon="lucide:layers|#6366f1"
+                            value={formatRange(item.modifiers?.min, item.modifiers?.max) + "组"}
+                        />
+                    </div>
+                </div>
+
+                {/* 可能属性 */}
+                <div>
+                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
+                        属性组
+                        {entries.length > 0 ? `（${entries.length}）` : ""}
+                    </h4>
+                    {entries.length === 0 ? (
+                        <div className="bg-muted/40 rounded-lg p-2.5">
+                            <p className="text-muted-foreground text-sm">无修饰符条目</p>
+                        </div>
+                    ) : (
+                        <div className="space-y-1.5">
+                            {entries.map(([id, entry]) => (
+                                <ModifierEntryRow key={id} entry={entry} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </article>
     );
 }
 
@@ -429,10 +366,8 @@ function FilterBar({
                 </Field>
             </div>
 
-            <p className="text-muted-foreground ml-auto self-center text-right text-sm">
-                正在展示 <span className="text-foreground font-medium">{filtered}</span> / {total} 件
-                <br />
-                点击卡片查看详情
+            <p className="text-muted-foreground ml-auto self-center text-sm">
+                正在展示 <span className="text-foreground font-medium">{filtered}</span> / {total} 颗
             </p>
         </div>
     );
@@ -450,7 +385,6 @@ function FilterBar({
 export function GemGalleryPage({ items }: { items: GemItem[] }) {
     const [typeFilter, setTypeFilter] = useState<GemType | "all">("all");
     const [qualityFilter, setQualityFilter] = useState<GemQuality | "all">("all");
-    const [selected, setSelected] = useState<GemItem | null>(null);
 
     const filtered = useMemo(() => {
         return items
@@ -496,14 +430,12 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
                     <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {filtered.map((item) => (
-                        <GemCard key={item.id} item={item} onSelect={setSelected} />
+                        <GemCard key={item.id} item={item} />
                     ))}
                 </div>
             )}
-
-            {selected && <DetailPanel item={selected} onClose={() => setSelected(null)} />}
         </div>
     );
 }
@@ -512,7 +444,7 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
  * Default export for Next.js App Router usage at app/gallery/gem/page.tsx.
  */
 export default function GemPage() {
-    const items: GemItem[] = gallery_gem_data as GemItem[];
+    const items: GemItem[] = gallery_gem_data;
     return <GemGalleryPage items={items} />;
 }
 

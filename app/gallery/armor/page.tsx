@@ -1,6 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { IconifyIcon } from "@/components/iconify-icon";
+import Image from "next/image";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { gallery_armor_data } from "@/.velite";
 
 /* -------------------------------------------------------------------------- */
 /*  Types — aligned with armor_data schema                                    */
@@ -47,6 +52,14 @@ export interface ArmorItem {
     gem?: ArmorGem;
 }
 
+interface ArmorSetGroup {
+    key: string;
+    job: ArmorJob;
+    quality: ArmorQuality;
+    setName: string;
+    pieces: ArmorItem[];
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Display maps                                                              */
 /* -------------------------------------------------------------------------- */
@@ -75,6 +88,24 @@ const QUALITY_COLOR: Record<ArmorQuality, string> = {
     S: "bg-amber-500 text-black",
 };
 
+/** Soft border/accent tint per quality for the set frame */
+const QUALITY_FRAME: Record<ArmorQuality, string> = {
+    D: "border-sky-500/45 bg-sky-500/10",
+    C: "border-emerald-500/45 bg-emerald-500/10",
+    B: "border-cyan-500/45 bg-cyan-500/10",
+    A: "border-violet-500/45 bg-violet-500/10",
+    S: "border-amber-500/45 bg-amber-500/10",
+};
+
+/** Accent colors for set frame glow / icons (aligned with refined mock) */
+const QUALITY_THEME: Record<ArmorQuality, { accent: string; accent2: string; glow: string }> = {
+    D: { accent: "#3ea3ff", accent2: "#7cc5ff", glow: "rgba(62,163,255,.16)" },
+    C: { accent: "#10b981", accent2: "#57ddb0", glow: "rgba(16,185,129,.16)" },
+    B: { accent: "#0ea5e9", accent2: "#7dd3fc", glow: "rgba(14,165,233,.16)" },
+    A: { accent: "#8b5cf6", accent2: "#c4b5fd", glow: "rgba(139,92,246,.16)" },
+    S: { accent: "#f59e0b", accent2: "#fde68a", glow: "rgba(245,158,11,.16)" },
+};
+
 const PART_LABEL: Record<ArmorPart, string> = {
     HELMET: "头盔",
     CHESTPLATE: "胸甲",
@@ -87,6 +118,20 @@ const PART_ORDER: ArmorPart[] = ["HELMET", "CHESTPLATE", "LEGGINGS", "BOOTS"];
 const JOB_ORDER: ArmorJob[] = ["zhanshi", "cike", "sheshou", "fashi", "mushi"];
 
 const QUALITY_ORDER: ArmorQuality[] = ["D", "C", "B", "A", "S"];
+
+const SET_BONUS = {
+    cooldown: { D: 2, C: 4, B: 6, A: 8, S: 10 },
+    rangedReduce: { D: 10, C: 10, B: 15, A: 20, S: 25 },
+} as const;
+
+/** Quality tier subtitle shown under set name */
+const QUALITY_TIER: Record<ArmorQuality, string> = {
+    D: "基础",
+    C: "进阶",
+    B: "精良",
+    A: "史诗",
+    S: "传说",
+};
 
 /* -------------------------------------------------------------------------- */
 /*  Helpers                                                                   */
@@ -104,7 +149,7 @@ function parsePartFromId(id: string): ArmorPart | "UNKNOWN" {
 function getStats(item: ArmorItem) {
     const v = item.value ?? {};
     const e = item.effect ?? {};
-    //  Support both schema layout and current YAML layout (fields under effect)
+    // Support both schema layout and current YAML layout (fields under effect)
     const durable = v.durable ?? (e as Record<string, number>)["durable"];
     const armor = v.armor ?? (e as Record<string, number>)["armor"];
     const toughness = v["armor-toughness"] ?? (e as Record<string, number>)["armor-toughness"];
@@ -127,6 +172,64 @@ function formatNumber(n: number | undefined, digits = 2): string {
     if (n === undefined || n === null) return "—";
     if (Number.isInteger(n)) return String(n);
     return n.toFixed(digits).replace(/\.?0+$/, "");
+}
+
+/** Extract set display name from piece names, e.g. 士卒之盔 → 士卒 */
+function deriveSetName(pieces: ArmorItem[]): string {
+    if (pieces.length === 0) return "未知套装";
+    const names = pieces.map((p) => p.basic.name);
+    // Prefer the common prefix before "之"
+    const withZhi = names.map((n) => {
+        const idx = n.indexOf("之");
+        return idx > 0 ? n.slice(0, idx) : n;
+    });
+    const first = withZhi[0];
+    if (withZhi.every((n) => n === first)) return first;
+    // Fallback: longest common prefix
+    let prefix = names[0];
+    for (const n of names.slice(1)) {
+        let i = 0;
+        while (i < prefix.length && i < n.length && prefix[i] === n[i]) i++;
+        prefix = prefix.slice(0, i);
+    }
+    return prefix.replace(/之$/, "") || names[0];
+}
+
+function groupIntoSets(items: ArmorItem[]): ArmorSetGroup[] {
+    const map = new Map<string, ArmorItem[]>();
+    for (const item of items) {
+        const key = `${item.basic.job}__${item.basic.quality}`;
+        const list = map.get(key);
+        if (list) list.push(item);
+        else map.set(key, [item]);
+    }
+
+    const groups: ArmorSetGroup[] = [];
+    for (const [key, pieces] of map) {
+        const [job, quality] = key.split("__") as [ArmorJob, ArmorQuality];
+        // Sort pieces by part order
+        pieces.sort((a, b) => {
+            const pA = PART_ORDER.indexOf(parsePartFromId(a.id) as ArmorPart);
+            const pB = PART_ORDER.indexOf(parsePartFromId(b.id) as ArmorPart);
+            return pA - pB;
+        });
+        groups.push({
+            key,
+            job,
+            quality,
+            setName: deriveSetName(pieces),
+            pieces,
+        });
+    }
+
+    groups.sort((a, b) => {
+        const jobA = JOB_ORDER.indexOf(a.job);
+        const jobB = JOB_ORDER.indexOf(b.job);
+        if (jobA !== jobB) return jobA - jobB;
+        return QUALITY_ORDER.indexOf(a.quality) - QUALITY_ORDER.indexOf(b.quality);
+    });
+
+    return groups;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -163,193 +266,170 @@ function StatRow({ label, icon, value, suffix = "" }: { label: string; icon?: st
     );
 }
 
-function ArmorCard({ item, onSelect }: { item: ArmorItem; onSelect: (item: ArmorItem) => void }) {
+/** Single equipment card inside a set — original layout; gem bar style from refined mock */
+function ArmorPieceCard({ item }: { item: ArmorItem }) {
     const part = parsePartFromId(item.id);
     const stats = getStats(item);
     const jobLabel = JOB_LABEL[item.basic.job] ?? item.basic.job;
     const partLabel = part === "UNKNOWN" ? "—" : PART_LABEL[part];
+    const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined;
 
     return (
-        <button
-            type="button"
-            onClick={() => onSelect(item)}
-            className="group border-border bg-card hover:border-primary/40 focus-visible:ring-ring flex flex-col rounded-xl border p-4 text-left shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:outline-none">
+        <article className="border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
+            {/* subtle top accent */}
+            <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-0.5 opacity-80"
+                style={{
+                    background:
+                        "linear-gradient(90deg, transparent, color-mix(in srgb, var(--primary) 55%, transparent), transparent)",
+                }}
+            />
+
+            {/* Header */}
             <div className="mb-3 flex items-start gap-2">
                 <Image
                     src={`/gallery/${item.basic.name}.png`}
                     alt={item.basic.name}
-                    width={16}
-                    height={16}
-                    className="size-8"
+                    width={32}
+                    height={32}
+                    className="size-8 shrink-0 drop-shadow-sm"
                 />
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                     <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
                     <p className="text-muted-foreground mt-0.5 text-xs">
                         {jobLabel} · {partLabel}
                     </p>
                 </div>
-                <div className="ml-auto">
-                    <QualityBadge quality={item.basic.quality} />
-                </div>
             </div>
 
-            <div className="border-border/60 mt-auto space-y-1 border-t pt-3">
-                <StatRow label="耐久" value={formatNumber(stats.durable, 0)} />
-                <StatRow label="护甲" value={formatNumber(stats.armor)} />
-                <StatRow label="韧性" value={formatNumber(stats.toughness)} />
-                <StatRow label="防御" value={formatNumber(stats.defense)} />
+            <div className="space-y-3">
+                {/* 基础属性 */}
+                <div>
+                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">基础属性</h4>
+                    <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
+                        <StatRow
+                            label="耐久度"
+                            icon="lucide:rectangle-ellipsis|#f0bd00"
+                            value={formatNumber(stats.durable, 0)}
+                        />
+                        <StatRow label="护甲值" icon="lucide:shield|#3c91ff" value={formatNumber(stats.armor)} />
+                        <StatRow label="护甲韧性" icon="lucide:shield-plus|#14d681" value={formatNumber(stats.toughness)} />
+                        <StatRow label="最大生命" icon="lucide:heart-plus|#ff5257" value={formatNumber(stats.maxHealth)} />
+                        <StatRow label="防御减伤" icon="lucide:shield-minus|#ff7a00" value={formatNumber(stats.defense)} />
+                        <StatRow label="最大法力" icon="lucide:wand-sparkles|#60a5fa" value={formatNumber(stats.maxMana)} />
+                        <StatRow label="最大耐力" icon="lucide:gauge|#b76bff" value={formatNumber(stats.maxStamina)} />
+                        <StatRow label="招架几率" icon="lucide:swords|#ec5bd8" value={formatNumber(stats.parry)} />
+                        <StatRow label="移动速度" icon="lucide:footprints|#e8d525" value={formatNumber(stats.moveSpeed)} />
+                        <StatRow label="闪避率" icon="lucide:wind|#14b8a6" value={formatNumber(stats.dodge)} />
+                    </div>
+                </div>
+
+                {/* 宝石栏 — bar style */}
+                {hasGem && (
+                    <div className="border-border/50 bg-muted/30 text-muted-foreground grid grid-cols-[1fr_auto_auto] items-center gap-3 rounded-lg border-t px-2.5 py-2 text-xs">
+                        <span className="text-foreground/90 inline-flex items-center gap-1.5 font-medium">
+                            <IconifyIcon icon="lucide:gem" width={14} height={14} className="text-primary" />
+                            宝石
+                        </span>
+                        <span>
+                            槽位{" "}
+                            <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.count, 0)}</strong>
+                        </span>
+                        <span>
+                            容量{" "}
+                            <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.volume, 0)}</strong>
+                        </span>
+                    </div>
+                )}
             </div>
-        </button>
+        </article>
     );
 }
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-function DetailPanel({ item, onClose }: { item: ArmorItem; onClose: () => void }) {
-    const part = parsePartFromId(item.id);
-    const stats = getStats(item);
-    const jobLabel = JOB_LABEL[item.basic.job] ?? item.basic.job;
-    const partLabel = part === "UNKNOWN" ? "未知部位" : PART_LABEL[part];
+/** Set-level frame: header + always-visible grid of pieces (no collapse) */
+function ArmorSetSection({ group }: { group: ArmorSetGroup }) {
+    const jobLabel = JOB_LABEL[group.job];
+    const tier = QUALITY_TIER[group.quality];
+    const pieceCount = group.pieces.length;
+    const cd = SET_BONUS.cooldown[group.quality];
+    const rr = SET_BONUS.rangedReduce[group.quality];
+    const theme = QUALITY_THEME[group.quality];
 
     return (
-        <Dialog open={!!item}>
-            <DialogContent showCloseButton={false} className="mt-8">
-                <div className="relative w-full" onClick={(e) => e.stopPropagation()}>
-                    <Button
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={onClose}
-                        className="text-muted-foreground hover:bg-muted hover:text-foreground absolute top-0 right-0 rounded-md p-1"
-                        aria-label="关闭">
-                        ✕
-                    </Button>
-
-                    <div className="mb-4 flex items-center gap-3">
-                        <Image
-                            src={`/gallery/${item.basic.name}.png`}
-                            alt={item.basic.name}
-                            width={16}
-                            height={16}
-                            className="size-12"
-                        />
-                        <div>
-                            <h2 className="flex items-center gap-2 text-xl font-bold">
-                                {item.basic.name} <QualityBadge quality={item.basic.quality} />
-                            </h2>
-                            <p className="text-muted-foreground text-sm">
-                                {jobLabel} · {partLabel}
-                            </p>
-                        </div>
+        <section
+            className={`relative overflow-hidden rounded-2xl border p-4 shadow-sm sm:p-5 ${QUALITY_FRAME[group.quality]}`}
+            style={
+                {
+                    boxShadow: `0 12px 40px rgba(0,0,0,.18), 0 0 0 1px color-mix(in srgb, ${theme.accent} 22%, transparent)`,
+                    backgroundImage: `radial-gradient(circle at 8% 0%, ${theme.glow}, transparent 42%)`,
+                } as React.CSSProperties
+            }>
+            {/* Set header */}
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
+                    <div
+                        className="flex size-10 shrink-0 items-center justify-center rounded-lg border"
+                        style={{
+                            borderColor: `color-mix(in srgb, ${theme.accent} 45%, transparent)`,
+                            background: `linear-gradient(180deg, color-mix(in srgb, ${theme.accent} 28%, transparent), color-mix(in srgb, ${theme.accent} 10%, transparent))`,
+                            boxShadow: `0 0 16px ${theme.glow}`,
+                        }}>
+                        <IconifyIcon icon="lucide:shield" width={22} height={22} style={{ color: theme.accent2 }} />
                     </div>
-
-                    <section className="space-y-4">
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                {item.basic.name.slice(0, 2)} 四件套效果
-                            </h3>
-                            <div
-                                className="bg-muted/40 flashing-border space-y-1.5 rounded-lg border p-3"
-                                style={
-                                    {
-                                        "--border-1": "oklch(from var(--primary) l c h / 0.5)",
-                                        "--border-2": "oklch(from var(--primary) l c h / 1)",
-                                    } as React.CSSProperties
-                                }>
-                                <StatRow
-                                    label="技能冷却"
-                                    icon="lucide:hourglass|#8b5cf6"
-                                    value={`-${{ D: 2, C: 4, B: 6, A: 8, S: 10 }[item.basic.quality]}%`}
-                                />
-                                <StatRow
-                                    label="远程减免"
-                                    icon="lucide:circle-arrow-down|#f97316"
-                                    value={`-${{ D: 10, C: 10, B: 15, A: 20, S: 25 }[item.basic.quality]}%`}
-                                />
-                            </div>
+                    <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                            <h2 className="text-lg font-semibold tracking-tight">{group.setName}套装</h2>
+                            <QualityBadge quality={group.quality} />
                         </div>
-
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                基础数值
-                            </h3>
-                            <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                <StatRow
-                                    label="耐久"
-                                    icon="lucide:rectangle-ellipsis|var(--color-primary)"
-                                    value={formatNumber(stats.durable, 0)}
-                                />
-                                <StatRow label="护甲值" icon="lucide:shield|#3b82f6" value={formatNumber(stats.armor)} />
-                                <StatRow
-                                    label="护甲韧性"
-                                    icon="lucide:shield-plus|#22c55e"
-                                    value={formatNumber(stats.toughness)}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                特殊效果
-                            </h3>
-                            <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                <StatRow
-                                    label="最大生命"
-                                    icon="lucide:heart-plus|#ef4444"
-                                    value={formatNumber(stats.maxHealth)}
-                                />
-                                <StatRow
-                                    label="防御减伤"
-                                    icon="lucide:shield-minus|#f97316"
-                                    value={formatNumber(stats.defense)}
-                                />
-                                <StatRow
-                                    label="最大法力"
-                                    icon="lucide:wand-sparkles|#60a5fa"
-                                    value={formatNumber(stats.maxMana)}
-                                />
-                                <StatRow label="最大耐力" icon="lucide:stone|#b244ef" value={formatNumber(stats.maxStamina)} />
-                                <StatRow label="招架几率" icon="lucide:hand-fist|#ef44db" value={formatNumber(stats.parry)} />
-                                <StatRow
-                                    label="移动速度"
-                                    icon="lucide:footprints|#e8d525"
-                                    value={formatNumber(stats.moveSpeed)}
-                                />
-                                <StatRow label="闪避率" icon="lucide:wind|#14b8a6" value={formatNumber(stats.dodge)} />
-                                {!stats.maxHealth &&
-                                    !stats.defense &&
-                                    !stats.maxMana &&
-                                    !stats.maxStamina &&
-                                    !stats.parry &&
-                                    !stats.moveSpeed &&
-                                    !stats.dodge && <p className="text-muted-foreground text-sm">无额外效果</p>}
-                            </div>
-                        </div>
-
-                        {(item.gem?.count !== undefined || item.gem?.volume !== undefined) && (
-                            <div>
-                                <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                    宝石
-                                </h3>
-                                <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                    <StatRow
-                                        label="槽位数量"
-                                        icon="lucide:wallet-cards"
-                                        value={formatNumber(item.gem?.count, 0)}
-                                    />
-                                    <StatRow
-                                        label="容量"
-                                        icon="lucide:package-open"
-                                        value={formatNumber(item.gem?.volume, 0)}
-                                    />
-                                </div>
-                            </div>
-                        )}
-                    </section>
+                        <p className="text-muted-foreground mt-0.5 text-sm">
+                            {tier}
+                            {jobLabel}防具 · 共{pieceCount}件
+                        </p>
+                    </div>
                 </div>
-            </DialogContent>
-        </Dialog>
+
+                {/* 套装效果 — shown once at set level */}
+                <div
+                    className="rounded-lg border p-2 text-sm"
+                    style={{
+                        borderColor: `color-mix(in srgb, ${theme.accent} 35%, transparent)`,
+                        background: `linear-gradient(180deg, color-mix(in srgb, ${theme.accent} 12%, transparent), color-mix(in srgb, ${theme.accent} 6%, transparent))`,
+                        boxShadow: `inset 0 1px color-mix(in srgb, ${theme.accent2} 12%, transparent)`,
+                    }}>
+                    <p className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
+                        套装效果（{pieceCount}件）
+                    </p>
+                    <div className="bg-muted/40 flex flex-wrap gap-x-4 gap-y-1 rounded-md px-2 py-1">
+                        <span className="inline-flex items-center gap-1.5">
+                            <IconifyIcon icon="lucide:hourglass" style={{ color: theme.accent2 }} width={14} height={14} />
+                            <span className="text-muted-foreground">技能冷却</span>
+                            <span className="font-medium tabular-nums" style={{ color: theme.accent2 }}>
+                                -{cd}%
+                            </span>
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                            <IconifyIcon
+                                icon="lucide:circle-arrow-down"
+                                style={{ color: theme.accent2 }}
+                                width={14}
+                                height={14}
+                            />
+                            <span className="text-muted-foreground">远程减免</span>
+                            <span className="font-medium tabular-nums" style={{ color: theme.accent2 }}>
+                                -{rr}%
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Pieces grid — always expanded */}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {group.pieces.map((item) => (
+                    <ArmorPieceCard key={item.id} item={item} />
+                ))}
+            </div>
+        </section>
     );
 }
 
@@ -437,8 +517,6 @@ function FilterBar({
 
             <p className="text-muted-foreground ml-auto self-center text-right text-sm">
                 正在展示 <span className="text-foreground font-medium">{filtered}</span> / {total} 件
-                <br />
-                点击卡片查看详情
             </p>
         </div>
     );
@@ -451,50 +529,33 @@ function FilterBar({
 /**
  * Armor gallery page — /gallery/armor
  *
- * Expects `items` to be the collection produced by the armor_data schema
- * (Velite / Contentlayer / custom loader). When wiring into the app:
- *
- *   import { armor } from "@/content";  or equivalent
- *   <ArmorGalleryPage items={armor} />
- *
- * Or use the default export with a server component that fetches data
- * and passes it as props.
+ * Displays armor grouped by set (job + quality). Each set is a fixed section
+ * with header (name, tier, set bonuses) and a grid of piece cards. No collapse.
  */
 export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
     const [jobFilter, setJobFilter] = useState<ArmorJob | "all">("all");
     const [qualityFilter, setQualityFilter] = useState<ArmorQuality | "all">("all");
     const [partFilter, setPartFilter] = useState<ArmorPart | "all">("all");
-    const [selected, setSelected] = useState<ArmorItem | null>(null);
 
     const filtered = useMemo(() => {
-        return items
-            .filter((item) => {
-                if (jobFilter !== "all" && item.basic.job !== jobFilter) return false;
-                if (qualityFilter !== "all" && item.basic.quality !== qualityFilter) return false;
-                if (partFilter !== "all") {
-                    const p = parsePartFromId(item.id);
-                    if (p !== partFilter) return false;
-                }
-                return true;
-            })
-            .sort((a, b) => {
-                const jobA = JOB_ORDER.indexOf(a.basic.job);
-                const jobB = JOB_ORDER.indexOf(b.basic.job);
-                if (jobA !== jobB) return jobA - jobB;
-                const qA = QUALITY_ORDER.indexOf(a.basic.quality);
-                const qB = QUALITY_ORDER.indexOf(b.basic.quality);
-                if (qA !== qB) return qA - qB;
-                const pA = PART_ORDER.indexOf(parsePartFromId(a.id) as ArmorPart);
-                const pB = PART_ORDER.indexOf(parsePartFromId(b.id) as ArmorPart);
-                return pA - pB;
-            });
+        return items.filter((item) => {
+            if (jobFilter !== "all" && item.basic.job !== jobFilter) return false;
+            if (qualityFilter !== "all" && item.basic.quality !== qualityFilter) return false;
+            if (partFilter !== "all") {
+                const p = parsePartFromId(item.id);
+                if (p !== partFilter) return false;
+            }
+            return true;
+        });
     }, [items, jobFilter, qualityFilter, partFilter]);
+
+    const sets = useMemo(() => groupIntoSets(filtered), [filtered]);
 
     return (
         <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
             <header className="mb-8">
                 <h1 className="text-3xl font-bold tracking-tight">护甲图鉴</h1>
-                <p className="text-muted-foreground mt-1">按职业、品质与部位浏览全部护甲数据</p>
+                <p className="text-muted-foreground mt-1">按职业、品质与部位浏览全部护甲数据（按套装分组）</p>
             </header>
 
             <div className="mb-6">
@@ -510,20 +571,18 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
                 />
             </div>
 
-            {filtered.length === 0 ? (
+            {sets.length === 0 ? (
                 <div className="border-border text-muted-foreground flex flex-col items-center justify-center rounded-xl border border-dashed py-16">
                     <p className="text-lg">暂无符合条件的护甲</p>
                     <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                 </div>
             ) : (
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {filtered.map((item) => (
-                        <ArmorCard key={item.id} item={item} onSelect={setSelected} />
+                <div className="flex flex-col gap-6">
+                    {sets.map((group) => (
+                        <ArmorSetSection key={group.key} group={group} />
                     ))}
                 </div>
             )}
-
-            {selected && <DetailPanel item={selected} onClose={() => setSelected(null)} />}
         </div>
     );
 }
@@ -531,9 +590,6 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
 /**
  * Default export for Next.js App Router usage at app/gallery/armor/page.tsx.
  */
-import { gallery_armor_data } from "@/.velite";
-import { IconifyIcon } from "@/components/iconify-icon";
-import Image from "next/image";
 export default function ArmorPage() {
     const items: ArmorItem[] = gallery_armor_data;
     return <ArmorGalleryPage items={items} />;

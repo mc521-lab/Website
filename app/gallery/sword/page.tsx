@@ -1,8 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { gallery_sword_data } from "@/.velite";
@@ -134,97 +132,44 @@ function StatRow({ label, icon, value, suffix = "" }: { label: string; icon?: st
     );
 }
 
-function SwordCard({ item, onSelect }: { item: SwordItem; onSelect: (item: SwordItem) => void }) {
+function SwordCard({ item }: { item: SwordItem }) {
     const stats = getStats(item);
     const jobLabel = JOB_LABEL[item.basic.job] ?? item.basic.job;
+    const hasCombat = stats.critPower !== undefined || stats.critChance !== undefined || stats.lifesteal !== undefined;
+    const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined || item.gem?.lock !== undefined;
 
     return (
-        <button
-            type="button"
-            onClick={() => onSelect(item)}
-            className="group border-border bg-card hover:border-primary/40 focus-visible:ring-ring flex flex-col rounded-xl border p-4 text-left shadow-sm transition-all hover:shadow-md focus-visible:ring-2 focus-visible:outline-none">
+        <article className="border-border bg-card flex flex-col rounded-xl border p-4 shadow-sm">
+            {/* Header */}
             <div className="mb-3 flex items-start gap-2">
                 <Image
                     src={`/gallery/${item.basic.name}.png`}
                     alt={item.basic.name}
-                    width={16}
-                    height={16}
-                    className="size-8"
+                    width={32}
+                    height={32}
+                    className="size-8 shrink-0"
                 />
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                     <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
                     <p className="text-muted-foreground mt-0.5 text-xs">{jobLabel}</p>
                 </div>
-                <div className="ml-auto">
-                    <QualityBadge quality={item.basic.quality} />
-                </div>
+                <QualityBadge quality={item.basic.quality} />
             </div>
 
-            <div className="border-border/60 mt-auto space-y-1 border-t pt-3">
-                <StatRow label="攻击力" value={formatNumber(stats.attackDamage)} />
-                <StatRow label="攻速" value={formatNumber(stats.attackSpeed)} />
-                <StatRow label="暴击伤害" value={formatNumber(stats.critPower)} />
-                <StatRow label="暴击几率" value={formatNumber(stats.critChance)} />
-            </div>
-        </button>
-    );
-}
-
-function DetailPanel({ item, onClose }: { item: SwordItem; onClose: () => void }) {
-    const stats = getStats(item);
-    const jobLabel = JOB_LABEL[item.basic.job] ?? item.basic.job;
-    const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined || item.gem?.lock !== undefined;
-
-    return (
-        <Dialog open={!!item}>
-            <DialogContent showCloseButton={false} className="mt-8">
-                <div className="relative w-full" onClick={(e) => e.stopPropagation()}>
-                    <Button
-                        variant="ghost"
-                        size="icon-sm"
-                        onClick={onClose}
-                        className="text-muted-foreground hover:bg-muted hover:text-foreground absolute top-0 right-0 rounded-md p-1"
-                        aria-label="关闭">
-                        ✕
-                    </Button>
-
-                    <div className="mb-4 flex items-center gap-3">
-                        <Image
-                            src={`/gallery/${item.basic.name}.png`}
-                            alt={item.basic.name}
-                            width={16}
-                            height={16}
-                            className="size-12"
+            <div className="space-y-3">
+                {/* 属性：基础 + 战斗 + 宝石合并为一组，与护甲图鉴一致 */}
+                <div>
+                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">属性</h4>
+                    <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
+                        <StatRow
+                            label="耐久"
+                            icon="lucide:rectangle-ellipsis|var(--color-primary)"
+                            value={formatNumber(stats.durable, 0)}
                         />
-                        <div>
-                            <h2 className="flex items-center gap-2 text-xl font-bold">
-                                {item.basic.name} <QualityBadge quality={item.basic.quality} />
-                            </h2>
-                            <p className="text-muted-foreground text-sm">{jobLabel}</p>
-                        </div>
-                    </div>
-
-                    <section className="space-y-4">
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                基础数值
-                            </h3>
-                            <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                <StatRow
-                                    label="耐久"
-                                    icon="lucide:rectangle-ellipsis|var(--color-primary)"
-                                    value={formatNumber(stats.durable, 0)}
-                                />
-                                <StatRow label="攻击力" icon="lucide:sword|#ef4444" value={formatNumber(stats.attackDamage)} />
-                                <StatRow label="攻击速度" icon="lucide:gauge|#3b82f6" value={formatNumber(stats.attackSpeed)} />
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                战斗效果
-                            </h3>
-                            <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
+                        <StatRow label="攻击力" icon="lucide:sword|#ef4444" value={formatNumber(stats.attackDamage)} />
+                        <StatRow label="攻击速度" icon="lucide:gauge|#3b82f6" value={formatNumber(stats.attackSpeed)} />
+                        {hasCombat ? (
+                            <>
                                 <StatRow
                                     label="暴击伤害"
                                     icon="lucide:crosshair|#f97316"
@@ -236,40 +181,23 @@ function DetailPanel({ item, onClose }: { item: SwordItem; onClose: () => void }
                                     icon="lucide:heart-pulse|#ef4444"
                                     value={formatNumber(stats.lifesteal)}
                                 />
-                                {!stats.critPower && !stats.critChance && !stats.lifesteal && (
-                                    <p className="text-muted-foreground text-sm">无额外效果</p>
-                                )}
-                            </div>
-                        </div>
-
+                            </>
+                        ) : null}
                         {hasGem && (
-                            <div>
-                                <h3 className="text-muted-foreground mb-2 text-sm font-semibold tracking-wider uppercase">
-                                    宝石
-                                </h3>
-                                <div className="bg-muted/40 space-y-1.5 rounded-lg p-3">
-                                    <StatRow
-                                        label="槽位数量"
-                                        icon="lucide:wallet-cards"
-                                        value={formatNumber(item.gem?.count, 0)}
-                                    />
-                                    <StatRow
-                                        label="锁定槽位"
-                                        icon="lucide:lock|#a1a1aa"
-                                        value={formatNumber(item.gem?.lock, 0)}
-                                    />
-                                    <StatRow
-                                        label="容量"
-                                        icon="lucide:package-open"
-                                        value={formatNumber(item.gem?.volume, 0)}
-                                    />
-                                </div>
-                            </div>
+                            <>
+                                <StatRow label="宝石槽位" icon="lucide:wallet-cards" value={formatNumber(item.gem?.count, 0)} />
+                                <StatRow label="锁定槽位" icon="lucide:lock|#a1a1aa" value={formatNumber(item.gem?.lock, 0)} />
+                                <StatRow
+                                    label="宝石容量"
+                                    icon="lucide:package-open"
+                                    value={formatNumber(item.gem?.volume, 0)}
+                                />
+                            </>
                         )}
-                    </section>
+                    </div>
                 </div>
-            </DialogContent>
-        </Dialog>
+            </div>
+        </article>
     );
 }
 
@@ -334,8 +262,6 @@ function FilterBar({
 
             <p className="text-muted-foreground ml-auto self-center text-right text-sm">
                 正在展示 <span className="text-foreground font-medium">{filtered}</span> / {total} 件
-                <br />
-                点击卡片查看详情
             </p>
         </div>
     );
@@ -356,7 +282,6 @@ function FilterBar({
 export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
     const [jobFilter, setJobFilter] = useState<SwordJob | "all">("all");
     const [qualityFilter, setQualityFilter] = useState<SwordQuality | "all">("all");
-    const [selected, setSelected] = useState<SwordItem | null>(null);
 
     const filtered = useMemo(() => {
         return items
@@ -401,12 +326,10 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
             ) : (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                     {filtered.map((item) => (
-                        <SwordCard key={item.id} item={item} onSelect={setSelected} />
+                        <SwordCard key={item.id} item={item} />
                     ))}
                 </div>
             )}
-
-            {selected && <DetailPanel item={selected} onClose={() => setSelected(null)} />}
         </div>
     );
 }

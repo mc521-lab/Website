@@ -1,0 +1,14 @@
+basic:
+  name: 后羿之刃
+  quality: S
+  job: sheshou
+value:
+  durable: 6093
+  attack-damage: 13
+  attack-speed: 1.75
+  critical-strike-power: 20
+  critical-strike-chance: 8
+gem:
+  count: 3
+  volume: 26
+  lock: 1

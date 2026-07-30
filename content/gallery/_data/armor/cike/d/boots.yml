@@ -1,0 +1,14 @@
+basic:
+  name: 暗卒之靴
+  quality: D
+  job: cike
+value:
+  durable: 481.0
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 0.25
+  movement-speed: 0.000625
+gem:
+  count: 1
+  volume: 2

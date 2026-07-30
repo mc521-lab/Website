@@ -1,0 +1,14 @@
+basic:
+  name: 隐匿之甲
+  quality: C
+  job: cike
+value:
+  durable: 888
+  armor: 8
+  armor-toughness: 3.0
+effect:
+  defense: 0.5
+  movement-speed: 0.00125
+gem:
+  count: 2
+  volume: 3

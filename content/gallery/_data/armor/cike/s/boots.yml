@@ -1,0 +1,14 @@
+basic:
+  name: 刺魂之靴
+  quality: S
+  job: cike
+value:
+  durable: 1443
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 1.25
+  movement-speed: 0.005
+gem:
+  count: 2
+  volume: 32

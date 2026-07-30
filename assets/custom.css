@@ -1,0 +1,43 @@
+@layer components {
+    :root {
+        overscroll-behavior: none;
+    }
+
+    body {
+        background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url("/images/background.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    li.cn-toast[data-type="success"] {
+        @apply bg-(--success-border)! text-(--success-text)!;
+    }
+    li.cn-toast[data-type="info"] {
+        @apply bg-(--info-border)! text-(--info-text)!;
+    }
+    li.cn-toast[data-type="warning"] {
+        @apply bg-(--warning-border)! text-(--warning-text)!;
+    }
+    li.cn-toast[data-type="error"] {
+        @apply bg-(--error-border)! text-(--error-text)!;
+    }
+
+    .flashing-border {
+        animation: flashing-border 1.5s ease-in-out infinite;
+    }
+}
+
+@keyframes flashing-border {
+    0% {
+        border-color: var(--border-1);
+    }
+    50% {
+        border-color: var(--border-2);
+    }
+    100% {
+        border-color: var(--border-1);
+    }
+}
+

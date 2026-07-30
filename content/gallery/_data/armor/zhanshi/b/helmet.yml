@@ -1,0 +1,14 @@
+basic:
+  name: 将军之盔
+  quality: B
+  job: zhanshi
+value:
+  durable: 814
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-health: 1.0
+  defense: 1.0
+gem:
+  count: 2
+  volume: 8

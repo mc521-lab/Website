@@ -1,0 +1,13 @@
+basic:
+  name: 弓卒之刃
+  quality: D
+  job: sheshou
+value:
+  durable: 2031
+  attack-damage: 8
+  attack-speed: 1.6
+  critical-strike-power: 4
+  critical-strike-chance: 1
+gem:
+  count: 2
+  volume: 4

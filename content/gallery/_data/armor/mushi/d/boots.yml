@@ -1,0 +1,16 @@
+basic:
+  name: 信徒之靴
+  quality: D
+  job: mushi
+value:
+  durable: 481.0
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-health: 0.125
+  defense: 0.25
+  max-mana: 0.125
+  max-stamina: 0.125
+gem:
+  count: 1
+  volume: 2

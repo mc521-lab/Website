@@ -1,0 +1,16 @@
+basic:
+  name: 猎手之裤
+  quality: C
+  job: sheshou
+value:
+  durable: 832
+  armor: 6
+  armor-toughness: 3.0
+effect:
+  defense: 0.5
+  max-mana: 0.25
+  max-stamina: 0.25
+  dodge-rating: 0.5
+gem:
+  count: 2
+  volume: 3

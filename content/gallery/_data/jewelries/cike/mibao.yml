@@ -1,0 +1,38 @@
+basic:
+  name: 瞬影密宝
+  special: true
+modifiers:
+  entries:
+    ckmibao1:
+      probability: 0.4
+      stats:
+      - effect: attack-damage
+        min: 1.5
+        max: 3
+      - effect: pve-damage
+        min: 4
+        max: 8
+    ckmibao2:
+      probability: 0.4
+      stats:
+      - effect: movement-speed
+        min: 0.001
+        max: 0.004
+      - effect: critical-strike-power
+        min: 2
+        max: 5
+    ckmibao3:
+      probability: 0.2
+      stats:
+      - effect: attack-damage
+        min: 1.5
+        max: 3
+      - effect: pve-damage
+        min: 4
+        max: 8
+      - effect: movement-speed
+        min: 0.001
+        max: 0.004
+      - effect: critical-strike-power
+        min: 2
+        max: 5

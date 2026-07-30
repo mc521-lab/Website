@@ -1,0 +1,13 @@
+basic:
+  name: 魔导之杖
+  quality: B
+  job: fashi
+value:
+  durable: 4062
+  attack-damage: 13
+  attack-speed: 1.65
+  critical-strike-power: 12
+  critical-strike-chance: 4
+gem:
+  count: 3
+  volume: 9

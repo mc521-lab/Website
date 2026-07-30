@@ -1,0 +1,14 @@
+basic:
+  name: 守护之杖
+  quality: A
+  job: mushi
+value:
+  durable: 5077
+  attack-damage: 12
+  attack-speed: 1.7
+  critical-strike-power: 16
+  critical-strike-chance: 6
+gem:
+  count: 3
+  volume: 20
+  lock: 1

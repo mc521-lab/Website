@@ -1,0 +1,14 @@
+basic:
+  name: 刺魂之刃
+  quality: S
+  job: cike
+value:
+  durable: 6093
+  attack-damage: 16
+  attack-speed: 1.8
+  critical-strike-power: 20
+  critical-strike-chance: 8
+gem:
+  count: 3
+  volume: 26
+  lock: 1

@@ -1,0 +1,16 @@
+basic:
+  name: 教皇之盔
+  quality: S
+  job: mushi
+value:
+  durable: 1221
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-health: 1.0
+  defense: 1.25
+  max-mana: 1.0
+  max-stamina: 1.0
+gem:
+  count: 2
+  volume: 32

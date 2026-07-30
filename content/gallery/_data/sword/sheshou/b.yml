@@ -1,0 +1,13 @@
+basic:
+  name: 鹰眼之刃
+  quality: B
+  job: sheshou
+value:
+  durable: 4062
+  attack-damage: 11
+  attack-speed: 1.65
+  critical-strike-power: 12
+  critical-strike-chance: 4
+gem:
+  count: 3
+  volume: 9

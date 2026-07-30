@@ -1,0 +1,26 @@
+basic:
+  name: 牧灵之链
+  special: false
+modifiers:
+  entries:
+    xianglian1:
+      probability: 0.4
+      stats:
+      - effect: pvp-damage-reduction
+        min: 1
+        max: 5
+    xianglian2:
+      probability: 0.4
+      stats:
+      - effect: pve-damage-reduction
+        min: 5
+        max: 10
+    xianglian3:
+      probability: 0.2
+      stats:
+      - effect: pvp-damage-reduction
+        min: 1
+        max: 5
+      - effect: pve-damage-reduction
+        min: 5
+        max: 10

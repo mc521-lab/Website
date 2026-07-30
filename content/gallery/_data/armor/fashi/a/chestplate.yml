@@ -1,0 +1,16 @@
+basic:
+  name: 贤者之甲
+  quality: A
+  job: fashi
+value:
+  durable: 1480
+  armor: 8
+  armor-toughness: 3.0
+effect:
+  defense: 1
+  max-mana: 0.75
+  max-stamina: 0.75
+  parry-rating: 1.5
+gem:
+  count: 2
+  volume: 16

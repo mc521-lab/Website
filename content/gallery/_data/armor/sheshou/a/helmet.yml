@@ -1,0 +1,16 @@
+basic:
+  name: 苍穹之盔
+  quality: A
+  job: sheshou
+value:
+  durable: 1017
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 1
+  max-mana: 0.75
+  max-stamina: 0.75
+  dodge-rating: 1.5
+gem:
+  count: 2
+  volume: 16

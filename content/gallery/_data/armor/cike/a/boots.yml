@@ -1,0 +1,14 @@
+basic:
+  name: 诡影之靴
+  quality: A
+  job: cike
+value:
+  durable: 1202
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 1
+  movement-speed: 0.00375
+gem:
+  count: 2
+  volume: 16

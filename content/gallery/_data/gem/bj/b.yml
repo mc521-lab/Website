@@ -1,0 +1,20 @@
+basic:
+  name: 暴击宝石
+  quality: B
+gem:
+  success-rate: 75
+  consume: 2
+modifiers:
+  min: 1
+  max: 2
+  entries:
+    bjb:
+      probability: 0.5
+      effect: critical-strike-chance
+      min: 1.5
+      max: 2
+    bsb:
+      probability: 0.5
+      effect: critical-strike-power
+      min: 4
+      max: 6

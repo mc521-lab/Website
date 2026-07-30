@@ -1,0 +1,28 @@
+- title: 新手必看教程
+  order: 1
+  items:
+    - title: 常用指令
+      href: /beginner/common-commands
+      icon: fluent-emoji-flat:books
+      order: 1
+    - title: 如何圈地
+      href: /beginner/how-to-claim-land
+      icon: fluent-emoji-flat:round-pushpin
+      order: 2
+    - title: 如何更换皮肤
+      href: /beginner/how-to-change-skin
+      icon: fluent-emoji-flat:t-shirt
+      order: 3
+    - title: 如何赚取金币
+      href: /beginner/how-to-earn-money
+      icon: fluent-emoji-flat:money-bag
+      order: 4
+    - title: 如何绑定 Bilibili
+      href: /beginner/how-to-bind-bilibili
+      icon: fluent-emoji-flat:television
+      order: 5
+    - title: 如何创建箱子商店
+      href: /beginner/how-to-create-quickshop
+      icon: fluent-emoji-flat:money-with-wings
+      order: 6
+

@@ -1,0 +1,20 @@
+basic:
+  name: 风语宝石
+  quality: B
+gem:
+  success-rate: 75
+  consume: 3
+modifiers:
+  min: 1
+  max: 2
+  entries:
+    tlb:
+      probability: 0.5
+      effect: max-stamina
+      min: 1
+      max: 1.5
+    tlhb:
+      probability: 0.5
+      effect: stamina-regeneration
+      min: 0.08
+      max: 0.12

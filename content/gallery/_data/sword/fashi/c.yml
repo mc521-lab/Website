@@ -1,0 +1,13 @@
+basic:
+  name: 术师之杖
+  quality: C
+  job: fashi
+value:
+  durable: 3046
+  attack-damage: 11
+  attack-speed: 1.6
+  critical-strike-power: 8
+  critical-strike-chance: 2
+gem:
+  count: 3
+  volume: 5

@@ -1,0 +1,14 @@
+basic:
+  name: 隐匿之靴
+  quality: C
+  job: cike
+value:
+  durable: 721
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 0.5
+  movement-speed: 0.00125
+gem:
+  count: 2
+  volume: 3

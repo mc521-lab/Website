@@ -1,0 +1,14 @@
+basic:
+  name: 士卒之盔
+  quality: D
+  job: zhanshi
+value:
+  durable: 407.0
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-health: 0.25
+  defense: 0.5
+gem:
+  count: 1
+  volume: 2

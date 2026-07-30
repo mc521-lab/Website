@@ -1,0 +1,16 @@
+basic:
+  name: 后羿之甲
+  quality: S
+  job: sheshou
+value:
+  durable: 1776
+  armor: 8
+  armor-toughness: 3.0
+effect:
+  defense: 1.25
+  max-mana: 1.0
+  max-stamina: 1.0
+  dodge-rating: 2.0
+gem:
+  count: 2
+  volume: 32

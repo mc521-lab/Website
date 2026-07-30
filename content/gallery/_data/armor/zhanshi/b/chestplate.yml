@@ -1,0 +1,14 @@
+basic:
+  name: 将军之甲
+  quality: B
+  job: zhanshi
+value:
+  durable: 1184
+  armor: 8
+  armor-toughness: 3.0
+effect:
+  max-health: 1.0
+  defense: 1.0
+gem:
+  count: 2
+  volume: 8

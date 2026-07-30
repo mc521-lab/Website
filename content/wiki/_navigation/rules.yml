@@ -1,0 +1,20 @@
+- title: 服务器规则
+  order: 9
+  items:
+    - title: 基本规则
+      href: /rules/basic
+      icon: fluent-emoji-flat:bookmark-tabs
+      order: 1
+    - title: 附录：裁定标准
+      href: /rules/adjudication
+      icon: fluent-emoji-flat:triangular-flag
+      order: 2
+    - title: 附录：惩罚制度
+      href: /rules/punishment
+      icon: fluent-emoji-flat:hammer
+      order: 3
+    - title: 附录：处理政策
+      href: /rules/policy
+      icon: fluent-emoji-flat:envelope
+      order: 4
+

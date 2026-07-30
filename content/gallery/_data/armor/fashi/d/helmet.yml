@@ -1,0 +1,15 @@
+basic:
+  name: 学徒之盔
+  quality: D
+  job: fashi
+value:
+  durable: 407.0
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-mana: 0.125
+  max-stamina: 0.125
+  parry-rating: 0.25
+gem:
+  count: 1
+  volume: 2

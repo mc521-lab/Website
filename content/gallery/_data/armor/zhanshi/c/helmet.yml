@@ -1,0 +1,14 @@
+basic:
+  name: 骑士之盔
+  quality: C
+  job: zhanshi
+value:
+  durable: 610.0
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-health: 0.5
+  defense: 0.75
+gem:
+  count: 2
+  volume: 3

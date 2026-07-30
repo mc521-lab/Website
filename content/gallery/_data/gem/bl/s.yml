@@ -1,0 +1,20 @@
+basic:
+  name: 冰灵宝石
+  quality: S
+gem:
+  success-rate: 25
+  consume: 8
+modifiers:
+  min: 2
+  max: 2
+  entries:
+    mfs:
+      probability: 0.5
+      effect: max-mana
+      min: 2
+      max: 2.5
+    mfhs:
+      probability: 0.5
+      effect: mana-regeneration
+      min: 0.14
+      max: 0.18

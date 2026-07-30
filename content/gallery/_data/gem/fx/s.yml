@@ -1,0 +1,20 @@
+basic:
+  name: 焚心宝石
+  quality: S
+gem:
+  success-rate: 25
+  consume: 16
+modifiers:
+  min: 2
+  max: 2
+  entries:
+    hxs:
+      probability: 0.5
+      effect: max-health
+      min: 2.5
+      max: 3
+    hfs:
+      probability: 0.5
+      effect: health-regeneration
+      min: 0.07
+      max: 0.1

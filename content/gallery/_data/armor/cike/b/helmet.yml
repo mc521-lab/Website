@@ -1,0 +1,14 @@
+basic:
+  name: 夜行之盔
+  quality: B
+  job: cike
+value:
+  durable: 814
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 0.75
+  movement-speed: 0.0025
+gem:
+  count: 2
+  volume: 8

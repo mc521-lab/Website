@@ -1,0 +1,26 @@
+basic:
+  name: 瞬影手套
+  special: false
+modifiers:
+  entries:
+    shoutao1:
+      probability: 0.4
+      stats:
+      - effect: critical-strike-power
+        min: 2
+        max: 10
+    shoutao2:
+      probability: 0.4
+      stats:
+      - effect: critical-strike-chance
+        min: 1
+        max: 3
+    shoutao3:
+      probability: 0.2
+      stats:
+      - effect: critical-strike-power
+        min: 2
+        max: 10
+      - effect: critical-strike-chance
+        min: 1
+        max: 3

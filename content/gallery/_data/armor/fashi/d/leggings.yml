@@ -1,0 +1,16 @@
+basic:
+  name: 学徒之裤
+  quality: D
+  job: fashi
+value:
+  durable: 555.0
+  armor: 6
+  armor-toughness: 3.0
+effect:
+  defense: 0.25
+  max-mana: 0.125
+  max-stamina: 0.125
+  parry-rating: 0.25
+gem:
+  count: 1
+  volume: 2

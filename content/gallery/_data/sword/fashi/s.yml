@@ -1,0 +1,14 @@
+basic:
+  name: 法神之杖
+  quality: S
+  job: fashi
+value:
+  durable: 6093
+  attack-damage: 17
+  attack-speed: 1.75
+  critical-strike-power: 20
+  critical-strike-chance: 8
+gem:
+  count: 3
+  volume: 26
+  lock: 1

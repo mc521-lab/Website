@@ -1,0 +1,20 @@
+basic:
+  name: 灰烬宝石
+  quality: B
+gem:
+  success-rate: 75
+  consume: 4
+modifiers:
+  min: 1
+  max: 2
+  entries:
+    sbb:
+      probability: 0.5
+      effect: dodge-rating
+      min: 1
+      max: 1.5
+    fyb:
+      probability: 0.5
+      effect: defense
+      min: 0.2
+      max: 0.6

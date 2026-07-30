@@ -1,0 +1,16 @@
+basic:
+  name: 法神之靴
+  quality: S
+  job: fashi
+value:
+  durable: 1443
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 1.25
+  max-mana: 1.0
+  max-stamina: 1.0
+  parry-rating: 2.0
+gem:
+  count: 2
+  volume: 32

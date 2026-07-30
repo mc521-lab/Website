@@ -1,0 +1,20 @@
+basic:
+  name: 灵魂宝石
+  quality: C
+gem:
+  success-rate: 100
+  consume: 3
+modifiers:
+  min: 1
+  max: 1
+  entries:
+    gjc:
+      probability: 0.5
+      effect: attack-damage
+      min: 0.3
+      max: 0.6
+    pvec:
+      probability: 0.5
+      effect: pve-damage
+      min: 1
+      max: 2

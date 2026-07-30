@@ -1,0 +1,38 @@
+basic:
+  name: 牧灵密宝
+  special: true
+modifiers:
+  entries:
+    msmibao1:
+      probability: 0.4
+      stats:
+      - effect: max-health
+        min: 3
+        max: 4
+      - effect: max-mana
+        min: 2
+        max: 4
+    msmibao2:
+      probability: 0.4
+      stats:
+      - effect: health-regeneration
+        min: 0.05
+        max: 0.15
+      - effect: max-stamina
+        min: 2
+        max: 4
+    msmibao3:
+      probability: 0.2
+      stats:
+      - effect: max-health
+        min: 3
+        max: 4
+      - effect: max-mana
+        min: 2
+        max: 4
+      - effect: health-regeneration
+        min: 0.05
+        max: 0.15
+      - effect: max-stamina
+        min: 2
+        max: 4

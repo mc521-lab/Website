@@ -1,0 +1,16 @@
+basic:
+  name: 圣洁之靴
+  quality: C
+  job: mushi
+value:
+  durable: 721
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-health: 0.25
+  defense: 0.5
+  max-mana: 0.25
+  max-stamina: 0.25
+gem:
+  count: 2
+  volume: 3

@@ -1,15 +1,13 @@
-import { Geist, Geist_Mono, Figtree } from "next/font/google";
-
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/mc521/layout/nav-bar";
+import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils";
 
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
+import "@/assets/globals.css";
+import { Figtree } from "next/font/google";
 
-const fontMono = Geist_Mono({
-    subsets: ["latin"],
-    variable: "--font-mono",
-});
+const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+
 
 export default function RootLayout({
     children,
@@ -17,12 +15,15 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html
-            lang="en"
-            suppressHydrationWarning
-            className={cn("antialiased", fontMono.variable, "font-sans", figtree.variable)}>
+        <html lang="en" suppressHydrationWarning className={cn("antialiased", "font-sans", figtree.variable)}>
             <body>
-                <ThemeProvider>{children}</ThemeProvider>
+                <ThemeProvider>
+                    <div className="flex flex-col min-h-screen">
+                        <Navbar />
+                        {children}
+                    </div>
+                    <Toaster />
+                </ThemeProvider>
             </body>
         </html>
     );

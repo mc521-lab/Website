@@ -1,0 +1,16 @@
+basic:
+  name: 魔导之盔
+  quality: B
+  job: fashi
+value:
+  durable: 814
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  defense: 0.75
+  max-mana: 0.5
+  max-stamina: 0.5
+  parry-rating: 1.0
+gem:
+  count: 2
+  volume: 8

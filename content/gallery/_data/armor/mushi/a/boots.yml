@@ -1,0 +1,16 @@
+basic:
+  name: 守护之靴
+  quality: A
+  job: mushi
+value:
+  durable: 1202
+  armor: 3
+  armor-toughness: 3.0
+effect:
+  max-health: 0.75
+  defense: 1
+  max-mana: 0.75
+  max-stamina: 0.75
+gem:
+  count: 2
+  volume: 16

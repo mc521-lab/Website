@@ -34,3 +34,11 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Velite generated
+public/static
+.velite/*
+
+# raw data, should not be exposed to public
+raw-config/*
+raw-ia-assets/*

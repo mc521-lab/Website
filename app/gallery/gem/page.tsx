@@ -382,7 +382,7 @@ function FilterBar({
  *
  * Expects `items` from Velite collection `gallery_gem_data`.
  */
-export function GemGalleryPage({ items }: { items: GemItem[] }) {
+function GemGalleryPage({ items }: { items: GemItem[] }) {
     const [typeFilter, setTypeFilter] = useState<GemType | "all">("all");
     const [qualityFilter, setQualityFilter] = useState<GemQuality | "all">("all");
 

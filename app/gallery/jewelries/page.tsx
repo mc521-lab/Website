@@ -389,7 +389,7 @@ function FilterBar({
  * - 状态为独立 useState，在 useMemo 中做 AND 组合过滤
  * - 并非 Checkbox 多选；若需多选可改为 Set + 切换按钮
  */
-export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
+function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
     const [jobFilter, setJobFilter] = useState<JewelryJob | "all">("all");
     const [positionFilter, setPositionFilter] = useState<JewelryPosition | "all">("all");
     const [specialFilter, setSpecialFilter] = useState<"all" | "yes" | "no">("all");

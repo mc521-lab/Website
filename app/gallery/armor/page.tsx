@@ -532,7 +532,7 @@ function FilterBar({
  * Displays armor grouped by set (job + quality). Each set is a fixed section
  * with header (name, tier, set bonuses) and a grid of piece cards. No collapse.
  */
-export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
+function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
     const [jobFilter, setJobFilter] = useState<ArmorJob | "all">("all");
     const [qualityFilter, setQualityFilter] = useState<ArmorQuality | "all">("all");
     const [partFilter, setPartFilter] = useState<ArmorPart | "all">("all");

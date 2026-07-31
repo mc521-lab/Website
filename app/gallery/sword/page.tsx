@@ -279,7 +279,7 @@ function FilterBar({
  *   import { sword } from "@/content";
  *   <SwordGalleryPage items={sword} />
  */
-export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
+function SwordGalleryPage({ items }: { items: SwordItem[] }) {
     const [jobFilter, setJobFilter] = useState<SwordJob | "all">("all");
     const [qualityFilter, setQualityFilter] = useState<SwordQuality | "all">("all");
 

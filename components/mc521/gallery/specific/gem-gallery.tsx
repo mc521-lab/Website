@@ -232,12 +232,14 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
                 <div className="flex flex-wrap items-end gap-3">
                     <FilterSelect
                         label="类型"
+                        icon="lucide:layout-grid"
                         value={typeFilter}
-                        options={TYPE_ORDER.map((t) => ({ value: t, label: TYPE_LABEL[t] }))}
+                        options={TYPE_ORDER.map((t) => ({ value: t, label: TYPE_LABEL[t].slice(0,2) }))}
                         onChange={(v) => setTypeFilter(v)}
                     />
                     <FilterSelect
                         label="品质"
+                        icon="lucide:gem"
                         value={qualityFilter}
                         options={GEM_QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
                         onChange={(v) => setQualityFilter(v)}

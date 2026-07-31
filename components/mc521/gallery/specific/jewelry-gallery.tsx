@@ -240,12 +240,14 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
                 <div className="flex flex-wrap items-end gap-3">
                     <FilterSelect
                         label="职业"
+                        icon="lucide:users"
                         value={jobFilter}
                         options={JOB_ORDER.map((j) => ({ value: j, label: JOB_LABEL[j] }))}
                         onChange={(v) => setJobFilter(v)}
                     />
                     <FilterSelect
                         label="部位"
+                        icon="lucide:scan"
                         value={positionFilter}
                         options={POSITION_ORDER.map((p) => ({ value: p, label: POSITION_LABEL[p] }))}
                         onChange={(v) => setPositionFilter(v)}

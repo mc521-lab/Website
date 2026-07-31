@@ -186,12 +186,14 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
                 <div className="flex flex-wrap items-end gap-3">
                     <FilterSelect
                         label="职业"
+                        icon="lucide:users"
                         value={jobFilter}
                         options={JOB_ORDER.map((j) => ({ value: j, label: JOB_LABEL[j] }))}
                         onChange={(v) => setJobFilter(v)}
                     />
                     <FilterSelect
                         label="品质"
+                        icon="lucide:gem"
                         value={qualityFilter}
                         options={QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
                         onChange={(v) => setQualityFilter(v)}

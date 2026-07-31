@@ -552,7 +552,7 @@ function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
     const sets = useMemo(() => groupIntoSets(filtered), [filtered]);
 
     return (
-        <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
+        <div className="w-full">
             <header className="mb-8">
                 <h1 className="text-3xl font-bold tracking-tight">护甲图鉴</h1>
                 <p className="text-muted-foreground mt-1">按职业、品质与部位浏览全部护甲数据（按套装分组）</p>

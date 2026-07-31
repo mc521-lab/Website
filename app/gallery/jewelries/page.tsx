@@ -422,7 +422,7 @@ function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
     }, [items, jobFilter, positionFilter, specialFilter]);
 
     return (
-        <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
+        <div className="w-full">
             <header className="mb-8">
                 <h1 className="text-3xl font-bold tracking-tight">饰品图鉴</h1>
                 <p className="text-muted-foreground mt-1">按职业与部位浏览全部饰品及可随机属性</p>

@@ -301,7 +301,7 @@ function SwordGalleryPage({ items }: { items: SwordItem[] }) {
     }, [items, jobFilter, qualityFilter]);
 
     return (
-        <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
+        <div className="w-full">
             <header className="mb-8">
                 <h1 className="text-3xl font-bold tracking-tight">武器图鉴</h1>
                 <p className="text-muted-foreground mt-1">按职业与品质浏览全部武器数据</p>

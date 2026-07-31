@@ -40,7 +40,7 @@ export function MyCopyButton({ text, copyText, className, ...props }: { text: st
         <Button
             variant="outline"
             size="sm"
-            className={cn("inline-flex items-center gap-2 font-mono! text-foreground! test", className)}
+            className={cn("inline-flex items-center gap-2 font-mono! text-foreground!", className)}
             onClick={onCopy}
             aria-label={"Click to copy command:" + textToCopy}
             {...props}>

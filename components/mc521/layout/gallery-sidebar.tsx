@@ -15,7 +15,7 @@ export function GallerySidebar() {
     const sortedNav = _gallery_navigation.sort((a, b) => a.order - b.order);
 
     return (
-        <aside className="border-primary h-full w-70 shrink-0 overflow-x-hidden overflow-y-auto border-r py-4">
+        <aside className="bg-background/50 h-full w-70 shrink-0 overflow-x-hidden overflow-y-auto rounded-lg px-2 py-4 backdrop-blur-lg">
             <div className="px-0">
                 <div className="mb-4 px-4">
                     <h2 className="text-foreground text-2xl font-semibold tracking-wide">君庭阁图鉴</h2>
@@ -32,9 +32,7 @@ export function GallerySidebar() {
                                         href={item.href}
                                         className={cn(
                                             "text-foreground mx-2 flex items-center gap-2 rounded-md border border-l-2 border-transparent px-4 py-2 text-sm transition-colors duration-150",
-                                            isActive
-                                                ? "border-l-primary bg-primary/50 font-medium"
-                                                : "hover:bg-primary/25"
+                                            isActive ? "border-l-primary bg-primary/50 font-medium" : "hover:bg-primary/25"
                                         )}>
                                         {item.icon && (
                                             <IconifyIcon icon={item.icon} className="text-base leading-none opacity-70" />

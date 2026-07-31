@@ -4,7 +4,7 @@
     }
 
     body {
-        background-image: url("/images/8a3dabe3cc6826f4bd3435c910abdade_720.png");
+        background-image: url("/images/background-old.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -26,6 +26,40 @@
 
     .flashing-border {
         animation: flashing-border 1.5s ease-in-out infinite;
+    }
+}
+
+@layer utilities {
+    /* Firefox */
+    .better-scroll-bar {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary) var(--color-background);
+    }
+
+    /* Chrome, Edge, Safari */
+    .better-scroll-bar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .better-scroll-bar::-webkit-scrollbar-track {
+        background: var(--color-background);
+    }
+
+    .better-scroll-bar::-webkit-scrollbar-thumb {
+        background: var(--color-primary);
+        border-radius: 4px;
+    }
+
+    .better-scroll-bar::-webkit-scrollbar-thumb:hover {
+        background: var(--color-primary);
+    }
+
+    /* 隐藏上下箭头 */
+    .better-scroll-bar::-webkit-scrollbar-button {
+        display: none;
+        width: 0;
+        height: 0;
     }
 }
 

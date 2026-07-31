@@ -1,18 +1,28 @@
-import { GallerySidebar } from "@/components/mc521/layout/gallery-sidebar";
+import { gallery_navigation } from "@/.velite";
+import { IslandSidebar } from "@/components/mc521/layout/island-sidebar";
+import type { IslandNavItem } from "@/components/mc521/layout/island-sidebar";
+
+const galleryNav = gallery_navigation as unknown as IslandNavItem[];
 
 export default function GalleryLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="h-[calc(100vh-64px)] p-4">
-            <div className="flex h-full gap-4">
+        <div className="island-page">
+            <div className="island-layout">
                 {/* 左侧边栏 */}
-                <GallerySidebar />
+                <IslandSidebar
+                    navigation={galleryNav}
+                    header={{
+                        label: "GALLERY",
+                        title: "君庭阁图鉴",
+                        description: "服务器物品、装备与图鉴展示",
+                    }}
+                />
 
                 {/* 右侧主内容 */}
-                <main className="bg-background/50 better-scroll-bar min-h-0 min-w-0 flex-1 overflow-y-auto rounded-lg px-8 py-10 backdrop-blur-lg lg:px-12">
-                    {children}
+                <main className="island-content better-scroll-bar">
+                    <div className="island-content-inner">{children}</div>
                 </main>
             </div>
         </div>
     );
 }
-

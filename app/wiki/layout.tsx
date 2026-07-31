@@ -1,15 +1,31 @@
-import { WikiSidebar } from "@/components/mc521/layout/wiki-sidebar";
+import { wiki_navigation } from "@/.velite";
+import { IslandSidebar } from "@/components/mc521/layout/island-sidebar";
+
+const wikiNav = wiki_navigation.map((group) => ({
+    ...group,
+    items: group.items.map((item) => ({
+        ...item,
+        href: "/wiki" + item.href,
+    })),
+}));
 
 export default function WikiLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="wiki-page">
-            <div className="wiki-layout">
+        <div className="island-page">
+            <div className="island-layout">
                 {/* 左侧边栏 */}
-                <WikiSidebar />
+                <IslandSidebar
+                    navigation={wikiNav}
+                    header={{
+                        label: "WIKI",
+                        title: "君庭阁百科",
+                        description: "服务器玩法、规则与指令文档",
+                    }}
+                />
 
                 {/* 右侧主内容 */}
-                <main className="wiki-content better-scroll-bar">
-                    <div className="wiki-content-inner">{children}</div>
+                <main className="island-content better-scroll-bar">
+                    <div className="island-content-inner">{children}</div>
                 </main>
             </div>
         </div>

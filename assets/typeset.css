@@ -454,20 +454,20 @@
 }
 
 @layer components {
-    /* Wiki typography */
-    .wiki-article {
+    /* Island typography */
+    .island-article {
         color: rgba(226, 229, 234, 0.82);
         letter-spacing: 0.008em;
     }
 
-    .wiki-article-header {
+    .island-article-header {
         position: relative;
         margin-bottom: 34px;
         padding-bottom: 26px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.075);
     }
 
-    .wiki-article-header::after {
+    .island-article-header::after {
         content: "";
         position: absolute;
         left: 0;
@@ -477,7 +477,7 @@
         background: linear-gradient(90deg, #d9ad4e, rgba(217, 173, 78, 0));
     }
 
-    .wiki-article-header h1 {
+    .island-article-header h1 {
         margin-top: 13px !important;
         color: #f7f4ee !important;
         font-size: clamp(30px, 3vw, 40px) !important;
@@ -488,7 +488,7 @@
         text-shadow: 0 2px 20px rgba(0, 0, 0, 0.24);
     }
 
-    .wiki-article-header p {
+    .island-article-header p {
         max-width: 760px;
         margin-top: 12px !important;
         color: rgba(218, 222, 228, 0.62) !important;
@@ -496,17 +496,17 @@
         line-height: 1.8;
     }
 
-    .wiki-article-body {
+    .island-article-body {
         max-width: 960px;
     }
 
-    .wiki-article-body > h2,
-    .wiki-article-body > h3,
-    .wiki-article-body > h4 {
+    .island-article-body > h2,
+    .island-article-body > h3,
+    .island-article-body > h4 {
         color: #f1eee8 !important;
     }
 
-    .wiki-article-body > h2 {
+    .island-article-body > h2 {
         position: relative;
         margin-top: 2.15em !important;
         padding-left: 14px;
@@ -515,7 +515,7 @@
         letter-spacing: 0.018em;
     }
 
-    .wiki-article-body > h2::before {
+    .island-article-body > h2::before {
         content: "";
         position: absolute;
         left: 0;
@@ -527,25 +527,25 @@
         box-shadow: 0 0 14px rgba(225, 181, 86, 0.22);
     }
 
-    .wiki-article-body > h3 {
+    .island-article-body > h3 {
         margin-top: 1.9em !important;
         font-size: 19px !important;
         font-weight: 650 !important;
     }
 
-    .wiki-article-body p,
-    .wiki-article-body li,
-    .wiki-article-body td {
+    .island-article-body p,
+    .island-article-body li,
+    .island-article-body td {
         color: rgba(224, 227, 232, 0.8);
     }
 
-    .wiki-article-body strong,
-    .wiki-article-body b {
+    .island-article-body strong,
+    .island-article-body b {
         color: rgba(248, 245, 238, 0.95);
         font-weight: 650;
     }
 
-    .wiki-article-body blockquote {
+    .island-article-body blockquote {
         position: relative;
         overflow: hidden;
         margin-top: 1.35em !important;
@@ -561,7 +561,7 @@
             0 14px 34px rgba(0, 0, 0, 0.12);
     }
 
-    .wiki-article-body blockquote::after {
+    .island-article-body blockquote::after {
         content: "";
         position: absolute;
         right: -34px;
@@ -573,7 +573,7 @@
         filter: blur(2px);
     }
 
-    .wiki-article-body blockquote p {
+    .island-article-body blockquote p {
         position: relative;
         z-index: 1;
         color: rgba(242, 239, 232, 0.84);
@@ -581,47 +581,47 @@
         line-height: 1.9;
     }
 
-    .wiki-article-body ul,
-    .wiki-article-body ol {
+    .island-article-body ul,
+    .island-article-body ol {
         padding-left: 1.4em !important;
     }
 
-    .wiki-article-body li {
+    .island-article-body li {
         margin-top: 0.62em !important;
         padding-left: 0.25em !important;
         line-height: 1.82;
     }
 
-    .wiki-article-body li::marker {
+    .island-article-body li::marker {
         color: #c89b3e !important;
         font-weight: 650;
     }
 
-    .wiki-article-body a {
+    .island-article-body a {
         color: #e6ca88 !important;
         text-decoration-color: rgba(230, 202, 136, 0.34) !important;
         text-underline-offset: 0.2em;
     }
 
-    .wiki-article-body a:hover {
+    .island-article-body a:hover {
         color: #f3d99b !important;
         text-decoration-color: currentColor !important;
     }
 
-    .wiki-article-body :not(pre) > code {
+    .island-article-body :not(pre) > code {
         border: 1px solid rgba(229, 189, 93, 0.16);
         background: rgba(198, 148, 43, 0.14) !important;
         color: #edcf8a !important;
         padding: 0.14em 0.38em !important;
     }
 
-    .wiki-article-body pre {
+    .island-article-body pre {
         border: 1px solid rgba(255, 255, 255, 0.075);
         background: rgba(10, 12, 16, 0.58) !important;
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
     }
 
-    .wiki-article-body table {
+    .island-article-body table {
         width: 100%;
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, 0.075) !important;
@@ -634,11 +634,11 @@
             0 15px 38px rgba(0, 0, 0, 0.1);
     }
 
-    .wiki-article-body thead {
+    .island-article-body thead {
         background: rgba(255, 255, 255, 0.04);
     }
 
-    .wiki-article-body thead th {
+    .island-article-body thead th {
         color: rgba(245, 242, 236, 0.9);
         font-size: 13px;
         font-weight: 650 !important;
@@ -647,31 +647,31 @@
         border: 0 !important;
     }
 
-    .wiki-article-body tbody tr {
+    .island-article-body tbody tr {
         transition: background-color 150ms ease;
     }
 
-    .wiki-article-body tbody tr:hover {
+    .island-article-body tbody tr:hover {
         background: rgba(255, 255, 255, 0.025);
     }
 
-    .wiki-article-body tbody td,
-    .wiki-article-body tbody th {
+    .island-article-body tbody td,
+    .island-article-body tbody th {
         padding: 12px 16px !important;
         border-top: 1px solid rgba(255, 255, 255, 0.065) !important;
         vertical-align: middle !important;
     }
 
-    .wiki-article-body th:first-child,
-    .wiki-article-body td:first-child {
+    .island-article-body th:first-child,
+    .island-article-body td:first-child {
         padding-left: 16px !important;
     }
 
-    .wiki-article-body td:first-child {
+    .island-article-body td:first-child {
         width: 42%;
     }
 
-    .wiki-article-body td button {
+    .island-article-body td button {
         height: 31px;
         max-width: 100%;
         border-color: rgba(255, 255, 255, 0.095) !important;
@@ -687,31 +687,31 @@
             color 150ms ease;
     }
 
-    .wiki-article-body td button:hover {
+    .island-article-body td button:hover {
         border-color: rgba(222, 177, 75, 0.28) !important;
         background: rgba(190, 140, 38, 0.12) !important;
         color: #f0d79d !important;
     }
 
-    .wiki-article-body img,
-    .wiki-article-body video {
+    .island-article-body img,
+    .island-article-body video {
         border: 1px solid rgba(255, 255, 255, 0.085);
         border-radius: 12px !important;
         background: rgba(8, 10, 14, 0.34);
         box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
     }
 
-    .wiki-article-body hr {
+    .island-article-body hr {
         border-color: rgba(255, 255, 255, 0.075) !important;
     }
 
     @media (max-width: 760px) {
-        .wiki-article-header {
+        .island-article-header {
             margin-bottom: 26px;
             padding-bottom: 21px;
         }
 
-        .wiki-article-body table {
+        .island-article-body table {
             display: block;
             overflow-x: auto;
             white-space: nowrap;

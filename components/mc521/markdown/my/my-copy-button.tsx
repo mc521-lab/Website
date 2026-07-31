@@ -37,8 +37,9 @@ export function MyCopyButton({ text, copyText, ...props }: { text: string; copyT
 
     return (
         <Button
-            variant="default"
-            className="inline-flex items-center gap-2 font-mono"
+            variant="outline"
+            size="sm"
+            className="inline-flex items-center gap-2 font-mono text-foreground!"
             onClick={onCopy}
             aria-label={"Click to copy command:" + textToCopy}
             {...props}>

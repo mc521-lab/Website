@@ -2,7 +2,7 @@ import { WikiSidebar } from "@/components/mc521/layout/wiki-sidebar";
 
 export default function WikiLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="bg-background/50 h-[calc(100vh-64px)]">
+        <div className="bg-background/90 h-[calc(100vh-64px)]">
             <div className="flex h-full">
                 {/* 左侧边栏 */}
                 <WikiSidebar />

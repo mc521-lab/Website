@@ -1,12 +1,14 @@
-export function MyVideo({ src, asGif = true }: { src: string; asGif?: boolean }) {
+import { cn } from "@/lib/utils";
+
+export function MyVideo({ src, asGif = true, raw }: { src: string; asGif?: boolean; raw?: boolean }) {
     return (
         <video
             muted={asGif}
             autoPlay={asGif}
             loop={asGif}
-            style={{ width: "1024px", height: "auto" }}
+            style={{ width: raw ? "100%" : "1024px", height: raw ? "100%" : "auto" }}
             src={src}
-            className="border-foreground/50 my-6 rounded-lg border-2"
+            className={cn(!raw && "border-foreground/50 my-6 rounded-lg border-2")}
         />
     );
 }

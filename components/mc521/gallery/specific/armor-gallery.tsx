@@ -106,7 +106,7 @@ function groupIntoSets(items: ArmorItem[]): ArmorSetGroup[] {
     return groups;
 }
 
-function ArmorPieceCard({ item }: { item: ArmorItem }) {
+function ArmorPieceCard({ item, accent }: { item: ArmorItem; accent?: string }) {
     const part = parsePartFromId(item.id);
     const stats = getStats(item);
     const jobLabel = JOB_LABEL[item.basic.job] ?? item.basic.job;
@@ -117,12 +117,11 @@ function ArmorPieceCard({ item }: { item: ArmorItem }) {
         <ItemCardShell
             name={item.basic.name}
             imageSrc={`/gallery/${item.basic.name}.png`}
-            subtitle={`${jobLabel} · ${partLabel}`}>
+            subtitle={`${jobLabel} · ${partLabel}`}
+            accent={accent}>
             <div className="space-y-3">
                 <div>
-                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
-                        基础属性
-                    </h4>
+                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">基础属性</h4>
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="耐久度"
@@ -149,15 +148,11 @@ function ArmorPieceCard({ item }: { item: ArmorItem }) {
                         </span>
                         <span>
                             槽位{" "}
-                            <strong className="text-foreground ml-0.5 tabular-nums">
-                                {formatNumber(item.gem?.count, 0)}
-                            </strong>
+                            <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.count, 0)}</strong>
                         </span>
                         <span>
                             容量{" "}
-                            <strong className="text-foreground ml-0.5 tabular-nums">
-                                {formatNumber(item.gem?.volume, 0)}
-                            </strong>
+                            <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.volume, 0)}</strong>
                         </span>
                     </div>
                 )}
@@ -172,13 +167,13 @@ function SetBonusPanel({ quality, pieceCount }: { quality: ArmorQuality; pieceCo
     const rr = SET_BONUS.rangedReduce[quality];
     return (
         <div
-            className="rounded-lg border p-2 text-sm"
+            className="flex items-center gap-1 rounded-lg border p-2 text-sm"
             style={{
                 borderColor: `color-mix(in srgb, ${theme.accent} 35%, transparent)`,
                 background: `linear-gradient(180deg, color-mix(in srgb, ${theme.accent} 12%, transparent), color-mix(in srgb, ${theme.accent} 6%, transparent))`,
                 boxShadow: `inset 0 1px color-mix(in srgb, ${theme.accent2} 12%, transparent)`,
             }}>
-            <p className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
+            <p className="text-muted-foreground translate-y-[1.5px] text-xs font-semibold tracking-wider uppercase">
                 套装效果（{pieceCount}件）
             </p>
             <div className="bg-muted/40 flex flex-wrap gap-x-4 gap-y-1 rounded-md px-2 py-1">
@@ -190,12 +185,7 @@ function SetBonusPanel({ quality, pieceCount }: { quality: ArmorQuality; pieceCo
                     </span>
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                    <IconifyIcon
-                        icon="lucide:circle-arrow-down"
-                        style={{ color: theme.accent2 }}
-                        width={14}
-                        height={14}
-                    />
+                    <IconifyIcon icon="lucide:circle-arrow-down" style={{ color: theme.accent2 }} width={14} height={14} />
                     <span className="text-muted-foreground">远程减免</span>
                     <span className="font-medium tabular-nums" style={{ color: theme.accent2 }}>
                         -{rr}%
@@ -224,7 +214,7 @@ function ArmorSetSection({ group }: { group: ArmorSetGroup }) {
             headerExtra={<SetBonusPanel quality={group.quality} pieceCount={group.pieces.length} />}>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {group.pieces.map((item) => (
-                    <ArmorPieceCard key={item.id} item={item} />
+                    <ArmorPieceCard key={item.id} item={item} accent={group.theme.accent} />
                 ))}
             </div>
         </SetSection>
@@ -234,19 +224,14 @@ function ArmorSetSection({ group }: { group: ArmorSetGroup }) {
 export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
     const [jobFilter, setJobFilter] = useState<ArmorJob | "all">("all");
     const [qualityFilter, setQualityFilter] = useState<ArmorQuality | "all">("all");
-    const [partFilter, setPartFilter] = useState<ArmorPart | "all">("all");
 
     const filtered = useMemo(() => {
         return items.filter((item) => {
             if (jobFilter !== "all" && item.basic.job !== jobFilter) return false;
             if (qualityFilter !== "all" && item.basic.quality !== qualityFilter) return false;
-            if (partFilter !== "all") {
-                const p = parsePartFromId(item.id);
-                if (p !== partFilter) return false;
-            }
             return true;
         });
-    }, [items, jobFilter, qualityFilter, partFilter]);
+    }, [items, jobFilter, qualityFilter]);
 
     const sets = useMemo(() => groupIntoSets(filtered), [filtered]);
 
@@ -268,15 +253,8 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
                         options={QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
                         onChange={(v) => setQualityFilter(v)}
                     />
-                    <FilterSelect
-                        label="部位"
-                        value={partFilter}
-                        options={PART_ORDER.map((p) => ({ value: p as ArmorPart, label: PART_LABEL[p] }))}
-                        onChange={(v) => setPartFilter(v)}
-                    />
                     <p className="text-muted-foreground ml-auto self-center text-right text-sm">
-                        正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length}{" "}
-                        件
+                        正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
                     </p>
                 </div>
             }
@@ -293,3 +271,4 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
         </GalleryShell>
     );
 }
+

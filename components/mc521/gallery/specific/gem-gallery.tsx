@@ -134,7 +134,7 @@ function ModifierEntryRow({ entry }: { entry: { probability: number; effect: str
     );
 }
 
-function GemCard({ item }: { item: GemItem }) {
+function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
     const typeCode = resolveType(item);
     const typeLabel = typeCode === "UNKNOWN" ? item.basic.name : TYPE_LABEL[typeCode];
     const entries = item.modifiers?.entries ? Object.entries(item.modifiers.entries) : [];
@@ -144,7 +144,8 @@ function GemCard({ item }: { item: GemItem }) {
             name={item.basic.name}
             imageSrc={`/gallery/${item.basic.name}-${item.basic.quality}级.png`}
             subtitle={typeLabel}
-            badge={<QualityBadge quality={item.basic.quality} />}>
+            badge={<QualityBadge quality={item.basic.quality} />}
+            accent={accent}>
             <div className="space-y-3">
                 <div>
                     <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
@@ -195,7 +196,7 @@ function GemSetSection({ group, compact }: { group: GemSetGroup; compact?: boole
                     compact && "xl:grid-cols-3!"
                 )}>
                 {group.pieces.map((item) => (
-                    <GemCard key={item.id} item={item} />
+                    <GemCard key={item.id} item={item} accent={group.theme.accent} />
                 ))}
             </div>
         </SetSection>

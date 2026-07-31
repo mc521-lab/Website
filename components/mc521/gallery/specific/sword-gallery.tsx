@@ -87,7 +87,7 @@ function groupByQuality(items: SwordItem[]): SwordSetGroup[] {
     return groups;
 }
 
-function SwordCard({ item }: { item: SwordItem }) {
+function SwordCard({ item, accent }: { item: SwordItem; accent?: string }) {
     const stats = getStats(item);
     const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined || item.gem?.lock !== undefined;
 
@@ -96,7 +96,8 @@ function SwordCard({ item }: { item: SwordItem }) {
             name={item.basic.name}
             imageSrc={`/gallery/${item.basic.name}.png`}
             subtitle={`${JOB_LABEL[item.basic.job]}武器`}
-            badge={<QualityBadge quality={item.basic.quality} />}>
+            badge={<QualityBadge quality={item.basic.quality} />}
+            accent={accent}>
             <div className="space-y-3">
                 <div>
                     <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
@@ -150,7 +151,7 @@ function SwordSetSection({ group }: { group: SwordSetGroup }) {
         <SetSection title={group.title} subtitle={group.subtitle} theme={group.theme} icon="lucide:sword">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {group.pieces.map((item) => (
-                    <SwordCard key={item.id} item={item} />
+                    <SwordCard key={item.id} item={item} accent={group.theme.accent} />
                 ))}
             </div>
         </SetSection>

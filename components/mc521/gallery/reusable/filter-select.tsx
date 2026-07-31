@@ -1,7 +1,7 @@
 "use client";
 
 import { Field, FieldLabel } from "@/components/ui/field";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 export interface FilterOption<T extends string> {
     value: T;
@@ -23,24 +23,35 @@ export function FilterSelect<T extends string>({
     onChange,
     placeholder = "全部",
 }: FilterSelectProps<T>) {
+    const allOptions: FilterOption<T | "all">[] = [{ value: "all", label: placeholder }, ...options];
+
     return (
         <div className="flex flex-col gap-1">
             <Field>
                 <FieldLabel className="text-muted-foreground -mb-2 text-xs">{label}</FieldLabel>
-                <Select value={value} onValueChange={(v) => onChange(v as T | "all")}>
-                    <SelectTrigger className="bg-background! w-36!">
-                        <SelectValue placeholder={placeholder} />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                        <SelectItem value="all">{placeholder}</SelectItem>
-                        {options.map((o) => (
-                            <SelectItem key={o.value} value={o.value}>
+                <div className="flex flex-wrap gap-1" role="radiogroup" aria-label={label}>
+                    {allOptions.map((o) => {
+                        const selected = value === o.value;
+                        return (
+                            <button
+                                key={o.value}
+                                type="button"
+                                role="radio"
+                                aria-checked={selected}
+                                onClick={() => onChange(o.value as T | "all")}
+                                className={cn(
+                                    "focus-visible:ring-ring inline-flex h-8 items-center justify-center rounded-md border px-2.5 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-2",
+                                    selected
+                                        ? "border-primary bg-primary/5 text-primary"
+                                        : "border-border bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
+                                )}>
                                 {o.label}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                            </button>
+                        );
+                    })}
+                </div>
             </Field>
         </div>
     );
 }
+

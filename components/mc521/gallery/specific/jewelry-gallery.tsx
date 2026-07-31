@@ -164,7 +164,7 @@ function ModifierEntryRow({ entry }: { entry: { probability: number; stats: Jewe
     );
 }
 
-function JewelryCard({ item }: { item: JewelryItem }) {
+function JewelryCard({ item, accent }: { item: JewelryItem; accent?: string }) {
     const jobCode = resolveJob(item);
     const posCode = resolvePosition(item);
     const jobLabel = jobCode === "UNKNOWN" ? "未知职业" : JOB_LABEL[jobCode];
@@ -176,7 +176,8 @@ function JewelryCard({ item }: { item: JewelryItem }) {
             name={item.basic.name}
             imageSrc={`/gallery/${item.basic.name}.png`}
             subtitle={`${jobLabel} · ${posLabel}`}
-            badge={<SpecialBadge special={item.basic.special} />}>
+            badge={<SpecialBadge special={item.basic.special} />}
+            accent={accent}>
             <div>
                 <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
                     属性组{entries.length > 0 ? `（${entries.length}）` : ""}
@@ -202,7 +203,7 @@ function JewelrySetSection({ group, icon }: { group: JewelrySetGroup; icon: stri
         <SetSection title={group.title} subtitle={group.subtitle} theme={group.theme} icon={icon}>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {group.pieces.map((item) => (
-                    <JewelryCard key={item.id} item={item} />
+                    <JewelryCard key={item.id} item={item} accent={group.theme.accent} />
                 ))}
             </div>
         </SetSection>

@@ -20,12 +20,16 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
     }
 
     return (
-        <main>
-            <article className="typeset typeset-docs">
+        <article className="wiki-article">
+            <header className="wiki-article-header">
+                <span className="wiki-article-label">文档</span>
                 <h1>{doc.title}</h1>
+                {doc.description && <p>{doc.description}</p>}
+            </header>
 
+            <div className="wiki-article-body typeset typeset-docs">
                 <MDXContent code={doc.body} />
-            </article>
-        </main>
+            </div>
+        </article>
     );
 }

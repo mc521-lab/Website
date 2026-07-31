@@ -4,6 +4,7 @@
 
 @import "./typeset.css";
 @import "./custom.css";
+@import "./wiki.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -117,15 +118,6 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
-}
-
-.typeset-docs {
-    --typeset-font-body: "Noto Sans SC", serif;
-    --typeset-font-heading: "Noto Serif SC", sans-serif;
-    --typeset-font-mono: monospace;
-    --typeset-size: 18px;
-    --typeset-leading: 1.6;
-    --typeset-flow: 1em;
 }
 
 @layer base {

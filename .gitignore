@@ -42,3 +42,6 @@ public/static
 # raw data, should not be exposed to public
 raw-config/*
 raw-ia-assets/*
+
+# temporary files
+temp/*

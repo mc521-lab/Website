@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SkinView3D } from "@/components/mc521/tools/skin-view-3d";
 import { useSkindrop, type ResolvedSkin } from "@/hooks/use-skindrop";
-import { Kbd } from "@/components/ui/kbd";
 
 type Tab = "upload" | "namemc";
 type Step = "select" | "preview" | "result";

@@ -28,10 +28,7 @@ export function FilterSelect<T extends string>({
     const allOptions: FilterOption<T | "all">[] = [{ value: "all", label: placeholder }, ...options];
 
     return (
-        <div
-            className="border-border/60 bg-card/50 flex items-center gap-4 rounded-xl border px-3 py-2.5 backdrop-blur-sm"
-            role="group"
-            aria-label={label}>
+        <div className="flex w-full items-center gap-4" role="group" aria-label={label}>
             <div className="flex shrink-0 items-center gap-2.5">
                 <div className="border-border/80 bg-muted/60 flex h-8 w-8 items-center justify-center rounded-lg border">
                     <IconifyIcon icon={icon} className="text-muted-foreground" width={16} height={16} />

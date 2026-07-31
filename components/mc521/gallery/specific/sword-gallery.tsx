@@ -1,16 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-    JOB_LABEL,
-    JOB_ORDER,
-    JOB_THEME,
-    QUALITY_LABEL,
-    QUALITY_ORDER,
-    QUALITY_THEME,
-    QUALITY_TIER,
-} from "../constant";
+import { JOB_LABEL, JOB_ORDER, JOB_THEME, QUALITY_LABEL, QUALITY_ORDER, QUALITY_THEME, QUALITY_TIER } from "../constant";
 import type { SwordItem, SwordJob, SwordQuality, SwordSetGroup } from "../types";
+import { FilterBarShell } from "../reusable/filter-bar-shell";
 import { FilterSelect } from "../reusable/filter-select";
 import { GalleryShell } from "../reusable/gallery-shell";
 import { ItemCardShell } from "../reusable/item-card-shell";
@@ -100,9 +93,7 @@ function SwordCard({ item, accent }: { item: SwordItem; accent?: string }) {
             accent={accent}>
             <div className="space-y-3">
                 <div>
-                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
-                        基础属性
-                    </h4>
+                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">基础属性</h4>
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="耐久度"
@@ -183,7 +174,12 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
                     : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级武器`
             }
             filterBar={
-                <div className="flex flex-wrap items-end gap-3">
+                <FilterBarShell
+                    extra={
+                        <>
+                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
+                        </>
+                    }>
                     <FilterSelect
                         label="职业"
                         icon="lucide:users"
@@ -198,11 +194,7 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
                         options={QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
                         onChange={(v) => setQualityFilter(v)}
                     />
-                    <p className="text-muted-foreground ml-auto self-center text-right text-sm">
-                        正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length}{" "}
-                        件
-                    </p>
-                </div>
+                </FilterBarShell>
             }
             isEmpty={sets.length === 0}
             empty={
@@ -217,3 +209,4 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
         </GalleryShell>
     );
 }
+

@@ -13,6 +13,7 @@ import {
     SET_BONUS,
 } from "../constant";
 import type { ArmorItem, ArmorJob, ArmorPart, ArmorQuality, ArmorSetGroup } from "../types";
+import { FilterBarShell } from "../reusable/filter-bar-shell";
 import { FilterSelect } from "../reusable/filter-select";
 import { GalleryShell } from "../reusable/gallery-shell";
 import { ItemCardShell } from "../reusable/item-card-shell";
@@ -240,7 +241,12 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
             title="护甲图鉴"
             subtitle="按职业、品质与部位浏览全部护甲数据（按套装分组）"
             filterBar={
-                <div className="flex flex-wrap items-end gap-3">
+                <FilterBarShell
+                    extra={
+                        <>
+                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
+                        </>
+                    }>
                     <FilterSelect
                         label="职业"
                         icon="lucide:users"
@@ -255,10 +261,7 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
                         options={QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
                         onChange={(v) => setQualityFilter(v)}
                     />
-                    <p className="text-muted-foreground ml-auto self-center text-right text-sm">
-                        正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
-                    </p>
-                </div>
+                </FilterBarShell>
             }
             isEmpty={sets.length === 0}
             empty={

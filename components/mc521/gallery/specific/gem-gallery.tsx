@@ -2,17 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
-import {
-    GEM_QUALITY_ORDER,
-    QUALITY_LABEL,
-    QUALITY_THEME,
-    QUALITY_TIER,
-    TYPE_LABEL,
-    TYPE_ORDER,
-    TYPE_THEME,
-} from "../constant";
+import { GEM_QUALITY_ORDER, QUALITY_LABEL, QUALITY_THEME, QUALITY_TIER, TYPE_LABEL, TYPE_ORDER, TYPE_THEME } from "../constant";
 import type { GemItem, GemQuality, GemSetGroup, GemType } from "../types";
 import { EffectLabel } from "../reusable/effect-label";
+import { FilterBarShell } from "../reusable/filter-bar-shell";
 import { FilterSelect } from "../reusable/filter-select";
 import { GalleryShell } from "../reusable/gallery-shell";
 import { ItemCardShell } from "../reusable/item-card-shell";
@@ -126,8 +119,7 @@ function ModifierEntryRow({ entry }: { entry: { probability: number; effect: str
                     概率 <span className="text-foreground font-medium">{formatPercent(entry.probability)}</span>
                 </span>
                 <span>
-                    数值{" "}
-                    <span className="text-foreground font-medium tabular-nums">{formatRange(entry.min, entry.max)}</span>
+                    数值 <span className="text-foreground font-medium tabular-nums">{formatRange(entry.min, entry.max)}</span>
                 </span>
             </div>
         </div>
@@ -148,16 +140,18 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
             accent={accent}>
             <div className="space-y-3">
                 <div>
-                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
-                        镶嵌信息
-                    </h4>
+                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">镶嵌信息</h4>
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="安装成功率"
                             icon="lucide:percent|#22c55e"
                             value={item.gem?.["success-rate"] !== undefined ? formatPercent(item.gem["success-rate"]) : "—"}
                         />
-                        <StatRow label="消耗容量" icon="lucide:package-minus|#a1a1aa" value={formatNumber(item.gem?.consume, 0)} />
+                        <StatRow
+                            label="消耗容量"
+                            icon="lucide:package-minus|#a1a1aa"
+                            value={formatNumber(item.gem?.consume, 0)}
+                        />
                         <StatRow
                             label="属性生效"
                             icon="lucide:layers|#6366f1"
@@ -229,12 +223,17 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
                     : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级宝石`
             }
             filterBar={
-                <div className="flex flex-wrap items-end gap-3">
+                <FilterBarShell
+                    extra={
+                        <>
+                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 颗
+                        </>
+                    }>
                     <FilterSelect
                         label="类型"
                         icon="lucide:layout-grid"
                         value={typeFilter}
-                        options={TYPE_ORDER.map((t) => ({ value: t, label: TYPE_LABEL[t].slice(0,2) }))}
+                        options={TYPE_ORDER.map((t) => ({ value: t, label: TYPE_LABEL[t].slice(0, 2) }))}
                         onChange={(v) => setTypeFilter(v)}
                     />
                     <FilterSelect
@@ -244,11 +243,7 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
                         options={GEM_QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
                         onChange={(v) => setQualityFilter(v)}
                     />
-                    <p className="text-muted-foreground ml-auto self-center text-right text-sm">
-                        正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length}{" "}
-                        颗
-                    </p>
-                </div>
+                </FilterBarShell>
             }
             isEmpty={sets.length === 0}
             empty={
@@ -263,3 +258,4 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
         </GalleryShell>
     );
 }
+

@@ -1,16 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-    JOB_LABEL,
-    JOB_ORDER,
-    JOB_THEME,
-    POSITION_LABEL,
-    POSITION_ORDER,
-    POSITION_THEME,
-} from "../constant";
+import { JOB_LABEL, JOB_ORDER, JOB_THEME, POSITION_LABEL, POSITION_ORDER, POSITION_THEME } from "../constant";
 import type { JewelryItem, JewelryJob, JewelryPosition, JewelrySetGroup, JewelryStatEntry } from "../types";
 import { EffectLabel } from "../reusable/effect-label";
+import { FilterBarShell } from "../reusable/filter-bar-shell";
 import { FilterSelect } from "../reusable/filter-select";
 import { GalleryShell } from "../reusable/gallery-shell";
 import { ItemCardShell } from "../reusable/item-card-shell";
@@ -237,7 +231,12 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
                     : `按部位浏览 ${POSITION_LABEL[positionFilter]}饰品`
             }
             filterBar={
-                <div className="flex flex-wrap items-end gap-3">
+                <FilterBarShell
+                    extra={
+                        <>
+                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
+                        </>
+                    }>
                     <FilterSelect
                         label="职业"
                         icon="lucide:users"
@@ -252,11 +251,7 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
                         options={POSITION_ORDER.map((p) => ({ value: p, label: POSITION_LABEL[p] }))}
                         onChange={(v) => setPositionFilter(v)}
                     />
-                    <p className="text-muted-foreground ml-auto self-center text-right text-sm">
-                        正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length}{" "}
-                        件
-                    </p>
-                </div>
+                </FilterBarShell>
             }
             isEmpty={sets.length === 0}
             empty={
@@ -275,3 +270,4 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
         </GalleryShell>
     );
 }
+

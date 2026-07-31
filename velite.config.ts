@@ -1,6 +1,8 @@
 import { defineConfig } from "velite";
 // wiki
 import { wiki_navigation, wiki_content } from "./configs/velite/wiki";
+// tools
+import { tools_navigation } from "./configs/velite/tools/_navigation";
 // gallery
 import { gallery_navigation } from "./configs/velite/gallery/_navigation";
 import { gallery_armor_data } from "./configs/velite/gallery/armor";
@@ -13,6 +15,9 @@ export default defineConfig({
         // wiki
         wiki_navigation,
         wiki_content,
+
+        // tools
+        tools_navigation,
 
         // gallery
         gallery_navigation,

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, Sparkles, Sword, ClipboardList, Users, Menu, X, GalleryVerticalEnd } from "lucide-react";
+import { Home, BookOpen, ClipboardList, Users, Menu, X, GalleryVerticalEnd, Toolbox } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -13,8 +13,7 @@ const navItems = [
     { text: "首页", link: "/", icon: Home },
     { text: "百科", link: "/wiki/beginner/common-commands", icon: BookOpen, activePattern: "/wiki" },
     { text: "图鉴", link: "/gallery/armor", icon: GalleryVerticalEnd, activePattern: "/gallery" },
-    { text: "更换皮肤", link: "/tools/skindrop", icon: Sparkles },
-    { text: "伤害计算", link: "/tools/damage", icon: Sword },
+    { text: "工具箱", link: "/tools/skindrop", icon: Toolbox, activePattern: "/tools" },
     { text: "更新日志", link: "#", icon: ClipboardList },
 ];
 

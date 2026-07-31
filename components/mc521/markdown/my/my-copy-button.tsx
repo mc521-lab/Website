@@ -3,8 +3,9 @@
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { CopyIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export function MyCopyButton({ text, copyText, ...props }: { text: string; copyText?: string }) {
+export function MyCopyButton({ text, copyText, className, ...props }: { text: string; copyText?: string, className?: string }) {
     const textToCopy = copyText || text;
     const onCopy = async () => {
         try {
@@ -39,7 +40,7 @@ export function MyCopyButton({ text, copyText, ...props }: { text: string; copyT
         <Button
             variant="outline"
             size="sm"
-            className="inline-flex items-center gap-2 font-mono text-foreground!"
+            className={cn("inline-flex items-center gap-2 font-mono! text-foreground! test", className)}
             onClick={onCopy}
             aria-label={"Click to copy command:" + textToCopy}
             {...props}>

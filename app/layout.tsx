@@ -28,7 +28,7 @@ export default function RootLayout({
                 </div>
                 <ThemeProvider>
                     {/* <DroppingBackground /> */}
-                    <div className="z-10 flex min-h-screen flex-col">{children}</div>
+                    <div className="z-10 flex min-h-screen flex-col backdrop-blur-[1px]">{children}</div>
                     <Toaster />
                 </ThemeProvider>
             </body>

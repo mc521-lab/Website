@@ -8,6 +8,8 @@ export const wiki_navigation = {
         title: s.string(),
         /** 分组排序 (可选, 默认 0) */
         order: s.number().default(0),
+        /** 是否默认展开 (可选, 默认 false) */
+        defaultExpanded: s.boolean().default(false),
         /** 菜单项列表 */
         items: s.array(
             s.object({

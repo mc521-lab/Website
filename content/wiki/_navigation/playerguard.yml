@@ -1,5 +1,6 @@
 - title: 公会管理
   order: 2
+  defaultExpanded: false
   items:
     - title: 公会升级
       href: /playerguard/update

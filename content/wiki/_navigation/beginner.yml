@@ -1,5 +1,6 @@
 - title: 新手必看教程
   order: 1
+  defaultExpanded: true
   items:
     - title: 常用指令
       href: /beginner/common-commands

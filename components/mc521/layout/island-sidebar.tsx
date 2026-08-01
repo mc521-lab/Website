@@ -16,6 +16,7 @@ export type IslandNavItem = {
 export type IslandNavGroup = {
     title: string;
     order?: number;
+    defaultExpanded?: boolean;
     items: IslandNavItem[];
 };
 
@@ -53,7 +54,7 @@ function IslandNavItemLink({ item }: { item: IslandNavItem }) {
 
 function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
     const pathname = usePathname();
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(group.defaultExpanded ?? false);
     const sortedItems = sortByOrder(group.items);
 
     return (

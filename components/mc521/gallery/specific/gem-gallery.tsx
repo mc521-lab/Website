@@ -229,8 +229,8 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
                 <h1 className="text-3xl font-bold tracking-tight">宝石图鉴</h1>
                 <p className="text-muted-foreground mt-1">
                     {qualityFilter === "all"
-                        ? "按类型浏览全部宝石数据（同一类型 C~S 归为一组）"
-                        : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级宝石`}
+                        ? "按类型浏览全部宝石数据"
+                        : `按品质浏览所有的 ${QUALITY_LABEL[qualityFilter]} 级宝石`}
                 </p>
             </header>
 

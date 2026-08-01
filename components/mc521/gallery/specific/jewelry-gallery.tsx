@@ -245,8 +245,8 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
                 <h1 className="text-3xl font-bold tracking-tight">饰品图鉴</h1>
                 <p className="text-muted-foreground mt-1">
                     {positionFilter === "all"
-                        ? "按职业浏览全部饰品数据（同一职业各部位归为一组）"
-                        : `按部位浏览 ${POSITION_LABEL[positionFilter]}饰品`}
+                        ? "按职业浏览全部饰品数据"
+                        : `按部位浏览全部的${POSITION_LABEL[positionFilter]}`}
                 </p>
             </header>
 

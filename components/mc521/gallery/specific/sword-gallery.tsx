@@ -176,8 +176,8 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
                 <h1 className="text-3xl font-bold tracking-tight">武器图鉴</h1>
                 <p className="text-muted-foreground mt-1">
                     {qualityFilter === "all"
-                        ? "按职业浏览全部武器数据（同一职业 D~S 归为一组）"
-                        : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级武器`}
+                        ? "按职业浏览全部武器数据"
+                        : `按品质浏览所有的 ${QUALITY_LABEL[qualityFilter]} 级武器`}
                 </p>
             </header>
 

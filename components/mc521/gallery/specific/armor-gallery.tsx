@@ -7,6 +7,7 @@ import {
     JOB_ORDER,
     PART_LABEL,
     PART_ORDER,
+    QUALITY_LABEL,
     QUALITY_ORDER,
     QUALITY_THEME,
     QUALITY_TIER,
@@ -132,14 +133,18 @@ function ArmorPieceCard({ item }: { item: ArmorItem }) {
                             icon="lucide:rectangle-ellipsis|#f0bd00"
                             value={formatNumber(stats.durable, 0)}
                         />
+                        <StatRow label="最大生命" icon="lucide:heart-plus|#ff5257" value={formatNumber(stats.maxHealth)} />
                         <StatRow label="护甲值" icon="lucide:shield|#3c91ff" value={formatNumber(stats.armor)} />
                         <StatRow label="护甲韧性" icon="lucide:shield-plus|#14d681" value={formatNumber(stats.toughness)} />
-                        <StatRow label="最大生命" icon="lucide:heart-plus|#ff5257" value={formatNumber(stats.maxHealth)} />
                         <StatRow label="防御减伤" icon="lucide:shield-minus|#ff7a00" value={formatNumber(stats.defense)} />
                         <StatRow label="最大法力" icon="lucide:wand-sparkles|#60a5fa" value={formatNumber(stats.maxMana)} />
                         <StatRow label="最大耐力" icon="lucide:gauge|#b76bff" value={formatNumber(stats.maxStamina)} />
                         <StatRow label="招架几率" icon="lucide:swords|#ec5bd8" value={formatNumber(stats.parry)} />
-                        <StatRow label="移动速度" icon="lucide:footprints|#e8d525" value={formatNumber(stats.moveSpeed)} />
+                        <StatRow
+                            label="移动速度"
+                            icon="lucide:footprints|#e8d525"
+                            value={formatNumber(stats.moveSpeed) === "0" ? "—" : formatNumber(stats.moveSpeed)}
+                        />
                         <StatRow label="闪避率" icon="lucide:wind|#14b8a6" value={formatNumber(stats.dodge)} />
                     </div>
                 </div>
@@ -222,7 +227,11 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
         <div className="w-full">
             <header className="gallery-page-header">
                 <h1 className="text-3xl font-bold tracking-tight">护甲图鉴</h1>
-                <p className="text-muted-foreground mt-1">按职业与品质浏览全部护甲数据，装备将按套装自然分组展示</p>
+                <p className="text-muted-foreground mt-1">
+                    {qualityFilter === "all"
+                        ? "按职业浏览全部护甲数据"
+                        : `按品质浏览所有的 ${QUALITY_LABEL[qualityFilter]} 级护甲`}
+                </p>
             </header>
 
             <GalleryFilterPanel

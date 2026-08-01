@@ -15,7 +15,7 @@ export function AdminNavBar() {
     const handleLogout = () => {
         clearAdminAuth();
         setUser(null);
-        router.push("/admin/login");
+        router.push("/");
     };
 
     return (

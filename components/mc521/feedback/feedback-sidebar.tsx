@@ -3,7 +3,6 @@
 import { useFeedbackView } from "./feedback-context";
 import { cn } from "@/lib/utils";
 import { IconifyIcon } from "@/components/iconify-icon";
-import { ChevronLeft } from "lucide-react";
 
 export function FeedbackSidebar() {
     const { view, selectedFeedback, goToBoard, goToSubmit } = useFeedbackView();
@@ -47,10 +46,8 @@ export function FeedbackSidebar() {
                 })}
 
                 {view === "detail" && (
-                    <div className="feedback-nav-group is-detail">
-                        <button
-                            type="button"
-                            className={cn("island-nav-item feedback-nav-item is-active")}>
+                    <div className="feedback-nav-group is-detail w-full">
+                        <button type="button" className={cn("island-nav-item feedback-nav-item is-active w-full")}>
                             <span className="island-nav-icon">
                                 <IconifyIcon icon="lucide:eye" />
                             </span>
@@ -58,13 +55,10 @@ export function FeedbackSidebar() {
                                 {selectedFeedback ? `#${selectedFeedback.number} ${selectedFeedback.title}` : "反馈详情"}
                             </span>
                         </button>
-                        <button type="button" onClick={goToBoard} className="feedback-nav-back">
-                            <ChevronLeft size={14} />
-                            返回看板
-                        </button>
                     </div>
                 )}
             </nav>
         </aside>
     );
 }
+

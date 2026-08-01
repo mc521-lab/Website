@@ -10,6 +10,8 @@ export const wiki_navigation = {
         order: s.number().default(0),
         /** 是否默认展开 (可选, 默认 false) */
         defaultExpanded: s.boolean().default(false),
+        /** 分组图标 (可选, Iconify 图标标识符) */
+        icon: s.string().optional(),
         /** 菜单项列表 */
         items: s.array(
             s.object({

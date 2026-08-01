@@ -1,6 +1,7 @@
 - title: 公会管理
   order: 2
   defaultExpanded: false
+  icon: lucide:landmark
   items:
     - title: 公会升级
       href: /playerguard/update

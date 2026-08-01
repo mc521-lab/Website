@@ -73,7 +73,7 @@
 .island-sidebar-header h2 {
     margin-top: 12px;
     color: #f5f3ef;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: 0.02em;
     line-height: 1.28;
@@ -123,6 +123,19 @@
 .island-nav-group-header:hover {
     color: rgba(229, 232, 237, 0.78);
     background: rgba(255, 255, 255, 0.035);
+}
+
+.island-nav-group-icon {
+    display: grid;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    place-items: center;
+    border: 1px solid rgba(224, 180, 75, 0.28);
+    border-radius: 6px;
+    background: rgba(193, 143, 37, 0.14);
+    color: #e5c36f;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .island-nav-chevron {

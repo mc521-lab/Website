@@ -15,6 +15,7 @@ export type IslandNavItem = {
 
 export type IslandNavGroup = {
     title: string;
+    icon?: string;
     order?: number;
     defaultExpanded?: boolean;
     items: IslandNavItem[];
@@ -64,8 +65,15 @@ function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
                 className="island-nav-group-header"
                 onClick={() => setIsExpanded((prev) => !prev)}
                 aria-expanded={isExpanded}>
-                <span className="translate-y-0.5">{group.title}</span>
-                <IconifyIcon icon="lucide:chevron-down" className="island-nav-chevron translate-y-0.5" />
+                <span className="translate-y-0.5 flex items-center gap-2 w-full">
+                    {group.icon && (
+                        <span className="island-nav-group-icon" aria-hidden="true">
+                            <IconifyIcon icon={group.icon} />
+                        </span>
+                    )}
+                    <span className="text-sm">{group.title}</span>
+                    <IconifyIcon icon="lucide:chevron-down" className="island-nav-chevron ml-auto size-4!" />
+                </span>
             </button>
             <div className="island-nav-group-body">
                 <ul>

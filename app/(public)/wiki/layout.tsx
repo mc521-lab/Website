@@ -10,6 +10,7 @@ const wikiNav = wiki_navigation.map((group) => ({
 }));
 
 export default function WikiLayout({ children }: { children: React.ReactNode }) {
+    console.log(wikiNav);
     return (
         <div className="island-page">
             <div className="island-layout">

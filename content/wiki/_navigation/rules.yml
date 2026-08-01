@@ -1,6 +1,7 @@
 - title: 服务器规则
   order: 9
   defaultExpanded: false
+  icon: lucide:scale
   items:
     - title: 基本规则
       href: /rules/basic

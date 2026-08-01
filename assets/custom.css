@@ -756,29 +756,13 @@
 /* ==================== Feedback Page ==================== */
 .feedback-page {
     width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px 20px 48px;
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
 .feedback-page-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 20px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.085);
-    border-radius: 18px;
-    background:
-        radial-gradient(circle at 7% -12%, rgba(221, 177, 76, 0.1), transparent 32%),
-        linear-gradient(145deg, rgba(24, 28, 35, 0.94), rgba(13, 17, 23, 0.96));
-    box-shadow:
-        0 16px 36px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(18px) saturate(114%);
-    -webkit-backdrop-filter: blur(18px) saturate(114%);
+    display: none;
 }
 
 .feedback-page-header-icon {
@@ -811,50 +795,82 @@
     margin: 4px 0 0;
 }
 
-.feedback-view-tabs {
+.feedback-page-content {
     display: flex;
-    gap: 8px;
-    padding: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.085);
-    border-radius: 12px;
-    background: rgba(13, 17, 23, 0.6);
-    width: fit-content;
+    flex-direction: column;
+    min-height: 100%;
 }
 
-.feedback-view-tab {
-    display: inline-flex;
+.feedback-loading-state {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 6px;
-    padding: 8px 18px;
-    border: none;
-    border-radius: 8px;
-    background: transparent;
+    justify-content: center;
+    gap: 12px;
+    padding: 48px;
     color: rgba(226, 230, 236, 0.6);
     font-size: 14px;
-    font-weight: 600;
+}
+
+/* ==================== Feedback sidebar nav items ==================== */
+.feedback-sidebar .island-nav-item {
+    padding: 10px 12px;
+}
+
+.feedback-sidebar .island-nav-icon {
+    width: 16px;
+    flex: 0 0 16px;
+}
+
+.feedback-sidebar .island-nav-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.feedback-nav-group.is-detail {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.feedback-nav-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    margin-top: 2px;
+    border: none;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(226, 230, 236, 0.5);
+    font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
     transition:
         color 150ms ease,
         background-color 150ms ease;
+    width: 100%;
 }
 
-.feedback-view-tab:hover {
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.05);
+.feedback-nav-back:hover {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.feedback-view-tab.is-active {
-    color: #f6da90;
-    background: linear-gradient(135deg, rgba(193, 142, 37, 0.38), rgba(155, 111, 27, 0.24));
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.07),
-        0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.feedback-main {
+.feedback-sidebar {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+}
+
+.feedback-sidebar .island-sidebar-nav {
+    gap: 8px;
+}
+
+@media (max-width: 760px) {
+    .feedback-nav-desc {
+        display: none;
+    }
 }
 
 /* ==================== Feedback Form ==================== */
@@ -1687,21 +1703,6 @@
 
 /* ==================== Responsive ==================== */
 @media (max-width: 720px) {
-    .feedback-page {
-        padding: 16px 12px 32px;
-    }
-
-    .feedback-page-header {
-        padding: 16px;
-        gap: 12px;
-    }
-
-    .feedback-page-header-icon {
-        width: 44px;
-        height: 44px;
-        flex-basis: 44px;
-    }
-
     .feedback-list-toolbar {
         flex-direction: column;
         align-items: flex-start;

@@ -103,7 +103,7 @@ export function FeedbackList({ onSelectFeedback, refreshKey }: FeedbackListProps
     );
 
     return (
-        <section className="feedback-list-panel">
+        <section className="feedback-list-panel flex-1">
             {/* Toolbar with filters */}
             <div className="feedback-list-toolbar">
                 <div className="feedback-list-toolbar-title">

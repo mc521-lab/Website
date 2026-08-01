@@ -18,4 +18,3 @@ export const tools_navigation = {
         )
         .transform((obj) => Object.values(obj)),
 };
-

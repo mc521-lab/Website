@@ -49,4 +49,3 @@ export const wiki_content = {
             slug: doc.slug.replace("wiki/_pages/", ""),
         })),
 };
-

@@ -52,4 +52,3 @@ export const gallery_armor_data = {
             };
         }),
 };
-

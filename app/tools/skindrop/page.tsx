@@ -339,7 +339,7 @@ export default function SkindropPage() {
                             </div>
                             <div>
                                 <h2 className="font-heading text-foreground text-base font-bold">如何使用？</h2>
-                                <div className="ml-4 mt-1 flex flex-col gap-1">
+                                <div className="mt-1 ml-4 flex flex-col gap-1">
                                     <span>1. 点击下方按钮复制换皮肤命令</span>
                                     <span>
                                         2. 在游戏中按{" "}
@@ -369,7 +369,7 @@ export default function SkindropPage() {
                                 </div>
                             </div>
                             <p>如有问题请联系服务器技术 @LingyunAwA (QQ 1913532130)</p>
-                            <div className="flex flex-col gap-3 rounded-lg border border-green-400/25 bg-green-400/8 p-4 mt-auto">
+                            <div className="mt-auto flex flex-col gap-3 rounded-lg border border-green-400/25 bg-green-400/8 p-4">
                                 <code className="bg-background/35 text-foreground block rounded-lg p-3 font-mono text-sm break-all">
                                     {skinCommand}
                                 </code>
@@ -447,4 +447,3 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
         </button>
     );
 }
-

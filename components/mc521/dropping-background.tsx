@@ -96,4 +96,3 @@ export const DroppingBackground: React.FC = () => {
 };
 
 export default DroppingBackground;
-

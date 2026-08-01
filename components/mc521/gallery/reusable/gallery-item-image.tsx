@@ -4,15 +4,7 @@ import Image from "next/image";
 import { ImageOff } from "lucide-react";
 import { useState } from "react";
 
-export function GalleryItemImage({
-    src,
-    alt,
-    size = 38,
-}: {
-    src: string;
-    alt: string;
-    size?: number;
-}) {
+export function GalleryItemImage({ src, alt, size = 38 }: { src: string; alt: string; size?: number }) {
     const [failed, setFailed] = useState(false);
 
     return (

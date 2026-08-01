@@ -21,12 +21,11 @@ export const gallery_sword_data = {
                     "critical-strike-chance": s.number().nonnegative(),
                 })
                 .optional(),
-            gem: s
-                .object({
-                    count: s.number().int().nonnegative(), // weapon-card
-                    volume: s.number().int().nonnegative(), // weapon-swordvolume
-                    lock: s.number().int().nonnegative().optional(), // weapon-max-card - weapon-card
-                }),
+            gem: s.object({
+                count: s.number().int().nonnegative(), // weapon-card
+                volume: s.number().int().nonnegative(), // weapon-swordvolume
+                lock: s.number().int().nonnegative().optional(), // weapon-max-card - weapon-card
+            }),
         })
         .transform((data, { meta }) => {
             const segments = meta.path.replace(/\.yml$/, "").split("/");

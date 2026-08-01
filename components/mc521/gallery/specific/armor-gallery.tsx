@@ -115,7 +115,7 @@ function ArmorPieceCard({ item }: { item: ArmorItem }) {
         <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
             <div className="gallery-card-header mb-3 flex items-start gap-2">
                 <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
-                <div className="min-w-0 flex-1 mt-1">
+                <div className="mt-1 min-w-0 flex-1">
                     <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
                     <p className="text-muted-foreground mt-0.5 text-xs">
                         {jobLabel} · {partLabel}
@@ -273,4 +273,3 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
         </div>
     );
 }
-

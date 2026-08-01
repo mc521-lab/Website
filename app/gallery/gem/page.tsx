@@ -8,4 +8,3 @@ export default function GemPage() {
     const items: GemItem[] = gallery_gem_data;
     return <GemGalleryPage items={items} />;
 }
-

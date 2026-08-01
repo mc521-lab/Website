@@ -255,4 +255,3 @@ export const SET_BONUS = {
     cooldown: { D: 2, C: 4, B: 6, A: 8, S: 10 },
     rangedReduce: { D: 10, C: 10, B: 15, A: 20, S: 25 },
 } as const;
-

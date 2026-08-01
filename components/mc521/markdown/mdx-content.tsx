@@ -22,4 +22,3 @@ export function MDXContent({ code, components }: MDXProps) {
     // eslint-disable-next-line react-hooks/static-components
     return <Component components={{ ...sharedComponents, ...components }} />;
 }
-

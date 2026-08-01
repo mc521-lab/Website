@@ -12,4 +12,3 @@ export function MyVideo({ src, asGif = true, raw }: { src: string; asGif?: boole
         />
     );
 }
-

@@ -11,12 +11,5 @@ export function MyImage({
     width?: number;
     height?: number;
 }) {
-    return (
-        <Image
-            src={src}
-            alt={alt || "Image"}
-            width={width}
-            height={height}
-        />
-    );
+    return <Image src={src} alt={alt || "Image"} width={width} height={height} />;
 }

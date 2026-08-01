@@ -229,4 +229,3 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
         </div>
     );
 }
-

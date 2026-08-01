@@ -182,4 +182,3 @@ export interface SwordItem {
 }
 
 export type SwordSetGroup = GallerySetGroup<SwordItem>;
-

@@ -103,4 +103,3 @@ export async function uploadSkin(filename: string, file: File): Promise<SkinUplo
 
     return response.json() as Promise<SkinUploadResult>;
 }
-

@@ -21,4 +21,3 @@ export interface IconifyIconProps extends Omit<IconProps, "icon"> {
 export const IconifyIcon: React.FC<IconifyIconProps> = ({ icon, width = "1em", height = "1em", className, style, ...rest }) => {
     return <Icon icon={icon} width={width} height={height} className={className} style={style} {...rest} />;
 };
-

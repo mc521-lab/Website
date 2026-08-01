@@ -22,12 +22,12 @@ export function GalleryShell({ title, subtitle, filterBar, children, isEmpty, em
             <div className="mb-6">{filterBar}</div>
 
             {isEmpty ? (
-                empty ?? (
+                (empty ?? (
                     <div className="border-border text-muted-foreground flex flex-col items-center justify-center rounded-xl border border-dashed py-16">
                         <p className="text-lg">暂无符合条件的数据</p>
                         <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                     </div>
-                )
+                ))
             ) : (
                 <div className="flex flex-col gap-6">{children}</div>
             )}

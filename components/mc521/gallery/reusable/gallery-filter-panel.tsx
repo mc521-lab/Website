@@ -90,4 +90,3 @@ export function GalleryFilterPanel({ total, filtered, unit = "件", groups }: Ga
         </section>
     );
 }
-

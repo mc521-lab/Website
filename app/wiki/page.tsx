@@ -7,4 +7,3 @@ export default function WikiIndexPage() {
     router.push("/wiki/beginner/common-commands");
     return null;
 }
-

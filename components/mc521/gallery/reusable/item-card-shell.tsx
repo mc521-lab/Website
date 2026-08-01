@@ -35,4 +35,3 @@ export function ItemCardShell({ name, imageSrc, subtitle, badge, children, accen
         </article>
     );
 }
-

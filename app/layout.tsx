@@ -17,9 +17,19 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning className={cn("antialiased", "font-sans", figtree.variable)}>
             <body>
+                <div className="hidden">
+                    <span>君庭阁服务器官网 v7 | Copyright 2026~present LingyunAwA, all rights reserved.</span>
+                    <span>众所周知，这是一个基于 NextJS，TailwindCSS，React，shadcn/ui 的网站</span>
+                    <span>
+                        但是因为某个人对他所谓的“自然 ui”的死板意见，以及某个降智的国外大厂
+                        AI（C某某T），这个站点里面存在很多不合群的代码，例如一堆自定义 CSS 组件类
+                    </span>
+                    <span>对于这部分，我作为开发者也没旧，某人就是喜欢这样的，然后还非要用降智 AI 给我发组件代码示例。</span>
+                    <span>如果谁在用 DevTools 查看组件代码，看到这部分评论请不要见笑，这是一系列不得已的因素造成的</span>
+                </div>
                 <ThemeProvider>
                     {/* <DroppingBackground /> */}
-                    <div className="flex min-h-screen flex-col z-10">
+                    <div className="z-10 flex min-h-screen flex-col">
                         <Navbar />
                         {children}
                     </div>

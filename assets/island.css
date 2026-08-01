@@ -246,7 +246,7 @@
 
 .island-content-inner {
     min-height: 100%;
-    padding: clamp(20px, 2.4vw, 36px) clamp(18px, 3vw, 44px) 48px;
+    padding: clamp(20px, 2.4vw, 36px) clamp(14px, 2.4vw, 36px) 48px;
 }
 
 @media (max-width: 1024px) {

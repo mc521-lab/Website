@@ -13,12 +13,9 @@ import {
     SET_BONUS,
 } from "../constant";
 import type { ArmorItem, ArmorJob, ArmorPart, ArmorQuality, ArmorSetGroup } from "../types";
-import { FilterBarShell } from "../reusable/filter-bar-shell";
-import { FilterSelect } from "../reusable/filter-select";
-import { GalleryShell } from "../reusable/gallery-shell";
-import { ItemCardShell } from "../reusable/item-card-shell";
-import { QualityBadge } from "../reusable/quality-badge";
-import { SetSection } from "../reusable/set-section";
+import { GalleryFilterPanel } from "../reusable/gallery-filter-panel";
+import { GalleryGroupSection } from "../reusable/gallery-group-section";
+import { GalleryItemImage } from "../reusable/gallery-item-image";
 import { StatRow } from "../reusable/stat-row";
 import { formatNumber } from "../reusable/utils";
 
@@ -107,7 +104,7 @@ function groupIntoSets(items: ArmorItem[]): ArmorSetGroup[] {
     return groups;
 }
 
-function ArmorPieceCard({ item, accent }: { item: ArmorItem; accent?: string }) {
+function ArmorPieceCard({ item }: { item: ArmorItem }) {
     const part = parsePartFromId(item.id);
     const stats = getStats(item);
     const jobLabel = JOB_LABEL[item.basic.job] ?? item.basic.job;
@@ -115,14 +112,20 @@ function ArmorPieceCard({ item, accent }: { item: ArmorItem; accent?: string }) 
     const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined;
 
     return (
-        <ItemCardShell
-            name={item.basic.name}
-            imageSrc={`/gallery/${item.basic.name}.png`}
-            subtitle={`${jobLabel} · ${partLabel}`}
-            accent={accent}>
+        <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
+            <div className="gallery-card-header mb-3 flex items-start gap-2">
+                <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
+                <div className="min-w-0 flex-1 mt-1">
+                    <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
+                    <p className="text-muted-foreground mt-0.5 text-xs">
+                        {jobLabel} · {partLabel}
+                    </p>
+                </div>
+            </div>
+
             <div className="space-y-3">
                 <div>
-                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">基础属性</h4>
+                    <h4 className="gallery-card-section-title">基础属性</h4>
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="耐久度"
@@ -158,67 +161,46 @@ function ArmorPieceCard({ item, accent }: { item: ArmorItem; accent?: string }) 
                     </div>
                 )}
             </div>
-        </ItemCardShell>
-    );
-}
-
-function SetBonusPanel({ quality, pieceCount }: { quality: ArmorQuality; pieceCount: number }) {
-    const theme = QUALITY_THEME[quality];
-    const cd = SET_BONUS.cooldown[quality];
-    const rr = SET_BONUS.rangedReduce[quality];
-    return (
-        <div
-            className="flex items-center gap-1 rounded-lg border p-2 text-sm"
-            style={{
-                borderColor: `color-mix(in srgb, ${theme.accent} 35%, transparent)`,
-                background: `linear-gradient(180deg, color-mix(in srgb, ${theme.accent} 12%, transparent), color-mix(in srgb, ${theme.accent} 6%, transparent))`,
-                boxShadow: `inset 0 1px color-mix(in srgb, ${theme.accent2} 12%, transparent)`,
-            }}>
-            <p className="text-muted-foreground translate-y-[1.5px] text-xs font-semibold tracking-wider uppercase">
-                套装效果（{pieceCount}件）
-            </p>
-            <div className="bg-muted/40 flex flex-wrap gap-x-4 gap-y-1 rounded-md px-2 py-1">
-                <span className="inline-flex items-center gap-1.5">
-                    <IconifyIcon icon="lucide:hourglass" style={{ color: theme.accent2 }} width={14} height={14} />
-                    <span className="text-muted-foreground">技能冷却</span>
-                    <span className="font-medium tabular-nums" style={{ color: theme.accent2 }}>
-                        -{cd}%
-                    </span>
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                    <IconifyIcon icon="lucide:circle-arrow-down" style={{ color: theme.accent2 }} width={14} height={14} />
-                    <span className="text-muted-foreground">远程减免</span>
-                    <span className="font-medium tabular-nums" style={{ color: theme.accent2 }}>
-                        -{rr}%
-                    </span>
-                </span>
-            </div>
-        </div>
+        </article>
     );
 }
 
 function ArmorSetSection({ group }: { group: ArmorSetGroup }) {
     const jobLabel = JOB_LABEL[group.job];
     const tier = QUALITY_TIER[group.quality];
+    const pieceCount = group.pieces.length;
+    const cd = SET_BONUS.cooldown[group.quality];
+    const rr = SET_BONUS.rangedReduce[group.quality];
+    const accent = group.theme.accent;
+
+    const setEffect = (
+        <div className="gallery-set-effect">
+            <p className="gallery-set-effect-title">套装效果（{pieceCount}件）</p>
+            <div className="gallery-set-effect-items">
+                <span className="gallery-set-effect-item">
+                    <IconifyIcon icon="lucide:hourglass" width={14} height={14} />
+                    技能冷却 <strong>-{cd}%</strong>
+                </span>
+                <span className="gallery-set-effect-item">
+                    <IconifyIcon icon="lucide:circle-arrow-down" width={14} height={14} />
+                    远程减免 <strong>-{rr}%</strong>
+                </span>
+            </div>
+        </div>
+    );
 
     return (
-        <SetSection
-            title={
-                <span className="flex flex-wrap items-center gap-2">
-                    {group.setName}套装
-                    <QualityBadge quality={group.quality} />
-                </span>
-            }
-            subtitle={`${tier}${jobLabel}防具 · 共${group.pieces.length}件`}
-            theme={group.theme}
+        <GalleryGroupSection
+            title={`${group.setName}套装`}
+            description={`${tier}${jobLabel}防具 · 共${pieceCount}件`}
             icon="lucide:shield"
-            headerExtra={<SetBonusPanel quality={group.quality} pieceCount={group.pieces.length} />}>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {group.pieces.map((item) => (
-                    <ArmorPieceCard key={item.id} item={item} accent={group.theme.accent} />
-                ))}
-            </div>
-        </SetSection>
+            accent={accent}
+            aside={setEffect}
+            contentClassName="gallery-group-grid gallery-group-grid-armor">
+            {group.pieces.map((item) => (
+                <ArmorPieceCard key={item.id} item={item} />
+            ))}
+        </GalleryGroupSection>
     );
 }
 
@@ -237,43 +219,58 @@ export function ArmorGalleryPage({ items }: { items: ArmorItem[] }) {
     const sets = useMemo(() => groupIntoSets(filtered), [filtered]);
 
     return (
-        <GalleryShell
-            title="护甲图鉴"
-            subtitle="按职业、品质与部位浏览全部护甲数据（按套装分组）"
-            filterBar={
-                <FilterBarShell
-                    extra={
-                        <>
-                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
-                        </>
-                    }>
-                    <FilterSelect
-                        label="职业"
-                        icon="lucide:users"
-                        value={jobFilter}
-                        options={JOB_ORDER.map((j) => ({ value: j, label: JOB_LABEL[j] }))}
-                        onChange={(v) => setJobFilter(v)}
-                    />
-                    <FilterSelect
-                        label="品质"
-                        icon="lucide:gem"
-                        value={qualityFilter}
-                        options={QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
-                        onChange={(v) => setQualityFilter(v)}
-                    />
-                </FilterBarShell>
-            }
-            isEmpty={sets.length === 0}
-            empty={
-                <div className="border-border text-muted-foreground flex flex-col items-center justify-center rounded-xl border border-dashed py-16">
+        <div className="w-full">
+            <header className="gallery-page-header">
+                <h1 className="text-3xl font-bold tracking-tight">护甲图鉴</h1>
+                <p className="text-muted-foreground mt-1">按职业与品质浏览全部护甲数据，装备将按套装自然分组展示</p>
+            </header>
+
+            <GalleryFilterPanel
+                total={items.length}
+                filtered={filtered.length}
+                unit="件"
+                groups={[
+                    {
+                        key: "job",
+                        label: "职业",
+                        icon: "lucide:user-round",
+                        value: jobFilter,
+                        onChange: (value) => setJobFilter(value as ArmorJob | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...JOB_ORDER.map((value) => ({ value, label: JOB_LABEL[value] })),
+                        ],
+                    },
+                    {
+                        key: "quality",
+                        label: "品质",
+                        icon: "lucide:sparkles",
+                        value: qualityFilter,
+                        onChange: (value) => setQualityFilter(value as ArmorQuality | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...QUALITY_ORDER.map((value) => ({
+                                value,
+                                label: `${value} · ${QUALITY_TIER[value]}`,
+                            })),
+                        ],
+                    },
+                ]}
+            />
+
+            {sets.length === 0 ? (
+                <div className="gallery-empty-state">
                     <p className="text-lg">暂无符合条件的护甲</p>
                     <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                 </div>
-            }>
-            {sets.map((group) => (
-                <ArmorSetSection key={group.key} group={group} />
-            ))}
-        </GalleryShell>
+            ) : (
+                <div className="flex flex-col gap-6">
+                    {sets.map((group) => (
+                        <ArmorSetSection key={group.key} group={group} />
+                    ))}
+                </div>
+            )}
+        </div>
     );
 }
 

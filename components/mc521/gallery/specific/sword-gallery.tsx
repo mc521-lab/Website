@@ -3,12 +3,10 @@
 import { useMemo, useState } from "react";
 import { JOB_LABEL, JOB_ORDER, JOB_THEME, QUALITY_LABEL, QUALITY_ORDER, QUALITY_THEME, QUALITY_TIER } from "../constant";
 import type { SwordItem, SwordJob, SwordQuality, SwordSetGroup } from "../types";
-import { FilterBarShell } from "../reusable/filter-bar-shell";
-import { FilterSelect } from "../reusable/filter-select";
-import { GalleryShell } from "../reusable/gallery-shell";
-import { ItemCardShell } from "../reusable/item-card-shell";
+import { GalleryFilterPanel } from "../reusable/gallery-filter-panel";
+import { GalleryGroupSection } from "../reusable/gallery-group-section";
+import { GalleryItemImage } from "../reusable/gallery-item-image";
 import { QualityBadge } from "../reusable/quality-badge";
-import { SetSection } from "../reusable/set-section";
 import { StatRow } from "../reusable/stat-row";
 import { formatNumber } from "../reusable/utils";
 
@@ -80,20 +78,26 @@ function groupByQuality(items: SwordItem[]): SwordSetGroup[] {
     return groups;
 }
 
-function SwordCard({ item, accent }: { item: SwordItem; accent?: string }) {
+function SwordCard({ item }: { item: SwordItem }) {
     const stats = getStats(item);
     const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined || item.gem?.lock !== undefined;
 
     return (
-        <ItemCardShell
-            name={item.basic.name}
-            imageSrc={`/gallery/${item.basic.name}.png`}
-            subtitle={`${JOB_LABEL[item.basic.job]}武器`}
-            badge={<QualityBadge quality={item.basic.quality} />}
-            accent={accent}>
+        <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
+            <div className="gallery-card-header mb-3 flex items-start gap-2">
+                <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
+                <div className="mt-1 min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                        <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
+                        <QualityBadge quality={item.basic.quality} />
+                    </div>
+                    <p className="text-muted-foreground mt-0.5 text-xs">{JOB_LABEL[item.basic.job]}武器</p>
+                </div>
+            </div>
+
             <div className="space-y-3">
                 <div>
-                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">基础属性</h4>
+                    <h4 className="gallery-card-section-title">基础属性</h4>
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="耐久度"
@@ -107,9 +111,7 @@ function SwordCard({ item, accent }: { item: SwordItem; accent?: string }) {
 
                 {(stats.critPower !== undefined || stats.critChance !== undefined || stats.lifesteal !== undefined) && (
                     <div>
-                        <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
-                            战斗属性
-                        </h4>
+                        <h4 className="gallery-card-section-title">战斗属性</h4>
                         <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                             <StatRow label="暴击伤害" icon="lucide:crosshair|#f97316" value={formatNumber(stats.critPower)} />
                             <StatRow label="暴击几率" icon="lucide:target|#eab308" value={formatNumber(stats.critChance)} />
@@ -133,19 +135,22 @@ function SwordCard({ item, accent }: { item: SwordItem; accent?: string }) {
                     </div>
                 )}
             </div>
-        </ItemCardShell>
+        </article>
     );
 }
 
 function SwordSetSection({ group }: { group: SwordSetGroup }) {
     return (
-        <SetSection title={group.title} subtitle={group.subtitle} theme={group.theme} icon="lucide:sword">
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-                {group.pieces.map((item) => (
-                    <SwordCard key={item.id} item={item} accent={group.theme.accent} />
-                ))}
-            </div>
-        </SetSection>
+        <GalleryGroupSection
+            title={group.title}
+            description={group.subtitle}
+            icon="lucide:sword"
+            accent={group.theme.accent}
+            contentClassName="gallery-group-grid gallery-group-grid-sword">
+            {group.pieces.map((item) => (
+                <SwordCard key={item.id} item={item} />
+            ))}
+        </GalleryGroupSection>
     );
 }
 
@@ -166,47 +171,62 @@ export function SwordGalleryPage({ items }: { items: SwordItem[] }) {
     }, [filtered, qualityFilter]);
 
     return (
-        <GalleryShell
-            title="武器图鉴"
-            subtitle={
-                qualityFilter === "all"
-                    ? "按职业浏览全部武器数据（同一职业 D~S 归为一组）"
-                    : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级武器`
-            }
-            filterBar={
-                <FilterBarShell
-                    extra={
-                        <>
-                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
-                        </>
-                    }>
-                    <FilterSelect
-                        label="职业"
-                        icon="lucide:users"
-                        value={jobFilter}
-                        options={JOB_ORDER.map((j) => ({ value: j, label: JOB_LABEL[j] }))}
-                        onChange={(v) => setJobFilter(v)}
-                    />
-                    <FilterSelect
-                        label="品质"
-                        icon="lucide:gem"
-                        value={qualityFilter}
-                        options={QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
-                        onChange={(v) => setQualityFilter(v)}
-                    />
-                </FilterBarShell>
-            }
-            isEmpty={sets.length === 0}
-            empty={
-                <div className="border-border text-muted-foreground flex flex-col items-center justify-center rounded-xl border border-dashed py-16">
+        <div className="w-full">
+            <header className="gallery-page-header">
+                <h1 className="text-3xl font-bold tracking-tight">武器图鉴</h1>
+                <p className="text-muted-foreground mt-1">
+                    {qualityFilter === "all"
+                        ? "按职业浏览全部武器数据（同一职业 D~S 归为一组）"
+                        : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级武器`}
+                </p>
+            </header>
+
+            <GalleryFilterPanel
+                total={items.length}
+                filtered={filtered.length}
+                unit="件"
+                groups={[
+                    {
+                        key: "job",
+                        label: "职业",
+                        icon: "lucide:user-round",
+                        value: jobFilter,
+                        onChange: (value) => setJobFilter(value as SwordJob | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...JOB_ORDER.map((value) => ({ value, label: JOB_LABEL[value] })),
+                        ],
+                    },
+                    {
+                        key: "quality",
+                        label: "品质",
+                        icon: "lucide:sparkles",
+                        value: qualityFilter,
+                        onChange: (value) => setQualityFilter(value as SwordQuality | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...QUALITY_ORDER.map((value) => ({
+                                value,
+                                label: `${value} · ${QUALITY_TIER[value]}`,
+                            })),
+                        ],
+                    },
+                ]}
+            />
+
+            {sets.length === 0 ? (
+                <div className="gallery-empty-state">
                     <p className="text-lg">暂无符合条件的武器</p>
                     <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                 </div>
-            }>
-            {sets.map((group) => (
-                <SwordSetSection key={group.key} group={group} />
-            ))}
-        </GalleryShell>
+            ) : (
+                <div className="flex flex-col gap-6">
+                    {sets.map((group) => (
+                        <SwordSetSection key={group.key} group={group} />
+                    ))}
+                </div>
+            )}
+        </div>
     );
 }
 

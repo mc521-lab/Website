@@ -5,12 +5,10 @@ import { cn } from "@/lib/utils";
 import { GEM_QUALITY_ORDER, QUALITY_LABEL, QUALITY_THEME, QUALITY_TIER, TYPE_LABEL, TYPE_ORDER, TYPE_THEME } from "../constant";
 import type { GemItem, GemQuality, GemSetGroup, GemType } from "../types";
 import { EffectLabel } from "../reusable/effect-label";
-import { FilterBarShell } from "../reusable/filter-bar-shell";
-import { FilterSelect } from "../reusable/filter-select";
-import { GalleryShell } from "../reusable/gallery-shell";
-import { ItemCardShell } from "../reusable/item-card-shell";
+import { GalleryFilterPanel } from "../reusable/gallery-filter-panel";
+import { GalleryGroupSection } from "../reusable/gallery-group-section";
+import { GalleryItemImage } from "../reusable/gallery-item-image";
 import { QualityBadge } from "../reusable/quality-badge";
-import { SetSection } from "../reusable/set-section";
 import { StatRow } from "../reusable/stat-row";
 import { formatNumber, formatPercent, formatRange } from "../reusable/utils";
 
@@ -110,7 +108,7 @@ function groupByQuality(items: GemItem[]): GemSetGroup[] {
 
 function ModifierEntryRow({ entry }: { entry: { probability: number; effect: string; min: number; max: number } }) {
     return (
-        <div className="border-border/50 bg-background/50 rounded-md border px-2.5 py-1.5">
+        <div className="gallery-jewelry-entry">
             <div className="mb-0.5 flex items-center justify-between gap-2">
                 <EffectLabel effect={entry.effect} className="text-sm font-medium" />
             </div>
@@ -132,15 +130,27 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
     const entries = item.modifiers?.entries ? Object.entries(item.modifiers.entries) : [];
 
     return (
-        <ItemCardShell
-            name={item.basic.name}
-            imageSrc={`/gallery/${item.basic.name}-${item.basic.quality}级.png`}
-            subtitle={typeLabel}
-            badge={<QualityBadge quality={item.basic.quality} />}
-            accent={accent}>
+        <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
+            <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-0.5 opacity-80"
+                style={{
+                    background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${accent ?? "var(--primary)"} 55%, transparent), transparent)`,
+                }}
+            />
+            <div className="gallery-card-header mb-3 flex items-start gap-2">
+                <GalleryItemImage src={`/gallery/${item.basic.name}-${item.basic.quality}级.png`} alt={item.basic.name} />
+                <div className="mt-1 min-w-0 flex-1">
+                    <h3 className="truncate text-base leading-tight font-semibold flex items-center gap-2">
+                        {item.basic.name}
+                        <QualityBadge quality={item.basic.quality} />
+                    </h3>
+                    <p className="text-muted-foreground mt-0.5 text-xs">{typeLabel}</p>
+                </div>
+            </div>
+
             <div className="space-y-3">
                 <div>
-                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">镶嵌信息</h4>
+                    <h4 className="gallery-card-section-title">镶嵌信息</h4>
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="安装成功率"
@@ -161,9 +171,7 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
                 </div>
 
                 <div>
-                    <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
-                        属性组{entries.length > 0 ? `（${entries.length}）` : ""}
-                    </h4>
+                    <h4 className="gallery-card-section-title">属性组{entries.length > 0 ? `（${entries.length}）` : ""}</h4>
                     {entries.length === 0 ? (
                         <div className="bg-muted/40 rounded-lg p-2.5">
                             <p className="text-muted-foreground text-sm">无修饰符条目</p>
@@ -177,23 +185,24 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
                     )}
                 </div>
             </div>
-        </ItemCardShell>
+        </article>
     );
 }
 
 function GemSetSection({ group, compact }: { group: GemSetGroup; compact?: boolean }) {
+    const gridClass = cn("grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3", compact ? "xl:grid-cols-3" : "xl:grid-cols-4");
+
     return (
-        <SetSection title={group.title} subtitle={group.subtitle} theme={group.theme} icon="lucide:gem">
-            <div
-                className={cn(
-                    "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
-                    compact && "xl:grid-cols-3!"
-                )}>
-                {group.pieces.map((item) => (
-                    <GemCard key={item.id} item={item} accent={group.theme.accent} />
-                ))}
-            </div>
-        </SetSection>
+        <GalleryGroupSection
+            title={group.title}
+            description={group.subtitle}
+            icon="lucide:gem"
+            accent={group.theme.accent}
+            contentClassName={gridClass}>
+            {group.pieces.map((item) => (
+                <GemCard key={item.id} item={item} accent={group.theme.accent} />
+            ))}
+        </GalleryGroupSection>
     );
 }
 
@@ -215,47 +224,59 @@ export function GemGalleryPage({ items }: { items: GemItem[] }) {
     }, [filtered, qualityFilter]);
 
     return (
-        <GalleryShell
-            title="宝石图鉴"
-            subtitle={
-                qualityFilter === "all"
-                    ? "按类型浏览全部宝石数据（同一类型 C~S 归为一组）"
-                    : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级宝石`
-            }
-            filterBar={
-                <FilterBarShell
-                    extra={
-                        <>
-                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 颗
-                        </>
-                    }>
-                    <FilterSelect
-                        label="类型"
-                        icon="lucide:layout-grid"
-                        value={typeFilter}
-                        options={TYPE_ORDER.map((t) => ({ value: t, label: TYPE_LABEL[t].slice(0, 2) }))}
-                        onChange={(v) => setTypeFilter(v)}
-                    />
-                    <FilterSelect
-                        label="品质"
-                        icon="lucide:gem"
-                        value={qualityFilter}
-                        options={GEM_QUALITY_ORDER.map((q) => ({ value: q, label: q }))}
-                        onChange={(v) => setQualityFilter(v)}
-                    />
-                </FilterBarShell>
-            }
-            isEmpty={sets.length === 0}
-            empty={
-                <div className="border-border text-muted-foreground flex flex-col items-center justify-center rounded-xl border border-dashed py-16">
+        <div className="w-full">
+            <header className="gallery-page-header">
+                <h1 className="text-3xl font-bold tracking-tight">宝石图鉴</h1>
+                <p className="text-muted-foreground mt-1">
+                    {qualityFilter === "all"
+                        ? "按类型浏览全部宝石数据（同一类型 C~S 归为一组）"
+                        : `按品质浏览 ${QUALITY_TIER[qualityFilter]}${QUALITY_LABEL[qualityFilter]}级宝石`}
+                </p>
+            </header>
+
+            <GalleryFilterPanel
+                total={items.length}
+                filtered={filtered.length}
+                unit="颗"
+                groups={[
+                    {
+                        key: "type",
+                        label: "类型",
+                        icon: "lucide:layout-grid",
+                        value: typeFilter,
+                        onChange: (value) => setTypeFilter(value as GemType | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...TYPE_ORDER.map((t) => ({ value: t, label: TYPE_LABEL[t].slice(0, 2) })),
+                        ],
+                    },
+                    {
+                        key: "quality",
+                        label: "品质",
+                        icon: "lucide:gem",
+                        value: qualityFilter,
+                        onChange: (value) => setQualityFilter(value as GemQuality | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...GEM_QUALITY_ORDER.map((q) => ({ value: q, label: `${q} · ${QUALITY_TIER[q]}` })),
+                        ],
+                    },
+                ]}
+            />
+
+            {sets.length === 0 ? (
+                <div className="gallery-empty-state">
                     <p className="text-lg">暂无符合条件的宝石</p>
                     <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                 </div>
-            }>
-            {sets.map((group) => (
-                <GemSetSection key={group.key} group={group} compact={qualityFilter !== "all"} />
-            ))}
-        </GalleryShell>
+            ) : (
+                <div className="flex flex-col gap-6">
+                    {sets.map((group) => (
+                        <GemSetSection key={group.key} group={group} compact={qualityFilter !== "all"} />
+                    ))}
+                </div>
+            )}
+        </div>
     );
 }
 

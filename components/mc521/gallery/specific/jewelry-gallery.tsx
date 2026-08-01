@@ -4,11 +4,9 @@ import { useMemo, useState } from "react";
 import { JOB_LABEL, JOB_ORDER, JOB_THEME, POSITION_LABEL, POSITION_ORDER, POSITION_THEME } from "../constant";
 import type { JewelryItem, JewelryJob, JewelryPosition, JewelrySetGroup, JewelryStatEntry } from "../types";
 import { EffectLabel } from "../reusable/effect-label";
-import { FilterBarShell } from "../reusable/filter-bar-shell";
-import { FilterSelect } from "../reusable/filter-select";
-import { GalleryShell } from "../reusable/gallery-shell";
-import { ItemCardShell } from "../reusable/item-card-shell";
-import { SetSection } from "../reusable/set-section";
+import { GalleryFilterPanel } from "../reusable/gallery-filter-panel";
+import { GalleryGroupSection } from "../reusable/gallery-group-section";
+import { GalleryItemImage } from "../reusable/gallery-item-image";
 import { formatPercent, formatRange } from "../reusable/utils";
 
 function isJewelryJob(v: string): v is JewelryJob {
@@ -166,12 +164,25 @@ function JewelryCard({ item, accent }: { item: JewelryItem; accent?: string }) {
     const entries = item.modifiers?.entries ? Object.entries(item.modifiers.entries) : [];
 
     return (
-        <ItemCardShell
-            name={item.basic.name}
-            imageSrc={`/gallery/${item.basic.name}.png`}
-            subtitle={`${jobLabel} · ${posLabel}`}
-            badge={<SpecialBadge special={item.basic.special} />}
-            accent={accent}>
+        <article className="gallery-item-card gallery-jewelry-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
+            <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-0.5 opacity-80"
+                style={{
+                    background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${accent ?? "var(--primary)"} 55%, transparent), transparent)`,
+                }}
+            />
+            <div className="gallery-card-header mb-3 flex items-start gap-2">
+                <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
+                <div className="mt-1 min-w-0 flex-1">
+                    <h3 className="flex items-center gap-2 truncate text-base leading-tight font-semibold">
+                        {item.basic.name} <SpecialBadge special={item.basic.special} />
+                    </h3>
+                    <p className="text-muted-foreground mt-0.5 text-xs">
+                        {jobLabel} · {posLabel}
+                    </p>
+                </div>
+            </div>
+
             <div>
                 <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
                     属性组{entries.length > 0 ? `（${entries.length}）` : ""}
@@ -188,19 +199,23 @@ function JewelryCard({ item, accent }: { item: JewelryItem; accent?: string }) {
                     </div>
                 )}
             </div>
-        </ItemCardShell>
+        </article>
     );
 }
 
 function JewelrySetSection({ group, icon }: { group: JewelrySetGroup; icon: string }) {
+    const accent = group.theme.accent;
     return (
-        <SetSection title={group.title} subtitle={group.subtitle} theme={group.theme} icon={icon}>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {group.pieces.map((item) => (
-                    <JewelryCard key={item.id} item={item} accent={group.theme.accent} />
-                ))}
-            </div>
-        </SetSection>
+        <GalleryGroupSection
+            title={group.title}
+            description={group.subtitle}
+            icon={icon}
+            accent={accent}
+            contentClassName="gallery-group-grid gallery-group-grid-jewelry">
+            {group.pieces.map((item) => (
+                <JewelryCard key={item.id} item={item} accent={accent} />
+            ))}
+        </GalleryGroupSection>
     );
 }
 
@@ -222,52 +237,61 @@ export function JewelryGalleryPage({ items }: { items: JewelryItem[] }) {
         return positionFilter === "all" ? groupByJob(filtered) : groupByPosition(filtered);
     }, [filtered, positionFilter]);
 
+    const icon = positionFilter === "all" ? "lucide:sparkles" : "lucide:gem";
+
     return (
-        <GalleryShell
-            title="饰品图鉴"
-            subtitle={
-                positionFilter === "all"
-                    ? "按职业浏览全部饰品数据（同一职业各部位归为一组）"
-                    : `按部位浏览 ${POSITION_LABEL[positionFilter]}饰品`
-            }
-            filterBar={
-                <FilterBarShell
-                    extra={
-                        <>
-                            正在展示 <span className="text-foreground font-medium">{filtered.length}</span> / {items.length} 件
-                        </>
-                    }>
-                    <FilterSelect
-                        label="职业"
-                        icon="lucide:users"
-                        value={jobFilter}
-                        options={JOB_ORDER.map((j) => ({ value: j, label: JOB_LABEL[j] }))}
-                        onChange={(v) => setJobFilter(v)}
-                    />
-                    <FilterSelect
-                        label="部位"
-                        icon="lucide:scan"
-                        value={positionFilter}
-                        options={POSITION_ORDER.map((p) => ({ value: p, label: POSITION_LABEL[p] }))}
-                        onChange={(v) => setPositionFilter(v)}
-                    />
-                </FilterBarShell>
-            }
-            isEmpty={sets.length === 0}
-            empty={
-                <div className="border-border text-muted-foreground flex flex-col items-center justify-center rounded-xl border border-dashed py-16">
+        <div className="w-full">
+            <header className="gallery-page-header">
+                <h1 className="text-3xl font-bold tracking-tight">饰品图鉴</h1>
+                <p className="text-muted-foreground mt-1">
+                    {positionFilter === "all"
+                        ? "按职业浏览全部饰品数据（同一职业各部位归为一组）"
+                        : `按部位浏览 ${POSITION_LABEL[positionFilter]}饰品`}
+                </p>
+            </header>
+
+            <GalleryFilterPanel
+                total={items.length}
+                filtered={filtered.length}
+                unit="件"
+                groups={[
+                    {
+                        key: "job",
+                        label: "职业",
+                        icon: "lucide:users",
+                        value: jobFilter,
+                        onChange: (value) => setJobFilter(value as JewelryJob | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...JOB_ORDER.map((value) => ({ value, label: JOB_LABEL[value] })),
+                        ],
+                    },
+                    {
+                        key: "position",
+                        label: "部位",
+                        icon: "lucide:scan",
+                        value: positionFilter,
+                        onChange: (value) => setPositionFilter(value as JewelryPosition | "all"),
+                        options: [
+                            { value: "all", label: "全部" },
+                            ...POSITION_ORDER.map((value) => ({ value, label: POSITION_LABEL[value] })),
+                        ],
+                    },
+                ]}
+            />
+
+            {sets.length === 0 ? (
+                <div className="gallery-empty-state">
                     <p className="text-lg">暂无符合条件的饰品</p>
                     <p className="mt-1 text-sm">请调整筛选条件后重试</p>
                 </div>
-            }>
-            {sets.map((group) => (
-                <JewelrySetSection
-                    key={group.key}
-                    group={group}
-                    icon={positionFilter === "all" ? "lucide:sparkles" : "lucide:gem"}
-                />
-            ))}
-        </GalleryShell>
+            ) : (
+                <div className="flex flex-col gap-6">
+                    {sets.map((group) => (
+                        <JewelrySetSection key={group.key} group={group} icon={icon} />
+                    ))}
+                </div>
+            )}
+        </div>
     );
 }
-

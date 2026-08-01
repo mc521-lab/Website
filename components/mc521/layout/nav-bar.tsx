@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, ClipboardList, Users, Menu, X, GalleryVerticalEnd, Toolbox } from "lucide-react";
+import { Home, BookOpen, ClipboardList, Users, Menu, X, GalleryVerticalEnd, Toolbox, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +14,7 @@ const navItems = [
     { text: "百科", link: "/wiki/beginner/common-commands", icon: BookOpen, activePattern: "/wiki" },
     { text: "图鉴", link: "/gallery/armor", icon: GalleryVerticalEnd, activePattern: "/gallery" },
     { text: "工具箱", link: "/tools/skindrop", icon: Toolbox, activePattern: "/tools" },
+    { text: "反馈", link: "/feedback", icon: MessageSquare, activePattern: "/feedback" },
     { text: "更新日志", link: "#", icon: ClipboardList },
 ];
 

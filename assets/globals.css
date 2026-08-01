@@ -5,6 +5,7 @@
 @import "./typeset.css";
 @import "./custom.css";
 @import "./island.css";
+@import "./admin.css";
 
 @custom-variant dark (&:is(.dark *));
 

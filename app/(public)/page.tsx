@@ -21,7 +21,7 @@ const ctas = [
         title: "反馈问题",
         sub: "建言献策 · 遇见问题找我们",
         icon: MessageSquare,
-        link: "#",
+        link: "/feedback",
         iconBg: "#e87d2a",
     },
 ];

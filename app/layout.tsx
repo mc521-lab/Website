@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/mc521/layout/nav-bar";
 // import DroppingBackground from "@/components/mc521/dropping-background";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
@@ -29,10 +28,7 @@ export default function RootLayout({
                 </div>
                 <ThemeProvider>
                     {/* <DroppingBackground /> */}
-                    <div className="z-10 flex min-h-screen flex-col">
-                        <Navbar />
-                        {children}
-                    </div>
+                    <div className="z-10 flex min-h-screen flex-col">{children}</div>
                     <Toaster />
                 </ThemeProvider>
             </body>

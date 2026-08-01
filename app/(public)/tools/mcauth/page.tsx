@@ -7,13 +7,12 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
-const $env = process.env;
 const LOGIN_URI =
     "https://login.microsoftonline.com/consumers/oauth2/v2.0/authorize?" +
     new URLSearchParams({
-        client_id: $env.NEXT_PUBLIC_MSAUTH_CLIENT_ID as string,
+        client_id: process.env.NEXT_PUBLIC_MSAUTH_CLIENT_ID as string,
         response_type: "code",
-        redirect_uri: $env.NEXT_PUBLIC_MSAUTH_REDIRECT_URI as string,
+        redirect_uri: process.env.NEXT_PUBLIC_MSAUTH_REDIRECT_URI as string,
         response_mode: "query",
         scope: "XboxLive.signin offline_access",
     }).toString();
@@ -167,7 +166,7 @@ export default function McauthVerifyPage() {
                 <div className="border-foreground/8 my-3 border-t" />
                 <span className="text-foreground/70 flex gap-[0.5ch]">
                     如果您曾经登录了错误的微软账户，请先
-                    <div className="text-primary hover:opacity-80 flex border-b border-primary">
+                    <div className="text-primary border-primary flex border-b hover:opacity-80">
                         <Link href="https://login.live.com/logout.srf" target="_blank">
                             退出当前登录
                         </Link>

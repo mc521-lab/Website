@@ -15,7 +15,7 @@ const navItems = [
     { text: "图鉴", link: "/gallery/armor", icon: GalleryVerticalEnd, activePattern: "/gallery" },
     { text: "工具箱", link: "/tools/skindrop", icon: Toolbox, activePattern: "/tools" },
     { text: "反馈", link: "/feedback", icon: MessageSquare, activePattern: "/feedback" },
-    { text: "更新日志", link: "#", icon: ClipboardList },
+    { text: "更新日志", link: "/changelog", icon: ClipboardList, activePattern: "/changelog" },
 ];
 
 const qqGroupLink = "https://qm.qq.com/q/cA73mE5jR6";

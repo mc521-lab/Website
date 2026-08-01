@@ -165,15 +165,14 @@ export default function McauthVerifyPage() {
                     验证步骤开始后，请授权 NEXORA Hub 访问您的 Microsoft 账户
                 </p>
                 <div className="border-foreground/8 my-3 border-t" />
-                <span className="text-foreground/70">
-                    如果您曾经登录了错误的微软账户，请先{" "}
-                    <Link
-                        href="https://login.live.com/logout.srf"
-                        target="_blank"
-                        className="text-primary hover:text-primary/80 underline underline-offset-4">
-                        退出当前登录
-                    </Link>
-                    <ExternalLinkIcon className="-ml-px inline size-3" />
+                <span className="text-foreground/70 flex gap-[0.5ch]">
+                    如果您曾经登录了错误的微软账户，请先
+                    <div className="text-primary hover:opacity-80 flex border-b border-primary">
+                        <Link href="https://login.live.com/logout.srf" target="_blank">
+                            退出当前登录
+                        </Link>
+                        <ExternalLinkIcon className="text-primary size-3 translate-y-0.5" />
+                    </div>
                 </span>
             </div>
         </div>

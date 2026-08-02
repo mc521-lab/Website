@@ -20,6 +20,7 @@ type VerifyResult = {
     accountXuid?: string;
     accountName?: string;
     hasValidMcje?: boolean;
+    illegal?: boolean;
     invalidReason?: string | null;
 };
 
@@ -88,25 +89,38 @@ export default function McauthVerifyPage() {
                 const verifyRes = await verifyCode({ msAccessToken });
                 if (verifyRes.success && verifyRes.accountXuid) {
                     const isValid = !!verifyRes.hasValidMcje;
-                    const submitRes = await submitResult({
-                        accountXuid: verifyRes.accountXuid,
-                        accountName: accountName.trim(),
-                        hasValidMcje: isValid,
-                        invalidReason: isValid ? null : (verifyRes.error ?? null),
-                    });
-                    if (submitRes.success) {
+
+                    if (verifyRes.error === "HEIMDALL_FAILURE") {
                         setResult({
-                            status: isValid ? "success" : "failure",
+                            status: "failure",
                             accountXuid: verifyRes.accountXuid,
                             accountName: verifyRes.accountName ?? accountName,
-                            hasValidMcje: isValid,
-                            invalidReason: isValid ? null : (verifyRes.error ?? null),
+                            hasValidMcje: false,
+                            illegal: true,
+                            invalidReason: "HEIMDALL_FAILURE",
                         });
                         setFinished(true);
                     } else {
-                        toast.error("提交验证结果失败");
-                        setResult({ status: "failure", invalidReason: "SUBMIT_FAILED" });
-                        setFinished(true);
+                        const submitRes = await submitResult({
+                            accountXuid: verifyRes.accountXuid,
+                            accountName: accountName.trim(),
+                            hasValidMcje: isValid,
+                            invalidReason: isValid ? null : (verifyRes.error ?? null),
+                        });
+                        if (submitRes.success) {
+                            setResult({
+                                status: isValid ? "success" : "failure",
+                                accountXuid: verifyRes.accountXuid,
+                                accountName: verifyRes.accountName ?? accountName,
+                                hasValidMcje: isValid,
+                                invalidReason: isValid ? null : (verifyRes.error ?? null),
+                            });
+                            setFinished(true);
+                        } else {
+                            toast.error("提交验证结果失败");
+                            setResult({ status: "failure", invalidReason: "SUBMIT_FAILED" });
+                            setFinished(true);
+                        }
                     }
                 } else {
                     toast.error("登录验证失败");
@@ -129,7 +143,7 @@ export default function McauthVerifyPage() {
                 setLoading(false);
             }
         },
-        [accountName]
+        [accountName, stopAllTimers]
     );
 
     const startPolling = useCallback(
@@ -252,6 +266,7 @@ export default function McauthVerifyPage() {
 
     useEffect(() => {
         if (countdown === 0 && authorizing) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             handleFailure("CODE_EXPIRED");
         }
     }, [countdown, authorizing, handleFailure]);
@@ -410,7 +425,7 @@ function DeviceCodeCard({
                 </a>
 
                 <div
-                    className="border-foreground/8 bg-background/40 flex w-full max-w-xs items-center justify-between rounded-lg border p-4 cursor-pointer"
+                    className="border-foreground/8 bg-background/40 flex w-full max-w-xs cursor-pointer items-center justify-between rounded-lg border p-4"
                     onClick={onCopyCode}>
                     <span className="text-foreground font-mono text-2xl font-bold tracking-widest">{deviceCode.user_code}</span>
                     <button className="text-foreground/60 hover:text-foreground transition-colors" title="复制代码">
@@ -495,6 +510,8 @@ function getFailureReasonText(reason: string): string {
         VERIFICATION_FAILED: "验证失败",
         SUBMIT_FAILED: "提交结果失败",
         NETWORK_ERROR: "网络连接错误",
+        HEIMDALL_FAILURE: "未通过 Minecraft 反黑卡验证",
     };
     return map[reason] ?? reason;
 }
+

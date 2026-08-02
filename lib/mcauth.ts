@@ -56,6 +56,7 @@ export interface VerifyResponse {
     accountXuid?: string;
     accountName?: string;
     hasValidMcje?: boolean;
+    illegal?: boolean;
     error?: string;
 }
 
@@ -217,6 +218,7 @@ export async function verifyCode(payload: VerifyPayload): Promise<VerifyResponse
             accountXuid: data.accountXuid as string | undefined,
             accountName: data.accountName as string | undefined,
             hasValidMcje: data.hasValidMcje as boolean | undefined,
+            illegal: data.illegal as boolean | undefined,
             error: data.error as string | undefined,
         };
     }

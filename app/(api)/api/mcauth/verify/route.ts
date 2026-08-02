@@ -1,6 +1,8 @@
 import { NextRequest } from "next/server";
 import { createHandler } from "@/lib/server/with-logger";
 import { login, type LoginError } from "@/lib/server/ms-auth";
+import { checkHeimdall } from "@/lib/server/heimdall";
+import { submitMcAuth } from "@/lib/server/mc-auth-queries";
 import { failure, success } from "@/lib/server/response";
 
 const PROFILE_NOT_FOUND_STEPS = [6];
@@ -25,6 +27,40 @@ export const POST = createHandler(async (request: NextRequest, _context, log) =>
     try {
         const result = await login(body.msAccessToken);
         log.success("MC auth verification succeeded", { uuid: result.uuid });
+
+        const heimdallResult = await checkHeimdall(result.uuid);
+
+        if (!heimdallResult.passed) {
+            log.warn("Heimdall check failed", {
+                uuid: result.uuid,
+                illegal: heimdallResult.illegal,
+                reason: heimdallResult.reason,
+            });
+
+            try {
+                await submitMcAuth({
+                    accountXuid: result.uuid,
+                    accountName: result.name,
+                    hasValidMcje: false,
+                    invalidReason: "HEIMDALL_FAILURE",
+                });
+                log.info("Saved HEIMDALL_FAILURE record to database", { uuid: result.uuid });
+            } catch (dbErr) {
+                log.error("Failed to save HEIMDALL_FAILURE record", {
+                    error: dbErr instanceof Error ? dbErr.message : String(dbErr),
+                });
+            }
+
+            return success({
+                accountXuid: result.uuid,
+                accountName: result.name,
+                hasValidMcje: false,
+                illegal: true,
+                error: "HEIMDALL_FAILURE",
+            });
+        }
+
+        log.info("Heimdall check passed", { uuid: result.uuid });
         return success({
             accountXuid: result.uuid,
             accountName: result.name,
@@ -71,3 +107,4 @@ export const POST = createHandler(async (request: NextRequest, _context, log) =>
         return failure("验证流程出错", 500);
     }
 });
+

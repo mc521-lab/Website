@@ -12,14 +12,14 @@ type McauthFilterOption = "all" | "true" | "false";
 
 const VALIDITY_FILTER_OPTIONS: { value: McauthFilterOption; label: string }[] = [
     { value: "all", label: "全部" },
-    { value: "true", label: "通过验证" },
+    { value: "true", label: "通过" },
     { value: "false", label: "失败" },
 ];
 
 const CHECKED_FILTER_OPTIONS: { value: McauthFilterOption; label: string }[] = [
     { value: "all", label: "全部" },
-    { value: "true", label: "已审核" },
-    { value: "false", label: "未审核" },
+    { value: "true", label: "已确认" },
+    { value: "false", label: "未确认" },
 ];
 
 export default function AdminMcauthPage() {
@@ -77,7 +77,7 @@ export default function AdminMcauthPage() {
     const handleMarkChecked = useCallback(async (id: string) => {
         try {
             await markMcauthChecked(id);
-            toast.success("已标记为审核通过");
+            toast.success("已确认");
             setRefreshKey((k) => k + 1);
         } catch (err) {
             toast.error(err instanceof Error ? err.message : "操作失败");
@@ -206,7 +206,7 @@ export default function AdminMcauthPage() {
                         <span className="w-32">玩家名称</span>
                         <span className="flex-1">XUID</span>
                         <span className="w-24">验证状态</span>
-                        <span className="w-24">审核状态</span>
+                        <span className="w-24">确认状态</span>
                         <span className="w-32">创建时间</span>
                         <span className="w-32 text-right">操作</span>
                     </div>
@@ -238,12 +238,12 @@ export default function AdminMcauthPage() {
                                 {record.checkedByAdmin ? (
                                     <span className="inline-flex items-center gap-1 rounded border border-blue-500/30 bg-blue-500/10 px-2 py-0.5 text-xs text-blue-400">
                                         <Shield size={12} />
-                                        已审核
+                                        已确认
                                     </span>
                                 ) : (
                                     <span className="inline-flex items-center gap-1 rounded border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-xs text-amber-400">
                                         <Loader2 size={12} />
-                                        未审核
+                                        未确认
                                     </span>
                                 )}
                             </div>
@@ -266,7 +266,7 @@ export default function AdminMcauthPage() {
                                         size="sm"
                                         variant="outline"
                                         onClick={() => handleMarkChecked(record.id)}
-                                        title="标记为已审核">
+                                        title="标记为已确认">
                                         <CheckCircle2 size={14} />
                                     </Button>
                                 )}

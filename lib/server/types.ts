@@ -116,8 +116,11 @@ export interface McAuthListItem {
 
 export interface McAuthCheckResult {
     exists: boolean;
+    accountXuid?: string;
+    accountName?: string | null;
     hasValidMcje: boolean;
     checkedByAdmin: boolean;
+    invalidReason?: string | null;
 }
 
 export interface ListFilters {

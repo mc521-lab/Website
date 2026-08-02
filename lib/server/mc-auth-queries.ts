@@ -1,12 +1,5 @@
 import { supabase } from "./supabase";
-import type {
-    McAuthRow,
-    McAuthListItem,
-    McAuthCheckResult,
-    McAuthListFilters,
-    Pagination,
-    ListResult,
-} from "./types";
+import type { McAuthRow, McAuthListItem, McAuthCheckResult, McAuthListFilters, Pagination, ListResult } from "./types";
 
 function toListItem(row: McAuthRow): McAuthListItem {
     return {
@@ -58,8 +51,8 @@ export async function submitMcAuth(input: {
 export async function checkMcAuth(xuid: string): Promise<McAuthCheckResult> {
     const { data, error } = await supabase
         .from("mc_auth")
-        .select("has_valid_mcje, checked_by_admin")
-        .eq("account_xuid", xuid)
+        .select("account_xuid, account_name, has_valid_mcje, checked_by_admin, invalid_reason")
+        .eq("account_name", xuid)
         .order("created_at", { ascending: false })
         .limit(1)
         .single();
@@ -70,17 +63,18 @@ export async function checkMcAuth(xuid: string): Promise<McAuthCheckResult> {
         return { exists: false, hasValidMcje: false, checkedByAdmin: false };
     }
 
+    const row = data as McAuthRow;
     return {
         exists: true,
-        hasValidMcje: (data as Pick<McAuthRow, "has_valid_mcje" | "checked_by_admin">).has_valid_mcje,
-        checkedByAdmin: (data as Pick<McAuthRow, "has_valid_mcje" | "checked_by_admin">).checked_by_admin,
+        accountXuid: row.account_xuid,
+        accountName: row.account_name,
+        hasValidMcje: row.has_valid_mcje,
+        checkedByAdmin: row.checked_by_admin,
+        invalidReason: row.invalid_reason,
     };
 }
 
-export async function listMcAuth(
-    filters: McAuthListFilters,
-    pagination: Pagination,
-): Promise<ListResult<McAuthListItem>> {
+export async function listMcAuth(filters: McAuthListFilters, pagination: Pagination): Promise<ListResult<McAuthListItem>> {
     const from = (pagination.page - 1) * pagination.pageSize;
     const to = from + pagination.pageSize - 1;
 
@@ -96,10 +90,7 @@ export async function listMcAuth(
 }
 
 export async function markMcAuthChecked(id: string): Promise<void> {
-    const { error } = await supabase
-        .from("mc_auth")
-        .update({ checked_by_admin: true })
-        .eq("id", id);
+    const { error } = await supabase.from("mc_auth").update({ checked_by_admin: true }).eq("id", id);
 
     if (error) throw error;
 }
@@ -108,3 +99,4 @@ export async function deleteMcAuth(id: string): Promise<void> {
     const { error } = await supabase.from("mc_auth").delete().eq("id", id);
     if (error) throw error;
 }
+

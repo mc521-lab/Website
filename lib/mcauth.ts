@@ -247,13 +247,22 @@ export async function checkExisting(payload: CheckExistingPayload): Promise<Chec
 
     if (raw && typeof raw === "object") {
         const obj = raw as Record<string, unknown>;
-        const exists = obj.exists as boolean | undefined;
-        const record =
-            obj.data && typeof obj.data === "object"
-                ? mapMcauthItem(obj.data as Record<string, unknown>)
-                : obj.record && typeof obj.record === "object"
-                  ? mapMcauthItem(obj.record as Record<string, unknown>)
-                  : undefined;
+        const data = obj.data && typeof obj.data === "object" ? (obj.data as Record<string, unknown>) : {};
+        const exists = data.exists as boolean | undefined;
+
+        let record: McauthRecord | undefined;
+        if (exists) {
+            record = {
+                id: "",
+                accountXuid: (data.accountXuid as string) ?? "",
+                accountName: (data.accountName as string) ?? "",
+                hasValidMcje: (data.hasValidMcje as boolean) ?? false,
+                invalidReason: (data.invalidReason as string | null) ?? null,
+                checkedByAdmin: (data.checkedByAdmin as boolean) ?? false,
+                createdAt: "",
+            };
+        }
+
         return {
             success: (obj.success as boolean) ?? false,
             exists,

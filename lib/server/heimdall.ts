@@ -1,12 +1,12 @@
+import { plogDebug } from "./logger";
+
 const HEIMDALL_BASE_URL = "https://heimdall.honoka.cafe";
 
 export type HeimdallStatus = "VERIFIED" | "UNVERIFIED" | "BLACKLISTED" | "RATE_LIMITED" | "ERROR";
 
 export interface HeimdallResponse {
-    Resp: {
-        status: HeimdallStatus;
-        [key: string]: unknown;
-    };
+    status: HeimdallStatus;
+    [key: string]: unknown;
 }
 
 export interface HeimdallCheckResult {
@@ -35,7 +35,8 @@ export async function checkHeimdall(uuid: string): Promise<HeimdallCheckResult> 
 
         if (resp.status === 200) {
             const body = (await resp.json()) as HeimdallResponse;
-            const status = body?.Resp?.status;
+            plogDebug(`Heimdall response: ${JSON.stringify(body)}`);
+            const status = body?.status;
 
             if (status === "VERIFIED") {
                 return { passed: true, illegal: false };

@@ -71,7 +71,7 @@ export function resolveSkinId(input: string): string | null {
  */
 export function getSkinDownloadUrl(id: string): string {
     assertValidSkinId(id);
-    return buildUrl(`/skindrop/download/${id}`);
+    return buildUrl(`/api/skindrop/download/${id}`);
 }
 
 /**
@@ -80,7 +80,7 @@ export function getSkinDownloadUrl(id: string): string {
 export async function downloadSkin(id: string): Promise<Blob> {
     assertValidSkinId(id);
 
-    const response = await fetch(buildUrl(`/skindrop/download/${id}`));
+    const response = await fetch(buildUrl(`/api/skindrop/download/${id}`));
     await handleResponse(response);
 
     return response.blob();
@@ -94,7 +94,7 @@ export async function uploadSkin(filename: string, file: File): Promise<SkinUplo
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch(buildUrl(`/skindrop/upload/${encodedFilename}`), {
+    const response = await fetch(buildUrl(`/api/skindrop/upload/${encodedFilename}`), {
         method: "POST",
         body: formData,
     });

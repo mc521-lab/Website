@@ -32,8 +32,23 @@ export interface McauthListResponse {
 }
 
 export interface VerifyPayload {
-    code: string;
-    refreshToken?: string;
+    msAccessToken: string;
+}
+
+export interface DeviceCodeResponse {
+    device_code: string;
+    user_code: string;
+    verification_uri: string;
+    expires_in: number;
+    interval: number;
+    message?: string;
+}
+
+export interface TokenPollResult {
+    status: "pending" | "slow_down" | "success";
+    access_token?: string;
+    refresh_token?: string;
+    expires_in?: number;
 }
 
 export interface VerifyResponse {
@@ -192,7 +207,21 @@ export async function verifyCode(payload: VerifyPayload): Promise<VerifyResponse
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
     });
-    return handleResponse<VerifyResponse>(response);
+    const raw = await handleResponse<unknown>(response);
+
+    if (raw && typeof raw === "object") {
+        const obj = raw as Record<string, unknown>;
+        const data = obj.data && typeof obj.data === "object" ? (obj.data as Record<string, unknown>) : {};
+        return {
+            success: (obj.success as boolean) ?? false,
+            accountXuid: data.accountXuid as string | undefined,
+            accountName: data.accountName as string | undefined,
+            hasValidMcje: data.hasValidMcje as boolean | undefined,
+            error: data.error as string | undefined,
+        };
+    }
+
+    return raw as VerifyResponse;
 }
 
 export async function submitResult(payload: SubmitPayload): Promise<SubmitResponse> {
@@ -217,13 +246,14 @@ export async function checkExisting(payload: CheckExistingPayload): Promise<Chec
     if (raw && typeof raw === "object") {
         const obj = raw as Record<string, unknown>;
         const exists = obj.exists as boolean | undefined;
-        const record = obj.data && typeof obj.data === "object"
-            ? mapMcauthItem(obj.data as Record<string, unknown>)
-            : obj.record && typeof obj.record === "object"
-              ? mapMcauthItem(obj.record as Record<string, unknown>)
-              : undefined;
+        const record =
+            obj.data && typeof obj.data === "object"
+                ? mapMcauthItem(obj.data as Record<string, unknown>)
+                : obj.record && typeof obj.record === "object"
+                  ? mapMcauthItem(obj.record as Record<string, unknown>)
+                  : undefined;
         return {
-            success: obj.success as boolean ?? false,
+            success: (obj.success as boolean) ?? false,
             exists,
             record,
             error: obj.error as string | undefined,
@@ -272,24 +302,46 @@ export async function deleteMcauthRecord(id: string): Promise<void> {
     await handleResponse<unknown>(response);
 }
 
-// ============ Utility ============
+// ============ Device Code Flow ============
 
-export function openCentered(url: string, width: number, height: number): Window | null {
-    if (typeof window === "undefined") return null;
+export async function requestDeviceCode(): Promise<DeviceCodeResponse> {
+    const response = await fetch(buildUrl("/api/mcauth/devicecode"), {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+    });
+    const raw = await handleResponse<unknown>(response);
 
-    const left = (window.screen.width - width) / 2;
-    const top = (window.screen.height - height) / 2;
-    const features = `width=${width},height=${height},left=${left},top=${top}`;
+    if (raw && typeof raw === "object" && "data" in raw && typeof raw.data === "object") {
+        return raw.data as DeviceCodeResponse;
+    }
 
-    return window.open(url, "mcauth_login", features);
+    return raw as DeviceCodeResponse;
 }
+
+export async function pollDeviceToken(deviceCode: string): Promise<TokenPollResult> {
+    const response = await fetch(buildUrl("/api/mcauth/token"), {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ device_code: deviceCode }),
+    });
+    const raw = await handleResponse<unknown>(response);
+
+    if (raw && typeof raw === "object" && "data" in raw && typeof raw.data === "object") {
+        return raw.data as TokenPollResult;
+    }
+
+    return raw as TokenPollResult;
+}
+
+// ============ Utility ============
 
 export async function copyToClipboard(text: string): Promise<void> {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
         await navigator.clipboard.writeText(text);
         return;
     }
-    // Fallback for older browsers
     if (typeof document !== "undefined") {
         const textarea = document.createElement("textarea");
         textarea.value = text;
@@ -301,3 +353,4 @@ export async function copyToClipboard(text: string): Promise<void> {
         document.body.removeChild(textarea);
     }
 }
+

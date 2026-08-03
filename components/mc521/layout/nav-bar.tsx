@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const navItems = [
     { text: "首页", link: "/", icon: Home },
     { text: "百科", link: "/wiki/beginner/common-commands", icon: BookOpen, activePattern: "/wiki" },
-    { text: "图鉴", link: "/gallery/armor", icon: GalleryVerticalEnd, activePattern: "/gallery" },
+    { text: "图鉴", link: "/gallery/equipment/armor", icon: GalleryVerticalEnd, activePattern: "/gallery" },
     { text: "工具箱", link: "/tools/skindrop", icon: Toolbox, activePattern: "/tools" },
     { text: "反馈", link: "/feedback", icon: MessageSquare, activePattern: "/feedback" },
     { text: "更新日志", link: "/changelog", icon: ClipboardList, activePattern: "/changelog" },

@@ -7,10 +7,7 @@ import { changelog_navigation, changelog_content } from "./configs/velite/change
 import { tools_navigation } from "./configs/velite/tools/_navigation";
 // gallery
 import { gallery_navigation } from "./configs/velite/gallery/_navigation";
-import { gallery_armor_data } from "./configs/velite/gallery/armor";
-import { gallery_sword_data } from "./configs/velite/gallery/sword";
-import { gallery_gem_data } from "./configs/velite/gallery/gem";
-import { gallery_jewelry_data } from "./configs/velite/gallery/jewelries";
+import * as gallery_equipment_data from "./configs/velite/gallery/equipment";
 
 export default defineConfig({
     collections: {
@@ -27,9 +24,6 @@ export default defineConfig({
 
         // gallery
         gallery_navigation,
-        gallery_armor_data,
-        gallery_sword_data,
-        gallery_gem_data,
-        gallery_jewelry_data,
+        ...gallery_equipment_data,
     },
 });

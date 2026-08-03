@@ -116,7 +116,7 @@ def transform_item(key: str, base: dict[str, Any]) -> tuple[str, dict[str, Any]]
     if gem:
         result["gem"] = gem
 
-    return job_upper, quality, part, result
+    return job_upper, quality, part, result # type: ignore[reportReturnType]
 
 
 def generate(
@@ -154,8 +154,8 @@ def generate(
         if transformed is None:
             continue
 
-        job, quality, part, content = transformed
-        out_path = dst_dir / job.lower() / quality.lower() / f"{part.lower()}.yml"
+        job, quality, part, content = transformed # type: ignore[reportAssignmentType]
+        out_path = dst_dir / job.lower() / quality.lower() / f"{part.lower()}.yml" # type: ignore[reportAttributeAccessIssue]
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
         with out_path.open("w", encoding="utf-8") as f:
@@ -188,7 +188,7 @@ def main() -> None:
     # 默认路径（与现有流水线一致）
     # 若希望使用绝对路径 /raw-config 与 /content，可在此修改
     src = project_root / "raw-config" / "item" / "armor.yml"
-    dst = project_root / "content" / "gallery" / "_data" / "armor"
+    dst = project_root / "content" / "gallery" / "_data" / "equipment" / "armor"
 
     # 支持命令行覆盖：python generate_armor_gallery.py [src] [dst]
     if len(sys.argv) >= 2:

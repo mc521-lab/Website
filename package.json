@@ -45,6 +45,5 @@
         "tailwindcss": "^4.3.3",
         "typescript": "^5.9.3",
         "velite": "^0.4.0"
-    },
-    "packageManager": "pnpm@11.18.0"
+    }
 }

@@ -30,6 +30,6 @@
         "**/*.mts",
         ".next/types/**/*.ts",
         ".next/dev/types/**/*.ts"
-    ],
+, "app/(public)/changelog/layout.tsx", "app/(public)/changelog/[...slug]/page.tsx"    ],
     "exclude": ["node_modules", "temp"]
 }

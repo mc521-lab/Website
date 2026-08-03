@@ -1,8 +1,5 @@
 import { gallery_navigation } from "@/.velite";
 import { IslandSidebar } from "@/components/mc521/layout/island-sidebar";
-import type { IslandNavItem } from "@/components/mc521/layout/island-sidebar";
-
-const galleryNav = gallery_navigation as unknown as IslandNavItem[];
 
 export default function GalleryLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -10,7 +7,7 @@ export default function GalleryLayout({ children }: { children: React.ReactNode 
             <div className="island-layout">
                 {/* 左侧边栏 */}
                 <IslandSidebar
-                    navigation={galleryNav}
+                    navigation={gallery_navigation}
                     header={{
                         label: "GALLERY",
                         title: "君庭阁图鉴",

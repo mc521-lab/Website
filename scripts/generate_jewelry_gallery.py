@@ -332,7 +332,7 @@ def main() -> None:
 
     items_src = project_root / "raw-config" / "item"
     modifiers_src = project_root / "raw-config" / "modifiers" / "shipin_modifiers.yml"
-    dst = project_root / "content" / "gallery" / "_data" / "jewelries"
+    dst = project_root / "content" / "gallery" / "_data" / "equipment" / "jewelries"
 
     if len(sys.argv) >= 2:
         items_src = Path(sys.argv[1])

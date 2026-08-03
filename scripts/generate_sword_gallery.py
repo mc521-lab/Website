@@ -185,7 +185,7 @@ def main() -> None:
 
     # 默认路径（与现有流水线一致）
     src = project_root / "raw-config" / "item" / "sword.yml"
-    dst = project_root / "content" / "gallery" / "_data" / "sword"
+    dst = project_root / "content" / "gallery" / "_data" / "equipment" / "sword"
 
     # 支持命令行覆盖：python generate_sword_gallery.py [src] [dst]
     if len(sys.argv) >= 2:

@@ -1,0 +1,21 @@
+- title: 装备图鉴
+  order: 1
+  icon: lucide:shirt
+  defaultExpanded: true
+  items:
+    - title: 护甲图鉴
+      href: /gallery/equipment/armor
+      icon: fluent-emoji-flat:safety-vest
+      order: 1
+    - title: 武器图鉴
+      href: /gallery/equipment/sword
+      icon: fluent-emoji-flat:crossed-swords
+      order: 2
+    - title: 宝石图鉴
+      href: /gallery/equipment/gem
+      icon: fluent-emoji-flat:gem-stone
+      order: 3
+    - title: 饰品图鉴
+      href: /gallery/equipment/jewelries
+      icon: fluent-emoji-flat:ring
+      order: 4

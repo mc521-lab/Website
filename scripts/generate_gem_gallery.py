@@ -273,7 +273,7 @@ def main() -> None:
     # 默认路径（与现有流水线一致：raw-config 位于 temp/ 下）
     modifiers_src = project_root / "raw-config" / "modifiers" / "baoshi_modifiers.yml"
     gem_stone_src = project_root / "raw-config" / "item" / "gem_stone.yml"
-    dst = project_root / "content" / "gallery" / "_data" / "gem"
+    dst = project_root / "content" / "gallery" / "_data" / "equipment" / "gem"
 
     # 支持命令行覆盖：
     #   python generate_gem_gallery.py [modifiers.yml] [gem_stone.yml] [dst]

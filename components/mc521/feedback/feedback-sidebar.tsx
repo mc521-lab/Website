@@ -61,4 +61,3 @@ export function FeedbackSidebar() {
         </aside>
     );
 }
-

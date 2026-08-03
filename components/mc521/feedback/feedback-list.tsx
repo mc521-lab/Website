@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, startTransition } from "react";
 import { toast } from "sonner";
-import { getFeedbacks } from "@/lib/feedback";
+import { getFeedbacks } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { IconifyIcon } from "@/components/iconify-icon";
 import {
@@ -50,26 +50,23 @@ export function FeedbackList({ onSelectFeedback, refreshKey }: FeedbackListProps
     const [typeFilter, setTypeFilter] = useState<FeedbackType | "all">("all");
     const [serverFilter, setServerFilter] = useState<FeedbackServer | "all">("all");
 
-    const fetchFeedbacks = useCallback(
-        async (query: FeedbackListQuery) => {
-            startTransition(() => setLoading(true));
-            try {
-                const result = await getFeedbacks(query);
-                startTransition(() => {
-                    setFeedbacks(result.data ?? []);
-                    setTotal(result.total ?? 0);
-                    setPage(result.page ?? 1);
-                    setTotalPages(result.totalPages ?? 1);
-                });
-            } catch (err) {
-                toast.error(err instanceof Error ? err.message : "加载失败");
-                startTransition(() => setFeedbacks([]));
-            } finally {
-                startTransition(() => setLoading(false));
-            }
-        },
-        []
-    );
+    const fetchFeedbacks = useCallback(async (query: FeedbackListQuery) => {
+        startTransition(() => setLoading(true));
+        try {
+            const result = await getFeedbacks(query);
+            startTransition(() => {
+                setFeedbacks(result.data ?? []);
+                setTotal(result.total ?? 0);
+                setPage(result.page ?? 1);
+                setTotalPages(result.totalPages ?? 1);
+            });
+        } catch (err) {
+            toast.error(err instanceof Error ? err.message : "加载失败");
+            startTransition(() => setFeedbacks([]));
+        } finally {
+            startTransition(() => setLoading(false));
+        }
+    }, []);
 
     const fetchWithFilters = useCallback(
         (p = 1) => {
@@ -208,27 +205,17 @@ export function FeedbackList({ onSelectFeedback, refreshKey }: FeedbackListProps
                                 className="feedback-item-card">
                                 <div className="feedback-item-header">
                                     <div className="feedback-item-badges">
-                                        <span
-                                            className={cn(
-                                                "feedback-item-badge",
-                                                FEEDBACK_TYPE_COLOR[fb.type]
-                                            )}>
+                                        <span className={cn("feedback-item-badge", FEEDBACK_TYPE_COLOR[fb.type])}>
                                             {FEEDBACK_TYPE_LABEL[fb.type]}
                                         </span>
                                         <span className="feedback-item-badge feedback-item-badge-server">
                                             {FEEDBACK_SERVER_LABEL[fb.server]}
                                         </span>
                                         {fb.isPinned && (
-                                            <span className="feedback-item-badge feedback-item-badge-pinned">
-                                                📌 置顶
-                                            </span>
+                                            <span className="feedback-item-badge feedback-item-badge-pinned">📌 置顶</span>
                                         )}
                                     </div>
-                                    <span
-                                        className={cn(
-                                            "feedback-item-status",
-                                            FEEDBACK_STATUS_COLOR[fb.status]
-                                        )}>
+                                    <span className={cn("feedback-item-status", FEEDBACK_STATUS_COLOR[fb.status])}>
                                         {FEEDBACK_STATUS_LABEL[fb.status]}
                                     </span>
                                 </div>
@@ -263,11 +250,7 @@ export function FeedbackList({ onSelectFeedback, refreshKey }: FeedbackListProps
             {/* Pagination */}
             {!loading && feedbacks.length > 0 && totalPages > 1 && (
                 <div className="feedback-list-pagination">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        disabled={page <= 1}
-                        onClick={() => handlePageChange(page - 1)}>
+                    <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => handlePageChange(page - 1)}>
                         <ChevronLeft size={16} />
                         上一页
                     </Button>

@@ -11,9 +11,9 @@ export default function AdminLayout({
                 {/* Sidebar */}
                 <IslandSidebar
                     navigation={[
-                    { title: "反馈管理", href: "/admin/feedbacks", icon: "lucide:clipboard-list" },
-                    { title: "正版验证", href: "/admin/mcauth", icon: "lucide:shield-check" },
-                ]}
+                        { title: "反馈管理", href: "/admin/feedbacks", icon: "lucide:clipboard-list" },
+                        { title: "正版验证", href: "/admin/mcauth", icon: "lucide:shield-check" },
+                    ]}
                     header={{
                         label: "ADMIN",
                         title: "管理后台",

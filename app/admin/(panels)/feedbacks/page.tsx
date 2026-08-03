@@ -9,7 +9,7 @@ import {
     updateAdminFeedback,
     addAdminComment,
     deleteAdminComment,
-} from "@/lib/admin";
+} from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { IconifyIcon } from "@/components/iconify-icon";
 import {
@@ -710,4 +710,3 @@ function FeedbackDetailView({
         </div>
     );
 }
-

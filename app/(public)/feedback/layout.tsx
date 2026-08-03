@@ -17,4 +17,3 @@ export default function FeedbackLayout({ children }: { children: React.ReactNode
         </FeedbackViewProvider>
     );
 }
-

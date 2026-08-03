@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { isAdminLoggedIn } from "@/lib/admin";
+import { isAdminLoggedIn } from "@/lib/api";
 
 interface AuthGuardProps {
     children: React.ReactNode;
@@ -23,7 +23,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
             router.replace("/admin/feedbacks");
             return;
         }
-        setIsChecking(false);
+        setTimeout(() => setIsChecking(false), 0);
     }, [router, pathname]);
 
     if (isChecking) {

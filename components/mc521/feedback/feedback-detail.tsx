@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, startTransition } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { getFeedbackByNumber, addFeedbackComment } from "@/lib/feedback";
+import { getFeedbackByNumber, addFeedbackComment } from "@/lib/api";
 import {
     type Feedback,
     type FeedbackComment,
@@ -200,4 +200,3 @@ export function FeedbackDetail({ feedbackNumber, onBack }: FeedbackDetailProps) 
         </section>
     );
 }
-

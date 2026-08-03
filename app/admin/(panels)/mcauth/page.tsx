@@ -2,11 +2,23 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { toast } from "sonner";
-import { getAdminMcauthList, markMcauthChecked, deleteMcauthRecord, copyToClipboard, type McauthRecord } from "@/lib/mcauth";
+import { getAdminMcauthList, markMcauthChecked, deleteMcauthRecord, copyToClipboard, type McauthRecord } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { IconifyIcon } from "@/components/iconify-icon";
 import { cn } from "@/lib/utils";
-import { Search, ChevronLeft, ChevronRight, Loader2, CheckCircle2, XCircle, Copy, Trash2, Shield, User, Calendar } from "lucide-react";
+import {
+    Search,
+    ChevronLeft,
+    ChevronRight,
+    Loader2,
+    CheckCircle2,
+    XCircle,
+    Copy,
+    Trash2,
+    Shield,
+    User,
+    Calendar,
+} from "lucide-react";
 
 type McauthFilterOption = "all" | "true" | "false";
 
@@ -34,31 +46,31 @@ export default function AdminMcauthPage() {
     const [checkedFilter, setCheckedFilter] = useState<McauthFilterOption>("all");
     const [refreshKey, setRefreshKey] = useState(0);
 
-    const fetchRecords = useCallback(async (p: number) => {
-        setLoading(true);
-        try {
-            const query: Record<string, unknown> = { page: p, pageSize };
-            if (search.trim()) query.search = search.trim();
-            if (validityFilter !== "all") query.hasValidMcje = validityFilter === "true";
-            if (checkedFilter !== "all") query.checkedByAdmin = checkedFilter === "true";
+    const fetchRecords = useCallback(
+        async (p: number) => {
+            setLoading(true);
+            try {
+                const query: Record<string, unknown> = { page: p, pageSize };
+                if (search.trim()) query.search = search.trim();
+                if (validityFilter !== "all") query.hasValidMcje = validityFilter === "true";
+                if (checkedFilter !== "all") query.checkedByAdmin = checkedFilter === "true";
 
-            const result = await getAdminMcauthList(query);
-            setRecords(result.data ?? []);
-            setTotal(result.total ?? 0);
-            setPage(result.page ?? 1);
-            setTotalPages(result.totalPages ?? 1);
-        } catch (err) {
-            toast.error(err instanceof Error ? err.message : "加载失败");
-            setRecords([]);
-        } finally {
-            setLoading(false);
-        }
-    }, [pageSize, search, validityFilter, checkedFilter]);
-
-    const fetchWithFilters = useCallback(
-        (p = 1) => fetchRecords(p),
-        [fetchRecords]
+                const result = await getAdminMcauthList(query);
+                setRecords(result.data ?? []);
+                setTotal(result.total ?? 0);
+                setPage(result.page ?? 1);
+                setTotalPages(result.totalPages ?? 1);
+            } catch (err) {
+                toast.error(err instanceof Error ? err.message : "加载失败");
+                setRecords([]);
+            } finally {
+                setLoading(false);
+            }
+        },
+        [pageSize, search, validityFilter, checkedFilter]
     );
+
+    const fetchWithFilters = useCallback((p = 1) => fetchRecords(p), [fetchRecords]);
 
     useEffect(() => {
         queueMicrotask(() => fetchWithFilters(1));
@@ -215,10 +227,10 @@ export default function AdminMcauthPage() {
                     {records.map((record) => (
                         <div key={record.id} className="admin-mcauth-row">
                             <div className="w-32 truncate" title={record.accountName}>
-                                <User size={12} className="inline mr-1 text-foreground/50" />
+                                <User size={12} className="text-foreground/50 mr-1 inline" />
                                 {record.accountName}
                             </div>
-                            <div className="flex-1 truncate font-mono text-xs text-foreground/60" title={record.accountXuid}>
+                            <div className="text-foreground/60 flex-1 truncate font-mono text-xs" title={record.accountXuid}>
                                 {record.accountXuid}
                             </div>
                             <div className="w-24">
@@ -247,11 +259,11 @@ export default function AdminMcauthPage() {
                                     </span>
                                 )}
                             </div>
-                            <div className="w-32 flex items-center gap-1 text-xs text-foreground/60">
+                            <div className="text-foreground/60 flex w-32 items-center gap-1 text-xs">
                                 <Calendar size={12} />
                                 {record.createdAt ? new Date(record.createdAt).toLocaleDateString("zh-CN") : "-"}
                             </div>
-                            <div className="w-32 flex items-center justify-end gap-1">
+                            <div className="flex w-32 items-center justify-end gap-1">
                                 {record.hasValidMcje && (
                                     <Button
                                         size="sm"

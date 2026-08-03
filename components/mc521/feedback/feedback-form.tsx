@@ -5,13 +5,8 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Send, Bug, Lightbulb, Flag, Server, User, FileText, Loader2 } from "lucide-react";
 import { IconifyIcon } from "@/components/iconify-icon";
-import { createFeedback } from "@/lib/feedback";
-import {
-    type FeedbackType,
-    type FeedbackServer,
-    FEEDBACK_TYPE_LABEL,
-    FEEDBACK_SERVER_LABEL,
-} from "./types";
+import { createFeedback } from "@/lib/api";
+import { type FeedbackType, type FeedbackServer, FEEDBACK_TYPE_LABEL, FEEDBACK_SERVER_LABEL } from "./types";
 
 interface FeedbackFormProps {
     onSubmitSuccess?: () => void;
@@ -97,7 +92,7 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
                                     aria-checked={isActive}
                                     onClick={() => setType(opt.value)}
                                     className={`feedback-type-chip ${isActive ? "is-active" : ""}`}
-                                    style={isActive ? ({ ["--chip-accent" as string]: opt.color }) : undefined}>
+                                    style={isActive ? { ["--chip-accent" as string]: opt.color } : undefined}>
                                     <Icon size={14} className={isActive ? opt.color : ""} />
                                     {FEEDBACK_TYPE_LABEL[opt.value]}
                                 </button>
@@ -188,7 +183,11 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
                 {/* Actions */}
                 <div className="feedback-form-actions">
                     {onCancel && (
-                        <Button type="button" variant="ghost" onClick={onCancel} className="text-foreground/70 hover:text-foreground">
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            onClick={onCancel}
+                            className="text-foreground/70 hover:text-foreground">
                             取消
                         </Button>
                     )}

@@ -65,7 +65,7 @@ function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
                 className="island-nav-group-header"
                 onClick={() => setIsExpanded((prev) => !prev)}
                 aria-expanded={isExpanded}>
-                <span className="translate-y-0.5 flex items-center gap-2 w-full">
+                <span className="flex w-full translate-y-0.5 items-center gap-2">
                     {group.icon && (
                         <span className="island-nav-group-icon" aria-hidden="true">
                             <IconifyIcon icon={group.icon} />

@@ -1,6 +1,4 @@
-// MC Auth (Minecraft 正版验证) API client
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3000";
+import { request } from "./client";
 
 // ============ Types ============
 
@@ -84,64 +82,6 @@ export interface CheckExistingResponse {
     error?: string;
 }
 
-// ============ Auth helpers ============
-
-export function getAdminToken(): string | null {
-    if (typeof window === "undefined") return null;
-    return localStorage.getItem("mc521_admin_token");
-}
-
-function buildUrl(path: string, params?: Record<string, string | number | boolean | undefined>): string {
-    const base = API_BASE_URL.replace(/\/$/, "");
-    const url = new URL(`${base}${path}`);
-    if (params) {
-        for (const [key, value] of Object.entries(params)) {
-            if (value !== undefined && value !== "") {
-                url.searchParams.set(key, String(value));
-            }
-        }
-    }
-    return url.toString();
-}
-
-function getAuthHeaders(): Record<string, string> {
-    const token = getAdminToken();
-    return token ? { Authorization: `Bearer ${token}` } : {};
-}
-
-async function handleResponse<T>(response: Response): Promise<T> {
-    const text = await response.text();
-
-    if (!response.ok) {
-        let message = response.statusText;
-        if (text) {
-            try {
-                const errorData = JSON.parse(text);
-                message = errorData?.message ?? errorData?.error ?? message;
-            } catch {
-                // not JSON
-            }
-        }
-        throw new Error(message || `请求失败 (${response.status})`);
-    }
-
-    if (!text) return {} as T;
-
-    try {
-        const parsed = JSON.parse(text) as Record<string, unknown>;
-
-        if (parsed && typeof parsed === "object" && "success" in parsed && parsed.success === false) {
-            const msg = typeof parsed.message === "string" ? parsed.message : "操作失败";
-            throw new Error(msg);
-        }
-
-        return parsed as unknown as T;
-    } catch (e) {
-        if (e instanceof Error && e.message) throw e;
-        throw new Error("响应解析失败");
-    }
-}
-
 // ============ Normalization ============
 
 function mapMcauthItem(item: Record<string, unknown>): McauthRecord {
@@ -172,7 +112,6 @@ function normalizeListResponse(raw: unknown, page: number, pageSize: number): Mc
     if (raw && typeof raw === "object") {
         let obj = raw as Record<string, unknown>;
 
-        // Unwrap nested {data: {...}} envelopes (up to 2 levels)
         for (let i = 0; i < 2; i++) {
             if (obj.data && typeof obj.data === "object" && !Array.isArray(obj.data)) {
                 obj = obj.data as Record<string, unknown>;
@@ -202,24 +141,26 @@ function normalizeListResponse(raw: unknown, page: number, pageSize: number): Mc
 // ============ User-facing APIs ============
 
 export async function verifyCode(payload: VerifyPayload): Promise<VerifyResponse> {
-    const response = await fetch(buildUrl("/api/mcauth/verify"), {
+    const raw = await request<unknown>("/api/mcauth/verify", {
         method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: payload,
     });
-    const raw = await handleResponse<unknown>(response);
 
     if (raw && typeof raw === "object") {
-        const obj = raw as Record<string, unknown>;
-        const data = obj.data && typeof obj.data === "object" ? (obj.data as Record<string, unknown>) : {};
+        const obj = (raw as Record<string, unknown>).body as Record<string, unknown>;
+        // After unwrapSuccessEnvelope strips { data }, fields sit on obj directly.
+        // Fall back to nested obj.data for robustness.
+        const inner =
+            obj.data && typeof obj.data === "object" && !Array.isArray(obj.data) ? (obj.data as Record<string, unknown>) : null;
+        const get = (key: string) => (key in obj ? obj[key] : inner?.[key]);
+
         return {
             success: (obj.success as boolean) ?? false,
-            accountXuid: data.accountXuid as string | undefined,
-            accountName: data.accountName as string | undefined,
-            hasValidMcje: data.hasValidMcje as boolean | undefined,
-            illegal: data.illegal as boolean | undefined,
-            error: data.error as string | undefined,
+            accountXuid: get("accountXuid") as string | undefined,
+            accountName: get("accountName") as string | undefined,
+            hasValidMcje: get("hasValidMcje") as boolean | undefined,
+            illegal: get("illegal") as boolean | undefined,
+            error: get("error") as string | undefined,
         };
     }
 
@@ -227,44 +168,54 @@ export async function verifyCode(payload: VerifyPayload): Promise<VerifyResponse
 }
 
 export async function submitResult(payload: SubmitPayload): Promise<SubmitResponse> {
-    const response = await fetch(buildUrl("/api/mcauth/submit"), {
+    const raw = await request<unknown>("/api/mcauth/submit", {
         method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: payload,
     });
-    return handleResponse<SubmitResponse>(response);
-}
-
-export async function checkExisting(payload: CheckExistingPayload): Promise<CheckExistingResponse> {
-    const response = await fetch(buildUrl("/api/mcauth/check-existing"), {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-    });
-    const raw = await handleResponse<unknown>(response);
 
     if (raw && typeof raw === "object") {
         const obj = raw as Record<string, unknown>;
-        const data = obj.data && typeof obj.data === "object" ? (obj.data as Record<string, unknown>) : {};
-        const exists = data.exists as boolean | undefined;
+        const inner =
+            obj.data && typeof obj.data === "object" && !Array.isArray(obj.data) ? (obj.data as Record<string, unknown>) : null;
+        const get = (key: string) => (key in obj ? obj[key] : inner?.[key]);
+
+        return {
+            success: (get("success") as boolean) ?? false,
+            id: get("id") as string | undefined,
+            error: get("error") as string | undefined,
+        };
+    }
+
+    return raw as SubmitResponse;
+}
+
+export async function checkExisting(payload: CheckExistingPayload): Promise<CheckExistingResponse> {
+    const raw = await request<unknown>("/api/mcauth/check-existing", {
+        method: "POST",
+        body: payload,
+    });
+
+    if (raw && typeof raw === "object") {
+        const obj = raw as Record<string, unknown>;
+        const get = (key: string) => (key in obj ? obj[key] : undefined);
+
+        const exists = get("exists") as boolean | undefined;
 
         let record: McauthRecord | undefined;
         if (exists) {
             record = {
                 id: "",
-                accountXuid: (data.accountXuid as string) ?? "",
-                accountName: (data.accountName as string) ?? "",
-                hasValidMcje: (data.hasValidMcje as boolean) ?? false,
-                invalidReason: (data.invalidReason as string | null) ?? null,
-                checkedByAdmin: (data.checkedByAdmin as boolean) ?? false,
+                accountXuid: (get("accountXuid") as string) ?? "",
+                accountName: (get("accountName") as string) ?? "",
+                hasValidMcje: (get("hasValidMcje") as boolean) ?? false,
+                invalidReason: (get("invalidReason") as string | null) ?? null,
+                checkedByAdmin: (get("checkedByAdmin") as boolean) ?? false,
                 createdAt: "",
             };
         }
 
         return {
-            success: (obj.success as boolean) ?? false,
+            success: !!exists,
             exists,
             record,
             error: obj.error as string | undefined,
@@ -285,62 +236,62 @@ export async function getAdminMcauthList(query?: McauthListQuery): Promise<Mcaut
     if (query?.checkedByAdmin !== undefined) params.checkedByAdmin = String(query.checkedByAdmin);
     if (query?.search) params.search = query.search;
 
-    const url = buildUrl("/api/admin/mcauth", params);
-    const response = await fetch(url, {
+    const raw = await request<unknown>("/api/admin/mcauth", {
         method: "GET",
-        credentials: "include",
-        headers: getAuthHeaders(),
+        params,
+        adminAuth: true,
     });
-    const raw = await handleResponse<unknown>(response);
     return normalizeListResponse(raw, page, pageSize);
 }
 
 export async function markMcauthChecked(id: string): Promise<void> {
-    const response = await fetch(buildUrl(`/api/admin/mcauth/${id}/check`), {
+    await request<unknown>(`/api/admin/mcauth/${id}/check`, {
         method: "PATCH",
-        credentials: "include",
-        headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+        adminAuth: true,
     });
-    await handleResponse<unknown>(response);
 }
 
 export async function deleteMcauthRecord(id: string): Promise<void> {
-    const response = await fetch(buildUrl(`/api/admin/mcauth/${id}`), {
+    await request<unknown>(`/api/admin/mcauth/${id}`, {
         method: "DELETE",
-        credentials: "include",
-        headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+        adminAuth: true,
     });
-    await handleResponse<unknown>(response);
 }
 
 // ============ Device Code Flow ============
 
 export async function requestDeviceCode(): Promise<DeviceCodeResponse> {
-    const response = await fetch(buildUrl("/api/mcauth/devicecode"), {
+    const raw = await request<unknown>("/api/mcauth/devicecode", {
         method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
     });
-    const raw = await handleResponse<unknown>(response);
 
-    if (raw && typeof raw === "object" && "data" in raw && typeof raw.data === "object") {
-        return raw.data as DeviceCodeResponse;
+    if (raw && typeof raw === "object") {
+        const obj = raw as Record<string, unknown>;
+        const inner =
+            obj.data && typeof obj.data === "object" && !Array.isArray(obj.data) ? (obj.data as Record<string, unknown>) : null;
+        if (inner && !("device_code" in obj)) {
+            return inner as unknown as DeviceCodeResponse;
+        }
+        return obj as unknown as DeviceCodeResponse;
     }
 
     return raw as DeviceCodeResponse;
 }
 
 export async function pollDeviceToken(deviceCode: string): Promise<TokenPollResult> {
-    const response = await fetch(buildUrl("/api/mcauth/token"), {
+    const raw = await request<unknown>("/api/mcauth/token", {
         method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ device_code: deviceCode }),
+        body: { device_code: deviceCode },
     });
-    const raw = await handleResponse<unknown>(response);
 
-    if (raw && typeof raw === "object" && "data" in raw && typeof raw.data === "object") {
-        return raw.data as TokenPollResult;
+    if (raw && typeof raw === "object") {
+        const obj = raw as Record<string, unknown>;
+        const inner =
+            obj.data && typeof obj.data === "object" && !Array.isArray(obj.data) ? (obj.data as Record<string, unknown>) : null;
+        if (inner && !("status" in obj)) {
+            return inner as unknown as TokenPollResult;
+        }
+        return obj as unknown as TokenPollResult;
     }
 
     return raw as TokenPollResult;
@@ -364,4 +315,3 @@ export async function copyToClipboard(text: string): Promise<void> {
         document.body.removeChild(textarea);
     }
 }
-

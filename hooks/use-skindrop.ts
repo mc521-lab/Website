@@ -1,14 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import {
-    downloadSkin,
-    getSkinDownloadUrl,
-    resolveSkinId,
-    uploadSkin,
-    SkindropError,
-    type SkinUploadResult,
-} from "@/lib/skindrop";
+import { downloadSkin, getSkinDownloadUrl, resolveSkinId, uploadSkin, SkindropError, type SkinUploadResult } from "@/lib/api";
 
 export interface ResolvedSkin {
     id: string;

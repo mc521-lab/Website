@@ -22,14 +22,10 @@ export default async function ChangelogPage({ params }: { params: Promise<{ slug
     return (
         <article className="island-article">
             <header className="island-article-header">
-                <span className="island-article-label">
-                    {doc.version ? `v${doc.version}` : "更新"}
-                </span>
+                <span className="island-article-label">{doc.version ? `v${doc.version}` : "更新"}</span>
                 <h1>{doc.title}</h1>
                 {doc.description && <p>{doc.description}</p>}
-                {doc.date && (
-                    <p className="island-article-date">📅 {doc.date}</p>
-                )}
+                {doc.date && <p className="island-article-date">📅 {doc.date}</p>}
             </header>
 
             <div className="island-article-body typeset typeset-docs">

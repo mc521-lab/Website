@@ -98,4 +98,3 @@ export const FEEDBACK_STATUS_COLOR: Record<FeedbackStatus, string> = {
     resolved: "text-green-400 border-green-400/30 bg-green-400/10",
     closed: "text-gray-400 border-gray-400/30 bg-gray-400/10",
 };
-

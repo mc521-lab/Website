@@ -8,7 +8,7 @@ import {
     pollDeviceToken,
     copyToClipboard,
     type DeviceCodeResponse,
-} from "@/lib/mcauth";
+} from "@/lib/api";
 import Link from "next/link";
 import { ExternalLinkIcon, Loader2, Copy, CheckCircle2 } from "lucide-react";
 import { useEffect, useRef, useState, useCallback } from "react";
@@ -242,7 +242,8 @@ export default function McauthVerifyPage() {
                 setCheckingExisting(false);
                 return;
             }
-        } catch {
+        } catch (err) {
+            toast.warning("检查玩家称号失败:" + (err instanceof Error ? err.message : String(err)));
             // ignore errors for check-existing, proceed with login
         }
 
@@ -514,4 +515,3 @@ function getFailureReasonText(reason: string): string {
     };
     return map[reason] ?? reason;
 }
-

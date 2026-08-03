@@ -8,8 +8,7 @@ import { FeedbackDetail } from "@/components/mc521/feedback/feedback-detail";
 import type { Feedback } from "@/components/mc521/feedback/types";
 
 export default function FeedbackPage() {
-    const { view, selectedFeedback, refreshKey, selectFeedback, goToBoard, refreshBoard } =
-        useFeedbackView();
+    const { view, selectedFeedback, refreshKey, selectFeedback, goToBoard, refreshBoard } = useFeedbackView();
 
     const handleSubmitSuccess = useCallback(() => {
         refreshBoard();

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Shield, Lock, LogIn, Home, Loader2, User2 } from "lucide-react";
-import { adminLogin } from "@/lib/admin";
+import { adminLogin } from "@/lib/api";
 
 export default function AdminLoginPage() {
     const router = useRouter();
@@ -132,4 +132,3 @@ export default function AdminLoginPage() {
         </div>
     );
 }
-

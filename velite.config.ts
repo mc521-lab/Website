@@ -8,6 +8,7 @@ import { tools_navigation } from "./configs/velite/tools/_navigation";
 // gallery
 import { gallery_navigation } from "./configs/velite/gallery/_navigation";
 import * as gallery_equipment_data from "./configs/velite/gallery/equipment";
+import * as gallery_items_data from "./configs/velite/gallery/items";
 
 export default defineConfig({
     collections: {
@@ -25,5 +26,6 @@ export default defineConfig({
         // gallery
         gallery_navigation,
         ...gallery_equipment_data,
+        ...gallery_items_data,
     },
 });

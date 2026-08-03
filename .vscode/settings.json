@@ -1,6 +1,4 @@
 {
-    "i18n-ally.localesPaths": [
-        "raw-config/language"
-    ],
+    "i18n-ally.localesPaths": ["raw-config/language"],
     "search.useIgnoreFiles": false
 }

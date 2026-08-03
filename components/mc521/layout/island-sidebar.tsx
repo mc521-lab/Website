@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconifyIcon } from "@/components/iconify-icon";
 
@@ -56,10 +56,11 @@ function IslandNavItemLink({ item }: { item: IslandNavItem }) {
 function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
     const pathname = usePathname();
     const [isExpanded, setIsExpanded] = useState(group.defaultExpanded ?? false);
+    const isActiveGroup = useMemo(() => group.items.some((item) => pathname === item.href), [pathname, group.items]);
     const sortedItems = sortByOrder(group.items);
 
     return (
-        <div className={cn("island-nav-group", !isExpanded && "is-collapsed")}>
+        <div className={cn("island-nav-group", !(isExpanded || isActiveGroup) && "is-collapsed")}>
             <button
                 type="button"
                 className="island-nav-group-header"

@@ -1,7 +1,7 @@
 - title: 装备图鉴
   order: 1
   icon: lucide:shirt
-  defaultExpanded: true
+  defaultExpanded: false
   items:
     - title: 护甲图鉴
       href: /gallery/equipment/armor

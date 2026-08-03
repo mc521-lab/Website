@@ -1,0 +1,25 @@
+- title: 物品图鉴
+  order: 2
+  icon: lucide:gift
+  defaultExpanded: false
+  items:
+    - title: 材料图鉴
+      href: /gallery/items/material
+      icon: fluent-emoji-flat:wood
+      order: 1
+    - title: 道具图鉴
+      href: /gallery/items/prop
+      icon: fluent-emoji-flat:broom
+      order: 2
+    - title: 货币图鉴
+      href: /gallery/items/currency
+      icon: fluent-emoji-flat:coin
+      order: 3
+    - title: 宠物碎片图鉴
+      href: /gallery/items/fragments
+      icon: fluent-emoji-flat:puzzle-piece
+      order: 4
+    - title: 宠物食品图鉴
+      href: /gallery/items/petfood
+      icon: fluent-emoji-flat:cut-of-meat
+      order: 5

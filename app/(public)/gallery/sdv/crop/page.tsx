@@ -5,6 +5,7 @@ import { gallery_sdv_crop_data } from "@/.velite";
 import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
 import { GalleryItemImage } from "@/components/mc521/gallery/reusable/gallery-item-image";
 import { IconifyIcon } from "@/components/iconify-icon";
+import { cn } from "@/lib/utils";
 
 interface CropItem {
     id: string;
@@ -41,9 +42,18 @@ function CropCard({ item }: { item: CropItem }) {
         <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
             <div className="gallery-card-header mb-3 flex items-start gap-2">
                 <div className="relative">
-                    <GalleryItemImage src={`/gallery/${currentVariant}.png`} alt={currentVariant} />
+                    {variants.map((v) => (
+                        <div
+                            key={v}
+                            className={cn(
+                                "absolute top-0 left-0 h-full w-full",
+                                v === currentVariant ? "opacity-100" : "opacity-0"
+                            )}>
+                            <GalleryItemImage src={`/gallery/${v}.png`} alt={v} />
+                        </div>
+                    ))}
                 </div>
-                <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
+                <div className="ml-12 flex h-full min-w-0 flex-1 flex-col justify-center">
                     <h3 className="truncate text-base leading-tight font-semibold">{currentVariant}</h3>
                     <p className="text-muted-foreground mt-0.5 text-xs">作物</p>
                 </div>

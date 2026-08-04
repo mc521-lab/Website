@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ImageOff } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function GalleryItemImage({ src, alt, size = 38 }: { src: string; alt: string; size?: number }) {
     const [failed, setFailed] = useState(false);
@@ -18,7 +19,7 @@ export function GalleryItemImage({ src, alt, size = 38 }: { src: string; alt: st
                     width={size}
                     height={size}
                     unoptimized
-                    className="gallery-item-image"
+                    className={cn("gallery-item-image")}
                     onError={() => setFailed(true)}
                 />
             )}

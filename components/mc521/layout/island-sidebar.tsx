@@ -103,7 +103,7 @@ export function IslandSidebar({ navigation, header }: { navigation: IslandNavEnt
     const sortedNav = sortByOrder(navigation);
 
     return (
-        <aside className="island-sidebar">
+        <aside className="island-sidebar better-scroll-bar">
             <div className="island-sidebar-header">
                 <span className="island-sidebar-label">{header.label}</span>
                 <h2>{header.title}</h2>

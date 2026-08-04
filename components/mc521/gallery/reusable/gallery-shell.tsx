@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 export interface GalleryShellProps {
     title: string;
     subtitle: string;
-    filterBar: ReactNode;
+    filterBar?: ReactNode;
     children: ReactNode;
     isEmpty?: boolean;
     empty?: ReactNode;

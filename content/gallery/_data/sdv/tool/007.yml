@@ -1,0 +1,7 @@
+basic:
+  name: 金制洒水器
+  type: tool
+usage:
+  - 辅助种植作物
+source:
+  - 主城 > 星露谷商人 处购买

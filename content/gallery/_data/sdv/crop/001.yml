@@ -1,0 +1,11 @@
+basic:
+  name: 啤酒花
+  type: crop
+usage:
+  - 在主城售卖获得金币
+source:
+  - 种植对应作物后收成获得
+variants:
+  - 啤酒花
+  - 啤酒花(银星)
+  - 啤酒花(金星)

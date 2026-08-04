@@ -6,33 +6,33 @@ modifiers:
     fsmibao1:
       probability: 0.4
       stats:
-      - effect: attack-damage
-        min: 1
-        max: 2
-      - effect: max-mana
-        min: 5
-        max: 10
+        - effect: attack-damage
+          min: 1
+          max: 2
+        - effect: max-mana
+          min: 5
+          max: 10
     fsmibao2:
       probability: 0.4
       stats:
-      - effect: parry-rating
-        min: 1
-        max: 5
-      - effect: max-stamina
-        min: 0.5
-        max: 1
+        - effect: parry-rating
+          min: 1
+          max: 5
+        - effect: max-stamina
+          min: 0.5
+          max: 1
     fsmibao3:
       probability: 0.2
       stats:
-      - effect: attack-damage
-        min: 1
-        max: 2
-      - effect: max-mana
-        min: 5
-        max: 10
-      - effect: parry-rating
-        min: 1
-        max: 5
-      - effect: max-stamina
-        min: 0.5
-        max: 1
+        - effect: attack-damage
+          min: 1
+          max: 2
+        - effect: max-mana
+          min: 5
+          max: 10
+        - effect: parry-rating
+          min: 1
+          max: 5
+        - effect: max-stamina
+          min: 0.5
+          max: 1

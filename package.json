@@ -9,7 +9,7 @@
         "build": "next build --webpack",
         "start": "next start",
         "lint": "eslint",
-        "format": "prettier --write \"**/*.{ts,tsx,css,md,mdx,json,yaml}\"",
+        "format": "prettier --write \"**/*.{ts,tsx,css,md,mdx,json,yaml,yml}\"",
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {

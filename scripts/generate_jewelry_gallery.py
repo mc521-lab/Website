@@ -330,7 +330,7 @@ def main() -> None:
 
     project_root = Path(__file__).resolve().parent.parent
 
-    items_src = project_root / "raw-config" / "item"
+    items_src = project_root / "raw-config" / "MMOItems" / "item"
     modifiers_src = project_root / "raw-config" / "modifiers" / "shipin_modifiers.yml"
     dst = project_root / "content" / "gallery" / "_data" / "equipment" / "jewelries"
 

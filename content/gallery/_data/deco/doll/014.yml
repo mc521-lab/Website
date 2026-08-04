@@ -1,0 +1,7 @@
+basic:
+  name: 小羊玩偶
+  type: doll
+usage:
+  - 摆放在建筑中做装饰
+source:
+  - 主城 > 玩偶抽奖箱 抽奖

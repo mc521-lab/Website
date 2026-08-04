@@ -6,21 +6,21 @@ modifiers:
     shouzhuo1:
       probability: 0.4
       stats:
-      - effect: max-mana
-        min: 0.5
-        max: 2.5
+        - effect: max-mana
+          min: 0.5
+          max: 2.5
     shouzhuo2:
       probability: 0.4
       stats:
-      - effect: max-stamina
-        min: 0.5
-        max: 2.5
+        - effect: max-stamina
+          min: 0.5
+          max: 2.5
     shouzhuo3:
       probability: 0.2
       stats:
-      - effect: max-mana
-        min: 0.5
-        max: 2.5
-      - effect: max-stamina
-        min: 0.5
-        max: 2.5
+        - effect: max-mana
+          min: 0.5
+          max: 2.5
+        - effect: max-stamina
+          min: 0.5
+          max: 2.5

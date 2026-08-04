@@ -1,0 +1,11 @@
+basic:
+  name: 番茄
+  type: crop
+usage:
+  - 在主城售卖获得金币
+source:
+  - 种植对应作物后收成获得
+variants:
+  - 番茄
+  - 番茄(银星)
+  - 番茄(金星)

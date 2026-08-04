@@ -6,27 +6,27 @@ modifiers:
     zsmibao1:
       probability: 0.4
       stats:
-      - effect: max-health
-        min: 4
-        max: 8
+        - effect: max-health
+          min: 4
+          max: 8
     zsmibao2:
       probability: 0.4
       stats:
-      - effect: defense
-        min: 2
-        max: 5
-      - effect: max-mana
-        min: 3
-        max: 5
+        - effect: defense
+          min: 2
+          max: 5
+        - effect: max-mana
+          min: 3
+          max: 5
     zsmibao3:
       probability: 0.2
       stats:
-      - effect: max-health
-        min: 4
-        max: 8
-      - effect: defense
-        min: 2
-        max: 5
-      - effect: max-mana
-        min: 3
-        max: 5
+        - effect: max-health
+          min: 4
+          max: 8
+        - effect: defense
+          min: 2
+          max: 5
+        - effect: max-mana
+          min: 3
+          max: 5

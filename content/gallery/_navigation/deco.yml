@@ -1,0 +1,17 @@
+- title: 装饰图鉴
+  order: 5
+  icon: lucide:palette
+  defaultExpanded: false
+  items:
+    - title: 家具图鉴
+      href: /gallery/deco/furniture
+      icon: fluent-emoji-flat:couch-and-lamp
+      order: 1
+    - title: 墙贴图鉴
+      href: /gallery/deco/wallsticker
+      icon: fluent-emoji-flat:framed-picture
+      order: 2
+    - title: 玩偶图鉴
+      href: /gallery/deco/doll
+      icon: fluent-emoji-flat:teddy-bear
+      order: 3

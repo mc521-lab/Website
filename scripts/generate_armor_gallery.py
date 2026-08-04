@@ -187,7 +187,7 @@ def main() -> None:
 
     # 默认路径（与现有流水线一致）
     # 若希望使用绝对路径 /raw-config 与 /content，可在此修改
-    src = project_root / "raw-config" / "item" / "armor.yml"
+    src = project_root / "raw-config" / "MMOItems" / "item" / "armor.yml"
     dst = project_root / "content" / "gallery" / "_data" / "equipment" / "armor"
 
     # 支持命令行覆盖：python generate_armor_gallery.py [src] [dst]

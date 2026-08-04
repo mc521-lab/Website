@@ -1,0 +1,11 @@
+basic:
+  name: 橙子
+  type: crop
+usage:
+  - 在主城售卖获得金币
+source:
+  - 种植对应作物后收成获得
+variants:
+  - 橙子
+  - 橙子(银星)
+  - 橙子(金星)

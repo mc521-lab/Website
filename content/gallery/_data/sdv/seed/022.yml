@@ -1,0 +1,8 @@
+basic:
+  name: 辣椒种子
+  type: seed
+usage:
+  - 种植在种植盆中
+  - 收获后获得对应作物
+source:
+  - 主城 > 星露谷商人 处购买

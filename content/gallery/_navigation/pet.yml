@@ -1,0 +1,17 @@
+- title: 宠物图鉴
+  order: 3
+  icon: lucide:paw-print
+  defaultExpanded: false
+  items:
+    - title: 宠物碎片图鉴
+      href: /gallery/pet/fragment
+      icon: fluent-emoji-flat:puzzle-piece
+      order: 1
+    - title: 宠物皮肤图鉴
+      href: /gallery/pet/skin
+      icon: fluent-emoji-flat:clown-face
+      order: 2
+    - title: 宠物食品图鉴
+      href: /gallery/pet/food
+      icon: fluent-emoji-flat:cut-of-meat
+      order: 3

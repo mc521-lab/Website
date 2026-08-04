@@ -9,7 +9,6 @@
 
 类型映射：
   道具 → prop
-  宠食 → petfood
   材料 → material
   货币 → currency
 """
@@ -32,7 +31,6 @@ logger = logging.getLogger(__name__)
 
 TYPE_MAP: dict[str, str] = {
     "道具": "prop",
-    "宠食": "petfood",
     "材料": "material",
     "货币": "currency",
 }
@@ -207,10 +205,6 @@ def transform_item(
     if not name:
         name = key
 
-    # 名字含「碎片」的材料类重定向到 fragments 目录
-    if type_cn == "材料" and "碎片" in name:
-        type_dir = "fragments"
-
     basic: dict[str, Any] = {
         "name": name,
     }
@@ -313,7 +307,7 @@ def main() -> None:
 
     # 默认路径（与现有流水线一致）
     # 用户约定：raw-config/item/material.yml
-    src = project_root / "raw-config" / "item" / "material.yml"
+    src = project_root / "raw-config" / "MMOItems" / "item" / "material.yml"
     dst = project_root / "content" / "gallery" / "_data" / "items"
 
     # 支持命令行覆盖：python generate_items_gallery.py [src] [dst]

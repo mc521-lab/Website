@@ -1,0 +1,11 @@
+basic:
+  name: 香蕉
+  type: crop
+usage:
+  - 在主城售卖获得金币
+source:
+  - 种植对应作物后收成获得
+variants:
+  - 香蕉
+  - 香蕉(银星)
+  - 香蕉(金星)

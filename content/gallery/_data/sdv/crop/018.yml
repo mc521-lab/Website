@@ -1,0 +1,11 @@
+basic:
+  name: 辣椒
+  type: crop
+usage:
+  - 在主城售卖获得金币
+source:
+  - 种植对应作物后收成获得
+variants:
+  - 辣椒
+  - 辣椒(银星)
+  - 辣椒(金星)

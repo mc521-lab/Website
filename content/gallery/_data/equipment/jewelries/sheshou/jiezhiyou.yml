@@ -6,21 +6,21 @@ modifiers:
     jzyou1:
       probability: 0.4
       stats:
-      - effect: attack-damage
-        min: 0.3
-        max: 1.5
+        - effect: attack-damage
+          min: 0.3
+          max: 1.5
     jzyou2:
       probability: 0.4
       stats:
-      - effect: pve-damage
-        min: 1
-        max: 5
+        - effect: pve-damage
+          min: 1
+          max: 5
     jzyou3:
       probability: 0.2
       stats:
-      - effect: attack-damage
-        min: 2
-        max: 2.5
-      - effect: pve-damage
-        min: 1
-        max: 5
+        - effect: attack-damage
+          min: 2
+          max: 2.5
+        - effect: pve-damage
+          min: 1
+          max: 5

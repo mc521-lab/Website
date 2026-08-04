@@ -1,0 +1,9 @@
+basic:
+  name: 巨型番茄
+  type: crop
+usage:
+  - 在主城售卖获得金币
+source:
+  - 收获番茄时随机变异
+variant:
+  - 巨型番茄

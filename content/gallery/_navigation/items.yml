@@ -15,11 +15,3 @@
       href: /gallery/items/currency
       icon: fluent-emoji-flat:coin
       order: 3
-    - title: 宠物碎片图鉴
-      href: /gallery/items/fragments
-      icon: fluent-emoji-flat:puzzle-piece
-      order: 4
-    - title: 宠物食品图鉴
-      href: /gallery/items/petfood
-      icon: fluent-emoji-flat:cut-of-meat
-      order: 5

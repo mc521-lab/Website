@@ -1,0 +1,17 @@
+- title: 皮肤图鉴
+  order: 4
+  icon: lucide:palette
+  defaultExpanded: false
+  items:
+    - title: 时装皮肤
+      href: /gallery/skin/cosmetic
+      icon: fluent-emoji-flat:glowing-star
+      order: 1
+    - title: 武器皮肤
+      href: /gallery/skin/weapon
+      icon: fluent-emoji-flat:crossed-swords
+      order: 2
+    - title: 工具皮肤
+      href: /gallery/skin/tools
+      icon: fluent-emoji-flat:hammer-and-wrench
+      order: 3

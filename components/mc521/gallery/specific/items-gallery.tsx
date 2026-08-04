@@ -11,11 +11,11 @@ interface GalleryItem {
     limit: string[];
 }
 
-function ItemCard({ item }: { item: GalleryItem }) {
+function ItemCard({ item, isGif }: { item: GalleryItem; isGif?: boolean }) {
     return (
         <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
             <div className="gallery-card-header mb-3 flex items-start gap-2">
-                <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
+                <GalleryItemImage src={`/gallery/${item.basic.name}.${isGif ? "gif" : "png"}`} alt={item.basic.name} />
                 <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
                     <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
                 </div>
@@ -74,7 +74,17 @@ function ItemCard({ item }: { item: GalleryItem }) {
     );
 }
 
-export function ItemsGalleryPage({ items, title, description }: { items: GalleryItem[]; title: string; description: string }) {
+export function ItemsGalleryPage({
+    items,
+    title,
+    description,
+    isGif = false,
+}: {
+    items: GalleryItem[];
+    title: string;
+    description: string;
+    isGif?: boolean;
+}) {
     return (
         <div className="w-full">
             <header className="gallery-page-header">
@@ -84,7 +94,7 @@ export function ItemsGalleryPage({ items, title, description }: { items: Gallery
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {items.map((item) => (
-                    <ItemCard key={item.id} item={item} />
+                    <ItemCard key={item.id} item={item} isGif={isGif} />
                 ))}
             </div>
         </div>

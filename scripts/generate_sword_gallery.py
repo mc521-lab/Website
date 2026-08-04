@@ -184,7 +184,7 @@ def main() -> None:
     project_root = Path(__file__).resolve().parent.parent
 
     # 默认路径（与现有流水线一致）
-    src = project_root / "raw-config" / "item" / "sword.yml"
+    src = project_root / "raw-config" / "MMOItems" / "item" / "sword.yml"
     dst = project_root / "content" / "gallery" / "_data" / "equipment" / "sword"
 
     # 支持命令行覆盖：python generate_sword_gallery.py [src] [dst]

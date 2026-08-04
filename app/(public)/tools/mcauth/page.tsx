@@ -346,10 +346,8 @@ function VerifyCard({
             {loading || checkingExisting ? (
                 <div className="flex flex-col items-center gap-4 py-8">
                     <Loader2 size={32} className="text-primary animate-spin" />
-                    <p className="text-foreground/70 text-sm">
-                        {checkingExisting ? "正在检查已有验证..." : "正在准备设备码..."}
-                    </p>
-                    {!checkingExisting && <p className="text-foreground/50 text-xs">即将生成授权码，请稍候</p>}
+                    <p className="text-foreground/70 text-sm">{checkingExisting ? "正在检查已有验证..." : "正在准备验证..."}</p>
+                    {!checkingExisting && <p className="text-foreground/50 text-xs">与服务器通讯中，请稍候</p>}
                 </div>
             ) : (
                 <div className="flex flex-col gap-4">

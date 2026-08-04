@@ -147,21 +147,18 @@ export async function verifyCode(payload: VerifyPayload): Promise<VerifyResponse
     });
 
     if (raw && typeof raw === "object") {
-        const obj = (raw as Record<string, unknown>).body as Record<string, unknown>;
-        // After unwrapSuccessEnvelope strips { data }, fields sit on obj directly.
-        // Fall back to nested obj.data for robustness.
-        const inner =
-            obj.data && typeof obj.data === "object" && !Array.isArray(obj.data) ? (obj.data as Record<string, unknown>) : null;
-        const get = (key: string) => (key in obj ? obj[key] : inner?.[key]);
+        const obj = raw as Record<string, unknown>;
+        const get = (key: string) => (key in obj ? obj[key] : undefined);
 
-        return {
-            success: (obj.success as boolean) ?? false,
+        const res = {
+            success: (get("hasValidMcje") as boolean | undefined) ?? false,
             accountXuid: get("accountXuid") as string | undefined,
             accountName: get("accountName") as string | undefined,
-            hasValidMcje: get("hasValidMcje") as boolean | undefined,
-            illegal: get("illegal") as boolean | undefined,
+            hasValidMcje: (get("hasValidMcje") as boolean | undefined) ?? false,
+            illegal: (get("illegal") as boolean | undefined) ?? false,
             error: get("error") as string | undefined,
         };
+        return res;
     }
 
     return raw as VerifyResponse;
@@ -175,12 +172,10 @@ export async function submitResult(payload: SubmitPayload): Promise<SubmitRespon
 
     if (raw && typeof raw === "object") {
         const obj = raw as Record<string, unknown>;
-        const inner =
-            obj.data && typeof obj.data === "object" && !Array.isArray(obj.data) ? (obj.data as Record<string, unknown>) : null;
-        const get = (key: string) => (key in obj ? obj[key] : inner?.[key]);
+        const get = (key: string) => (key in obj ? obj[key] : undefined);
 
         return {
-            success: (get("success") as boolean) ?? false,
+            success: get("id") !== undefined,
             id: get("id") as string | undefined,
             error: get("error") as string | undefined,
         };

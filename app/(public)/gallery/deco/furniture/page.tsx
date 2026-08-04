@@ -72,24 +72,44 @@ export default function DecoFurniturePage() {
     }, [allItems, search]);
 
     const filterBar = (
-        <div className="relative">
-            <IconifyIcon
-                icon="lucide:search"
-                width={16}
-                height={16}
-                className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-amber-500"
-            />
-            <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="搜索家具名称…"
-                className="w-full rounded-lg border border-amber-400 bg-amber-50 py-2.5 pr-4 pl-10 text-sm text-amber-900 transition-all duration-300 outline-none placeholder:text-amber-500/60 focus:border-amber-400 focus:shadow-[0_0_16px_-2px_rgba(251,191,36,0.5)] focus:ring-2 focus:ring-amber-400/50 dark:border-amber-500/70 dark:bg-amber-950/30 dark:text-amber-100 dark:placeholder:text-amber-400/60 dark:focus:shadow-[0_0_16px_-2px_rgba(251,191,36,0.4)]"
-            />
-            <span className="absolute top-1/2 right-3 -translate-y-1/2 text-xs font-medium text-amber-600 tabular-nums dark:text-amber-400">
-                {filteredItems.length}/{allItems.length}
-            </span>
-        </div>
+        <section className="gallery-filter-panel" aria-label="筛选器">
+            <div className="gallery-filter-toolbar">
+                <div className="gallery-filter-toolbar-title">
+                    <span className="gallery-filter-toolbar-icon" aria-hidden="true">
+                        <IconifyIcon icon="lucide:search" width={18} height={18} />
+                    </span>
+                    <div>
+                        <strong>名称搜索</strong>
+                        <span>输入关键词即可筛选家具</span>
+                    </div>
+                </div>
+                <div className="gallery-filter-toolbar-actions">
+                    <div className="gallery-filter-summary" aria-live="polite">
+                        <span className="gallery-filter-summary-dot" aria-hidden="true" />
+                        正在显示 <strong>{filteredItems.length}</strong> / {allItems.length} 件
+                    </div>
+                </div>
+            </div>
+            <div className="gallery-filter-groups">
+                <div className="gallery-filter-row">
+                    <div className="gallery-filter-heading">
+                        <span className="gallery-filter-heading-icon" aria-hidden="true">
+                            <IconifyIcon icon="lucide:file-text" width={14} height={14} />
+                        </span>
+                        家具名称
+                    </div>
+                    <div className="relative flex-1">
+                        <input
+                            type="text"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            placeholder="搜索家具名称…"
+                            className="w-full rounded-lg border py-2.5 pr-4 pl-4 text-sm transition-all duration-300 outline-none"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 
     return (

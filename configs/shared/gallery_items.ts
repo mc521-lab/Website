@@ -11,7 +11,7 @@ export const gallery_items_shared_schema = s
     })
     .transform((data, { meta }) => {
         // 路径解析：gallery/_data/items/prop/name.yml → type=prop
-        const segments = meta.path.replace(/\.yml$/, "").split("\\");
+        const segments = meta.path.replace(/\.yml$/, "").replace(/\\/g, "/").split("/");
         const nameFromPath = segments.at(-1) ?? "UNKNOWN";
         const typeFromPath = segments.at(-2) ?? "UNKNOWN";
 

@@ -11,7 +11,7 @@ export const gallery_deco_schema = s
         limit: s.array(s.string()).optional(),
     })
     .transform((data, { meta }) => {
-        const segments = meta.path.replace(/\.yml$/, "").split("\\");
+        const segments = meta.path.replace(/\.yml$/, "").replace(/\\/g, "/").split("/");
         const nameFromPath = segments.at(-1) ?? "UNKNOWN";
         const categoryFromPath = segments.at(-2) ?? "UNKNOWN";
 

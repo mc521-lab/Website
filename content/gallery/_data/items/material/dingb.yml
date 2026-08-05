@@ -1,7 +1,12 @@
 basic:
   name: 流金砂
+  quality: C
+filter:
+  type: ding
+  for: set_c
 usage:
-  - 用于兑换 C 级套装
+  - 兑换 C 级套装
 source:
-  - 主城银币商店兑换
-  - 副本 > 秘境一层
+  - 银币商店兑换
+  - 副本秘境一层
+limit: []

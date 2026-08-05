@@ -1,7 +1,9 @@
 basic:
   name: 银币
+  quality: A
 usage:
-  - 用于兑换各类物品
+  - 兑换各类物品
 source:
-  - 主城 > 珍宝商人 处购买
+  - 主城珍宝商人 处购买
   - (待补充...)
+limit: []

@@ -1,7 +1,12 @@
 basic:
   name: 深蓝晶块
+  quality: B
+filter:
+  type: bi
+  for: set_b
 usage:
-  - 用于兑换 B 级套装
+  - 兑换 B 级套装
 source:
-  - 主城银币商店兑换
-  - 副本 > 秘境二层
+  - 银币商店兑换
+  - 副本秘境二层
+limit: []

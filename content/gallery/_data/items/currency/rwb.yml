@@ -1,7 +1,9 @@
 basic:
   name: 任务币
+  quality: S
 usage:
-  - 用于在珍宝商店兑换商品
+  - 在珍宝商店兑换商品
 source:
   - 完成每日任务获得
   - 官方商城 > 水晶商城 中购买
+limit: []

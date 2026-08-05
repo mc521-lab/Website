@@ -8,7 +8,8 @@ import { IconifyIcon } from "@/components/iconify-icon";
 
 interface CosmeticItem {
     id: string;
-    basic: { name: string; type: string };
+    basic: { name: string };
+    filter?: { type?: string };
     usage: string[];
     source: string[];
     limit: string[];
@@ -27,7 +28,7 @@ function CosmeticCard({ item }: { item: CosmeticItem }) {
                 <GalleryItemImage src={`/gallery/${item.basic.name}.gif`} alt={item.basic.name} />
                 <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
                     <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
-                    <p className="text-muted-foreground mt-0.5 text-xs">{item.basic.type === "head" ? "头饰" : "背饰"}</p>
+                    <p className="text-muted-foreground mt-0.5 text-xs">{item.filter?.type === "head" ? "头饰" : "背饰"}</p>
                 </div>
             </div>
 
@@ -70,12 +71,20 @@ function CosmeticCard({ item }: { item: CosmeticItem }) {
 
 export default function SkinCosmeticPage() {
     const allItems = gallery_skin_cosmetic_data as unknown as CosmeticItem[];
+    const [search, setSearch] = useState("");
     const [typeFilter, setTypeFilter] = useState<string>("all");
 
     const filteredItems = useMemo(() => {
-        if (typeFilter === "all") return allItems;
-        return allItems.filter((item) => item.basic.type === typeFilter);
-    }, [allItems, typeFilter]);
+        let result = allItems;
+        if (typeFilter !== "all") {
+            result = result.filter((item) => item.filter?.type === typeFilter);
+        }
+        if (search.trim()) {
+            const q = search.trim().toLowerCase();
+            result = result.filter((item) => item.basic.name.toLowerCase().includes(q));
+        }
+        return result;
+    }, [allItems, typeFilter, search]);
 
     return (
         <div className="w-full">
@@ -84,21 +93,29 @@ export default function SkinCosmeticPage() {
                 <p className="text-muted-foreground mt-1">浏览游戏中的各类时装头饰与背饰皮肤</p>
             </header>
 
-            <GalleryFilterPanel
-                total={allItems.length}
-                filtered={filteredItems.length}
-                unit="件"
-                groups={[
-                    {
-                        key: "type",
-                        label: "部位",
-                        icon: "lucide:shirt",
-                        value: typeFilter,
-                        onChange: (value) => setTypeFilter(value),
-                        options: TYPE_OPTIONS.map((opt) => ({ value: opt.value, label: opt.label })),
-                    },
-                ]}
-            />
+            <div className="mb-6">
+                <GalleryFilterPanel
+                    total={allItems.length}
+                    filtered={filteredItems.length}
+                    unit="件"
+                    search={{
+                        value: search,
+                        onChange: setSearch,
+                        placeholder: "搜索时装名称…",
+                        label: "时装名称",
+                    }}
+                    groups={[
+                        {
+                            key: "type",
+                            label: "部位",
+                            icon: "lucide:shirt",
+                            value: typeFilter,
+                            onChange: (value) => setTypeFilter(value),
+                            options: TYPE_OPTIONS.map((opt) => ({ value: opt.value, label: opt.label })),
+                        },
+                    ]}
+                />
+            </div>
 
             {filteredItems.length === 0 ? (
                 <div className="gallery-empty-state">

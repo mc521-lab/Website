@@ -29,7 +29,10 @@ export const gallery_equipment_sword_data = {
         })
         .transform((data, { meta }) => {
             // 路径解析：gallery/_data/equipment/sword/CIKE/A/BOOTS.yml → job=CIKE, quality=A, part=BOOTS
-            const segments = meta.path.replace(/\.yml$/, "").replace(/\\/g, "/").split("/");
+            const segments = meta.path
+                .replace(/\.yml$/, "")
+                .replace(/\\/g, "/")
+                .split("/");
             const qualityFromPath = segments.at(-1) ?? data.basic.quality;
             const jobFromPath = segments.at(-2)?.toLowerCase() ?? data.basic.job;
 

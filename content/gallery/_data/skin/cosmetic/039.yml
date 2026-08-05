@@ -4,4 +4,6 @@ basic:
 usage:
   - 在主城更换物品皮肤
 source:
-  - 主城 > 时装抽奖箱 第一期 抽奖
+  - 主城时装抽奖箱 第一期
+filter:
+  type: head

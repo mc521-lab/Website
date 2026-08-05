@@ -1,9 +1,19 @@
 [project]
-name = "scripts"
-version = "0.1.0"
-description = "Add your description here"
+name = "gallery-generator"
+version = "0.2.0"
+description = "从 raw-config 生成 gallery YAML 数据文件的工具"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "pyyaml>=6.0.3",
 ]
+
+[project.scripts]
+gallery-generator = "gallery_generator.cli:main"
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["gallery_generator*"]

@@ -1,7 +1,12 @@
 basic:
   name: 赤日塔晶
+  quality: A
+filter:
+  type: tajing
+  for: set_a
 usage:
-  - 用于兑换 A 级套装
+  - 兑换 A 级套装
 source:
-  - 主城银币商店兑换
-  - 副本 > 法老王陵
+  - 银币商店兑换
+  - 副本法老王陵
+limit: []

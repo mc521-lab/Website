@@ -1,6 +1,10 @@
 basic:
   name: 牧灵幽晶
+  quality: S
+filter:
+  type: jing
 usage:
-  - 用于兑换职业饰品
+  - 兑换职业饰品
 source:
-  - 副本 > 玄轮圣墟
+  - 副本玄轮圣墟
+limit: []

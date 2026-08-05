@@ -1,0 +1,10 @@
+basic:
+  name: 风语弓皮肤
+usage:
+  - 在主城更换物品皮肤
+source:
+  - 主城武器皮肤抽奖箱
+filter:
+  type: weapon
+limit:
+  - 仅限 射手 职业可用

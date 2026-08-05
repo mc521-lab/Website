@@ -34,7 +34,10 @@ export const gallery_equipment_gem_data = {
         })
         .transform((data, { meta }) => {
             // 路径解析：gallery/_data/equipment/gem/fx/c.yml → type=fx, quality=c
-            const segments = meta.path.replace(/\.yml$/, "").replace(/\\/g, "/").split("/");
+            const segments = meta.path
+                .replace(/\.yml$/, "")
+                .replace(/\\/g, "/")
+                .split("/");
             const qualityFromPath = (segments.at(-1) ?? data.basic.quality).toLowerCase();
             const typeFromPath = (segments.at(-2) ?? "unknown").toLowerCase();
 

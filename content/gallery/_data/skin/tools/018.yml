@@ -5,3 +5,6 @@ usage:
   - 在主城更换物品皮肤
 source:
   - 集齐对应工具后兑换
+filter:
+  type: tools
+  bundle: dasheng

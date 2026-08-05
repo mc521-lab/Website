@@ -1,6 +1,11 @@
 basic:
   name: 焚心晶胚
+  quality: S
+filter:
+  type: sui
+  for: gem
 usage:
-  - 用于兑换焚心宝石
+  - 兑换焚心宝石
 source:
-  - 副本 > 灵域遗迹
+  - 副本灵域遗迹
+limit: []

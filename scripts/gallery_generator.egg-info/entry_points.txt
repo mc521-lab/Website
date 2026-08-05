@@ -1,0 +1,2 @@
+[console_scripts]
+gallery-generator = gallery_generator.cli:main

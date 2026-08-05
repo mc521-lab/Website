@@ -1,9 +1,14 @@
 basic:
   name: 灭世焚心
+  quality: A
+filter:
+  type: tong
+  for: general
 usage:
   - 兑换所需的通用材料
 source:
-  - 主城银币商店兑换
-  - 副本 > 泘境一层
-  - 副本 > 泘境二层
-  - 副本 > 法老王陵
+  - 银币商店兑换
+  - 副本泘境一层
+  - 副本泘境二层
+  - 副本法老王陵
+limit: []

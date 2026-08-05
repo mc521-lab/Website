@@ -41,7 +41,10 @@ export const gallery_equipment_armor_data = {
         .transform((data, { meta }) => {
             // 路径解析：gallery/_data/equipment/armor/CIKE/A/BOOTS.yml
             // → job=CIKE, quality=A, part=BOOTS
-            const segments = meta.path.replace(/\.yml$/, "").replace(/\\/g, "/").split("/");
+            const segments = meta.path
+                .replace(/\.yml$/, "")
+                .replace(/\\/g, "/")
+                .split("/");
             const part = segments.at(-1) ?? "UNKNOWN";
             const qualityFromPath = segments.at(-2) ?? data.basic.quality;
             const jobFromPath = segments.at(-3)?.toLowerCase() ?? data.basic.job;

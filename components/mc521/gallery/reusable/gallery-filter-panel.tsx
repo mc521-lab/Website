@@ -22,12 +22,21 @@ export interface GalleryFilterPanelProps {
     filtered: number;
     unit?: string;
     groups: GalleryFilterGroup[];
+    search?: {
+        value: string;
+        onChange: (value: string) => void;
+        placeholder?: string;
+        label?: string;
+    };
 }
 
-export function GalleryFilterPanel({ total, filtered, unit = "件", groups }: GalleryFilterPanelProps) {
+export function GalleryFilterPanel({ total, filtered, unit = "件", groups, search }: GalleryFilterPanelProps) {
     const allSelected = filtered === total;
 
     const handleReset = () => {
+        if (search && search.value) {
+            search.onChange("");
+        }
         groups.forEach((g) => {
             if (g.value !== "all") {
                 g.onChange("all");
@@ -44,7 +53,7 @@ export function GalleryFilterPanel({ total, filtered, unit = "件", groups }: Ga
                     </span>
                     <div>
                         <strong>快速筛选</strong>
-                        <span>点击分类即可更新下方图鉴</span>
+                        <span>{search ? "输入关键词或点击分类筛选" : "点击分类即可更新下方图鉴"}</span>
                     </div>
                 </div>
                 <div className="gallery-filter-toolbar-actions">
@@ -60,6 +69,25 @@ export function GalleryFilterPanel({ total, filtered, unit = "件", groups }: Ga
                 </div>
             </div>
             <div className="gallery-filter-groups">
+                {search && (
+                    <div className="gallery-filter-row">
+                        <div className="gallery-filter-heading">
+                            <span className="gallery-filter-heading-icon" aria-hidden="true">
+                                <IconifyIcon icon="lucide:search" width={14} height={14} />
+                            </span>
+                            {search.label ?? "名称搜索"}
+                        </div>
+                        <div className="relative flex-1">
+                            <input
+                                type="text"
+                                value={search.value}
+                                onChange={(e) => search.onChange(e.target.value)}
+                                placeholder={search.placeholder ?? "输入关键词搜索…"}
+                                className="w-full rounded-lg border py-2.5 pr-4 pl-4 text-sm transition-all duration-300 outline-none"
+                            />
+                        </div>
+                    </div>
+                )}
                 {groups.map((group) => (
                     <div key={group.key} className="gallery-filter-row">
                         <div className="gallery-filter-heading">

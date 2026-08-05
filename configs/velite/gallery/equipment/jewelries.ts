@@ -28,7 +28,10 @@ export const gallery_equipment_jewelry_data = {
         })
         .transform((data, { meta }) => {
             // 路径示例: gallery/_data/equipment/jewelries/ZHANSHI/jiezhizuo.yml
-            const segments = meta.path.replace(/\.yml$/, "").replace(/\\/g, "/").split("/");
+            const segments = meta.path
+                .replace(/\.yml$/, "")
+                .replace(/\\/g, "/")
+                .split("/");
             const positionFromPath = segments.at(-1) ?? "";
             const jobFromPath = segments.at(-2)?.toLowerCase() ?? "";
 

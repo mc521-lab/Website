@@ -4,4 +4,7 @@ basic:
 usage:
   - 摆放在建筑中做装饰
 source:
-  - 主城 > 家具抽奖箱 第二期 抽奖
+  - 主城家具抽奖箱 第二期
+filter:
+  bundle: zhanpu
+  type: furniture

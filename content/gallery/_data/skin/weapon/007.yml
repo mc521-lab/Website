@@ -1,7 +1,10 @@
 basic:
-  name: 暗影之刃皮肤
-  type: weapon
+  name: 圣灵之杖皮肤
 usage:
   - 在主城更换物品皮肤
 source:
-  - 主城 > 武器皮肤抽奖箱 抽奖
+  - 主城武器皮肤抽奖箱
+filter:
+  type: weapon
+limit:
+  - 仅限 牧师 职业可用

@@ -2,10 +2,11 @@
 
 import { GalleryItemImage } from "@/components/mc521/gallery/reusable/gallery-item-image";
 import { IconifyIcon } from "@/components/iconify-icon";
+import { QualityBadge } from "../reusable/quality-badge";
 
 interface GalleryItem {
     id: string;
-    basic: { name: string };
+    basic: { name: string; quality?: string };
     usage: string[];
     source: string[];
     limit: string[];
@@ -17,7 +18,10 @@ function ItemCard({ item, isGif }: { item: GalleryItem; isGif?: boolean }) {
             <div className="gallery-card-header mb-3 flex items-start gap-2">
                 <GalleryItemImage src={`/gallery/${item.basic.name}.${isGif ? "gif" : "png"}`} alt={item.basic.name} />
                 <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
-                    <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
+                    <div className="flex items-center gap-2">
+                        <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
+                        {item.basic.quality && <QualityBadge quality={item.basic.quality} />}
+                    </div>
                 </div>
             </div>
 

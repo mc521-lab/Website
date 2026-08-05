@@ -2,17 +2,31 @@
 
 import { useMemo, useState } from "react";
 import { gallery_deco_furniture_data } from "@/.velite";
+import { GalleryFilterPanel } from "@/components/mc521/gallery/reusable/gallery-filter-panel";
 import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
 import { GalleryItemImage } from "@/components/mc521/gallery/reusable/gallery-item-image";
 import { IconifyIcon } from "@/components/iconify-icon";
 
 interface FurnitureItem {
     id: string;
-    basic: { name: string; type: string };
+    basic: { name: string };
+    filter?: { type?: string; bundle?: string };
     usage: string[];
     source: string[];
     limit: string[];
 }
+
+const BUNDLE_OPTIONS = [
+    { value: "all", label: "全部" },
+    { value: "jiudian", label: "酒店家具" },
+    { value: "nongchang", label: "农场家具" },
+    { value: "gufeng", label: "古风家具" },
+    { value: "duchang", label: "赌场家具" },
+    { value: "zhanpu", label: "占卜家具" },
+    { value: "zhongshiji", label: "中世纪家具" },
+    { value: "shengdan", label: "圣诞家具" },
+    { value: "muyu", label: "沐浴家具" },
+] as const;
 
 function FurnitureCard({ item }: { item: FurnitureItem }) {
     return (
@@ -64,52 +78,42 @@ function FurnitureCard({ item }: { item: FurnitureItem }) {
 export default function DecoFurniturePage() {
     const allItems = gallery_deco_furniture_data as unknown as FurnitureItem[];
     const [search, setSearch] = useState("");
+    const [bundleFilter, setBundleFilter] = useState<string>("all");
 
     const filteredItems = useMemo(() => {
-        if (!search.trim()) return allItems;
-        const q = search.trim().toLowerCase();
-        return allItems.filter((item) => item.basic.name.toLowerCase().includes(q));
-    }, [allItems, search]);
+        let result = allItems;
+        if (bundleFilter !== "all") {
+            result = result.filter((item) => item.filter?.bundle === bundleFilter);
+        }
+        if (search.trim()) {
+            const q = search.trim().toLowerCase();
+            result = result.filter((item) => item.basic.name.toLowerCase().includes(q));
+        }
+        return result;
+    }, [allItems, bundleFilter, search]);
 
     const filterBar = (
-        <section className="gallery-filter-panel" aria-label="筛选器">
-            <div className="gallery-filter-toolbar">
-                <div className="gallery-filter-toolbar-title">
-                    <span className="gallery-filter-toolbar-icon" aria-hidden="true">
-                        <IconifyIcon icon="lucide:search" width={18} height={18} />
-                    </span>
-                    <div>
-                        <strong>名称搜索</strong>
-                        <span>输入关键词即可筛选家具</span>
-                    </div>
-                </div>
-                <div className="gallery-filter-toolbar-actions">
-                    <div className="gallery-filter-summary" aria-live="polite">
-                        <span className="gallery-filter-summary-dot" aria-hidden="true" />
-                        正在显示 <strong>{filteredItems.length}</strong> / {allItems.length} 件
-                    </div>
-                </div>
-            </div>
-            <div className="gallery-filter-groups">
-                <div className="gallery-filter-row">
-                    <div className="gallery-filter-heading">
-                        <span className="gallery-filter-heading-icon" aria-hidden="true">
-                            <IconifyIcon icon="lucide:file-text" width={14} height={14} />
-                        </span>
-                        家具名称
-                    </div>
-                    <div className="relative flex-1">
-                        <input
-                            type="text"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="搜索家具名称…"
-                            className="w-full rounded-lg border py-2.5 pr-4 pl-4 text-sm transition-all duration-300 outline-none"
-                        />
-                    </div>
-                </div>
-            </div>
-        </section>
+        <GalleryFilterPanel
+            total={allItems.length}
+            filtered={filteredItems.length}
+            unit="件"
+            search={{
+                value: search,
+                onChange: setSearch,
+                placeholder: "搜索家具名称…",
+                label: "家具名称",
+            }}
+            groups={[
+                {
+                    key: "bundle",
+                    label: "套系",
+                    icon: "lucide:layers",
+                    value: bundleFilter,
+                    onChange: (value) => setBundleFilter(value),
+                    options: BUNDLE_OPTIONS.map((opt) => ({ value: opt.value, label: opt.label })),
+                },
+            ]}
+        />
     );
 
     return (

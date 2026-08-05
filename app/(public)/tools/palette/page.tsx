@@ -349,6 +349,7 @@ export default function PalettePage() {
                             onClick={() => setFormat("cmi")}
                         />
                         <ModeChip
+                            className="opacity-1"
                             icon={Box}
                             label="Vanilla (聊天栏)"
                             active={format === "vanilla"}
@@ -498,11 +499,13 @@ function ModeChip({
     label,
     active,
     onClick,
+    className,
 }: {
-    icon: typeof Palette;
+    icon: typeof Box;
     label: string;
     active: boolean;
     onClick: () => void;
+    className?: string;
 }) {
     return (
         <Button
@@ -510,7 +513,7 @@ function ModeChip({
             variant={active ? "default" : "outline"}
             size="sm"
             onClick={onClick}
-            className={cn("gap-2 rounded-full px-4", active && "shadow-sm")}>
+            className={cn("gap-2 rounded-full px-4", active && "shadow-sm", className)}>
             <Icon className="size-4" />
             {label}
         </Button>

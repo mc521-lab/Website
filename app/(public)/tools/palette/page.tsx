@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Check, Copy, Layers3, Palette, Plus, Sparkles, RotateCw, Trash2 } from "lucide-react";
+import { Check, Copy, Layers3, Palette, Plus, Sparkles, RotateCw, Trash2, Box } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-type FormatMode = "minimessage" | "cmi";
+type FormatMode = "minimessage" | "cmi" | "vanilla";
 type ColorMode = "single" | "cycle" | "gradient";
 
 type Preset = {
@@ -22,6 +22,14 @@ const PRESET_SINGLE: Preset[] = [
     { name: "青绿", colors: ["#14B8A6"] },
     { name: "暖橙", colors: ["#F97316"] },
     { name: "玫红", colors: ["#EC4899"] },
+    { name: "天空蓝", colors: ["#0EA5E9"] },
+    { name: "翠绿", colors: ["#10B981"] },
+    { name: "琥珀", colors: ["#F59E0B"] },
+    { name: "靛蓝", colors: ["#6366F1"] },
+    { name: "珊瑚", colors: ["#F43F5E"] },
+    { name: "青瓷", colors: ["#06B6D4"] },
+    { name: "薰衣", colors: ["#A78BFA"] },
+    { name: "薄荷", colors: ["#34D399"] },
 ];
 
 const PRESET_MULTI: Preset[] = [
@@ -29,6 +37,14 @@ const PRESET_MULTI: Preset[] = [
     { name: "海岸", colors: ["#38BDF8", "#2DD4BF", "#F8FAFC"] },
     { name: "夕光", colors: ["#F59E0B", "#FB7185", "#8B5CF6"] },
     { name: "森林", colors: ["#22C55E", "#84CC16", "#EAB308"] },
+    { name: "极光", colors: ["#06B6D4", "#8B5CF6", "#EC4899"] },
+    { name: "日落", colors: ["#FBBF24", "#F97316", "#F43F5E"] },
+    { name: "深海", colors: ["#0EA5E9", "#6366F1", "#294fb6"] },
+    { name: "樱花", colors: ["#F9A8D4", "#EC4899", "#F472B6"] },
+    { name: "翡翠", colors: ["#10B981", "#34D399", "#6EE7B7"] },
+    { name: "暮色", colors: ["#7C3AED", "#A78BFA", "#C4B5FD"] },
+    { name: "秋叶", colors: ["#EA580C", "#F59E0B", "#D97706"] },
+    { name: "星河", colors: ["#3B82F6", "#8B5CF6", "#EC4899"] },
 ];
 
 function normalizeInput(value: string) {
@@ -132,7 +148,8 @@ function toMinimessage(text: string, colors: string[], mode: ColorMode) {
 
         case "cycle":
             let colorIndex = 0;
-            return tokens
+            return text
+                .split("")
                 .map((token) => {
                     if (isWhitespaceToken(token)) {
                         return token;
@@ -150,7 +167,7 @@ function toMinimessage(text: string, colors: string[], mode: ColorMode) {
 
 function toCmi(text: string, colors: string[], mode: ColorMode) {
     const tokens = ensureTextTokens(extractText(text));
-    if (!tokens) {
+    if (!tokens.length) {
         return "";
     }
 
@@ -160,7 +177,8 @@ function toCmi(text: string, colors: string[], mode: ColorMode) {
 
         case "cycle":
             let colorIndex = 0;
-            return tokens
+            return text
+                .split("")
                 .map((token) => {
                     if (isWhitespaceToken(token)) {
                         return token;
@@ -189,6 +207,48 @@ function toCmi(text: string, colors: string[], mode: ColorMode) {
     }
 }
 
+function toVanilla(text: string, colors: string[], mode: ColorMode) {
+    const tokens = ensureTextTokens(extractText(text));
+    if (!tokens.length) {
+        return "";
+    }
+
+    switch (mode) {
+        case "single":
+            return `&${colors[0] ?? "#FFFFFF"}${tokens.join("")}`;
+
+        case "cycle":
+            let colorIndex = 0;
+            return text
+                .split("")
+                .map((token) => {
+                    if (isWhitespaceToken(token)) {
+                        return token;
+                    }
+                    const color = colors[colorIndex % colors.length] ?? "#FFFFFF";
+                    colorIndex += 1;
+                    return `&${color}${token}`;
+                })
+                .join("");
+
+        case "gradient":
+            const compact = tokens.filter((token) => !isWhitespaceToken(token)).join("");
+            const gradient = buildGradientPalette(colors, compact.length || 1);
+            let index = 0;
+            return tokens
+                .map((token) => {
+                    if (isWhitespaceToken(token)) {
+                        return token;
+                    }
+                    return token
+                        .split("")
+                        .map((char) => `&${gradient[index++] ?? colors[0] ?? "#FFFFFF"}${char}`)
+                        .join("");
+                })
+                .join("");
+    }
+}
+
 export default function PalettePage() {
     const [text, setText] = useState("欢迎使用彩色文本生成器");
     const [format, setFormat] = useState<FormatMode>("minimessage");
@@ -196,7 +256,7 @@ export default function PalettePage() {
     const [singleColor, setSingleColor] = useState("#8B5CF6");
     const [cycleColors, setCycleColors] = useState<string[]>(["#22D3EE", "#A855F7", "#F43F5E"]);
     const [gradientColors, setGradientColors] = useState<string[]>(["#F97316", "#EC4899", "#8B5CF6"]);
-    const [inputLooksColored, setInputLooksColored] = useState(true);
+    const [inputLooksColored] = useState(true);
     const [copied, setCopied] = useState(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -204,9 +264,14 @@ export default function PalettePage() {
 
     const output = useMemo(() => {
         const source = inputLooksColored ? extractText(text) : text;
-        return format === "minimessage"
-            ? toMinimessage(source, activeColors, colorMode)
-            : toCmi(source, activeColors, colorMode);
+        switch (format) {
+            case "minimessage":
+                return toMinimessage(source, activeColors, colorMode);
+            case "cmi":
+                return toCmi(source, activeColors, colorMode);
+            case "vanilla":
+                return toVanilla(source, activeColors, colorMode);
+        }
     }, [activeColors, colorMode, format, inputLooksColored, text]);
 
     const previewSegments = useMemo(() => {
@@ -282,6 +347,12 @@ export default function PalettePage() {
                             label="CMI (用于告示牌)"
                             active={format === "cmi"}
                             onClick={() => setFormat("cmi")}
+                        />
+                        <ModeChip
+                            icon={Box}
+                            label="Vanilla (聊天栏)"
+                            active={format === "vanilla"}
+                            onClick={() => setFormat("vanilla")}
                         />
                         <div className="ms-auto flex items-center gap-2">
                             <Button size="sm" type="button" variant="outline" onClick={() => setText("欢迎使用彩色文本生成器")}>

@@ -10,3 +10,7 @@ MCAUTH:
   title: 正版验证
   icon: fluent-emoji-flat:bookmark
   href: /tools/mcauth
+PALETTE:
+  title: 彩色文本生成
+  icon: fluent-emoji-flat:artist-palette
+  href: /tools/palette

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Shield, Landmark, Gift, MessageSquare, Leaf, Globe } from "lucide-react";
 import { IconifyIcon } from "@/components/iconify-icon";
+import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 // 1. 数据配置
 const features = [
@@ -108,6 +110,18 @@ export default function Page() {
                         <span>{item.text}</span>
                     </div>
                 ))}
+                <Separator orientation="vertical" className="-mx-2" />
+                <a
+                    className="text-foreground inline-flex items-center gap-2 text-base"
+                    href="https://beian.miit.gov.cn/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <span>陕ICP备2022008445号-1</span>
+                </a>
+                <div className="text-foreground inline-flex items-center gap-2 text-base">
+                    <Image src="https://beian.mps.gov.cn/img/logo01.dd7ff50e.png" alt="陕公网安备" width={16} height={16} className="-translate-y-px" />
+                    <span>陕公网安备61092602000117号</span>
+                </div>
             </div>
         </section>
     );

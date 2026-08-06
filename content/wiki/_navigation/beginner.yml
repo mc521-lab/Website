@@ -3,27 +3,35 @@
   icon: lucide:sprout
   defaultExpanded: true
   items:
-    - title: 常用指令
-      href: /beginner/common-commands
-      icon: fluent-emoji-flat:books
+    - title: 初入世界
+      href: /beginner/join-us
+      icon: fluent-emoji-flat:globe-showing-asia-australia
       order: 1
-    - title: 如何圈地
-      href: /beginner/how-to-claim-land
-      icon: fluent-emoji-flat:round-pushpin
+    - title: 职业与战斗
+      href: /beginner/job-n-fight
+      icon: fluent-emoji-flat:crossed-swords
       order: 2
-    - title: 如何更换皮肤
-      href: /beginner/how-to-change-skin
-      icon: fluent-emoji-flat:t-shirt
+    - title: 装备与成长
+      href: /beginner/equip-n-growth
+      icon: fluent-emoji-flat:shield
       order: 3
-    - title: 如何赚取金币
-      href: /beginner/how-to-earn-money
-      icon: fluent-emoji-flat:money-bag
+    - title: 生活玩法
+      href: /beginner/life-play
+      icon: fluent-emoji-flat:seedling
       order: 4
-    - title: 如何绑定 Bilibili
-      href: /beginner/how-to-bind-bilibili
-      icon: fluent-emoji-flat:television
+    - title: 收藏养成
+      href: /beginner/collection
+      icon: fluent-emoji-flat:sparkles
       order: 5
-    - title: 如何创建箱子商店
-      href: /beginner/how-to-create-quickshop
-      icon: fluent-emoji-flat:money-with-wings
+    - title: 家园建设
+      href: /beginner/homeland
+      icon: fluent-emoji-flat:house-with-garden
       order: 6
+    - title: 财富系统
+      href: /beginner/wealth
+      icon: fluent-emoji-flat:money-bag
+      order: 7
+    - title: 社交成长
+      href: /beginner/social
+      icon: fluent-emoji-flat:busts-in-silhouette
+      order: 8

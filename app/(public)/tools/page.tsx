@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-export default function WikiIndexPage() {
+export default function ToolsIndexPage() {
     const router = useRouter();
-    router.push("/gallery/equipment/armor");
+    router.push("/tools/skindrop");
 }

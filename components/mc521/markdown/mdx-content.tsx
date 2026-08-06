@@ -1,9 +1,11 @@
 import * as runtime from "react/jsx-runtime";
 import * as MyComponents from "./my";
+import { H2, H3 } from "./my";
 
-// 全局共享组件
 const sharedComponents = {
     ...MyComponents,
+    h2: H2,
+    h3: H3,
 };
 
 // 将 Velite 生成的 code 解析为 React 组件

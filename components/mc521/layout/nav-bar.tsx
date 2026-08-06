@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 // 导航配置，直接传入 Lucide 图标组件
 const navItems = [
     { text: "首页", link: "/", icon: Home },
-    { text: "百科", link: "/wiki/beginner/common-commands", icon: BookOpen, activePattern: "/wiki" },
-    { text: "图鉴", link: "/gallery/equipment/armor", icon: GalleryVerticalEnd, activePattern: "/gallery" },
-    { text: "工具箱", link: "/tools/skindrop", icon: Toolbox, activePattern: "/tools" },
+    { text: "百科", link: "/wiki", icon: BookOpen, activePattern: "/wiki" },
+    { text: "图鉴", link: "/gallery", icon: GalleryVerticalEnd, activePattern: "/gallery" },
+    { text: "工具箱", link: "/tools", icon: Toolbox, activePattern: "/tools" },
     { text: "反馈", link: "/feedback", icon: MessageSquare, activePattern: "/feedback" },
     { text: "更新日志", link: "/changelog", icon: ClipboardList, activePattern: "/changelog" },
 ];

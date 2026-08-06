@@ -1,0 +1,29 @@
+- title: 核心系统
+  order: 2
+  defaultExpanded: false
+  icon: lucide:layers-3
+  items:
+    - title: 职业与战斗
+      href: /systems/job-n-fight
+      icon: fluent-emoji-flat:crossed-swords
+      order: 1
+    - title: 装备与成长
+      href: /systems/equip-n-growth
+      icon: fluent-emoji-flat:shield
+      order: 2
+    - title: 收藏养成
+      href: /systems/collection
+      icon: fluent-emoji-flat:ring
+      order: 3
+    - title: 财富系统
+      href: /systems/wealth
+      icon: fluent-emoji-flat:heavy-dollar-sign
+      order: 4
+    - title: 家园建设
+      href: /systems/homeland
+      icon: fluent-emoji-flat:hut
+      order: 5
+    - title: 生活玩法
+      href: /systems/life-play
+      icon: fluent-emoji-flat:carousel-horse
+      order: 6

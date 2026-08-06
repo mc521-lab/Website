@@ -1,8 +1,5 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { useRouter } from "next/navigation";
-
-export default function WikiIndexPage() {
-    const router = useRouter();
-    router.push("/gallery/equipment/armor");
+export default function GalleryIndexPage() {
+    redirect("/gallery/equipment/armor");
 }

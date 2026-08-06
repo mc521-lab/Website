@@ -1,8 +1,5 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function ChangelogIndexPage() {
-    const router = useRouter();
-    router.push("/changelog/latest/v1-2-0");
+    redirect("/changelog/latest/v1-2-0");
 }

@@ -1,0 +1,13 @@
+- title: 社交组织
+  order: 4
+  defaultExpanded: false
+  icon: lucide:users
+  items:
+    - title: 社交成长
+      href: /social
+      icon: fluent-emoji-flat:handshake
+      order: 1
+    - title: 公会入门简介
+      href: /social/guild
+      icon: fluent-emoji-flat:people-hugging
+      order: 2

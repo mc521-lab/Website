@@ -1,0 +1,29 @@
+- title: 操作教程
+  order: 3
+  defaultExpanded: false
+  icon: lucide:book-open-check
+  items:
+    - title: 如何圈地
+      href: /guides/how-to-claim-land
+      icon: fluent-emoji-flat:desert-island
+      order: 1
+    - title: 如何创建箱子商店
+      href: /guides/how-to-create-quickshop
+      icon: fluent-emoji-flat:shopping-bags
+      order: 2
+    - title: 如何赚取金币
+      href: /guides/how-to-earn-money
+      icon: fluent-emoji-flat:coin
+      order: 3
+    - title: 如何更换皮肤
+      href: /guides/how-to-change-skin
+      icon: fluent-emoji-flat:shorts
+      order: 4
+    - title: 如何绑定 Bilibili
+      href: /guides/how-to-bind-bilibili
+      icon: fluent-emoji-flat:television
+      order: 5
+    - title: 常用指令
+      href: /guides/common-commands
+      icon: fluent-emoji-flat:notebook-with-decorative-cover
+      order: 6

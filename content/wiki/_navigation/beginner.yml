@@ -1,37 +1,33 @@
-- title: 新手必看教程
+- title: 新手入门
   order: 1
-  icon: lucide:sprout
   defaultExpanded: true
+  icon: lucide:rocket
   items:
-    - title: 初入世界
-      href: /beginner/join-us
-      icon: fluent-emoji-flat:globe-showing-asia-australia
+    - title: 新手总入口
+      href: /beginner
+      icon: fluent-emoji-flat:derelict-house
       order: 1
-    - title: 职业与战斗
-      href: /beginner/job-n-fight
+    - title: PVP 玩家入口
+      href: /beginner/pvp
       icon: fluent-emoji-flat:crossed-swords
       order: 2
-    - title: 装备与成长
-      href: /beginner/equip-n-growth
-      icon: fluent-emoji-flat:shield
+    - title: PVE 玩家入口
+      href: /beginner/pve
+      icon: fluent-emoji-flat:man-zombie
       order: 3
-    - title: 生活玩法
-      href: /beginner/life-play
-      icon: fluent-emoji-flat:seedling
+    - title: 生电玩家入口
+      href: /beginner/redstone
+      icon: fluent-emoji-flat:hammer-and-wrench
       order: 4
-    - title: 收藏养成
-      href: /beginner/collection
-      icon: fluent-emoji-flat:sparkles
+    - title: 建筑玩家入口
+      href: /beginner/building
+      icon: fluent-emoji-flat:building-construction
       order: 5
-    - title: 家园建设
-      href: /beginner/homeland
-      icon: fluent-emoji-flat:house-with-garden
+    - title: 生活玩家入口
+      href: /beginner/life
+      icon: fluent-emoji-flat:beach-with-umbrella
       order: 6
-    - title: 财富系统
-      href: /beginner/wealth
-      icon: fluent-emoji-flat:money-bag
-      order: 7
-    - title: 社交成长
+    - title: 社交玩家入口
       href: /beginner/social
-      icon: fluent-emoji-flat:busts-in-silhouette
-      order: 8
+      icon: fluent-emoji-flat:face-with-hand-over-mouth
+      order: 7

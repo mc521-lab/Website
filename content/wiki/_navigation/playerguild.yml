@@ -1,9 +1,0 @@
-- title: 公会系统
-  order: 3
-  defaultExpanded: true # TODO: set to false after dev
-  icon: lucide:landmark
-  items:
-    - title: 入门简介
-      href: /playerguild/intro
-      icon: fluent-emoji-flat:houses
-      order: 1

@@ -4,18 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-    Home,
-    BookOpen,
-    ClipboardList,
-    Users,
-    Menu,
-    X,
-    GalleryVerticalEnd,
-    Toolbox,
-    MessageSquare,
-    KeyRound,
-} from "lucide-react";
+import { Home, BookOpen, ClipboardList, Users, Menu, X, GalleryVerticalEnd, Toolbox, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PlayerIdDialog } from "@/components/mc521/feedback/player-id-dialog";

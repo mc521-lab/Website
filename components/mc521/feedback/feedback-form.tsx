@@ -3,9 +3,10 @@
 import { useState, useCallback } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Send, Bug, Lightbulb, Flag, Server, User, FileText, Loader2 } from "lucide-react";
+import { Send, Bug, Lightbulb, Flag, Server, FileText, Loader2, ArrowRight, CircleQuestionMark } from "lucide-react";
 import { IconifyIcon } from "@/components/iconify-icon";
 import { createFeedback } from "@/lib/api";
+import { ensureSession } from "@/lib/api/client";
 import { type FeedbackType, type FeedbackServer, FEEDBACK_TYPE_LABEL, FEEDBACK_SERVER_LABEL } from "./types";
 
 interface FeedbackFormProps {
@@ -29,7 +30,6 @@ const SERVER_OPTIONS: { value: FeedbackServer; icon: string }[] = [
 export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
     const [type, setType] = useState<FeedbackType>("bug");
     const [server, setServer] = useState<FeedbackServer>("hub");
-    const [playerName, setPlayerName] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [submitting, setSubmitting] = useState(false);
@@ -37,16 +37,23 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
     const handleSubmit = useCallback(
         async (e: React.FormEvent) => {
             e.preventDefault();
-            if (!playerName.trim() || !title.trim() || !content.trim()) {
+            const playerId = window.localStorage.getItem("mc521_feedback_player_id")?.trim();
+            if (!playerId) {
+                toast.error("请先在右上角设置玩家 ID");
+                return;
+            }
+
+            if (!title.trim() || !content.trim()) {
                 toast.error("请填写所有必填字段");
                 return;
             }
             setSubmitting(true);
             try {
+                await ensureSession();
                 await createFeedback({
                     type,
                     server,
-                    playerName: playerName.trim(),
+                    playerName: playerId,
                     title: title.trim(),
                     content: content.trim(),
                 });
@@ -58,11 +65,11 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
                 setSubmitting(false);
             }
         },
-        [type, server, playerName, title, content, onSubmitSuccess]
+        [type, server, title, content, onSubmitSuccess]
     );
 
     return (
-        <section className="feedback-form-panel">
+        <section className="feedback-form-panel flex-1">
             <div className="feedback-form-header">
                 <div className="feedback-form-header-icon">
                     <IconifyIcon icon="lucide:message-square-plus" width={18} height={18} />
@@ -126,28 +133,14 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
                     </div>
                 </div>
 
-                {/* Player name */}
-                <div className="feedback-form-group">
-                    <label className="feedback-form-label" htmlFor="feedback-player-name">
-                        <User size={14} />
-                        玩家名称
-                    </label>
-                    <input
-                        id="feedback-player-name"
-                        type="text"
-                        value={playerName}
-                        onChange={(e) => setPlayerName(e.target.value)}
-                        placeholder="你的游戏 ID"
-                        maxLength={64}
-                        required
-                        className="feedback-form-input"
-                    />
+                <div className="feedback-form-group rounded-lg border border-dashed border-foreground/15 bg-foreground/5 px-4 py-3 text-sm text-foreground/75">
+                    <span>玩家 ID 将从右上角设置读取；如果还没有设置，请先去右上角填写喔~</span>
                 </div>
 
                 {/* Title */}
                 <div className="feedback-form-group">
                     <label className="feedback-form-label" htmlFor="feedback-title">
-                        <FileText size={14} />
+                        <CircleQuestionMark size={14} />
                         反馈标题
                     </label>
                     <input
@@ -163,8 +156,9 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
                 </div>
 
                 {/* Content */}
-                <div className="feedback-form-group">
+                <div className="feedback-form-group flex-1">
                     <label className="feedback-form-label" htmlFor="feedback-content">
+                        <FileText size={14} />
                         详细描述
                         <span className="feedback-form-counter">{content.length} / 5000</span>
                     </label>
@@ -176,7 +170,7 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
                         maxLength={5000}
                         rows={6}
                         required
-                        className="feedback-form-textarea"
+                        className="feedback-form-textarea h-full"
                     />
                 </div>
 

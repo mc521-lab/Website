@@ -4,9 +4,22 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, ClipboardList, Users, Menu, X, GalleryVerticalEnd, Toolbox, MessageSquare } from "lucide-react";
+import {
+    Home,
+    BookOpen,
+    ClipboardList,
+    Users,
+    Menu,
+    X,
+    GalleryVerticalEnd,
+    Toolbox,
+    MessageSquare,
+    KeyRound,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { PlayerIdDialog } from "@/components/mc521/feedback/player-id-dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // 导航配置，直接传入 Lucide 图标组件
 const navItems = [
@@ -23,6 +36,7 @@ const qqGroupLink = "https://qm.qq.com/q/cA73mE5jR6";
 export function Navbar() {
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
+    const isFeedbackRoute = pathname.startsWith("/feedback");
 
     // 判断链接是否激活
     const isActive = (item: { link: string; activePattern?: string }) => {
@@ -44,7 +58,7 @@ export function Navbar() {
             </Link>
 
             {/* 桌面端导航 */}
-            <nav className="hidden items-center gap-8 lg:flex">
+            <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
                 {navItems.map((item) => {
                     const Icon = item.icon;
                     const active = isActive(item);
@@ -66,22 +80,55 @@ export function Navbar() {
             </nav>
 
             {/* 右侧动作区 (桌面端 CTA) */}
-            <Button asChild className="hidden h-9 gap-1.5 rounded-full px-4 lg:inline-flex">
-                <a href={qqGroupLink} target="_blank" rel="noopener noreferrer">
-                    <Users size={18} />
-                    <span>加入QQ群</span>
-                </a>
-            </Button>
+            <TooltipProvider>
+                <div className="hidden items-center gap-2 lg:flex">
+                    {isFeedbackRoute && (
+                        <div className="min-w-0">
+                            <PlayerIdDialog />
+                        </div>
+                    )}
+                    {isFeedbackRoute ? (
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button
+                                    asChild
+                                    variant={isFeedbackRoute ? "outline" : "default"}
+                                    size={isFeedbackRoute ? "icon" : "default"}
+                                    className={cn("rounded-full", isFeedbackRoute ? "h-9 w-9 px-0" : "h-9 gap-1.5 px-4")}>
+                                    <Link href={qqGroupLink} target="_blank" rel="noopener noreferrer" aria-label="加入QQ群">
+                                        <Users size={18} data-icon="inline-start ml-1" />
+                                    </Link>
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>加入QQ群</TooltipContent>
+                        </Tooltip>
+                    ) : (
+                        <Button
+                            asChild
+                            variant={isFeedbackRoute ? "outline" : "default"}
+                            size={isFeedbackRoute ? "icon" : "default"}
+                            className={cn("rounded-full", isFeedbackRoute ? "h-9 w-9 px-0" : "h-9 gap-1.5 px-4")}>
+                            <Link href={qqGroupLink} target="_blank" rel="noopener noreferrer" aria-label="加入QQ群">
+                                <Users size={18} data-icon="inline-start ml-1" />
+                                <span>加入QQ群</span>
+                            </Link>
+                        </Button>
+                    )}
+                </div>
+            </TooltipProvider>
 
             {/* 移动端菜单切换按钮 */}
-            <Button
-                variant="ghost"
-                size="icon"
-                className="text-foreground hover:bg-foreground/10 lg:hidden"
-                onClick={() => setMenuOpen(!menuOpen)}
-                aria-label="打开菜单">
-                {menuOpen ? <X size={22} /> : <Menu size={22} />}
-            </Button>
+            <div className="flex items-center gap-2 lg:hidden">
+                {isFeedbackRoute && <PlayerIdDialog />}
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-foreground hover:bg-foreground/10"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label="打开菜单">
+                    {menuOpen ? <X size={22} /> : <Menu size={22} />}
+                </Button>
+            </div>
 
             {/* 移动端下拉菜单 */}
             {menuOpen && (

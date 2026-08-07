@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, startTransition } from "react";
 import { toast } from "sonner";
 import { getFeedbacks } from "@/lib/api";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { IconifyIcon } from "@/components/iconify-icon";
 import {
     type Feedback,
@@ -20,7 +21,6 @@ import { cn } from "@/lib/utils";
 import { Search, ChevronLeft, ChevronRight, Loader2, MessageSquare } from "lucide-react";
 
 interface FeedbackListProps {
-    onSelectFeedback: (feedback: Feedback) => void;
     refreshKey?: number;
 }
 
@@ -39,7 +39,7 @@ const SERVER_FILTER_OPTIONS: { value: FeedbackServer | "all"; label: string }[] 
     { value: "plot", label: "地皮" },
 ];
 
-export function FeedbackList({ onSelectFeedback, refreshKey }: FeedbackListProps) {
+export function FeedbackList({ refreshKey }: FeedbackListProps) {
     const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
@@ -198,10 +198,9 @@ export function FeedbackList({ onSelectFeedback, refreshKey }: FeedbackListProps
                 ) : (
                     <div className="feedback-list-items">
                         {feedbacks.map((fb) => (
-                            <button
+                            <Link
                                 key={fb.id}
-                                type="button"
-                                onClick={() => onSelectFeedback(fb)}
+                                href={`/feedback/${fb.number}`}
                                 className="feedback-item-card">
                                 <div className="feedback-item-header">
                                     <div className="feedback-item-badges">
@@ -241,7 +240,7 @@ export function FeedbackList({ onSelectFeedback, refreshKey }: FeedbackListProps
                                         )}
                                     </div>
                                 </div>
-                            </button>
+                            </Link>
                         ))}
                     </div>
                 )}

@@ -39,7 +39,7 @@ function sortByOrder<T extends { order?: number }>(items: T[]): T[] {
 
 function IslandNavItemLink({ item }: { item: IslandNavItem }) {
     const pathname = usePathname();
-    const isActive = pathname === item.href;
+    const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
     return (
         <Link href={item.href} className={cn("island-nav-item", isActive && "is-active")}>
@@ -79,7 +79,7 @@ function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
             <div className="island-nav-group-body">
                 <ul>
                     {sortedItems.map((item, index) => {
-                        const isActive = pathname === item.href;
+                        const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
                         return (
                             <li key={item.href} className={cn(index === 0 && "mt-2")}>
                                 <Link href={item.href} className={cn("island-nav-item", isActive && "is-active")}>

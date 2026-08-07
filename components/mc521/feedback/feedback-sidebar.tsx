@@ -1,24 +1,30 @@
 "use client";
 
-import { useFeedbackView } from "./feedback-context";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { IconifyIcon } from "@/components/iconify-icon";
 
-export function FeedbackSidebar() {
-    const { view, selectedFeedback, goToBoard, goToSubmit } = useFeedbackView();
+export function FeedbackSidebar({ pathname }: { pathname?: string }) {
+    const _currentPath = usePathname();
+    const currentPath = pathname ?? _currentPath;
 
     const navItems = [
         {
-            key: "board" as const,
+            key: "/feedback" as const,
             title: "反馈看板",
             iconIfe: "lucide:clipboard-list",
+            href: "/feedback",
         },
         {
-            key: "submit" as const,
+            key: "/feedback/submit" as const,
             title: "提交反馈",
             iconIfe: "lucide:plus",
+            href: "/feedback/submit",
         },
     ];
+
+    const isActive = (href: string) => currentPath === href;
 
     return (
         <aside className="island-sidebar feedback-sidebar">
@@ -30,31 +36,28 @@ export function FeedbackSidebar() {
 
             <nav className="island-sidebar-nav">
                 {navItems.map((item) => {
-                    const isActive = view === item.key;
+                    const active = isActive(item.href);
                     return (
-                        <button
+                        <Link
                             key={item.key}
-                            type="button"
-                            onClick={item.key === "board" ? goToBoard : goToSubmit}
-                            className={cn("island-nav-item feedback-nav-item", isActive && "is-active")}>
+                            href={item.href}
+                            className={cn("island-nav-item feedback-nav-item", active && "is-active")}>
                             <span className="island-nav-icon">
                                 <IconifyIcon icon={item.iconIfe} />
                             </span>
                             <span className="island-nav-title">{item.title}</span>
-                        </button>
+                        </Link>
                     );
                 })}
 
-                {view === "detail" && (
+                {currentPath.startsWith("/feedback/") && currentPath !== "/feedback" && currentPath !== "/feedback/submit" && (
                     <div className="feedback-nav-group is-detail w-full">
-                        <button type="button" className={cn("island-nav-item feedback-nav-item is-active w-full")}>
+                        <div className={cn("island-nav-item feedback-nav-item is-active w-full")}>
                             <span className="island-nav-icon">
                                 <IconifyIcon icon="lucide:eye" />
                             </span>
-                            <span className="island-nav-title">
-                                {selectedFeedback ? `#${selectedFeedback.number} ${selectedFeedback.title}` : "反馈详情"}
-                            </span>
-                        </button>
+                            <span className="island-nav-title">反馈详情</span>
+                        </div>
                     </div>
                 )}
             </nav>

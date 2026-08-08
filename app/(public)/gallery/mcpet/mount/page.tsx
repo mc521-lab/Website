@@ -76,10 +76,6 @@ function MountOverviewCard({ item }: { item: MountItem }) {
 
             <div className="mb-3 grid grid-cols-4 gap-2 text-sm">
                 <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">最大等级</div>
-                    <div className="mt-0.5 font-medium">{item.basic.maxLevel ?? "-"}</div>
-                </div>
-                <div className="bg-muted rounded-md p-2">
                     <div className="text-muted-foreground text-xs">生命</div>
                     <div className="mt-0.5 font-medium">{item.effects.MaxHealth.at(-1) ?? "-"}</div>
                 </div>
@@ -91,24 +87,9 @@ function MountOverviewCard({ item }: { item: MountItem }) {
                     <div className="text-muted-foreground text-xs">防御</div>
                     <div className="mt-0.5 font-medium">{item.effects.ResistanceModifier.at(-1) ?? "-"}</div>
                 </div>
-            </div>
-
-            <div className="bg-muted rounded-md p-2 text-sm">
-                <div className="text-muted-foreground mb-1 flex items-center gap-1 text-xs font-medium">
-                    <IconifyIcon icon="lucide:sparkles" width={12} height={12} />
-                    成长曲线 (Lv{Array.from({ length: item.basic.maxLevel ?? 0 }, (_, i) => i + 1).join("/")})
-                </div>
-                <div className="grid grid-cols-[48px_1fr] gap-x-2 gap-y-1 text-xs">
-                    <span className="text-muted-foreground">经验</span>
-                    <span className="text-right">{item.effects.ExperienceThreshold.join(" / ")}</span>
-                    <span className="text-muted-foreground">生命</span>
-                    <span className="text-right">{item.effects.MaxHealth.join(" / ")}</span>
-                    <span className="text-muted-foreground">恢复</span>
-                    <span className="text-right">{item.effects.Regeneration.join(" / ")}</span>
-                    <span className="text-muted-foreground">防御</span>
-                    <span className="text-right">{item.effects.ResistanceModifier.join(" / ")}</span>
-                    <span className="text-muted-foreground">复活</span>
-                    <span className="text-right">{item.effects.RespawnCooldown.join(" / ")}</span>
+                <div className="bg-muted rounded-md p-2">
+                    <div className="text-muted-foreground text-xs">复活冷却</div>
+                    <div className="mt-0.5 font-medium">{item.effects.RespawnCooldown.at(-1) ?? "-"}s</div>
                 </div>
             </div>
         </article>
@@ -202,3 +183,4 @@ export default function PetMountPage() {
         </GalleryShell>
     );
 }
+

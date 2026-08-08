@@ -115,7 +115,7 @@ function PetOverviewCard({ item }: { item: PetItem }) {
                     <span className="text-muted-foreground">防御数值</span>
                     <span className="text-right">{item.effects.ResistanceModifier.join(" / ")}</span>
                     <span className="text-muted-foreground">复活冷却</span>
-                    <span className="text-right">{item.effects.RespawnCooldown.join(" / ")}</span>
+                    <span className="text-right">{item.effects.RespawnCooldown.join("s / ")}s</span>
                 </div>
             </div>
         </article>

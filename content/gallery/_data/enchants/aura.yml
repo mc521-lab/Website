@@ -1,0 +1,19 @@
+basic:
+  id: aura
+  name: 光环
+  description: 在你%radius%格范围内的玩家承受的伤害减少%reduction%%
+  placeholder: null
+  placeholders:
+    reduction: '%level% * 10'
+    radius: 3 + %level% * 2
+  max-level: 2
+  type: shishi
+filter:
+  rarity: epic
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- chestplate
+- leggings
+conflicts: []

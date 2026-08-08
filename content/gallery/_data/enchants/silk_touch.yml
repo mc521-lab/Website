@@ -1,0 +1,15 @@
+basic:
+  id: silk_touch
+  name: 精准采集
+  description: 被挖掘的方块会掉落其本身
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: epic
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

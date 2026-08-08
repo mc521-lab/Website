@@ -1,0 +1,15 @@
+basic:
+  id: thorns
+  name: 荆棘
+  description: 有 %placeholder%% 的几率将部分受到的伤害反弹给攻击者
+  placeholder: '%level% * 15'
+  placeholders: {}
+  max-level: 1
+  type: shishi
+filter:
+  rarity: epic
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

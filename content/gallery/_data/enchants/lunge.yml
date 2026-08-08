@@ -1,0 +1,15 @@
+basic:
+  id: lunge
+  name: 猛冲
+  description: 在刺击攻击时向前猛冲 %placeholder% 格每秒
+  placeholder: round(%level * 9.16)
+  placeholders: {}
+  max-level: 1
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

@@ -1,0 +1,17 @@
+basic:
+  id: first_strike
+  name: 先机
+  description: 对满血玩家造成%placeholder%%额外伤害
+  placeholder: 5 * %level%
+  placeholders: {}
+  max-level: 5
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+- axe
+conflicts: []

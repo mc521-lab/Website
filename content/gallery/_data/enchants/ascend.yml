@@ -1,0 +1,16 @@
+basic:
+  id: ascend
+  name: 腾空
+  description: 使你悬浮在空中%placeholder%秒,并免疫坠落伤害
+  placeholder: '%level% / 4'
+  placeholders: {}
+  max-level: 2
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts: []

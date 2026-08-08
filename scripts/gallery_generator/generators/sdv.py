@@ -19,10 +19,10 @@ CROP_VARIANT_RE = re.compile(r"^(.+?)\((银星|金星)\)$")
 
 USAGE_SEED = ["种植在种植盆中", "收获后获得对应作物"]
 USAGE_TOOL = "辅助种植作物"
-USAGE_CROP = "在主城售卖获得金币"
+USAGE_CROP = "售卖获得金币"
 
-SOURCE = "主城星露谷商人 处购买"
-SOURCE_CROP = "种植对应作物后收成获得"
+SOURCE = "星露谷商人购买"
+SOURCE_CROP = "作物收成获得"
 
 
 def clean_name(raw: str) -> str:

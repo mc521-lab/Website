@@ -1,0 +1,16 @@
+basic:
+  id: lumberjack
+  name: 电锯
+  description: 一次性砍伐%placeholder%个树木方块
+  placeholder: 4 * %level%
+  placeholders: {}
+  max-level: 6
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- axe
+conflicts: []

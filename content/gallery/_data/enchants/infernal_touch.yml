@@ -1,0 +1,17 @@
+basic:
+  id: infernal_touch
+  name: 急迫
+  description: 挖掘方块时获得急迫效果1级,持续%duration%秒
+  placeholder: null
+  placeholders:
+    duration: '%level% * 0.5'
+  max-level: 3
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- pickaxe
+conflicts: []

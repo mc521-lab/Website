@@ -1,0 +1,15 @@
+basic:
+  id: channeling
+  name: 引雷
+  description: 在雷暴天气下，掷出的三叉戟击中实体时会在该处生成闪电
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: normal
+filter:
+  rarity: epic
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

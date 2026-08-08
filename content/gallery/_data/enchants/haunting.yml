@@ -1,0 +1,16 @@
+basic:
+  id: haunting
+  name: 缠魂
+  description: 死亡时生成一团伤害药水云，持续%placeholder%秒
+  placeholder: 1 + %level%
+  placeholders: {}
+  max-level: 2
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- helmet
+conflicts: []

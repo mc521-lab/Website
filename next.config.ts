@@ -10,7 +10,7 @@ if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
 
 const nextConfig: NextConfig = {
     // For my local cross-device development :)
-    allowedDevOrigins: ["192.168.137.244", "local.frp.yuns-lab.tech"],
+    allowedDevOrigins: ["192.168.137.244", "local.frp.yuns-lab.tech", "127.52.1.1"],
     images: {
         remotePatterns: [{ protocol: "https", hostname: "beian.mps.gov.cn" }],
     },

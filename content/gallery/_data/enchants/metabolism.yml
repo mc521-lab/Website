@@ -1,0 +1,16 @@
+basic:
+  id: metabolism
+  name: 食疗
+  description: 增加食物恢复的饥饿值%placeholder%%
+  placeholder: '%level% * 12.5'
+  placeholders: {}
+  max-level: 2
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- chestplate
+conflicts: []

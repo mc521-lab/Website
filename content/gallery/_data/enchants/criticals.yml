@@ -1,0 +1,17 @@
+basic:
+  id: criticals
+  name: 暴戾
+  description: 提升暴击伤害%placeholder%%
+  placeholder: 4 * %level%
+  placeholders: {}
+  max-level: 5
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+- axe
+conflicts: []

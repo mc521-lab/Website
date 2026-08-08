@@ -1,0 +1,21 @@
+basic:
+  name: 荒行利爪
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 200
+  Regeneration:
+  - 1.1
+  ResistanceModifier:
+  - 1.55
+  RespawnCooldown:
+  - 40
+variants:
+- 荒行利爪
+- 冰霜利爪
+- 幽匿利爪
+- 末影利爪
+filter:
+  type: pet

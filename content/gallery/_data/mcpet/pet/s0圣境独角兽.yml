@@ -1,0 +1,41 @@
+basic:
+  name: 圣境独角兽
+  maxLevel: 5
+effects:
+  ExperienceThreshold:
+  - 0
+  - 300
+  - 700
+  - 1500
+  - 2500
+  MaxHealth:
+  - 50
+  - 80
+  - 110
+  - 140
+  - 170
+  Regeneration:
+  - 2.0
+  - 2.1
+  - 2.2
+  - 2.3
+  - 2.4
+  ResistanceModifier:
+  - 1.8
+  - 1.8
+  - 1.8
+  - 1.0
+  - 1.8
+  RespawnCooldown:
+  - 60
+  - 55
+  - 50
+  - 45
+  - 40
+variants:
+- 圣境独角兽
+- 碧影独角兽
+- 彩虹独角兽
+- 亡灵独角兽
+filter:
+  type: pet

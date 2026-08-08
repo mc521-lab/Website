@@ -1,0 +1,16 @@
+basic:
+  id: replenish
+  name: 播种机
+  description: 作物会被自动重新种植
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- hoe
+conflicts: []

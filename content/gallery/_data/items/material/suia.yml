@@ -1,11 +1,11 @@
 basic:
   name: 灰烬晶胚
   quality: S
+usage:
+- 用于兑换灰烬宝石
+source:
+- 副本灵域遗迹
+limit: []
 filter:
   type: sui
   for: gem
-usage:
-  - 兑换灰烬宝石
-source:
-  - 副本灵域遗迹
-limit: []

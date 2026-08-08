@@ -1,0 +1,16 @@
+basic:
+  id: wyvern
+  name: 血羽
+  description: 给予 %placeholder%% 近战伤害加成
+  placeholder: 10 * %level%
+  placeholders: {}
+  max-level: 2
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- elytra
+conflicts: []

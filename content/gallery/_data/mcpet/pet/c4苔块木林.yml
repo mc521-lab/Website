@@ -1,0 +1,36 @@
+basic:
+  name: 苔块木林
+  maxLevel: 5
+effects:
+  ExperienceThreshold:
+  - 0
+  - 50
+  - 100
+  - 200
+  - 350
+  MaxHealth:
+  - 10
+  - 20
+  - 30
+  - 45
+  - 50
+  Regeneration:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  ResistanceModifier:
+  - 1.25
+  - 1.25
+  - 1.25
+  - 1.25
+  - 1.25
+  RespawnCooldown:
+  - 60
+  - 55
+  - 50
+  - 45
+  - 40
+filter:
+  type: pet

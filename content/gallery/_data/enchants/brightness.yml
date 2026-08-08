@@ -1,0 +1,21 @@
+basic:
+  id: brightness
+  name: 光明
+  description: 对监守者造成 %placeholder%% 额外伤害
+  placeholder: 20 * %level%
+  placeholders: {}
+  max-level: 5
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts:
+- sharpness
+- smite
+- bane_of_arthropods
+- introversion
+- slaughter

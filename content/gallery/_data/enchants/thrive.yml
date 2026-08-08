@@ -1,0 +1,16 @@
+basic:
+  id: thrive
+  name: 旺盛
+  description: 获得 %placeholder% 点额外生命值
+  placeholder: '%level%'
+  placeholders: {}
+  max-level: 2
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- armor
+conflicts: []

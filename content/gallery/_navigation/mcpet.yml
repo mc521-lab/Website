@@ -1,0 +1,14 @@
+- title: 宠物与坐骑
+  order: 3
+  icon: lucide:paw-print
+  defaultExpanded: false
+  items:
+    - title: 宠物图鉴
+      href: /gallery/mcpet/pet
+      icon: fluent-emoji-flat:dog-face
+      order: 0
+    - title: 坐骑图鉴
+      href: /gallery/mcpet/mount
+      icon: fluent-emoji-flat:horse
+      order: 1
+

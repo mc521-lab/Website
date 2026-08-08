@@ -1,12 +1,12 @@
 basic:
   name: 圣河琥珀
   quality: A
+usage:
+- 用于兑换 A 级套装
+source:
+- 银币商店兑换
+- 副本法老王陵
+limit: []
 filter:
   type: hupo
   for: set_a
-usage:
-  - 兑换 A 级套装
-source:
-  - 银币商店兑换
-  - 副本法老王陵
-limit: []

@@ -2,9 +2,9 @@ basic:
   name: 番石榴
   type: crop
 usage:
-  - 在主城售卖获得金币
+  - 售卖获得金币
 source:
-  - 种植对应作物后收成获得
+  - 作物收成获得
 variants:
   - 番石榴
   - 番石榴(银星)

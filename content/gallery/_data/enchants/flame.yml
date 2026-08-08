@@ -1,0 +1,15 @@
+basic:
+  id: flame
+  name: 火矢
+  description: 箭矢使目标着火，造成 5 点火焰伤害
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

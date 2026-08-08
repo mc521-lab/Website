@@ -1,0 +1,17 @@
+basic:
+  id: veinminer
+  name: 脉络
+  description: 一次性采集多达 %placeholder% 个矿脉方块
+  placeholder: 2 + 3 * %level%
+  placeholders: {}
+  max-level: 4
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- pickaxe
+conflicts:
+- blast_mining

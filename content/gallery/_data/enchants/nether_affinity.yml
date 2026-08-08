@@ -1,0 +1,19 @@
+basic:
+  id: nether_affinity
+  name: 狱击
+  description: 在下界造成伤害时提升%placeholder%%
+  placeholder: 20 + %level% * 10
+  placeholders: {}
+  max-level: 3
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+- bow
+- trident
+conflicts:
+- end_affinity

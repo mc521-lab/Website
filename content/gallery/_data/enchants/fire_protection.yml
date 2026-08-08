@@ -1,0 +1,17 @@
+basic:
+  id: fire_protection
+  name: 火焰保护
+  description: 减少受到的火焰伤害 %damage%% 并缩短燃烧时间 %time%%
+  placeholder: null
+  placeholders:
+    damage: '%level% * 8'
+    time: '%level% * 15'
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

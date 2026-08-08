@@ -1,0 +1,17 @@
+basic:
+  id: bane_of_arthropods
+  name: 节肢杀手
+  description: 对节肢生物额外造成 %damage% 点伤害，并施加至多 %seconds% 秒的缓慢 IV
+  placeholder: null
+  placeholders:
+    damage: 2.5 * %level%
+    seconds: 0.5 * %level%
+  max-level: 1
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

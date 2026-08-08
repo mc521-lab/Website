@@ -1,0 +1,16 @@
+basic:
+  id: rocket_saver
+  name: 节能
+  description: 助推时有 %placeholder%% 几率不消耗烟花
+  placeholder: '%level% * 20'
+  placeholders: {}
+  max-level: 3
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- elytra
+conflicts: []

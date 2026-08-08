@@ -1,0 +1,17 @@
+basic:
+  id: boss_hunter
+  name: 破首
+  description: 对原版Boss造成%placeholder%% 额外伤害
+  placeholder: 10 * %level%
+  placeholders: {}
+  max-level: 8
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- bow
+- crossbow
+conflicts: []

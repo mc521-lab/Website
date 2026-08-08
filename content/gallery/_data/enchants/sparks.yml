@@ -1,0 +1,18 @@
+basic:
+  id: sparks
+  name: 雷鸣钩索
+  description: 在暴风雨中钩中敌人有 %chance%% 几率召唤闪电造成 %damage% 点伤害
+  placeholder: null
+  placeholders:
+    damage: 1 + %level%
+    chance: 25 + 5 * %level%
+  max-level: 5
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- fishing_rod
+conflicts: []

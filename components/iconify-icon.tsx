@@ -3,7 +3,7 @@ import { Icon, IconProps } from "@iconify/react";
 
 export interface IconifyIconProps extends Omit<IconProps, "icon"> {
     /** Icon name in the format "collection:name", e.g. "emojione-v1:maple-leaf" */
-    icon: string;
+    icon: string | IconProps["icon"];
     /** Optional width (number or string with unit) */
     width?: string | number;
     /** Optional height (number or string with unit) */

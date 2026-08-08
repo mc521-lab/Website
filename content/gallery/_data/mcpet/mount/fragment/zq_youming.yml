@@ -1,0 +1,6 @@
+basic:
+  name: 幽冥龙王碎片
+usage:
+- 集齐10个碎片用于兑换坐骑幽冥龙王
+filter:
+  type: fragment

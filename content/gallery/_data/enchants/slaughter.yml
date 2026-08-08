@@ -1,0 +1,21 @@
+basic:
+  id: slaughter
+  name: 屠戮
+  description: 对被动生物造成的近战伤害增加 %placeholder%
+  placeholder: 2.5 * %level%
+  placeholders: {}
+  max-level: 5
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts:
+- sharpness
+- smite
+- bane_of_arthropods
+- introversion
+- brightness

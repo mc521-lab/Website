@@ -1,17 +1,18 @@
-- title: 物品图鉴
+- title: 物品与道具
   order: 2
   icon: lucide:gift
   defaultExpanded: false
   items:
-    - title: 材料图鉴
-      href: /gallery/items/material
-      icon: fluent-emoji-flat:wood
-      order: 1
-    - title: 道具图鉴
-      href: /gallery/items/prop
-      icon: fluent-emoji-flat:broom
-      order: 2
-    - title: 货币图鉴
-      href: /gallery/items/currency
+    - title: 物品图鉴
+      href: /gallery/chore/items
       icon: fluent-emoji-flat:coin
+      order: 1
+    - title: 附魔图鉴
+      href: /gallery/chore/enchantments
+      icon: fluent-emoji-flat:magic-wand
+      order: 2
+    - title: 星露谷图鉴
+      href: /gallery/chore/sdv
+      icon: fluent-emoji-flat:seedling
       order: 3
+

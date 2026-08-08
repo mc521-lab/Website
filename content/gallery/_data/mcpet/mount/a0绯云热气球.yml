@@ -1,0 +1,16 @@
+basic:
+  name: 绯云热气球
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 200
+  Regeneration:
+  - 1.1
+  ResistanceModifier:
+  - 1.55
+  RespawnCooldown:
+  - 40
+filter:
+  type: pet

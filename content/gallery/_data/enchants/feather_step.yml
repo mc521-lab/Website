@@ -1,0 +1,16 @@
+basic:
+  id: feather_step
+  name: 轻步
+  description: 跳跃时防止践踏农作物
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- boots
+conflicts: []

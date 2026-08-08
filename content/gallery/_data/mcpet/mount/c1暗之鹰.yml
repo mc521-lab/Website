@@ -1,0 +1,16 @@
+basic:
+  name: 暗之鹰
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 100
+  Regeneration:
+  - 0.5
+  ResistanceModifier:
+  - 1.2
+  RespawnCooldown:
+  - 60
+filter:
+  type: pet

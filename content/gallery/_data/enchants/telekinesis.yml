@@ -1,0 +1,20 @@
+basic:
+  id: telekinesis
+  name: 吸星
+  description: 掉落物和经验将直接进入你的背包
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- pickaxe
+- sword
+- axe
+- hoe
+- shovel
+conflicts: []

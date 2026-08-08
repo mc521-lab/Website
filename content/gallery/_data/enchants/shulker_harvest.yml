@@ -1,0 +1,17 @@
+basic:
+  id: shulker_harvest
+  name: 贝收
+  description: 提升 %placeholder%% 的潜影贝掉落率
+  placeholder: ceil(((1 / (%level% + 4)) + ((%level% + 3) / 2)) * 100 - 100)
+  placeholders: {}
+  max-level: 3
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts:
+- looting

@@ -1,0 +1,15 @@
+basic:
+  id: fire_aspect
+  name: 火焰附加
+  description: 使目标着火 4 秒，每刻火焰造成 %placeholder% 点伤害
+  placeholder: (%level% * 4) - 1
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

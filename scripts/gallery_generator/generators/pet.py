@@ -1,20 +1,19 @@
-"""宠物相关 gallery 生成器（宠食/碎片/皮肤）。"""
+"""宠物相关 gallery 生成器（宠物/坐骑）。"""
 
 from __future__ import annotations
 
-import logging
 import re
 from pathlib import Path
 from typing import Any
-
-from ..utils import write_yaml_with_merge
-
-logger = logging.getLogger(__name__)
+import yaml
 
 name = "pet"
-help = "从 material.yml + pet-skin-names.txt 生成宠物 gallery 数据"
+help = "从 MCPets/Pets 和 MMOItems/item/material.yml 生成宠物 gallery 数据"
 
-TYPE_RE = re.compile(r"类型:\s*(?:<#?[A-Fa-f0-9]{6}>)?\s*([^\s<#&]+)")
+SKILL_RE = re.compile(r"(?:Skill|skill)\s*[:：]\s*([\w.-]+)")
+MAX_LEVEL_RE = re.compile(r"^Lv(\d+)$", re.IGNORECASE)
+VARIANT_KEY_RE = re.compile(r"^(pifu\d+|skin\d+|variant\d+|v\d+)$", re.IGNORECASE)
+FRAGMENT_KEY_RE = re.compile(r"^CW_[A-Z0-9_]+$")
 
 COLOR_TAG_RE = re.compile(
     r"</?gradient[^>]*>|"
@@ -24,170 +23,249 @@ COLOR_TAG_RE = re.compile(
     r"&[a-z]"
 )
 
-SEPARATOR_RE = re.compile(r"^[\s━─—–-]+$")
-TIME_LIMIT_RE = re.compile(r"(?:有效使用期限|有效时间|有效期限)\s*[:：]\s*(.+)$")
-USAGE_PREFIX_RE = re.compile(r"^用途\s*[:：]\s*")
+COLOR_TAG_RE_2 = re.compile(r"\x1b\[[0-9;]*m")
 
 
 def strip_formatting(text: str) -> str:
     if not text:
         return ""
     s = COLOR_TAG_RE.sub("", str(text))
+    s = COLOR_TAG_RE_2.sub("", s)
     s = re.sub(r"&[0-9a-fk-or]", "", s)
     return s.strip()
 
 
-def strip_gradient(name: str) -> str:
-    return strip_formatting(name)
+def clean_name(raw: str) -> str:
+    return strip_formatting(raw).strip()
 
 
-def extract_type(lore: list[Any]) -> str | None:
-    for line in lore:
-        m = TYPE_RE.search(str(line))
-        if m:
-            return m.group(1).strip()
+def get_name(base: dict[str, Any], fallback: str) -> str:
+    icon = base.get("Icon") or {}
+    for key in ("Name", "DisplayName"):
+        value = icon.get(key)
+        if value:
+            name = clean_name(str(value))
+            if name:
+                return name
+    value = base.get("Id") or fallback
+    return clean_name(str(value))
+
+
+def extract_level_value(level: dict[str, Any], keys: tuple[str, ...]) -> Any:
+    for key in keys:
+        if key in level and level[key] is not None:
+            return level[key]
     return None
 
 
-def parse_time_limit(base: dict[str, Any], cleaned_lines: list[str]) -> list[str]:
-    limits: list[str] = []
-    raw_tl = base.get("time-limit")
-    if raw_tl is not None:
-        s = str(raw_tl).strip().lower()
-        if s.endswith("h"):
-            try:
-                limits.append(f"有效时间：{int(float(s[:-1]))} 小时")
-            except ValueError:
-                limits.append(f"有效时间：{s}")
-        elif s.endswith("d"):
-            try:
-                limits.append(f"有效时间：{int(float(s[:-1]))} 天")
-            except ValueError:
-                limits.append(f"有效时间：{s}")
-        else:
-            limits.append(f"有效时间：{s}")
-        return limits
-    for line in cleaned_lines:
-        m = TIME_LIMIT_RE.search(line)
-        if m:
-            val = m.group(1).strip()
-            val = re.sub(r"(\d+)\s*小时", r"\1 小时", val)
-            val = re.sub(r"(\d+)\s*天", r"\1 天", val)
-            limits.append(f"有效时间：{val}")
-            break
-    return limits
+def parse_levels(levels: Any) -> tuple[int | None, list[dict[str, Any]]]:
+    if not isinstance(levels, dict):
+        return None, []
+    parsed: list[dict[str, Any]] = []
+    max_level = None
+    for key, value in levels.items():
+        if not isinstance(value, dict):
+            continue
+        m = MAX_LEVEL_RE.match(str(key))
+        level_no = int(m.group(1)) if m else None
+        if level_no is not None:
+            max_level = max(max_level or 0, level_no)
+        skill = extract_level_value(value, ("Announcement", "Skill"))
+        if isinstance(skill, dict):
+            skill = skill.get("Skill") or skill.get("skill")
+        parsed.append(
+            {
+                "level": level_no,
+                "name": clean_name(str(value.get("Name") or key)),
+                "experienceThreshold": value.get("ExperienceThreshold"),
+                "maxHealth": value.get("MaxHealth"),
+                "regeneration": value.get("Regeneration"),
+                "resistanceModifier": value.get("ResistanceModifier"),
+                "respawnCooldown": (value.get("Cooldowns") or {}).get("Respawn") if isinstance(value.get("Cooldowns"), dict) else None,
+                "skill": clean_name(str(skill)) if skill else None,
+            }
+        )
+    parsed.sort(key=lambda item: item["level"] or 0)
+    return max_level, parsed
 
 
-def classify_lore_lines(cleaned_lines: list[str]) -> tuple[list[str], list[str]]:
-    usage: list[str] = []
-    source: list[str] = []
-    skip_patterns = ("品质:", "类型:", "有效使用期限", "有效时间", "有效期限")
-    for line in cleaned_lines:
-        if not line or SEPARATOR_RE.match(line):
-            continue
-        if any(p in line for p in skip_patterns):
-            continue
-        if USAGE_PREFIX_RE.match(line):
-            content = USAGE_PREFIX_RE.sub("", line).strip()
-            if content:
-                usage.append(content)
-            continue
-        if "右键使用" in line:
-            clean = re.sub(r"^[^\u4e00-\u9fff]*", "", line).strip()
-            if clean:
-                usage.append(clean)
-            continue
-        if line == "需要拥有指定权限":
-            continue
-        usage.append(line)
-    return usage, source
+def parse_skills(base: dict[str, Any], levels: list[dict[str, Any]]) -> list[str]:
+    skills: list[str] = []
+    seen: set[str] = set()
+
+    def add(value: Any) -> None:
+        if not value:
+            return
+        clean = clean_name(str(value))
+        if clean and clean not in seen:
+            seen.add(clean)
+            skills.append(clean)
+
+    signals = base.get("Signals")
+    if isinstance(signals, dict):
+        values = signals.get("Values")
+        if isinstance(values, list):
+            for value in values:
+                add(value)
+        item = signals.get("Item")
+        if isinstance(item, dict):
+            add(item.get("Name"))
+
+    for level in levels:
+        add(level.get("skill"))
+
+    desc = base.get("Icon", {}).get("Description") if isinstance(base.get("Icon"), dict) else None
+    if isinstance(desc, list):
+        for line in desc:
+            m = SKILL_RE.search(strip_formatting(str(line)))
+            if m:
+                add(m.group(1))
+
+    return skills
 
 
-def transform_item(key: str, base: dict[str, Any]) -> tuple[str, str, dict[str, Any]] | None:
-    lore_raw = base.get("lore") or []
-    if not isinstance(lore_raw, list):
-        lore_raw = []
-    type_cn = extract_type(lore_raw)
-    if not type_cn:
-        return None
-    name = strip_gradient(str(base.get("name", key)))
+def parse_variants(base: dict[str, Any]) -> list[str]:
+    skins = base.get("Skins")
+    if not isinstance(skins, dict):
+        return []
+    variants: list[str] = []
+    for key, value in skins.items():
+        if not isinstance(value, dict):
+            continue
+        if not VARIANT_KEY_RE.match(str(key)) and key != "pifu1":
+            continue
+        icon = value.get("Icon") or {}
+        variant_name = None
+        if isinstance(icon, dict):
+            variant_name = icon.get("DisplayName") or icon.get("Name")
+        if not variant_name:
+            variant_name = value.get("Permission") or key
+        cleaned = strip_formatting(str(variant_name)).replace(" ", "")
+        cleaned = re.sub(r"\((?:本体|炫彩|皮肤|默认)\)$", "", cleaned)
+        cleaned = cleaned.replace("(本体)", "").replace("(炫彩)", "").replace("(皮肤)", "").replace("(默认)", "")
+        cleaned = cleaned.strip()
+        if cleaned:
+            variants.append(cleaned)
+    return [variant for variant in variants if variant]
+
+
+def build_pet_fragment_content(path: Path, base: dict[str, Any]) -> dict[str, Any]:
+    name = get_name(base, path.stem)
+    return {
+        "basic": {
+            "name": name,
+        },
+        "filter": {
+            "type": "fragment",
+        },
+    }
+
+
+def build_pet_content(path: Path, base: dict[str, Any]) -> dict[str, Any]:
+    name = get_name(base, path.stem)
+    levels_raw = base.get("Levels")
+    max_level, levels = parse_levels(levels_raw)
+    content: dict[str, Any] = {
+        "basic": {
+            "name": name,
+        },
+    }
+    if max_level is not None:
+        content["basic"]["maxLevel"] = max_level
+    effects = {
+        "ExperienceThreshold": [level.get("experienceThreshold") for level in levels],
+        "MaxHealth": [level.get("maxHealth") for level in levels],
+        "Regeneration": [level.get("regeneration") for level in levels],
+        "ResistanceModifier": [level.get("resistanceModifier") for level in levels],
+        "RespawnCooldown": [level.get("respawnCooldown") for level in levels],
+    }
+    content["effects"] = effects
+    variants = parse_variants(base)
+    if variants:
+        content["variants"] = variants
+    return content
+
+
+def build_material_fragment_content(key: str, base: dict[str, Any]) -> dict[str, Any]:
+    name = clean_name(str(base.get("name") or key))
     if not name:
         name = key
-    if type_cn == "宠食":
-        type_dir = "food"
-    elif type_cn == "材料" and "碎片" in name:
-        type_dir = "fragment"
-    else:
-        return None
-    basic: dict[str, Any] = {"name": name}
-    cleaned: list[str] = [strip_formatting(str(ln)) for ln in lore_raw]
-    limit = parse_time_limit(base, cleaned)
-    usage, source = classify_lore_lines(cleaned)
-    result: dict[str, Any] = {
-        "basic": basic,
-        "usage": usage if usage else [],
-        "source": source if source else [""],
-        "limit": limit if limit else [],
+    lore = base.get("lore")
+    if not isinstance(lore, list):
+        lore = []
+    cleaned = [strip_formatting(str(line)) for line in lore]
+    usage: list[str] = []
+    for line in cleaned:
+        if not line or line.startswith("品质:") or line.startswith("类型:"):
+            continue
+        if "集齐" in line:
+            line = line.replace(name, "")
+            line += "碎片"
+            line = line.strip()
+            if line and line not in usage:
+                usage.append(line)
+            continue
+        if "即可兑换宠物" in line:
+            line = line.replace("即可兑换宠物-", "用于兑换宠物")
+            line = line.strip()
+            if line and line not in usage:
+                usage[0] += line
+    return {
+        "basic": {
+            "name": name,
+        },
+        "usage": usage,
+        "filter": {
+            "type": "fragment",
+        },
     }
-    return type_dir, name, result
 
 
-SKIN_TEMPLATE: dict[str, Any] = {
-    "usage": ["更换宠物皮肤"],
-    "source": ["主城宠物皮肤宝箱"],
-}
-
-
-def generate_skin(src_path: Path, dst_dir: Path) -> int:
-    if not src_path.is_file():
-        raise FileNotFoundError(f"源文件不存在: {src_path}")
-    with src_path.open("r", encoding="utf-8") as f:
-        lines = [ln.strip() for ln in f if ln.strip()]
-    dst_dir.mkdir(parents=True, exist_ok=True)
+def run(src: Path, dst: Path) -> int:
+    """从 MCPets/Pets 和 MMOItems/item/material.yml 生成宠物 gallery 文件。"""
+    petsrc = src / "MCPets" / "Pets"
+    if not petsrc.exists():
+        raise FileNotFoundError(f"源路径不存在: {petsrc}")
+    dst_pet = dst / "pet"
+    dst_pet.mkdir(parents=True, exist_ok=True)
+    dst_fragment = dst_pet / "fragment"
+    dst_fragment.mkdir(parents=True, exist_ok=True)
     count = 0
-    for idx, line in enumerate(lines, start=1):
-        name = re.sub(r"\.png$", "", line.strip())
-        if not name:
-            continue
-        content: dict[str, Any] = {"basic": {"name": name}, **SKIN_TEMPLATE}
-        fname = f"{idx:02d}.yml"
-        write_yaml_with_merge(dst_dir / fname, content)
-        count += 1
-    return count
+    if petsrc.exists():
+        files = sorted(petsrc.rglob("*.yml"))
+        for file in files:
+            if "定制" in file.parts:
+                continue
+            if "宠物" not in file.parts:
+                continue
+            with file.open("r", encoding="utf-8") as f:
+                data: Any = yaml.safe_load(f)
+            if not isinstance(data, dict):
+                continue
+            content = build_pet_content(file, data)
+            content.setdefault("filter", {})["type"] = "pet"
+            out_path = dst_pet / f"{file.stem.lower()}.yml"
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            with out_path.open("w", encoding="utf-8") as f:
+                yaml.dump(content, f, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120)
+            count += 1
 
-
-def run(src: Path, dst: Path, skin_src: Path | None = None) -> int:
-    """从 material.yml 和 pet-skin-names.txt 生成 pet gallery 文件。"""
-    import yaml
-
-    if not src.is_file():
-        raise FileNotFoundError(f"源文件不存在: {src}")
-    with src.open("r", encoding="utf-8") as f:
-        data: Any = yaml.safe_load(f)
-    if not isinstance(data, dict):
-        raise ValueError(f"YAML 根节点不是字典: {src}")
-    dst.mkdir(parents=True, exist_ok=True)
-    count = 0
-    for key, item in data.items():
-        if not isinstance(item, dict) or "base" not in item:
-            continue
-        base = item["base"]
-        if not isinstance(base, dict):
-            continue
-        transformed = transform_item(key, base)
-        if transformed is None:
-            continue
-        type_dir, name, content = transformed
-        fname = key.lower() + ".yml"
-        out_path = dst / type_dir / fname
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        write_yaml_with_merge(out_path, content)
-        count += 1
-
-    # 生成皮肤
-    if skin_src is None:
-        skin_src = src.parent.parent / "Lists" / "pet-skin-names.txt"
-    if skin_src.is_file():
-        count += generate_skin(skin_src, dst / "skin")
+    material_src = src / "MMOItems" / "item" / "material.yml"
+    if material_src.is_file():
+        with material_src.open("r", encoding="utf-8") as f:
+            material_data: Any = yaml.safe_load(f)
+        if isinstance(material_data, dict):
+            for key, item in material_data.items():
+                if not FRAGMENT_KEY_RE.match(str(key)):
+                    continue
+                if not isinstance(item, dict) or not isinstance(item.get("base"), dict):
+                    continue
+                base = item["base"]
+                content = build_material_fragment_content(str(key), base)
+                out_path = dst_fragment / f"{str(key).lower()}.yml"
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                with out_path.open("w", encoding="utf-8") as f:
+                    yaml.dump(content, f, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120)
+                count += 1
 
     return count

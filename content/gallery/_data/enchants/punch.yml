@@ -1,0 +1,15 @@
+basic:
+  id: punch
+  name: 冲击
+  description: 增加箭的击退距离 %placeholder% 格
+  placeholder: 3 * %level%
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

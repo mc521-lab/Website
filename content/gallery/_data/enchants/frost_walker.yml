@@ -1,0 +1,15 @@
+basic:
+  id: frost_walker
+  name: 冰霜行者
+  description: 将玩家周围半径 %placeholder% 格内的水变为冰
+  placeholder: '%level% + 2'
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

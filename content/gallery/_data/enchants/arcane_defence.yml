@@ -1,0 +1,16 @@
+basic:
+  id: arcane_defence
+  name: 奥术防御
+  description: 有%placeholder%%几率无视药水伤害
+  placeholder: '%level% * 4'
+  placeholders: {}
+  max-level: 5
+  type: shishi
+filter:
+  rarity: epic
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- armor
+conflicts: []

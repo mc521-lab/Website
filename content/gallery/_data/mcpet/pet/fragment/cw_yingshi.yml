@@ -1,0 +1,6 @@
+basic:
+  name: 苍翼鹰使碎片
+usage:
+- 集齐10个碎片用于兑换宠物苍翼鹰使
+filter:
+  type: fragment

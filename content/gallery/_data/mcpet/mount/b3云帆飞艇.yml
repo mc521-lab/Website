@@ -1,0 +1,16 @@
+basic:
+  name: 云帆飞艇
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 150
+  Regeneration:
+  - 0.8
+  ResistanceModifier:
+  - 1.4
+  RespawnCooldown:
+  - 50
+filter:
+  type: pet

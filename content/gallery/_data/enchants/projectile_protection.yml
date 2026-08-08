@@ -1,0 +1,15 @@
+basic:
+  id: projectile_protection
+  name: 弹射物保护
+  description: 减少受到的弹射物伤害 %placeholder%%
+  placeholder: '%level% * 8'
+  placeholders: {}
+  max-level: 1
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

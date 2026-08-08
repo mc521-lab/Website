@@ -1,0 +1,21 @@
+basic:
+  name: 枷锁荒魔
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 150
+  Regeneration:
+  - 1
+  ResistanceModifier:
+  - 1.45
+  RespawnCooldown:
+  - 50
+variants:
+- 枷锁荒魔
+- 枷锁野魔
+- 枷锁火魔
+- 枷锁独眼魔
+filter:
+  type: pet

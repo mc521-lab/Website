@@ -1,0 +1,16 @@
+basic:
+  id: foraging
+  name: 果运
+  description: 提升剪刀采集树叶时获得苹果的几率%placeholder%%
+  placeholder: ceil(%level% * 5)
+  placeholders: {}
+  max-level: 4
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- shears
+conflicts: []

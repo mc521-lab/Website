@@ -1,0 +1,19 @@
+basic:
+  id: end_affinity
+  name: 终末
+  description: 在末地造成伤害时提升%placeholder%%
+  placeholder: 20 + %level% * 5
+  placeholders: {}
+  max-level: 4
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+- bow
+- trident
+conflicts:
+- nether_affinity

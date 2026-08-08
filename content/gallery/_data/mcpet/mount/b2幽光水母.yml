@@ -1,0 +1,22 @@
+basic:
+  name: 幽光水母
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 150
+  Regeneration:
+  - 0.8
+  ResistanceModifier:
+  - 1.4
+  RespawnCooldown:
+  - 50
+variants:
+- 幽光水母
+- 炽热水母
+- 暗系水母
+- 暖光水母
+- 幽灵水母
+filter:
+  type: pet

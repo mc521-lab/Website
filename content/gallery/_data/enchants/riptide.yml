@@ -1,0 +1,15 @@
+basic:
+  id: riptide
+  name: 激流
+  description: 在水中或雨中掷出三叉戟时，三叉戟会带着玩家前进
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: normal
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

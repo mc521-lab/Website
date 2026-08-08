@@ -2,8 +2,8 @@ basic:
   name: 金色番茄
   type: crop
 usage:
-  - 在主城售卖获得金币
+  - 售卖获得金币
 source:
-  - 收获番茄时随机变异
+  - 番茄随机变异
 variant:
   - 金色番茄

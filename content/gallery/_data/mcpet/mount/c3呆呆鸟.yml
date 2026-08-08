@@ -1,0 +1,16 @@
+basic:
+  name: 呆呆鸟
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 100
+  Regeneration:
+  - 0.7
+  ResistanceModifier:
+  - 1.25
+  RespawnCooldown:
+  - 60
+filter:
+  type: pet

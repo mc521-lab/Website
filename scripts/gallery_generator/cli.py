@@ -33,15 +33,22 @@ DEFAULT_PATHS: dict[str, dict[str, Any]] = {
         "modifiers": PROJECT_ROOT / "raw-config" / "modifiers" / "baoshi_modifiers.yml",
         "dst": PROJECT_ROOT / "content" / "gallery" / "_data" / "equipment" / "gem",
     },
+    "enchants": {
+        "src": PROJECT_ROOT / "raw-config" / "EcoEnchants" / "enchants",
+        "dst": PROJECT_ROOT / "content" / "gallery" / "_data" / "enchants",
+    },
     "jewelry": {
         "src": PROJECT_ROOT / "raw-config" / "MMOItems" / "item",
         "modifiers": PROJECT_ROOT / "raw-config" / "modifiers" / "shipin_modifiers.yml",
         "dst": PROJECT_ROOT / "content" / "gallery" / "_data" / "equipment" / "jewelries",
     },
-    "pet": {
-        "src": PROJECT_ROOT / "raw-config" / "MMOItems" / "item" / "material.yml",
-        "skin_src": PROJECT_ROOT / "raw-config" / "Lists" / "pet-skin-names.txt",
-        "dst": PROJECT_ROOT / "content" / "gallery" / "_data" / "pet",
+    "mcpet-pet": {
+        "src": PROJECT_ROOT / "raw-config",
+        "dst": PROJECT_ROOT / "content" / "gallery" / "_data" / "mcpet",
+    },
+    "mcpet-mount": {
+        "src": PROJECT_ROOT / "raw-config",
+        "dst": PROJECT_ROOT / "content" / "gallery" / "_data" / "mcpet",
     },
     "sdv": {
         "src": PROJECT_ROOT / "raw-config" / "Lists",
@@ -63,8 +70,10 @@ GENERATORS: dict[str, Any] = {
     "armor": generators.armor,
     "deco": generators.deco,
     "gem": generators.gem,
+    "enchants": generators.enchants,
     "jewelry": generators.jewelry,
-    "pet": generators.pet,
+    "mcpet-pet": generators.pet,
+    "mcpet-mount": generators.mount,
     "sdv": generators.sdv,
     "skin": generators.skin,
     "sword": generators.sword,
@@ -75,8 +84,10 @@ COMMANDS = {
     "armor": "护甲 gallery",
     "deco": "装饰类 gallery（家具/墙贴/玩偶）",
     "gem": "宝石 gallery",
+    "enchants": "附魔 gallery",
     "jewelry": "饰品 gallery",
-    "pet": "宠物 gallery（宠食/碎片/皮肤）",
+    "mcpet-pet": "MCPet/宠物 gallery（碎片/皮肤）",
+    "mcpet-mount": "MCPet/坐骑 gallery（碎片/皮肤）",
     "sdv": "星露谷 gallery（种子/工具/作物）",
     "skin": "皮肤 gallery（时装/武器/工具）",
     "sword": "武器 gallery",
@@ -120,9 +131,6 @@ def run_single(name: str, src: str | None, dst: str | None) -> int:
     kwargs: dict[str, Any] = {}
     if "modifiers" in cfg:
         kwargs["modifiers_src"] = cfg["modifiers"]
-    if "skin_src" in cfg:
-        kwargs["skin_src"] = cfg["skin_src"]
-
     logger.info("运行 %s: src=%s, dst=%s", name, src_path, dst_path)
     return mod.run(src_path, dst_path, **kwargs)
 

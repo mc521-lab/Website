@@ -1,12 +1,12 @@
 basic:
   name: 炎心晶块
   quality: B
+usage:
+- 用于兑换 B 级套装
+source:
+- 银币商店兑换
+- 副本秘境二层
+limit: []
 filter:
   type: bi
   for: set_b
-usage:
-  - 兑换 B 级套装
-source:
-  - 银币商店兑换
-  - 副本秘境二层
-limit: []

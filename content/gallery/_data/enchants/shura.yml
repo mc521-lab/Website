@@ -1,0 +1,16 @@
+basic:
+  id: shura
+  name: 血斧
+  description: 生命值低于一半时，增加 %placeholder%x 的暴击伤害
+  placeholder: 1 + 0.25 * %level%
+  placeholders: {}
+  max-level: 2
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- axe
+conflicts: []

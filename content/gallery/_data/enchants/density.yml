@@ -1,0 +1,15 @@
+basic:
+  id: density
+  name: 致密
+  description: 每坠落一格，造成的额外伤害增加 %placeholder% 点
+  placeholder: 0.5 * %level%
+  placeholders: {}
+  max-level: 1
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

@@ -1,0 +1,16 @@
+basic:
+  id: confusion
+  name: 乱序
+  description: 有%placeholder%% 几率打乱敌人快捷栏顺序
+  placeholder: 2 * %level%
+  placeholders: {}
+  max-level: 4
+  type: shishi
+filter:
+  rarity: epic
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts: []

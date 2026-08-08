@@ -1,0 +1,16 @@
+basic:
+  id: caffeinated
+  name: 咖啡因
+  description: 冲刺时获得%placeholder%%攻击速度加成
+  placeholder: 5 * %level%
+  placeholders: {}
+  max-level: 3
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts: []

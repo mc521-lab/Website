@@ -8,8 +8,8 @@ import { tools_navigation } from "./configs/velite/tools/_navigation";
 // gallery
 import { gallery_navigation } from "./configs/velite/gallery/_navigation";
 import * as gallery_equipment_data from "./configs/velite/gallery/equipment";
-import * as gallery_items_data from "./configs/velite/gallery/items";
-import * as gallery_pet_data from "./configs/velite/gallery/pet";
+import * as gallery_items_data from "./configs/velite/gallery/chore";
+import * as gallery_pet_data from "./configs/velite/gallery/mcpet";
 import * as gallery_skin_data from "./configs/velite/gallery/skin";
 import * as gallery_deco_data from "./configs/velite/gallery/deco";
 import * as gallery_sdv_data from "./configs/velite/gallery/sdv";

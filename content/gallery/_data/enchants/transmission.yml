@@ -1,0 +1,16 @@
+basic:
+  id: transmission
+  name: 跃动
+  description: 将你向前传送 %placeholder% 格
+  placeholder: 3 + %level% * 2
+  placeholders: {}
+  max-level: 2
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts: []

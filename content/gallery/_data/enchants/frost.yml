@@ -1,0 +1,18 @@
+basic:
+  id: frost
+  name: 冰霜
+  description: 有%chance%%几率使目标冻结%seconds%秒
+  placeholder: null
+  placeholders:
+    chance: 3 + 2 * %level%
+    seconds: 2 + %level%
+  max-level: 3
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- bow
+conflicts: []

@@ -1,0 +1,17 @@
+basic:
+  id: jumpshot
+  name: 跳射
+  description: 空中射击时造成%placeholder%%额外伤害
+  placeholder: 10 * %level%
+  placeholders: {}
+  max-level: 2
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- bow
+- crossbow
+conflicts: []

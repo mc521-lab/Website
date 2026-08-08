@@ -1,0 +1,17 @@
+basic:
+  id: flashbang
+  name: 晃眼
+  description: 有%placeholder%%几率使目标失明
+  placeholder: '%level%'
+  placeholders: {}
+  max-level: 6
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- bow
+- crossbow
+conflicts: []

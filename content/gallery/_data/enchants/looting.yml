@@ -1,0 +1,17 @@
+basic:
+  id: looting
+  name: 抢夺
+  description: 使常见掉落物上限增加 %common%，稀有掉落物几率增加 %rare%%
+  placeholder: null
+  placeholders:
+    common: '%level%'
+    rare: '%level%'
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

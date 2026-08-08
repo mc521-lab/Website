@@ -1,0 +1,16 @@
+basic:
+  id: adrenaline
+  name: 肾上腺素
+  description: 格挡攻击时获得%placeholder%秒速度提升
+  placeholder: 1 + %level% / 2
+  placeholders: {}
+  max-level: 3
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- shield
+conflicts: []

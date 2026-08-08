@@ -1,0 +1,21 @@
+basic:
+  name: 林鸣角兽
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 150
+  Regeneration:
+  - 1
+  ResistanceModifier:
+  - 1.45
+  RespawnCooldown:
+  - 50
+variants:
+- 林鸣角兽
+- 幽匿角兽
+- 冰霜角兽
+- 绯红角兽
+filter:
+  type: pet

@@ -1,0 +1,15 @@
+basic:
+  id: binding_curse
+  name: 绑定诅咒
+  description: 无法将物品从盔甲槽中取下
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: zuzhou
+filter:
+  rarity: epic
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

@@ -1,0 +1,15 @@
+basic:
+  id: protection
+  name: 保护
+  description: 减少受到的伤害 %placeholder%%
+  placeholder: '%level% * 4'
+  placeholders: {}
+  max-level: 1
+  type: shishi
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

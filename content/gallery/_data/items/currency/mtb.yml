@@ -2,7 +2,7 @@ basic:
   name: 魔塔币
   quality: A
 usage:
-  - 在珍宝商店兑换商品
+- 在珍宝商店兑换商品
 source:
-  - 击败魔塔怪物获得
+- 击败魔塔怪物
 limit: []

@@ -1,0 +1,19 @@
+basic:
+  id: misfortune_curse
+  name: 厄运诅咒
+  description: 使方块有%placeholder%%几率不掉落物品
+  placeholder: 15 * %level%
+  placeholders: {}
+  max-level: 1
+  type: zuzhou
+filter:
+  rarity: common
+  tradeable: false
+  discoverable: false
+  enchantable: true
+targets:
+- hoe
+- shovel
+- pickaxe
+- axe
+conflicts: []

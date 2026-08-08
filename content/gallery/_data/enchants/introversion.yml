@@ -1,0 +1,20 @@
+basic:
+  id: introversion
+  name: 杀意
+  description: 对玩家目标造成%placeholder%额外近战伤害
+  placeholder: 2 * %level%
+  placeholders: {}
+  max-level: 4
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts:
+- sharpness
+- smite
+- bane_of_arthropods
+- brightness

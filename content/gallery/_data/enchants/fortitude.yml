@@ -1,0 +1,16 @@
+basic:
+  id: fortitude
+  name: 铠怒
+  description: 提升造成伤害%placeholder%%
+  placeholder: '%level% * 2.5'
+  placeholders: {}
+  max-level: 2
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- armor
+conflicts: []

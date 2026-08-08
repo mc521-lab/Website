@@ -1,0 +1,16 @@
+basic:
+  name: 焚天赤龙
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 300
+  Regeneration:
+  - 1.5
+  ResistanceModifier:
+  - 1.8
+  RespawnCooldown:
+  - 30
+filter:
+  type: pet

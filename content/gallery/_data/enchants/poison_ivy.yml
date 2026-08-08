@@ -1,0 +1,19 @@
+basic:
+  id: poison_ivy
+  name: 毒藤
+  description: 每造成一颗❤对攻击者中毒%seconds%秒，最多持续%limit%秒
+  placeholder: null
+  placeholders:
+    seconds: 0.5 * %level%
+    limit: 4 + %level%
+  max-level: 2
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- leggings
+conflicts:
+- thorns

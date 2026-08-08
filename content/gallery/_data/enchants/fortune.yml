@@ -1,0 +1,15 @@
+basic:
+  id: fortune
+  name: 时运
+  description: 使特定方块的掉落数量增加 %placeholder%%
+  placeholder: ceil(((1 / (%level% + 2)) + ((%level% + 1) / 2)) * 100 - 100)
+  placeholders: {}
+  max-level: 1
+  type: shishi
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

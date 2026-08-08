@@ -1,0 +1,15 @@
+basic:
+  id: loyalty
+  name: 忠诚
+  description: 掷出后的三叉戟会返回
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

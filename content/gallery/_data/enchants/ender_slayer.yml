@@ -1,0 +1,17 @@
+basic:
+  id: ender_slayer
+  name: 终影
+  description: 对末影生物近战伤害额外增加%placeholder%
+  placeholder: 1 + 0.5 * %level%
+  placeholders: {}
+  max-level: 6
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+- axe
+conflicts: []

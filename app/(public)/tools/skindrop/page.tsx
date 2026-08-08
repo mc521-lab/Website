@@ -222,13 +222,11 @@ export default function SkindropPage() {
                     </div>
 
                     <div className="border-foreground/12 bg-background/35 relative flex min-h-0 flex-1 items-center justify-center overflow-hidden rounded-lg border border-dashed">
-                        {skinSource ? (
-                            <SkinView3D skin={skinSource?.url ?? null} className="h-full w-full" />
-                        ) : (
-                            <div className="text-foreground/50 pointer-events-none absolute inset-0 flex items-center justify-center">
-                                <span>加载一张皮肤先</span>
-                            </div>
-                        )}
+                        <SkinView3D
+                            skin={skinSource?.url ?? "/images/a0fe6e818c766c181db01a8022ba7d40.png"}
+                            className="h-full w-full"
+                            overrideConfig={{ autoRotate: false }}
+                        />
                     </div>
 
                     <div className="border-foreground/8 bg-background/25 flex items-center justify-between gap-3 rounded-lg border p-3">

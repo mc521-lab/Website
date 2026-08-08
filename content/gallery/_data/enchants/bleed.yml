@@ -1,0 +1,16 @@
+basic:
+  id: bleed
+  name: 血蚀
+  description: 有%placeholder%%几率使敌人流血，造成持续伤害
+  placeholder: 2 * %level%
+  placeholders: {}
+  max-level: 5
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts: []

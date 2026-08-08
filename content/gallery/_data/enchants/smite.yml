@@ -1,0 +1,15 @@
+basic:
+  id: smite
+  name: 亡灵杀手
+  description: 对亡灵生物额外造成 %placeholder% 点伤害
+  placeholder: 2.5 * %level%
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

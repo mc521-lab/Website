@@ -1,11 +1,11 @@
 basic:
   name: 风语晶胚
   quality: S
+usage:
+- 用于兑换风语宝石
+source:
+- 副本灵域遗迹
+limit: []
 filter:
   type: sui
   for: gem
-usage:
-  - 兑换风语宝石
-source:
-  - 副本灵域遗迹
-limit: []

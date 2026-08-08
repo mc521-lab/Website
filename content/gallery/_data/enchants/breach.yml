@@ -1,0 +1,15 @@
+basic:
+  id: breach
+  name: 破甲
+  description: 目标的护甲效果减少 %placeholder%%
+  placeholder: 15 * %level%
+  placeholders: {}
+  max-level: 1
+  type: shishi
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

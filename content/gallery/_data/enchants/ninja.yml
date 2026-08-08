@@ -1,0 +1,16 @@
+basic:
+  id: ninja
+  name: 雨袭
+  description: 下雨时造成+%placeholder%点额外伤害
+  placeholder: 0.5 + %level% * 0.5
+  placeholders: {}
+  max-level: 5
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+conflicts: []

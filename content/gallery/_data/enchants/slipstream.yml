@@ -1,0 +1,16 @@
+basic:
+  id: slipstream
+  name: 疾流
+  description: 持有时提升移动速度 %placeholder%%
+  placeholder: '%level% * 8'
+  placeholders: {}
+  max-level: 3
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- trident
+conflicts: []

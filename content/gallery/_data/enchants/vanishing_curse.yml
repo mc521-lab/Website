@@ -1,0 +1,15 @@
+basic:
+  id: vanishing_curse
+  name: 消失诅咒
+  description: 死亡时物品会消失
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: zuzhou
+filter:
+  rarity: epic
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

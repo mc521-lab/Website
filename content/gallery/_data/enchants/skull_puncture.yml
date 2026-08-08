@@ -1,0 +1,18 @@
+basic:
+  id: skull_puncture
+  name: 穿颅
+  description: 增加 %placeholder%% 的爆头伤害
+  placeholder: 5 * %level%
+  placeholders: {}
+  max-level: 2
+  type: shishi
+filter:
+  rarity: epic
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- bow
+- crossbow
+- trident
+conflicts: []

@@ -1,0 +1,6 @@
+basic:
+  name: 枷锁野魔碎片
+usage:
+- 集齐25个碎片用于兑换坐骑枷锁野魔
+filter:
+  type: fragment

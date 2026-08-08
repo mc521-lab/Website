@@ -1,0 +1,21 @@
+basic:
+  name: 僵尸王座
+  maxLevel: 1
+effects:
+  ExperienceThreshold:
+  - 0
+  MaxHealth:
+  - 200
+  Regeneration:
+  - 1.2
+  ResistanceModifier:
+  - 1.6
+  RespawnCooldown:
+  - 40
+variants:
+- 僵尸王座
+- 骷髅王座
+- 史莱姆王座
+- 末影王座
+filter:
+  type: pet

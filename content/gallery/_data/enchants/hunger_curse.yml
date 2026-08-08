@@ -1,0 +1,16 @@
+basic:
+  id: hunger_curse
+  name: 饥饿诅咒
+  description: 增加饥饿消耗%placeholder%%
+  placeholder: 50 * %level%
+  placeholders: {}
+  max-level: 1
+  type: zuzhou
+filter:
+  rarity: common
+  tradeable: false
+  discoverable: false
+  enchantable: true
+targets:
+- helmet
+conflicts: []

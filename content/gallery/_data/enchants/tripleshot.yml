@@ -1,0 +1,16 @@
+basic:
+  id: tripleshot
+  name: 连射
+  description: 射出3支箭代替1支
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: jingliang
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- bow
+conflicts: []

@@ -1,0 +1,18 @@
+basic:
+  id: carve
+  name: 劈砍
+  description: 挥砍时对周围%damage%点伤害，范围为%radius%格
+  placeholder: null
+  placeholders:
+    radius: 1 + %level%
+    damage: '%level% * 2'
+  max-level: 4
+  type: normal
+filter:
+  rarity: common
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets:
+- axe
+conflicts: []

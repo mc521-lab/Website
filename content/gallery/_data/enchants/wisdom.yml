@@ -1,0 +1,23 @@
+basic:
+  id: wisdom
+  name: 智识
+  description: 增加掉落经验值 %placeholder%%
+  placeholder: 100 + %level% * 20
+  placeholders: {}
+  max-level: 3
+  type: shishi
+filter:
+  rarity: epic
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- sword
+- axe
+- pickaxe
+- shovel
+- hoe
+- bow
+- crossbow
+- trident
+conflicts: []

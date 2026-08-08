@@ -172,8 +172,6 @@ def run(src: Path, dst: Path) -> int:
         base = item["base"]
         if not isinstance(base, dict):
             continue
-        if "碎片" in base.get("name", ""):
-            continue
         transformed = transform_item(key, base)
         if transformed is None:
             continue

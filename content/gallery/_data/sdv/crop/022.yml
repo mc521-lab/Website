@@ -2,8 +2,8 @@ basic:
   name: 巨型卷心菜
   type: crop
 usage:
-  - 在主城售卖获得金币
+  - 售卖获得金币
 source:
-  - 收获白菜时随机变异
+  - 白菜随机变异
 variant:
   - 巨型卷心菜

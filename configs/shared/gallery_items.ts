@@ -5,6 +5,7 @@ export const gallery_items_shared_schema = s
         basic: s.object({
             name: s.string(),
             quality: s.string().optional(),
+            type: s.string().optional(),
         }),
         filter: s
             .object({

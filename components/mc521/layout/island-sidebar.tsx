@@ -15,6 +15,7 @@ export type IslandNavItem = {
 
 export type IslandNavGroup = {
     title: string;
+    href?: string;
     icon?: string;
     order?: number;
     defaultExpanded?: boolean;
@@ -37,19 +38,30 @@ function sortByOrder<T extends { order?: number }>(items: T[]): T[] {
     return [...items].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
 
-function IslandNavItemLink({ item }: { item: IslandNavItem }) {
+function Wrapper({ children, wrapAsSingleItem }: { children: React.ReactNode; wrapAsSingleItem: boolean }) {
+    switch (wrapAsSingleItem) {
+        case true:
+            return <div className="island-nav-group">{children}</div>;
+        case false:
+            return children;
+    }
+}
+
+function IslandNavItemLink({ item, wrapAsSingleItem = false }: { item: IslandNavItem; wrapAsSingleItem?: boolean }) {
     const pathname = usePathname();
     const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
     return (
-        <Link href={item.href} className={cn("island-nav-item", isActive && "is-active")}>
-            {item.icon && (
-                <span className="island-nav-icon">
-                    <IconifyIcon icon={item.icon} />
-                </span>
-            )}
-            <span className="island-nav-title">{item.title}</span>
-        </Link>
+        <Wrapper wrapAsSingleItem={wrapAsSingleItem}>
+            <Link href={item.href} className={cn("island-nav-item", isActive && "is-active")}>
+                {item.icon && (
+                    <span className="island-nav-icon">
+                        <IconifyIcon icon={item.icon} />
+                    </span>
+                )}
+                <span className="island-nav-title">{item.title}</span>
+            </Link>
+        </Wrapper>
     );
 }
 
@@ -58,6 +70,10 @@ function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
     const [isExpanded, setIsExpanded] = useState(group.defaultExpanded ?? false);
     const isActiveGroup = useMemo(() => group.items.some((item) => pathname === item.href), [pathname, group.items]);
     const sortedItems = sortByOrder(group.items);
+
+    if (sortedItems.length === 0 && group.href) {
+        return <IslandNavItemLink item={{ title: group.title, href: group.href, icon: group.icon, order: group.order }} />;
+    }
 
     return (
         <div className={cn("island-nav-group", !(isExpanded || isActiveGroup) && "is-collapsed")}>
@@ -115,7 +131,7 @@ export function IslandSidebar({ navigation, header }: { navigation: IslandNavEnt
                     isGroup(entry) ? (
                         <IslandNavGroupView key={entry.title} group={entry} />
                     ) : (
-                        <IslandNavItemLink key={entry.href} item={entry} />
+                        <IslandNavItemLink key={entry.href} item={entry} wrapAsSingleItem={true} />
                     )
                 )}
             </nav>

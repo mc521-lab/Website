@@ -1,14 +1,20 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { IdleAnimation, SkinViewer } from "skinview3d";
+import { IdleAnimation, type PlayerAnimation, SkinViewer } from "skinview3d";
 
 interface SkinView3DProps {
     skin: string | null;
     className?: string;
+    overrideConfig?: {
+        zoom?: number;
+        animation?: PlayerAnimation;
+        autoRotate?: boolean;
+        autoRotateSpeed?: number;
+    };
 }
 
-export function SkinView3D({ skin, className }: SkinView3DProps) {
+export function SkinView3D({ skin, className, overrideConfig = {} }: SkinView3DProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const viewerRef = useRef<SkinViewer | null>(null);
 
@@ -20,10 +26,10 @@ export function SkinView3D({ skin, className }: SkinView3DProps) {
             width: canvasRef.current.clientWidth,
             height: canvasRef.current.clientHeight,
         });
-        viewer.zoom = 0.75;
-        viewer.animation = new IdleAnimation();
-        viewer.autoRotate = true;
-        viewer.autoRotateSpeed = 0.8;
+        viewer.zoom = overrideConfig.zoom ?? 0.75;
+        viewer.animation = overrideConfig.animation ?? new IdleAnimation();
+        viewer.autoRotate = overrideConfig.autoRotate ?? true;
+        viewer.autoRotateSpeed = overrideConfig.autoRotateSpeed ?? 0.8;
         viewerRef.current = viewer;
 
         const handleResize = () => {
@@ -39,7 +45,7 @@ export function SkinView3D({ skin, className }: SkinView3DProps) {
             viewer.dispose();
             viewerRef.current = null;
         };
-    }, []);
+    }, [overrideConfig]);
 
     useEffect(() => {
         const viewer = viewerRef.current;

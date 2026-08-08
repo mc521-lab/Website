@@ -1,0 +1,17 @@
+basic:
+  id: blast_mining
+  name: 立方
+  description: '%placeholder%%的几率以3x3x3范围挖掘方块'
+  placeholder: 4 * %level%
+  placeholders: {}
+  max-level: 5
+  type: xishi
+filter:
+  rarity: special
+  tradeable: false
+  discoverable: true
+  enchantable: true
+targets:
+- pickaxe
+conflicts:
+- veinminer

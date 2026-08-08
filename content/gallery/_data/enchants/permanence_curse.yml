@@ -1,0 +1,16 @@
+basic:
+  id: permanence_curse
+  name: 永恒诅咒
+  description: 禁止在铁砧中修改该物品
+  placeholder: null
+  placeholders: {}
+  max-level: 1
+  type: zuzhou
+filter:
+  rarity: common
+  tradeable: false
+  discoverable: false
+  enchantable: true
+targets:
+- all
+conflicts: []

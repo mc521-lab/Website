@@ -1,0 +1,17 @@
+basic:
+  id: respiration
+  name: 水下呼吸
+  description: 延长水下呼吸时间 %seconds% 秒，并有 %chance%% 的几率免受溺水伤害
+  placeholder: null
+  placeholders:
+    seconds: 15 * %level%
+    chance: '%level% / (%level% + 1)'
+  max-level: 1
+  type: normal
+filter:
+  rarity: rare
+  tradeable: true
+  discoverable: true
+  enchantable: true
+targets: []
+conflicts: []

@@ -3,9 +3,10 @@
 import { useMemo, useState } from "react";
 import { JOB_LABEL, JOB_ORDER, JOB_THEME, QUALITY_LABEL, QUALITY_ORDER, QUALITY_THEME, QUALITY_TIER } from "../constant";
 import type { SwordItem, SwordJob, SwordQuality, SwordSetGroup } from "../types";
+import { GalleryContentSection } from "../reusable/gallery-content-section";
 import { GalleryFilterPanel } from "../reusable/gallery-filter-panel";
 import { GalleryGroupSection } from "../reusable/gallery-group-section";
-import { GalleryItemImage } from "../reusable/gallery-item-image";
+import { ItemCardShell } from "../reusable/item-card-shell";
 import { QualityBadge } from "../reusable/quality-badge";
 import { StatRow } from "../reusable/stat-row";
 import { formatNumber } from "../reusable/utils";
@@ -81,23 +82,16 @@ function groupByQuality(items: SwordItem[]): SwordSetGroup[] {
 function SwordCard({ item }: { item: SwordItem }) {
     const stats = getStats(item);
     const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined || item.gem?.lock !== undefined;
+    const subtitle = <>{JOB_LABEL[item.basic.job]}武器</>;
 
     return (
-        <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
-            <div className="gallery-card-header mb-3 flex items-start gap-2">
-                <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
-                <div className="mt-1 min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                        <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
-                        <QualityBadge quality={item.basic.quality} />
-                    </div>
-                    <p className="text-muted-foreground mt-0.5 text-xs">{JOB_LABEL[item.basic.job]}武器</p>
-                </div>
-            </div>
-
+        <ItemCardShell
+            name={item.basic.name}
+            imageSrc={`/gallery/${item.basic.name}.png`}
+            subtitle={subtitle}
+            badge={<QualityBadge quality={item.basic.quality} />}>
             <div className="space-y-3">
-                <div>
-                    <h4 className="gallery-card-section-title">基础属性</h4>
+                <GalleryContentSection title="基础属性" icon="lucide:sword">
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="耐久度"
@@ -107,22 +101,20 @@ function SwordCard({ item }: { item: SwordItem }) {
                         <StatRow label="攻击力" icon="lucide:sword|#ef4444" value={formatNumber(stats.attackDamage)} />
                         <StatRow label="攻击速度" icon="lucide:gauge|#3b82f6" value={formatNumber(stats.attackSpeed)} />
                     </div>
-                </div>
+                </GalleryContentSection>
 
                 {(stats.critPower !== undefined || stats.critChance !== undefined || stats.lifesteal !== undefined) && (
-                    <div>
-                        <h4 className="gallery-card-section-title">战斗属性</h4>
+                    <GalleryContentSection title="战斗属性" icon="lucide:crosshair">
                         <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                             <StatRow label="暴击伤害" icon="lucide:crosshair|#f97316" value={formatNumber(stats.critPower)} />
                             <StatRow label="暴击几率" icon="lucide:target|#eab308" value={formatNumber(stats.critChance)} />
                             <StatRow label="生命偷取" icon="lucide:heart-pulse|#ef4444" value={formatNumber(stats.lifesteal)} />
                         </div>
-                    </div>
+                    </GalleryContentSection>
                 )}
 
                 {hasGem && (
-                    <div>
-                        <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">宝石</h4>
+                    <GalleryContentSection title="宝石" icon="lucide:gem">
                         <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                             <StatRow label="槽位" icon="lucide:wallet-cards" value={formatNumber(item.gem?.count, 0)} />
                             <StatRow
@@ -132,10 +124,10 @@ function SwordCard({ item }: { item: SwordItem }) {
                             />
                             <StatRow label="容量" icon="lucide:package-open" value={formatNumber(item.gem?.volume, 0)} />
                         </div>
-                    </div>
+                    </GalleryContentSection>
                 )}
             </div>
-        </article>
+        </ItemCardShell>
     );
 }
 

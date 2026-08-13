@@ -4,8 +4,7 @@ import { useMemo, useState } from "react";
 import { gallery_deco_furniture_data } from "@/.velite";
 import { GalleryFilterPanel } from "@/components/mc521/gallery/reusable/gallery-filter-panel";
 import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
-import { GalleryItemImage } from "@/components/mc521/gallery/reusable/gallery-item-image";
-import { IconifyIcon } from "@/components/iconify-icon";
+import { GalleryDetailCard } from "@/components/mc521/gallery/reusable/gallery-detail-card";
 
 interface FurnitureItem {
     id: string;
@@ -27,53 +26,6 @@ const BUNDLE_OPTIONS = [
     { value: "shengdan", label: "圣诞家具" },
     { value: "muyu", label: "沐浴家具" },
 ] as const;
-
-function FurnitureCard({ item }: { item: FurnitureItem }) {
-    return (
-        <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
-            <div className="gallery-card-header mb-3 flex items-start gap-2">
-                <GalleryItemImage src={`/gallery/${item.basic.name}.gif`} alt={item.basic.name} />
-                <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
-                    <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
-                </div>
-            </div>
-
-            <div className="space-y-2.5">
-                {item.usage.length > 0 && (
-                    <div>
-                        <h4 className="text-muted-foreground mb-1 flex items-center gap-1 text-xs font-medium">
-                            <IconifyIcon icon="lucide:wand-2" width={12} height={12} />
-                            用途
-                        </h4>
-                        <ul className="bg-muted space-y-0.5 rounded-md p-2">
-                            {item.usage.map((u, i) => (
-                                <li key={i} className="text-foreground/80 text-sm">
-                                    {u}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-
-                {item.source.length > 0 && (
-                    <div>
-                        <h4 className="text-muted-foreground mb-1 flex items-center gap-1 text-xs font-medium">
-                            <IconifyIcon icon="lucide:map-pin" width={12} height={12} />
-                            来源
-                        </h4>
-                        <ul className="bg-muted space-y-0.5 rounded-md p-2">
-                            {item.source.map((s, i) => (
-                                <li key={i} className="text-foreground/80 text-sm">
-                                    {s}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-            </div>
-        </article>
-    );
-}
 
 export default function DecoFurniturePage() {
     const allItems = gallery_deco_furniture_data as unknown as FurnitureItem[];
@@ -130,7 +82,14 @@ export default function DecoFurniturePage() {
             }>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {filteredItems.map((item) => (
-                    <FurnitureCard key={item.id} item={item} />
+                    <GalleryDetailCard
+                        key={item.id}
+                        name={item.basic.name}
+                        imageSrc={`/gallery/${item.basic.name}.gif`}
+                        usage={item.usage}
+                        source={item.source}
+                        limit={item.limit}
+                    />
                 ))}
             </div>
         </GalleryShell>

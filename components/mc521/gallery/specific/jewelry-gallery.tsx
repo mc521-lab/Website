@@ -4,9 +4,10 @@ import { useMemo, useState } from "react";
 import { JOB_LABEL, JOB_ORDER, JOB_THEME, POSITION_LABEL, POSITION_ORDER, POSITION_THEME } from "../constant";
 import type { JewelryItem, JewelryJob, JewelryPosition, JewelrySetGroup, JewelryStatEntry } from "../types";
 import { EffectLabel } from "../reusable/effect-label";
+import { GalleryContentSection } from "../reusable/gallery-content-section";
 import { GalleryFilterPanel } from "../reusable/gallery-filter-panel";
 import { GalleryGroupSection } from "../reusable/gallery-group-section";
-import { GalleryItemImage } from "../reusable/gallery-item-image";
+import { ItemCardShell } from "../reusable/item-card-shell";
 import { formatPercent, formatRange } from "../reusable/utils";
 
 function isJewelryJob(v: string): v is JewelryJob {
@@ -162,44 +163,34 @@ function JewelryCard({ item, accent }: { item: JewelryItem; accent?: string }) {
     const jobLabel = jobCode === "UNKNOWN" ? "未知职业" : JOB_LABEL[jobCode];
     const posLabel = posCode === "UNKNOWN" ? "未知部位" : POSITION_LABEL[posCode];
     const entries = item.modifiers?.entries ? Object.entries(item.modifiers.entries) : [];
+    const subtitle = (
+        <>
+            {jobLabel} · {posLabel}
+        </>
+    );
 
     return (
-        <article className="gallery-item-card gallery-jewelry-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
-            <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-0.5 opacity-80"
-                style={{
-                    background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${accent ?? "var(--primary)"} 55%, transparent), transparent)`,
-                }}
-            />
-            <div className="gallery-card-header mb-3 flex items-start gap-2">
-                <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
-                <div className="mt-1 min-w-0 flex-1">
-                    <h3 className="flex items-center gap-2 truncate text-base leading-tight font-semibold">
-                        {item.basic.name} <SpecialBadge special={item.basic.special} />
-                    </h3>
-                    <p className="text-muted-foreground mt-0.5 text-xs">
-                        {jobLabel} · {posLabel}
-                    </p>
-                </div>
-            </div>
-
+        <ItemCardShell
+            name={item.basic.name}
+            imageSrc={`/gallery/${item.basic.name}.png`}
+            subtitle={subtitle}
+            accent={accent}
+            badge={<SpecialBadge special={item.basic.special} />}
+            className="gallery-jewelry-card">
             <div>
-                <h4 className="text-muted-foreground mb-1.5 text-xs font-semibold tracking-wider uppercase">
-                    属性组{entries.length > 0 ? `（${entries.length}）` : ""}
-                </h4>
-                {entries.length === 0 ? (
-                    <div className="bg-muted/40 rounded-lg p-2.5">
-                        <p className="text-muted-foreground text-sm">无随机属性</p>
-                    </div>
-                ) : (
+                <GalleryContentSection title={`属性组${entries.length > 0 ? `（${entries.length}）` : ""}`} icon="lucide:gem">
                     <div className="space-y-1.5">
-                        {entries.map(([id, entry]) => (
-                            <ModifierEntryRow key={id} entry={entry} />
-                        ))}
+                        {entries.length === 0 ? (
+                            <div className="bg-muted/40 rounded-lg p-2.5">
+                                <p className="text-muted-foreground text-sm">无随机属性</p>
+                            </div>
+                        ) : (
+                            entries.map(([id, entry]) => <ModifierEntryRow key={id} entry={entry} />)
+                        )}
                     </div>
-                )}
+                </GalleryContentSection>
             </div>
-        </article>
+        </ItemCardShell>
     );
 }
 

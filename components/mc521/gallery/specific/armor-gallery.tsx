@@ -14,9 +14,10 @@ import {
     SET_BONUS,
 } from "../constant";
 import type { ArmorItem, ArmorJob, ArmorPart, ArmorQuality, ArmorSetGroup } from "../types";
+import { GalleryContentSection } from "../reusable/gallery-content-section";
 import { GalleryFilterPanel } from "../reusable/gallery-filter-panel";
 import { GalleryGroupSection } from "../reusable/gallery-group-section";
-import { GalleryItemImage } from "../reusable/gallery-item-image";
+import { ItemCardShell } from "../reusable/item-card-shell";
 import { StatRow } from "../reusable/stat-row";
 import { formatNumber } from "../reusable/utils";
 
@@ -111,22 +112,16 @@ function ArmorPieceCard({ item }: { item: ArmorItem }) {
     const jobLabel = JOB_LABEL[item.basic.job] ?? item.basic.job;
     const partLabel = part === "UNKNOWN" ? "—" : PART_LABEL[part];
     const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined;
+    const subtitle = (
+        <>
+            {jobLabel} · {partLabel}
+        </>
+    );
 
     return (
-        <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
-            <div className="gallery-card-header mb-3 flex items-start gap-2">
-                <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
-                <div className="mt-1 min-w-0 flex-1">
-                    <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
-                    <p className="text-muted-foreground mt-0.5 text-xs">
-                        {jobLabel} · {partLabel}
-                    </p>
-                </div>
-            </div>
-
+        <ItemCardShell name={item.basic.name} imageSrc={`/gallery/${item.basic.name}.png`} subtitle={subtitle}>
             <div className="space-y-3">
-                <div>
-                    <h4 className="gallery-card-section-title">基础属性</h4>
+                <GalleryContentSection title="基础属性" icon="lucide:shield">
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
                             label="耐久度"
@@ -147,26 +142,28 @@ function ArmorPieceCard({ item }: { item: ArmorItem }) {
                         />
                         <StatRow label="闪避率" icon="lucide:wind|#14b8a6" value={formatNumber(stats.dodge)} />
                     </div>
-                </div>
+                </GalleryContentSection>
 
                 {hasGem && (
-                    <div className="border-border/50 bg-muted/30 text-muted-foreground grid grid-cols-[1fr_auto_auto] items-center gap-3 rounded-lg border-t px-2.5 py-2 text-xs">
-                        <span className="text-foreground/90 inline-flex items-center gap-1.5 font-medium">
-                            <IconifyIcon icon="lucide:gem" width={14} height={14} className="text-primary" />
-                            宝石
-                        </span>
-                        <span>
-                            槽位{" "}
-                            <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.count, 0)}</strong>
-                        </span>
-                        <span>
-                            容量{" "}
-                            <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.volume, 0)}</strong>
-                        </span>
-                    </div>
+                    <GalleryContentSection title="宝石" icon="lucide:gem">
+                        <div className="border-border/50 bg-muted/30 text-muted-foreground grid grid-cols-[1fr_auto_auto] items-center gap-3 rounded-lg border-t px-2.5 py-2 text-xs">
+                            <span className="text-foreground/90 inline-flex items-center gap-1.5 font-medium">
+                                <IconifyIcon icon="lucide:gem" width={14} height={14} className="text-primary" />
+                                宝石
+                            </span>
+                            <span>
+                                槽位{" "}
+                                <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.count, 0)}</strong>
+                            </span>
+                            <span>
+                                容量{" "}
+                                <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.volume, 0)}</strong>
+                            </span>
+                        </div>
+                    </GalleryContentSection>
                 )}
             </div>
-        </article>
+        </ItemCardShell>
     );
 }
 

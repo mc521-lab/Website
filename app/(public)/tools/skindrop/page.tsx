@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { SkinView3D } from "@/components/mc521/tools/skin-view-3d";
 import { useSkindrop, type ResolvedSkin } from "@/hooks/use-skindrop";
+import PlayerRender, { type PlayerRenderRef } from "@/components/mc521/tools/skindrop/player";
 
 type Tab = "upload" | "namemc";
 type Step = "select" | "preview" | "result";
@@ -26,6 +26,7 @@ export default function SkindropPage() {
     const fileObjectUrlRef = useRef<string | null>(null);
     const copiedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const debugCopiedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const playerRenderRef = useRef<PlayerRenderRef | null>(null);
 
     const revokeFileObjectUrl = useCallback(() => {
         if (fileObjectUrlRef.current) {
@@ -147,6 +148,12 @@ export default function SkindropPage() {
         if (url) {
             setUploadedUrl(url);
             setStep("result");
+
+            const playerRender = playerRenderRef.current;
+            if (playerRender) {
+                await playerRender.onFaceFront();
+                playerRender.onStartWave();
+            }
         }
     }, [skinSource, playerName, upload]);
 
@@ -199,7 +206,7 @@ export default function SkindropPage() {
     const canConfirm = playerName.trim().length > 0 && skinSource !== null && !loading;
 
     return (
-        <div className="flex h-full flex-1 flex-col gap-6">
+        <div className="flex min-h-0 flex-1 flex-col gap-6 overflow-hidden">
             <header className="text-center">
                 <h1 className="font-heading text-foreground mb-2 text-2xl font-bold">皮肤驿站</h1>
                 <p className="text-muted-foreground text-sm">上传皮肤、确认角色、复制指令，三步完成换装。</p>
@@ -213,19 +220,19 @@ export default function SkindropPage() {
                 <Step step={step} target="result" label="复制指令" completed={false} />
             </nav>
 
-            <main className="grid h-full min-h-0 flex-1 gap-6 lg:grid-cols-[1fr_1.35fr]">
+            <main className="grid min-h-0 w-full flex-1 gap-6 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
                 {/* Preview panel */}
-                <section className="border-foreground/8 bg-background/25 flex min-h-0 flex-col gap-4 rounded-xl border p-5">
+                <section className="border-foreground/8 bg-background/25 flex min-h-0 w-full min-w-0 flex-col gap-4 overflow-hidden rounded-xl border p-5">
                     <div className="border-foreground/8 border-b pb-3">
                         <span className="text-foreground/50 font-mono text-[11px] tracking-widest">SKIN PREVIEW</span>
                         <h2 className="font-heading text-foreground text-lg font-bold">皮肤预览</h2>
                     </div>
 
-                    <div className="border-foreground/12 bg-background/35 relative flex min-h-0 flex-1 items-center justify-center overflow-hidden rounded-lg border border-dashed">
-                        <SkinView3D
-                            skin={skinSource?.url ?? "/images/a0fe6e818c766c181db01a8022ba7d40.png"}
-                            className="h-full w-full"
-                            overrideConfig={{ autoRotate: false }}
+                    <div className="border-foreground/12 bg-background/35 relative flex min-h-105 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg border border-dashed">
+                        <PlayerRender
+                            ref={playerRenderRef}
+                            type="wide"
+                            skinUrl={skinSource?.url ?? "/images/a0fe6e818c766c181db01a8022ba7d40.png"}
                         />
                     </div>
 
@@ -236,7 +243,7 @@ export default function SkindropPage() {
                 </section>
 
                 {/* Control panel */}
-                <section className="border-foreground/8 bg-background/25 flex min-h-0 flex-col gap-4 rounded-xl border p-5">
+                <section className="border-foreground/8 bg-background/25 flex min-h-0 min-w-0 flex-col gap-4 rounded-xl border p-5">
                     {step === "select" && (
                         <div className="flex min-h-0 flex-1 flex-col gap-4">
                             <div className="border-foreground/8 border-b pb-2">

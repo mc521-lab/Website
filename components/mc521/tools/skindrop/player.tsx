@@ -24,7 +24,7 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
 
         const sceneRef = useRef<THREE.Scene>(new THREE.Scene());
         const cameraRef = useRef<THREE.PerspectiveCamera>(new THREE.PerspectiveCamera(75, 1, 0.1, 1000));
-        const rendererRef = useRef<THREE.WebGLRenderer>(new THREE.WebGLRenderer({ antialias: true, alpha: true }));
+        const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
         const controlsRef = useRef<OrbitControls | null>(null);
         const playerAnimatorRef = useRef<PlayerAnimator | null>(null);
         const capeAnimatorRef = useRef<CapeAnimator | null>(null);
@@ -169,6 +169,7 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
 
             const camera = cameraRef.current;
             const renderer = rendererRef.current;
+            if (!renderer) return;
 
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
@@ -181,8 +182,14 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
             if (!container) return;
 
             const camera = cameraRef.current;
-            const renderer = rendererRef.current;
             const scene = sceneRef.current;
+
+            if (!rendererRef.current) {
+                rendererRef.current = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            }
+
+            const renderer = rendererRef.current;
+            if (!renderer) return;
 
             const width = container.clientWidth;
             const height = container.clientHeight;
@@ -262,6 +269,7 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
                 // window.removeEventListener("resize", onResize);
                 controls.dispose();
                 renderer.dispose();
+                rendererRef.current = null;
                 if (renderer.domElement.parentNode === container) {
                     container.removeChild(renderer.domElement);
                 }

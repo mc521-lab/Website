@@ -2,7 +2,7 @@ basic:
   id: unbreaking
   name: 耐久
   description: 物品的实际耐久度变为原本的 %placeholder% 倍
-  placeholder: '%level% + 1'
+  placeholder: "%level% + 1"
   placeholders: {}
   max-level: 1
   type: jingliang

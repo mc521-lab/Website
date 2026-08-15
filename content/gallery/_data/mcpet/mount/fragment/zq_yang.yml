@@ -1,6 +1,6 @@
 basic:
   name: 美羊羊碎片
 usage:
-- 集齐30个碎片用于兑换坐骑美羊羊
+  - 集齐30个碎片用于兑换坐骑美羊羊
 filter:
   type: fragment

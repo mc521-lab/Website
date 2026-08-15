@@ -5,7 +5,7 @@ basic:
   placeholder: null
   placeholders:
     radius: 1 + %level%
-    damage: '%level% * 2'
+    damage: "%level% * 2"
   max-level: 4
   type: normal
 filter:
@@ -14,5 +14,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- axe
+  - axe
 conflicts: []

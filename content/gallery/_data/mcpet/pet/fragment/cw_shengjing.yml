@@ -1,6 +1,6 @@
 basic:
   name: 圣境独角兽碎片
 usage:
-- 集齐10个碎片用于兑换宠物圣境独角兽
+  - 集齐10个碎片用于兑换宠物圣境独角兽
 filter:
   type: fragment

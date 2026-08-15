@@ -2,7 +2,7 @@ basic:
   id: feather_falling
   name: 摔落缓冲
   description: 减少摔落伤害 %placeholder%%
-  placeholder: '%level% * 12'
+  placeholder: "%level% * 12"
   placeholders: {}
   max-level: 1
   type: normal

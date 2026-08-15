@@ -1,6 +1,6 @@
 basic:
   name: 冰火幻灵碎片
 usage:
-- 集齐25个碎片用于兑换宠物冰火幻灵
+  - 集齐25个碎片用于兑换宠物冰火幻灵
 filter:
   type: fragment

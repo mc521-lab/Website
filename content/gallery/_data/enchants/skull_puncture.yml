@@ -12,7 +12,7 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- bow
-- crossbow
-- trident
+  - bow
+  - crossbow
+  - trident
 conflicts: []

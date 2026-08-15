@@ -149,4 +149,3 @@ export default function AdminFeedbackDetailPage({ params }: { params: Promise<{ 
         </div>
     );
 }
-

@@ -12,10 +12,10 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- sword
+  - sword
 conflicts:
-- sharpness
-- smite
-- bane_of_arthropods
-- introversion
-- slaughter
+  - sharpness
+  - smite
+  - bane_of_arthropods
+  - introversion
+  - slaughter

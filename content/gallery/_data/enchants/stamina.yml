@@ -2,7 +2,7 @@ basic:
   id: stamina
   name: 耐力
   description: 减少疾跑时的饥饿消耗 %placeholder%%
-  placeholder: '%level% * 20'
+  placeholder: "%level% * 20"
   placeholders: {}
   max-level: 4
   type: shishi
@@ -12,5 +12,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- chestplate
+  - chestplate
 conflicts: []

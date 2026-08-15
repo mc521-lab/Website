@@ -12,6 +12,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- sword
-- axe
+  - sword
+  - axe
 conflicts: []

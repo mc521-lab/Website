@@ -5,7 +5,7 @@ basic:
   placeholder: null
   placeholders:
     seconds: 15 * %level%
-    chance: '%level% / (%level% + 1)'
+    chance: "%level% / (%level% + 1)"
   max-level: 1
   type: normal
 filter:

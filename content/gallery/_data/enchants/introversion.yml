@@ -12,9 +12,9 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- sword
+  - sword
 conflicts:
-- sharpness
-- smite
-- bane_of_arthropods
-- brightness
+  - sharpness
+  - smite
+  - bane_of_arthropods
+  - brightness

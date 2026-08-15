@@ -4,8 +4,8 @@ basic:
   description: 减少受到的火焰伤害 %damage%% 并缩短燃烧时间 %time%%
   placeholder: null
   placeholders:
-    damage: '%level% * 8'
-    time: '%level% * 15'
+    damage: "%level% * 8"
+    time: "%level% * 15"
   max-level: 1
   type: jingliang
 filter:

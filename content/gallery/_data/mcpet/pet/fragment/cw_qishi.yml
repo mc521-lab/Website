@@ -1,6 +1,6 @@
 basic:
   name: 城堡小骑士碎片
 usage:
-- 集齐25个碎片用于兑换宠物城堡小骑士
+  - 集齐25个碎片用于兑换宠物城堡小骑士
 filter:
   type: fragment

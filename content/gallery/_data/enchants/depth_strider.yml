@@ -2,7 +2,7 @@ basic:
   id: depth_strider
   name: 深海探索者
   description: 减少在水下移动时的减速效果 %placeholder%%
-  placeholder: '%level% * 33.333333'
+  placeholder: "%level% * 33.333333"
   placeholders: {}
   max-level: 1
   type: jingliang

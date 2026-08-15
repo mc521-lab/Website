@@ -2,10 +2,10 @@ basic:
   name: 圣河塔晶
   quality: A
 usage:
-- 用于兑换 A 级套装
+  - 用于兑换 A 级套装
 source:
-- 银币商店兑换
-- 副本法老王陵
+  - 银币商店兑换
+  - 副本法老王陵
 limit: []
 filter:
   type: tajing

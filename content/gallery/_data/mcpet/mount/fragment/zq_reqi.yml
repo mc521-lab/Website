@@ -1,6 +1,6 @@
 basic:
   name: 绯云热气球碎片
 usage:
-- 集齐20个碎片用于兑换坐骑绯云热气球
+  - 集齐20个碎片用于兑换坐骑绯云热气球
 filter:
   type: fragment

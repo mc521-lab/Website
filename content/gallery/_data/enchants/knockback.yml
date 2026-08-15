@@ -2,7 +2,7 @@ basic:
   id: knockback
   name: 击退
   description: 增加攻击击退距离 %placeholder%%
-  placeholder: '%level% * 85 + 20'
+  placeholder: "%level% * 85 + 20"
   placeholders: {}
   max-level: 1
   type: normal

@@ -142,22 +142,10 @@ export function ItemsGalleryPage({
     empty,
 }: ItemsGalleryPageProps) {
     return (
-        <GalleryShell
-            title={title}
-            subtitle={description}
-            filterBar={filterBar}
-            isEmpty={items.length === 0}
-            empty={empty}
-        >
+        <GalleryShell title={title} subtitle={description} filterBar={filterBar} isEmpty={items.length === 0} empty={empty}>
             <div className={cn("grid grid-cols-1 gap-4", "sm:grid-cols-2", "lg:grid-cols-3 xl:grid-cols-4")}>
                 {items.map((item) => (
-                    <ItemCard
-                        key={item.id}
-                        item={item}
-                        isGif={isGif}
-                        sourceRules={sourceRules}
-                        variantStyles={variantStyles}
-                    />
+                    <ItemCard key={item.id} item={item} isGif={isGif} sourceRules={sourceRules} variantStyles={variantStyles} />
                 ))}
             </div>
         </GalleryShell>

@@ -198,10 +198,7 @@ export function FeedbackList({ refreshKey }: FeedbackListProps) {
                 ) : (
                     <div className="feedback-list-items">
                         {feedbacks.map((fb) => (
-                            <Link
-                                key={fb.id}
-                                href={`/feedback/${fb.number}`}
-                                className="feedback-item-card">
+                            <Link key={fb.id} href={`/feedback/${fb.number}`} className="feedback-item-card">
                                 <div className="feedback-item-header">
                                     <div className="feedback-item-badges">
                                         <span className={cn("feedback-item-badge", FEEDBACK_TYPE_COLOR[fb.type])}>

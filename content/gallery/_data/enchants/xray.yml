@@ -14,5 +14,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- pickaxe
+  - pickaxe
 conflicts: []

@@ -12,8 +12,8 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- sword
-- bow
-- trident
+  - sword
+  - bow
+  - trident
 conflicts:
-- end_affinity
+  - end_affinity

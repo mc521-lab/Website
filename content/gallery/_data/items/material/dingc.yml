@@ -2,10 +2,10 @@ basic:
   name: 冰晶砂
   quality: C
 usage:
-- 用于兑换 C 级套装
+  - 用于兑换 C 级套装
 source:
-- 银币商店兑换
-- 副本秘境一层
+  - 银币商店兑换
+  - 副本秘境一层
 limit: []
 filter:
   type: ding

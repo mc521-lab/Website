@@ -2,7 +2,7 @@ basic:
   id: abrasion
   name: 磨蚀
   description: 对敌方护甲额外造成 %placeholder% 点耐久伤害
-  placeholder: '%level%'
+  placeholder: "%level%"
   placeholders: {}
   max-level: 2
   type: normal
@@ -12,6 +12,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- sword
-- axe
+  - sword
+  - axe
 conflicts: []

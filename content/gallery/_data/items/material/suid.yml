@@ -2,9 +2,9 @@ basic:
   name: 焚心晶胚
   quality: S
 usage:
-- 用于兑换焚心宝石
+  - 用于兑换焚心宝石
 source:
-- 副本灵域遗迹
+  - 副本灵域遗迹
 limit: []
 filter:
   type: sui

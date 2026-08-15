@@ -1,6 +1,6 @@
 basic:
   name: 霜冠冰鹅碎片
 usage:
-- 集齐20个碎片用于兑换宠物霜冠冰鹅
+  - 集齐20个碎片用于兑换宠物霜冠冰鹅
 filter:
   type: fragment

@@ -12,4 +12,3 @@ export const gallery_mcpet_pet_fragment_data = {
     pattern: "gallery/_data/mcpet/pet/fragment/*.yml",
     schema: gallery_items_shared_schema,
 };
-

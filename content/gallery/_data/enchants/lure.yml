@@ -2,7 +2,7 @@ basic:
   id: lure
   name: 饵钓
   description: 钓鱼等待时间减少 %placeholder% 秒
-  placeholder: '%level% * 5'
+  placeholder: "%level% * 5"
   placeholders: {}
   max-level: 1
   type: jingliang

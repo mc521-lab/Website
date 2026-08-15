@@ -4,7 +4,7 @@ basic:
   description: 在你%radius%格范围内的玩家承受的伤害减少%reduction%%
   placeholder: null
   placeholders:
-    reduction: '%level% * 10'
+    reduction: "%level% * 10"
     radius: 3 + %level% * 2
   max-level: 2
   type: shishi
@@ -14,6 +14,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- chestplate
-- leggings
+  - chestplate
+  - leggings
 conflicts: []

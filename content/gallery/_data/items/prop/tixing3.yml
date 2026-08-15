@@ -2,7 +2,7 @@ basic:
   name: 体型卡-永久版
   quality: S
 usage:
-- 可设置自身的体型大小
+  - 可设置自身的体型大小
 source:
-- 水晶商城购买
+  - 水晶商城购买
 limit: []

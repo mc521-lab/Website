@@ -4,8 +4,8 @@ basic:
   description: 使常见掉落物上限增加 %common%，稀有掉落物几率增加 %rare%%
   placeholder: null
   placeholders:
-    common: '%level%'
-    rare: '%level%'
+    common: "%level%"
+    rare: "%level%"
   max-level: 1
   type: jingliang
 filter:

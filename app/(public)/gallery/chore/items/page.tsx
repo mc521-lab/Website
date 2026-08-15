@@ -76,5 +76,13 @@ export default function ItemsPage() {
         />
     );
 
-    return <ItemsGalleryPage items={filteredItems} title="物品图鉴" description="浏览游戏中的材料、道具和货币" filterBar={filterBar} sourceRules={SOURCE_RULES} />;
+    return (
+        <ItemsGalleryPage
+            items={filteredItems}
+            title="物品图鉴"
+            description="浏览游戏中的材料、道具和货币"
+            filterBar={filterBar}
+            sourceRules={SOURCE_RULES}
+        />
+    );
 }

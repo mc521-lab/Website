@@ -153,11 +153,15 @@ function ArmorPieceCard({ item }: { item: ArmorItem }) {
                             </span>
                             <span>
                                 槽位{" "}
-                                <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.count, 0)}</strong>
+                                <strong className="text-foreground ml-0.5 tabular-nums">
+                                    {formatNumber(item.gem?.count, 0)}
+                                </strong>
                             </span>
                             <span>
                                 容量{" "}
-                                <strong className="text-foreground ml-0.5 tabular-nums">{formatNumber(item.gem?.volume, 0)}</strong>
+                                <strong className="text-foreground ml-0.5 tabular-nums">
+                                    {formatNumber(item.gem?.volume, 0)}
+                                </strong>
                             </span>
                         </div>
                     </GalleryContentSection>

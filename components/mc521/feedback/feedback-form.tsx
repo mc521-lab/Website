@@ -133,7 +133,7 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
                     </div>
                 </div>
 
-                <div className="feedback-form-group rounded-lg border border-dashed border-foreground/15 bg-foreground/5 px-4 py-3 text-sm text-foreground/75">
+                <div className="feedback-form-group border-foreground/15 bg-foreground/5 text-foreground/75 rounded-lg border border-dashed px-4 py-3 text-sm">
                     <span>玩家 ID 将从右上角设置读取；如果还没有设置，请先去右上角填写喔~</span>
                 </div>
 

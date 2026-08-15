@@ -2,7 +2,7 @@ basic:
   id: excavation
   name: 连采
   description: 额外挖掘%placeholder%块方块
-  placeholder: '%level%'
+  placeholder: "%level%"
   placeholders: {}
   max-level: 5
   type: jingliang
@@ -12,5 +12,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- shovel
+  - shovel
 conflicts: []

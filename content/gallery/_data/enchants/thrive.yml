@@ -2,7 +2,7 @@ basic:
   id: thrive
   name: 旺盛
   description: 获得 %placeholder% 点额外生命值
-  placeholder: '%level%'
+  placeholder: "%level%"
   placeholders: {}
   max-level: 2
   type: xishi
@@ -12,5 +12,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- armor
+  - armor
 conflicts: []

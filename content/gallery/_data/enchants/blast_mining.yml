@@ -1,7 +1,7 @@
 basic:
   id: blast_mining
   name: 立方
-  description: '%placeholder%%的几率以3x3x3范围挖掘方块'
+  description: "%placeholder%%的几率以3x3x3范围挖掘方块"
   placeholder: 4 * %level%
   placeholders: {}
   max-level: 5
@@ -12,6 +12,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- pickaxe
+  - pickaxe
 conflicts:
-- veinminer
+  - veinminer

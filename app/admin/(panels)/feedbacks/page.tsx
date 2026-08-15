@@ -3,9 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
-import {
-    getAdminFeedbacks,
-} from "@/lib/api";
+import { getAdminFeedbacks } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { IconifyIcon } from "@/components/iconify-icon";
 import {
@@ -21,13 +19,7 @@ import {
     ADMIN_FEEDBACK_STATUS_COLOR,
 } from "@/components/mc521/admin/types";
 import { cn } from "@/lib/utils";
-import {
-    Search,
-    ChevronLeft,
-    ChevronRight,
-    Loader2,
-    MessageSquare,
-} from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, Loader2, MessageSquare } from "lucide-react";
 
 const TYPE_FILTER_OPTIONS: { value: AdminFeedbackType | "all"; label: string }[] = [
     { value: "all", label: "全部" },
@@ -236,7 +228,9 @@ export default function AdminFeedbacksPage() {
                                     <span className="admin-feedback-badge admin-feedback-badge-server">
                                         {ADMIN_FEEDBACK_SERVER_LABEL[fb.server]}
                                     </span>
-                                    {fb.isPinned && <span className="admin-feedback-badge admin-feedback-badge-pinned">📌 置顶</span>}
+                                    {fb.isPinned && (
+                                        <span className="admin-feedback-badge admin-feedback-badge-pinned">📌 置顶</span>
+                                    )}
                                     {typeof fb.priority === "number" && fb.priority > 0 && (
                                         <span
                                             className={cn(
@@ -287,7 +281,11 @@ export default function AdminFeedbacksPage() {
                     <span className="admin-pagination-info">
                         第 <strong>{page}</strong> / {totalPages} 页 · 共 {total} 条
                     </span>
-                    <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => handlePageChange(page + 1)}>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        disabled={page >= totalPages}
+                        onClick={() => handlePageChange(page + 1)}>
                         下一页
                         <ChevronRight size={16} />
                     </Button>

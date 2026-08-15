@@ -1,8 +1,8 @@
 basic:
   id: block_breather
   name: 幻息
-  description: '%placeholder%% 几率无视窒息伤害'
-  placeholder: '%level% * 20'
+  description: "%placeholder%% 几率无视窒息伤害"
+  placeholder: "%level% * 20"
   placeholders: {}
   max-level: 3
   type: normal
@@ -12,5 +12,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- helmet
+  - helmet
 conflicts: []

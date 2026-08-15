@@ -12,5 +12,5 @@ filter:
   discoverable: false
   enchantable: true
 targets:
-- all
+  - all
 conflicts: []

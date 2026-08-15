@@ -125,9 +125,13 @@ export function createWikiHeadingComponents(): Record<string, ComponentType<any>
     const counts = new Map<string, number>();
 
     return {
-        h1: (({ children, ...props }: ComponentPropsWithoutRef<"h1">) => renderHeading(1, children, props, counts)) as ComponentType<any>,
-        h2: (({ children, ...props }: ComponentPropsWithoutRef<"h2">) => renderHeading(2, children, props, counts)) as ComponentType<any>,
-        h3: (({ children, ...props }: ComponentPropsWithoutRef<"h3">) => renderHeading(3, children, props, counts)) as ComponentType<any>,
-        h4: (({ children, ...props }: ComponentPropsWithoutRef<"h4">) => renderHeading(4, children, props, counts)) as ComponentType<any>,
+        h1: (({ children, ...props }: ComponentPropsWithoutRef<"h1">) =>
+            renderHeading(1, children, props, counts)) as ComponentType<any>,
+        h2: (({ children, ...props }: ComponentPropsWithoutRef<"h2">) =>
+            renderHeading(2, children, props, counts)) as ComponentType<any>,
+        h3: (({ children, ...props }: ComponentPropsWithoutRef<"h3">) =>
+            renderHeading(3, children, props, counts)) as ComponentType<any>,
+        h4: (({ children, ...props }: ComponentPropsWithoutRef<"h4">) =>
+            renderHeading(4, children, props, counts)) as ComponentType<any>,
     };
 }

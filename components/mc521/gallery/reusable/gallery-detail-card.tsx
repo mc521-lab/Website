@@ -40,7 +40,10 @@ export function GalleryDetailCard({
                         icon="lucide:map-pin"
                         items={source}
                         listClassName="grid grid-cols-1 gap-2 sm:grid-cols-2"
-                        itemClassName={sourceItemClassName ?? "border-border/70 bg-background/80 flex items-center gap-1.5 rounded-md border px-2 py-1 text-sm shadow-sm"}
+                        itemClassName={
+                            sourceItemClassName ??
+                            "border-border/70 bg-background/80 flex items-center gap-1.5 rounded-md border px-2 py-1 text-sm shadow-sm"
+                        }
                         renderItem={renderSourceItem}
                     />
                 )}

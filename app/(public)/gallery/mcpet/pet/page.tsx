@@ -58,7 +58,9 @@ function PetOverviewCard({ item }: { item: PetItem }) {
             <div className="gallery-card-header mb-3 flex items-start gap-2">
                 <GalleryItemImage src={`/gallery/${activeVariant}.png`} alt={activeVariant} />
                 <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
-                    <h3 className="truncate text-base leading-tight font-semibold">{hasVariants ? activeVariant : item.basic.name}</h3>
+                    <h3 className="truncate text-base leading-tight font-semibold">
+                        {hasVariants ? activeVariant : item.basic.name}
+                    </h3>
                     <div className="mt-1 flex items-center gap-2">
                         <p className="text-muted-foreground text-xs">宠物</p>
                         {hasVariants && (

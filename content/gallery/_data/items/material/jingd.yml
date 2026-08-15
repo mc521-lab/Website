@@ -2,9 +2,9 @@ basic:
   name: 烈焰幽晶
   quality: S
 usage:
-- 用于兑换职业饰品
+  - 用于兑换职业饰品
 source:
-- 副本玄轮圣墟
+  - 副本玄轮圣墟
 limit: []
 filter:
   type: jing

@@ -14,5 +14,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- fishing_rod
+  - fishing_rod
 conflicts: []

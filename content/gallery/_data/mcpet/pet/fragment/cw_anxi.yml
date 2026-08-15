@@ -1,6 +1,6 @@
 basic:
   name: 暗袭者碎片
 usage:
-- 集齐30个碎片用于兑换宠物暗袭者
+  - 集齐30个碎片用于兑换宠物暗袭者
 filter:
   type: fragment

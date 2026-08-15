@@ -4,9 +4,9 @@ basic:
   description: 有 %chance%% 几率使对手受到 %damage% 点伤害，持续 %duration% 秒
   placeholder: null
   placeholders:
-    chance: '%level% * 3'
+    chance: "%level% * 3"
     duration: 0.75 * (%level% + 2)
-    damage: '1'
+    damage: "1"
   max-level: 7
   type: shishi
 filter:
@@ -15,6 +15,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- bow
-- crossbow
+  - bow
+  - crossbow
 conflicts: []

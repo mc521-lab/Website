@@ -1,6 +1,6 @@
 basic:
   name: 荒行利爪碎片
 usage:
-- 集齐25个碎片用于兑换坐骑荒行利爪
+  - 集齐25个碎片用于兑换坐骑荒行利爪
 filter:
   type: fragment

@@ -158,7 +158,9 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
                     </div>
                 </GalleryContentSection>
 
-                <GalleryContentSection title={`属性组${entries.length > 0 ? `（${entries.length}）` : ""}`} icon="lucide:sliders-horizontal">
+                <GalleryContentSection
+                    title={`属性组${entries.length > 0 ? `（${entries.length}）` : ""}`}
+                    icon="lucide:sliders-horizontal">
                     {entries.length === 0 ? (
                         <div className="bg-muted/40 rounded-lg p-2.5">
                             <p className="text-muted-foreground text-sm">无修饰符条目</p>

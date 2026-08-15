@@ -12,6 +12,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- pickaxe
+  - pickaxe
 conflicts:
-- blast_mining
+  - blast_mining

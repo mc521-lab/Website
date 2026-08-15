@@ -2,7 +2,7 @@ basic:
   id: warp_drive
   name: 幻移
   description: 用箭击中敌人时将你传送至目标身边
-  placeholder: '%level%'
+  placeholder: "%level%"
   placeholders: {}
   max-level: 1
   type: jingliang
@@ -12,5 +12,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- bow
+  - bow
 conflicts: []

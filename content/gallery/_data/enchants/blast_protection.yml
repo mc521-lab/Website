@@ -4,8 +4,8 @@ basic:
   description: 减少受到的爆炸伤害 %damage%% 并降低爆炸击退 %knockback%%
   placeholder: null
   placeholders:
-    damage: '%level% * 8'
-    knockback: '%level% * 15'
+    damage: "%level% * 8"
+    knockback: "%level% * 15"
   max-level: 1
   type: normal
 filter:

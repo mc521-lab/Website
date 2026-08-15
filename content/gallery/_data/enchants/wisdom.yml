@@ -12,12 +12,12 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- sword
-- axe
-- pickaxe
-- shovel
-- hoe
-- bow
-- crossbow
-- trident
+  - sword
+  - axe
+  - pickaxe
+  - shovel
+  - hoe
+  - bow
+  - crossbow
+  - trident
 conflicts: []

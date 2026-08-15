@@ -3,20 +3,20 @@ basic:
   maxLevel: 1
 effects:
   ExperienceThreshold:
-  - 0
+    - 0
   MaxHealth:
-  - 150
+    - 150
   Regeneration:
-  - 0.8
+    - 0.8
   ResistanceModifier:
-  - 1.4
+    - 1.4
   RespawnCooldown:
-  - 50
+    - 50
 variants:
-- 幽光水母
-- 炽热水母
-- 暗系水母
-- 暖光水母
-- 幽灵水母
+  - 幽光水母
+  - 炽热水母
+  - 暗系水母
+  - 暖光水母
+  - 幽灵水母
 filter:
   type: pet

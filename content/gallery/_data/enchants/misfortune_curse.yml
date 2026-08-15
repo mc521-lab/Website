@@ -12,8 +12,8 @@ filter:
   discoverable: false
   enchantable: true
 targets:
-- hoe
-- shovel
-- pickaxe
-- axe
+  - hoe
+  - shovel
+  - pickaxe
+  - axe
 conflicts: []

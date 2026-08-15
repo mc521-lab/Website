@@ -12,6 +12,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- bow
-- crossbow
+  - bow
+  - crossbow
 conflicts: []

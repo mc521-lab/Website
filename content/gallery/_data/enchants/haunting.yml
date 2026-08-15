@@ -12,5 +12,5 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- helmet
+  - helmet
 conflicts: []

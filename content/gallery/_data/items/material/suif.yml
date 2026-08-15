@@ -2,9 +2,9 @@ basic:
   name: 暴击晶胚
   quality: S
 usage:
-- 用于兑换暴击宝石
+  - 用于兑换暴击宝石
 source:
-- 副本灵域遗迹
+  - 副本灵域遗迹
 limit: []
 filter:
   type: sui

@@ -6,7 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ensureSession, getUrl } from "@/lib/api/client";
 import { cn } from "@/lib/utils";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 import { KeyRound, RefreshCcw } from "lucide-react";
 
 const STORAGE_KEY = "mc521_feedback_player_id";
@@ -67,15 +75,23 @@ export function PlayerIdDialog() {
                 <Button
                     variant="outline"
                     size="sm"
-                    className={cn("h-9 gap-1.5 rounded-full px-3", hasValue ? "max-w-[14rem]" : "w-9 px-0", hasValue && "text-primary")}>
+                    className={cn(
+                        "h-9 gap-1.5 rounded-full px-3",
+                        hasValue ? "max-w-[14rem]" : "w-9 px-0",
+                        hasValue && "text-primary"
+                    )}>
                     <KeyRound data-icon="inline-start" />
-                    <span className={cn("truncate", !hasValue && "sr-only")}>{hasValue ? `玩家 ID：${savedPlayerId}` : "设置玩家 ID"}</span>
+                    <span className={cn("truncate", !hasValue && "sr-only")}>
+                        {hasValue ? `玩家 ID：${savedPlayerId}` : "设置玩家 ID"}
+                    </span>
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>设置玩家 ID</DialogTitle>
-                    <DialogDescription>仅在反馈页使用。保存后会先和后端节点交换会话信息，以便建立身份 cookie。</DialogDescription>
+                    <DialogDescription>
+                        仅在反馈页使用。保存后会先和后端节点交换会话信息，以便建立身份 cookie。
+                    </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col gap-2">
                     <label className="text-sm font-medium" htmlFor="feedback-player-id">

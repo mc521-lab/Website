@@ -1,6 +1,6 @@
 basic:
   name: 幽光水母碎片
 usage:
-- 集齐25个碎片用于兑换坐骑幽光水母
+  - 集齐25个碎片用于兑换坐骑幽光水母
 filter:
   type: fragment

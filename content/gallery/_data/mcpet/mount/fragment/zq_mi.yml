@@ -1,6 +1,6 @@
 basic:
   name: 蜜团团碎片
 usage:
-- 集齐25个碎片用于兑换坐骑蜜团团
+  - 集齐25个碎片用于兑换坐骑蜜团团
 filter:
   type: fragment

@@ -3,14 +3,14 @@ basic:
   maxLevel: 1
 effects:
   ExperienceThreshold:
-  - 0
+    - 0
   MaxHealth:
-  - 300
+    - 300
   Regeneration:
-  - 1.5
+    - 1.5
   ResistanceModifier:
-  - 1.8
+    - 1.8
   RespawnCooldown:
-  - 30
+    - 30
 filter:
   type: pet

@@ -4,7 +4,7 @@ basic:
   description: 有 %chance%% 几率在命中对手时召唤 %bolts% 道闪电
   placeholder: null
   placeholders:
-    chance: '%level%'
+    chance: "%level%"
     bolts: ceil(%level% / 2)
   max-level: 6
   type: shishi
@@ -14,6 +14,6 @@ filter:
   discoverable: true
   enchantable: true
 targets:
-- bow
-- crossbow
+  - bow
+  - crossbow
 conflicts: []

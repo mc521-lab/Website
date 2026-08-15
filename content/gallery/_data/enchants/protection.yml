@@ -2,7 +2,7 @@ basic:
   id: protection
   name: 保护
   description: 减少受到的伤害 %placeholder%%
-  placeholder: '%level% * 4'
+  placeholder: "%level% * 4"
   placeholders: {}
   max-level: 1
   type: shishi

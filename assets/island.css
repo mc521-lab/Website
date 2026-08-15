@@ -48,6 +48,11 @@
         radial-gradient(circle at 20% 0%, rgba(224, 177, 75, 0.08), transparent 30%);
 }
 
+.wiki-island-layout .island-sidebar {
+    width: 272px;
+    flex-basis: 272px;
+}
+
 .island-sidebar-header {
     padding: 4px 10px 17px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
@@ -262,6 +267,100 @@
     padding: clamp(20px, 2.4vw, 36px) clamp(14px, 2.4vw, 36px);
 }
 
+.wiki-content-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(20px, 2.2vw, 30px);
+    align-items: start;
+}
+
+.wiki-content-layout.has-toc {
+    grid-template-columns: minmax(0, 1fr) 228px;
+}
+
+.wiki-content-layout > .island-article {
+    min-width: 0;
+}
+
+.wiki-toc {
+    position: sticky;
+    top: 36px;
+    right: 24px;
+    height: calc(100vh - 11rem);
+    min-width: 0;
+    align-self: start;
+    z-index: 10;
+}
+
+.wiki-toc-card {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    padding: 18px 16px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 16px;
+    background:
+        linear-gradient(180deg, rgba(18, 21, 26, 0.96), rgba(14, 16, 20, 0.96)),
+        radial-gradient(circle at 20% 0%, rgba(224, 177, 75, 0.08), transparent 30%);
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.wiki-toc-card h2 {
+    margin-top: 10px;
+    color: rgba(245, 241, 234, 0.96);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+}
+
+.wiki-toc-list {
+    display: grid;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.wiki-toc-card nav {
+    min-height: 0;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.wiki-toc-item {
+    min-width: 0;
+}
+
+.wiki-toc-link {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 8px 10px;
+    color: rgba(228, 231, 236, 0.76);
+    font-size: 13px;
+    line-height: 1.55;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition:
+        color 150ms ease,
+        background-color 150ms ease,
+        transform 150ms ease;
+}
+
+.wiki-toc-link:hover {
+    background: rgba(255, 255, 255, 0.045);
+    color: #fff;
+}
+
+.wiki-toc-depth-3 .wiki-toc-link {
+    padding-inline-start: 18px;
+}
+
+.wiki-toc-depth-4 .wiki-toc-link {
+    padding-inline-start: 30px;
+}
+
 @media (max-width: 1024px) {
     .island-page {
         height: auto;
@@ -282,6 +381,11 @@
         max-height: calc(100vh - 88px);
     }
 
+    .wiki-island-layout .island-sidebar {
+        width: 236px;
+        flex-basis: 236px;
+    }
+
     .island-content {
         min-height: calc(100vh - 88px);
         overflow: visible;
@@ -289,6 +393,14 @@
 
     .island-content-inner {
         padding: 34px 30px 64px;
+    }
+
+    .wiki-content-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .wiki-toc {
+        display: none;
     }
 }
 
@@ -311,5 +423,9 @@
 
     .island-content-inner {
         padding: 28px 20px 56px;
+    }
+
+    .wiki-content-layout {
+        display: block;
     }
 }

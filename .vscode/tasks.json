@@ -21,7 +21,7 @@
         {
             "label": "Velite Dev Server",
             "type": "shell",
-            "command": "nr velite",
+            "command": "nr velite:watch",
             "options": {
                 "cwd": "${workspaceFolder}"
             },

@@ -12,7 +12,7 @@ const wikiNav = wiki_navigation.map((group) => ({
 export default function WikiLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="island-page">
-            <div className="island-layout">
+            <div className="island-layout wiki-island-layout">
                 {/* 左侧边栏 */}
                 <IslandSidebar
                     navigation={wikiNav}

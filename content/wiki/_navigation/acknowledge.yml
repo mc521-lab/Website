@@ -1,0 +1,13 @@
+- title: 了解服务器
+  order: 2
+  icon: lucide:lightbulb
+  defaultExpanded: false
+  items:
+    - title: 获取资源
+      href: /acknowledge/resources
+      icon: fluent-emoji-flat:fish-cake-with-swirl
+      order: 1
+    - title: 限制
+      href: /acknowledge/limits
+      icon: fluent-emoji-flat:name-badge
+      order: 1

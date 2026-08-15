@@ -1,21 +1,21 @@
-- title: 公会管理
-  order: 2
-  defaultExpanded: false
+- title: 公会系统
+  order: 4
   icon: lucide:landmark
+  defaultExpanded: false
   items:
     - title: 公会升级
-      href: /playerguard/update
+      href: /playerguild/update
       icon: fluent-emoji-flat:houses
       order: 1
     - title: 公会神石
-      href: /playerguard/stone
+      href: /playerguild/stone
       icon: fluent-emoji-flat:gem-stone
       order: 2
     - title: 常见问题
-      href: /playerguard/faq
+      href: /playerguild/faq
       icon: fluent-emoji-flat:white-question-mark
       order: 3
     - title: 维护成本
-      href: /playerguard/maintainance-funds
+      href: /playerguild/maintainance-funds
       icon: fluent-emoji-flat:coin
       order: 4

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { IconifyIcon } from "@/components/iconify-icon";
 
@@ -75,8 +75,16 @@ function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
         return <IslandNavItemLink item={{ title: group.title, href: group.href, icon: group.icon, order: group.order }} />;
     }
 
+    useEffect(() => {
+        if (isActiveGroup) {
+            setIsExpanded(true);
+        } else {
+            setIsExpanded(false);
+        }
+    }, [isActiveGroup]);
+
     return (
-        <div className={cn("island-nav-group", !(isExpanded || isActiveGroup) && "is-collapsed")}>
+        <div className={cn("island-nav-group", !isExpanded && "is-collapsed")}>
             <button
                 type="button"
                 className="island-nav-group-header"

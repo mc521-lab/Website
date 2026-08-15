@@ -667,10 +667,6 @@
         padding-left: 16px !important;
     }
 
-    .island-article-body td:first-child {
-        width: 42%;
-    }
-
     .island-article-body td button {
         height: 31px;
         max-width: 100%;

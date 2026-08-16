@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useCallback, useImperativeHandle, forwardRef } from "react";
+import { useRef, useEffect, useMemo, useCallback, useImperativeHandle, forwardRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { PlayerAnimator, glTFDatasets, PlayerPose, PlayerGltfBuilder, CapeAnimator, CapeGltfBuilder } from "@/lib/gltf";
@@ -32,15 +32,21 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
         const faceFrontTargetRef = useRef<number | null>(null);
         const faceFrontResolveRef = useRef<(() => void) | null>(null);
         const faceFrontPromiseRef = useRef<Promise<void> | null>(null);
+        const loadQueueRef = useRef(Promise.resolve());
+        const didInitLoadRef = useRef(false);
         const frameRef = useRef(0);
         const animationFrameIdRef = useRef<number | null>(null);
 
         // 预先计算挥手骨骼动画插值
-        const wavePose = PlayerPose.diff(
-            type === "wide" ? new glTFDatasets.WideIdleDataset().getNodes() : new glTFDatasets.SlimIdleDataset().getNodes(),
-            type === "wide" ? new glTFDatasets.WideActionDataset().getNodes() : new glTFDatasets.SlimActionDataset().getNodes()
+        const wavePose = useMemo(
+            () =>
+                PlayerPose.diff(
+                    type === "wide" ? new glTFDatasets.WideIdleDataset().getNodes() : new glTFDatasets.SlimIdleDataset().getNodes(),
+                    type === "wide" ? new glTFDatasets.WideActionDataset().getNodes() : new glTFDatasets.SlimActionDataset().getNodes()
+                ),
+            [type]
         );
-        const idlePose = new PlayerPose("idle", []);
+        const idlePose = useMemo(() => new PlayerPose("idle", []), []);
 
         const sleep = useCallback((ms: number): Promise<void> => {
             return new Promise((resolve) => setTimeout(resolve, ms));
@@ -134,6 +140,22 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
             doOneWave();
         }, [wavePose, idlePose, sleep]);
 
+        const enqueueReload = useCallback(
+            (playWave = false) => {
+                const task = async () => {
+                    await reload();
+                    if (playWave) {
+                        startWaveSequence();
+                    }
+                };
+
+                const next = loadQueueRef.current.then(task, task);
+                loadQueueRef.current = next.catch(() => undefined);
+                return next;
+            },
+            [reload, startWaveSequence]
+        );
+
         const onFaceFront = useCallback(() => {
             if (faceFrontPromiseRef.current) {
                 return faceFrontPromiseRef.current;
@@ -218,11 +240,7 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
 
             let cancelled = false;
 
-            (async () => {
-                await loadScene();
-                if (cancelled) return;
-                if (waveOnLoad) startWaveSequence();
-            })();
+            void enqueueReload(Boolean(waveOnLoad));
 
             const animate = () => {
                 animationFrameIdRef.current = requestAnimationFrame(animate);
@@ -274,17 +292,16 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
                     container.removeChild(renderer.domElement);
                 }
             };
-        }, []); // 仅挂载时执行
+        }, [enqueueReload, onResize, waveOnLoad]); // 仅挂载时执行
 
-        // 监听皮肤 / 披风变化
         useEffect(() => {
-            reload();
-        }, [skinUrl, capeUrl, reload]);
+            if (!didInitLoadRef.current) {
+                didInitLoadRef.current = true;
+                return;
+            }
 
-        // 监听模型类型变化
-        useEffect(() => {
-            reload();
-        }, [type, reload]);
+            void enqueueReload();
+        }, [type, skinUrl, capeUrl, enqueueReload]);
 
         return (
             <div

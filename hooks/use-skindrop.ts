@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { downloadSkin, getSkinDownloadUrl, resolveSkinId, uploadSkin, SkindropError, type SkinUploadResult } from "@/lib/api";
+import { blobToDataUrl } from "@/lib/data-url";
 
 export interface ResolvedSkin {
     id: string;
@@ -59,7 +60,7 @@ export function useSkindrop(): UseSkindropReturn {
                 throw new SkindropError("invalid NameMC URL or skin id");
             }
             const blob = await downloadSkin(id);
-            const url = URL.createObjectURL(blob);
+            const url = await blobToDataUrl(blob);
             return { id, url, blob };
         } catch (err) {
             lastErrorRef.current = err;

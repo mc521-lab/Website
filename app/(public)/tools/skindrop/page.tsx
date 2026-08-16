@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { blobToDataUrl } from "@/lib/data-url";
 import { useSkindrop, type ResolvedSkin } from "@/hooks/use-skindrop";
 import PlayerRender, { type PlayerRenderRef } from "@/components/mc521/tools/skindrop/player";
 
@@ -20,78 +22,105 @@ export default function SkindropPage() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [nameMcInput, setNameMcInput] = useState("");
     const [isDragOver, setIsDragOver] = useState(false);
+    const [isPreparingPreview, setIsPreparingPreview] = useState(false);
     const [copied, setCopied] = useState(false);
     const [debugCopied, setDebugCopied] = useState(false);
 
-    const fileObjectUrlRef = useRef<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const uploadTokenRef = useRef(0);
     const copiedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const debugCopiedTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const playerRenderRef = useRef<PlayerRenderRef | null>(null);
 
-    const revokeFileObjectUrl = useCallback(() => {
-        if (fileObjectUrlRef.current) {
-            URL.revokeObjectURL(fileObjectUrlRef.current);
-            fileObjectUrlRef.current = null;
-        }
-    }, []);
-
     const resetAll = useCallback(() => {
+        uploadTokenRef.current += 1;
         setStep("select");
         setActiveTab("upload");
-        revokeFileObjectUrl();
         setSkinSource(null);
         setPlayerName("");
         setUploadedUrl(null);
         setSelectedFile(null);
         setNameMcInput("");
-    }, [revokeFileObjectUrl]);
+        setIsPreparingPreview(false);
+    }, []);
 
     const switchTab = useCallback(
         (tab: Tab) => {
+            uploadTokenRef.current += 1;
             setActiveTab(tab);
-            revokeFileObjectUrl();
             setSkinSource(null);
             setUploadedUrl(null);
             setPlayerName("");
             setSelectedFile(null);
             setNameMcInput("");
             setStep("select");
+            setIsPreparingPreview(false);
         },
-        [revokeFileObjectUrl]
+        []
     );
 
     useEffect(() => {
         return () => {
-            revokeFileObjectUrl();
             if (copiedTimeoutRef.current) clearTimeout(copiedTimeoutRef.current);
             if (debugCopiedTimeoutRef.current) clearTimeout(debugCopiedTimeoutRef.current);
         };
-    }, [revokeFileObjectUrl]);
+    }, []);
 
     const setUploadFile = useCallback(
-        (file: File | null) => {
+        async (file: File | null) => {
+            uploadTokenRef.current += 1;
+            const token = uploadTokenRef.current;
             setSelectedFile(file);
-            revokeFileObjectUrl();
+            setSkinSource(null);
 
-            if (file) {
-                fileObjectUrlRef.current = URL.createObjectURL(file);
+            if (!file) {
+                setIsPreparingPreview(false);
+                return;
+            }
+
+            if (file.type !== "image/png") {
+                setSelectedFile(null);
+                setIsPreparingPreview(false);
+                toast.error("只支持 PNG 皮肤，请重新选择 .png 文件");
+                return;
+            }
+
+            setIsPreparingPreview(true);
+            try {
+                const url = await blobToDataUrl(file);
+                if (uploadTokenRef.current !== token) return;
                 setSkinSource({
                     id: file.name.replace(/\.png$/i, ""),
-                    url: fileObjectUrlRef.current,
+                    url,
                     blob: file,
                     filename: file.name,
                 });
-            } else {
-                setSkinSource(null);
+            } catch {
+                if (uploadTokenRef.current !== token) return;
+                setSelectedFile(null);
+            } finally {
+                if (uploadTokenRef.current === token) {
+                    setIsPreparingPreview(false);
+                }
             }
         },
-        [revokeFileObjectUrl]
+        []
+    );
+
+    const acceptDroppedFile = useCallback(
+        (file: File | null) => {
+            if (!file) return;
+
+            void setUploadFile(file);
+            setActiveTab("upload");
+        },
+        [setUploadFile]
     );
 
     const onFileChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
             const file = event.target.files?.[0] ?? null;
-            setUploadFile(file);
+            void setUploadFile(file);
         },
         [setUploadFile]
     );
@@ -110,26 +139,52 @@ export default function SkindropPage() {
         (event: React.DragEvent) => {
             event.preventDefault();
             setIsDragOver(false);
-            const file = event.dataTransfer.files?.[0] ?? null;
-            if (file && file.type === "image/png") {
-                setUploadFile(file);
-                switchTab("upload");
-            }
+            acceptDroppedFile(event.dataTransfer.files?.[0] ?? null);
         },
-        [setUploadFile, switchTab]
+        [acceptDroppedFile]
     );
 
+    const openFilePicker = useCallback(() => {
+        fileInputRef.current?.click();
+    }, []);
+
+    useEffect(() => {
+        const onWindowDragOver = (event: DragEvent) => {
+            if (!event.dataTransfer?.types.includes("Files")) return;
+            event.preventDefault();
+            if (activeTab === "upload") {
+                setIsDragOver(true);
+            }
+        };
+
+        const onWindowDragLeave = (event: DragEvent) => {
+            if (!event.dataTransfer?.types.includes("Files")) return;
+            if (event.relatedTarget) return;
+            setIsDragOver(false);
+        };
+
+        const onWindowDrop = (event: DragEvent) => {
+            if (!event.dataTransfer?.types.includes("Files")) return;
+            event.preventDefault();
+            setIsDragOver(false);
+            acceptDroppedFile(event.dataTransfer.files?.[0] ?? null);
+        };
+
+        window.addEventListener("dragover", onWindowDragOver, true);
+        window.addEventListener("dragleave", onWindowDragLeave, true);
+        window.addEventListener("drop", onWindowDrop, true);
+
+        return () => {
+            window.removeEventListener("dragover", onWindowDragOver, true);
+            window.removeEventListener("dragleave", onWindowDragLeave, true);
+            window.removeEventListener("drop", onWindowDrop, true);
+        };
+    }, [acceptDroppedFile, activeTab]);
+
     const proceedFromUpload = useCallback(() => {
-        const file = selectedFile;
-        if (!file || !fileObjectUrlRef.current) return;
-        setSkinSource({
-            id: file.name.replace(/\.png$/i, ""),
-            url: fileObjectUrlRef.current,
-            blob: file,
-            filename: file.name,
-        });
+        if (!selectedFile || !skinSource) return;
         setStep("preview");
-    }, [selectedFile]);
+    }, [selectedFile, skinSource]);
 
     const proceedFromNameMc = useCallback(async () => {
         const input = nameMcInput;
@@ -201,7 +256,7 @@ export default function SkindropPage() {
     };
 
     const currentSourceLabel = skinSource ? skinSource.filename : "尚未选择";
-    const canProceedFromUpload = selectedFile !== null && !loading;
+    const canProceedFromUpload = selectedFile !== null && skinSource !== null && !isPreparingPreview && !loading;
     const canProceedFromNameMc = nameMcInput.trim().length > 0 && !loading;
     const canConfirm = playerName.trim().length > 0 && skinSource !== null && !loading;
 
@@ -267,13 +322,15 @@ export default function SkindropPage() {
                                             isDragOver && "border-primary bg-primary/6",
                                             selectedFile && "border-solid border-green-400/35 bg-green-400/6"
                                         )}
+                                        onClick={openFilePicker}
                                         onDragOver={onDragOver}
                                         onDragLeave={onDragLeave}
                                         onDrop={onDrop}>
                                         <input
+                                            ref={fileInputRef}
                                             type="file"
                                             accept="image/png"
-                                            className="absolute inset-0 cursor-pointer opacity-0"
+                                            className="pointer-events-none absolute inset-0 opacity-0"
                                             onChange={onFileChange}
                                         />
                                         <div className="pointer-events-none flex flex-1 flex-col items-center gap-2 text-center">

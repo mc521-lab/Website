@@ -16,7 +16,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning className={cn("antialiased", "font-sans", figtree.variable)}>
             <body>
-                <div className="hidden">
+                <div style={{ display: "none" }}>
                     <span>君庭阁服务器官网 v7 | Copyright 2026~present LingyunAwA, all rights reserved.</span>
                     <span>众所周知，这是一个基于 NextJS，TailwindCSS，React，shadcn/ui 的网站</span>
                     <span>

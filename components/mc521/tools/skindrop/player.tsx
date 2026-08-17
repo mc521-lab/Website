@@ -104,7 +104,7 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
             player.position.sub(center);
             player.rotation.y = Math.PI;
 
-            const scale = 0.4;
+            const scale = 0.5;
             player.scale.set(scale, scale, scale);
             player.position.y -= size.y * scale * 3.75;
 

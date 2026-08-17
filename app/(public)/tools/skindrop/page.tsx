@@ -7,6 +7,9 @@ import { cn } from "@/lib/utils";
 import { blobToDataUrl } from "@/lib/data-url";
 import { useSkindrop, type ResolvedSkin } from "@/hooks/use-skindrop";
 import PlayerRender, { type PlayerRenderRef } from "@/components/mc521/tools/skindrop/player";
+import { FieldLabel, Field, FieldContent, FieldTitle, FieldDescription } from "@/components/ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Separator } from "@/components/ui/separator";
 
 type Tab = "upload" | "namemc";
 type Step = "select" | "preview" | "result";
@@ -17,6 +20,7 @@ export default function SkindropPage() {
     const { loading, error, lastError, resolve, upload } = useSkindrop();
 
     const [skinSource, setSkinSource] = useState<(ResolvedSkin & { filename: string }) | null>(null);
+    const [skinType, setSkinType] = useState<"classic" | "slim">("classic");
     const [playerName, setPlayerName] = useState("");
     const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -25,6 +29,7 @@ export default function SkindropPage() {
     const [isPreparingPreview, setIsPreparingPreview] = useState(false);
     const [copied, setCopied] = useState(false);
     const [debugCopied, setDebugCopied] = useState(false);
+    const [skinCommand, setSkinCommand] = useState<string>("");
 
     const fileInputRef = useRef<HTMLInputElement>(null);
     const uploadTokenRef = useRef(0);
@@ -44,20 +49,17 @@ export default function SkindropPage() {
         setIsPreparingPreview(false);
     }, []);
 
-    const switchTab = useCallback(
-        (tab: Tab) => {
-            uploadTokenRef.current += 1;
-            setActiveTab(tab);
-            setSkinSource(null);
-            setUploadedUrl(null);
-            setPlayerName("");
-            setSelectedFile(null);
-            setNameMcInput("");
-            setStep("select");
-            setIsPreparingPreview(false);
-        },
-        []
-    );
+    const switchTab = useCallback((tab: Tab) => {
+        uploadTokenRef.current += 1;
+        setActiveTab(tab);
+        setSkinSource(null);
+        setUploadedUrl(null);
+        setPlayerName("");
+        setSelectedFile(null);
+        setNameMcInput("");
+        setStep("select");
+        setIsPreparingPreview(false);
+    }, []);
 
     useEffect(() => {
         return () => {
@@ -66,46 +68,43 @@ export default function SkindropPage() {
         };
     }, []);
 
-    const setUploadFile = useCallback(
-        async (file: File | null) => {
-            uploadTokenRef.current += 1;
-            const token = uploadTokenRef.current;
-            setSelectedFile(file);
-            setSkinSource(null);
+    const setUploadFile = useCallback(async (file: File | null) => {
+        uploadTokenRef.current += 1;
+        const token = uploadTokenRef.current;
+        setSelectedFile(file);
+        setSkinSource(null);
 
-            if (!file) {
+        if (!file) {
+            setIsPreparingPreview(false);
+            return;
+        }
+
+        if (file.type !== "image/png") {
+            setSelectedFile(null);
+            setIsPreparingPreview(false);
+            toast.error("只支持 PNG 皮肤，请重新选择 .png 文件");
+            return;
+        }
+
+        setIsPreparingPreview(true);
+        try {
+            const url = await blobToDataUrl(file);
+            if (uploadTokenRef.current !== token) return;
+            setSkinSource({
+                id: file.name.replace(/\.png$/i, ""),
+                url,
+                blob: file,
+                filename: file.name,
+            });
+        } catch {
+            if (uploadTokenRef.current !== token) return;
+            setSelectedFile(null);
+        } finally {
+            if (uploadTokenRef.current === token) {
                 setIsPreparingPreview(false);
-                return;
             }
-
-            if (file.type !== "image/png") {
-                setSelectedFile(null);
-                setIsPreparingPreview(false);
-                toast.error("只支持 PNG 皮肤，请重新选择 .png 文件");
-                return;
-            }
-
-            setIsPreparingPreview(true);
-            try {
-                const url = await blobToDataUrl(file);
-                if (uploadTokenRef.current !== token) return;
-                setSkinSource({
-                    id: file.name.replace(/\.png$/i, ""),
-                    url,
-                    blob: file,
-                    filename: file.name,
-                });
-            } catch {
-                if (uploadTokenRef.current !== token) return;
-                setSelectedFile(null);
-            } finally {
-                if (uploadTokenRef.current === token) {
-                    setIsPreparingPreview(false);
-                }
-            }
-        },
-        []
-    );
+        }
+    }, []);
 
     const acceptDroppedFile = useCallback(
         (file: File | null) => {
@@ -212,7 +211,9 @@ export default function SkindropPage() {
         }
     }, [skinSource, playerName, upload]);
 
-    const skinCommand = uploadedUrl ? `/skin url ${uploadedUrl}` : "";
+    useEffect(() => {
+        setSkinCommand(uploadedUrl ? `/skin url ${uploadedUrl}?t=${new Date().getTime()} ${skinType}` : "");
+    }, [uploadedUrl]);
 
     const copyCommand = useCallback(async () => {
         if (!skinCommand) return;
@@ -286,7 +287,7 @@ export default function SkindropPage() {
                     <div className="border-foreground/12 bg-background/35 relative flex min-h-105 min-w-0 flex-1 items-center justify-center overflow-hidden rounded-lg border border-dashed">
                         <PlayerRender
                             ref={playerRenderRef}
-                            type="wide"
+                            type={skinType.replace("classic", "wide") as "wide" | "slim"}
                             skinUrl={skinSource?.url ?? "/images/a0fe6e818c766c181db01a8022ba7d40.png"}
                         />
                     </div>
@@ -371,8 +372,41 @@ export default function SkindropPage() {
                             <div className="border-foreground/8 border-b pb-2">
                                 <h2 className="font-heading text-foreground text-lg font-bold">确认使用这张图？</h2>
                             </div>
+                            <p className="m-0 text-sm text-[rgba(255,250,242,0.85)]">这是一个什么类型的皮肤？</p>
+                            <RadioGroup
+                                value={skinType}
+                                onValueChange={(v: "classic" | "slim") => setSkinType(v)}
+                                className="grid grid-cols-2">
+                                <FieldLabel htmlFor="type-steve">
+                                    <Field orientation="horizontal">
+                                        <FieldContent>
+                                            <FieldTitle>Classic</FieldTitle>
+                                            <FieldDescription>经典皮肤类型，即 Steve 模型 (粗手臂)</FieldDescription>
+                                        </FieldContent>
+                                        <RadioGroupItem value="classic" id="type-steve" />
+                                    </Field>
+                                </FieldLabel>
+                                <FieldLabel htmlFor="type-slim">
+                                    <Field orientation="horizontal">
+                                        <FieldContent>
+                                            <FieldTitle>Slim</FieldTitle>
+                                            <FieldDescription>即 Alex 模型 (细手臂)</FieldDescription>
+                                        </FieldContent>
+                                        <RadioGroupItem value="slim" id="type-slim" />
+                                    </Field>
+                                </FieldLabel>
+                            </RadioGroup>
                             <p className="m-0 text-sm text-[rgba(255,250,242,0.85)]">
-                                输入你的玩家名，我们将把皮肤上传到你的账户。
+                                * 我不知道这是一个什么类型的皮肤？
+                                <br />
+                                <br />
+                                保持类型为 Classic，然后拖动左侧预览模型，看看是否有模型的面缺失了贴图或在闪烁。
+                                <br />
+                                如果有，则尝试切换到 Slim 类型，这应该能解决贴图面缺失的问题。
+                            </p>
+                            <Separator className="mt-auto" />
+                            <p className="m-0 text-sm text-[rgba(255,250,242,0.85)]">
+                                确认无误后输入你的玩家名，我们将把皮肤上传到你的账户。
                             </p>
                             <input
                                 value={playerName}

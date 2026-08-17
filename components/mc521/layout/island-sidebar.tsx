@@ -123,11 +123,21 @@ function IslandNavGroupView({ group }: { group: IslandNavGroup }) {
     );
 }
 
-export function IslandSidebar({ navigation, header }: { navigation: IslandNavEntry[]; header: IslandSidebarHeader }) {
+export function IslandSidebar({
+    navigation,
+    header,
+    className,
+    footer,
+}: {
+    navigation: IslandNavEntry[];
+    header: IslandSidebarHeader;
+    className?: string;
+    footer?: React.ReactNode;
+}) {
     const sortedNav = sortByOrder(navigation);
 
     return (
-        <aside className="island-sidebar better-scroll-bar">
+        <aside className={cn("island-sidebar better-scroll-bar", className)}>
             <div className="island-sidebar-header">
                 <span className="island-sidebar-label">{header.label}</span>
                 <h2>{header.title}</h2>
@@ -143,6 +153,7 @@ export function IslandSidebar({ navigation, header }: { navigation: IslandNavEnt
                     )
                 )}
             </nav>
+            {footer && <div className="mt-4">{footer}</div>}
         </aside>
     );
 }

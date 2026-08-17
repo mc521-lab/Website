@@ -8,6 +8,7 @@ import { Home, BookOpen, ClipboardList, Users, Menu, X, GalleryVerticalEnd, Tool
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PlayerIdDialog } from "@/components/mc521/feedback/player-id-dialog";
+import { ExperimentalFlagsDialog } from "@/components/mc521/layout/experimental-flags-dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // 导航配置，直接传入 Lucide 图标组件
@@ -71,6 +72,7 @@ export function Navbar() {
             {/* 右侧动作区 (桌面端 CTA) */}
             <TooltipProvider>
                 <div className="hidden items-center gap-2 lg:flex">
+                    <ExperimentalFlagsDialog />
                     {isFeedbackRoute && (
                         <div className="min-w-0">
                             <PlayerIdDialog />
@@ -108,6 +110,7 @@ export function Navbar() {
 
             {/* 移动端菜单切换按钮 */}
             <div className="flex items-center gap-2 lg:hidden">
+                <ExperimentalFlagsDialog />
                 {isFeedbackRoute && <PlayerIdDialog />}
                 <Button
                     variant="ghost"

@@ -8,8 +8,9 @@ import { Home, BookOpen, ClipboardList, Users, Menu, X, GalleryVerticalEnd, Tool
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { PlayerIdDialog } from "@/components/mc521/feedback/player-id-dialog";
-import { ExperimentalFlagsDialog } from "@/components/mc521/layout/experimental-flags-dialog";
+import { ExperimentalFlagsDialog } from "@/components/mc521/layout/experimental/experimental-flags-dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { EXPERIMENTAL_NEW_UI_FLAG, useExperimentalFlags } from "@/hooks/use-experimental-flags";
 
 // 导航配置，直接传入 Lucide 图标组件
 const navItems = [
@@ -23,10 +24,16 @@ const navItems = [
 
 const qqGroupLink = "https://qm.qq.com/q/cA73mE5jR6";
 
+function useExperimentalSectionUi() {
+    const { isEnabled } = useExperimentalFlags();
+    return isEnabled(EXPERIMENTAL_NEW_UI_FLAG);
+}
+
 export function Navbar() {
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
     const isFeedbackRoute = pathname.startsWith("/feedback");
+    const useExperimental = useExperimentalSectionUi();
 
     // 判断链接是否激活
     const isActive = (item: { link: string; activePattern?: string }) => {
@@ -37,7 +44,11 @@ export function Navbar() {
     };
 
     return (
-        <header className="border-foreground/10 sticky top-0 right-0 left-0 z-50 flex h-16 items-center justify-between border-b bg-black/30 px-6 backdrop-blur-md">
+        <header
+            className={cn(
+                useExperimental ? "bg-black/70" : "bg-black/30",
+                "border-foreground/10 sticky top-0 right-0 left-0 z-50 flex h-16 items-center justify-between border-b px-6 backdrop-blur-md"
+            )} suppressHydrationWarning>
             {/* 品牌 Logo 区 */}
             <Link href="/" className="text-foreground flex items-center gap-3 transition-opacity hover:opacity-90">
                 <Image width={32} height={32} src="/images/logo.png" alt="君庭阁" className="h-11 w-auto" />

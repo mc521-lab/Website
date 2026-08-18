@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from "@/components/ui/field";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { EXPERIMENTAL_FLAGS, EXPERIMENTAL_FLAGS_STORAGE_KEY, useExperimentalFlags } from "@/hooks/use-experimental-flags";
+import { EXPERIMENTAL_FLAGS, useExperimentalFlags } from "@/hooks/use-experimental-flags";
 import { Badge } from "@/components/ui/badge";
 
 export function ExperimentalFlagsDialog() {
@@ -66,7 +66,11 @@ export function ExperimentalFlagsDialog() {
                                             <FieldContent>
                                                 <FieldTitle>
                                                     {flag.label}{" "}
-                                                    {flag.disabled && <Badge variant="destructive">已被全局禁用</Badge>}
+                                                    {flag.disabled && process.env.NODE_ENV === "production" ? (
+                                                        <Badge variant="destructive">已被全局禁用</Badge>
+                                                    ) : (
+                                                        <Badge>仅生产环境禁用</Badge>
+                                                    )}
                                                 </FieldTitle>
                                                 {flag.description && <FieldDescription>{flag.description}</FieldDescription>}
                                             </FieldContent>
@@ -77,7 +81,7 @@ export function ExperimentalFlagsDialog() {
                                                 id={`switch-${flag.id}`}
                                                 checked={checked}
                                                 onCheckedChange={(value) => modifyFlag(flag.id, value)}
-                                                disabled={flag.disabled}
+                                                disabled={flag.disabled && process.env.NODE_ENV === "production"}
                                             />
                                         </Field>
                                     );

@@ -1,6 +1,6 @@
 import { tools_navigation } from "@/.velite";
 import type { IslandNavItem } from "@/components/mc521/layout/island-sidebar";
-import { SectionLayoutSwitch } from "@/components/mc521/layout/section-layout-switch";
+import { SectionLayoutSwitch } from "@/components/mc521/layout/experimental/section-layout-switch";
 
 const toolsNav = tools_navigation as unknown as IslandNavItem[];
 

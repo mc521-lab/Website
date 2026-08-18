@@ -1,5 +1,5 @@
 import { changelog_navigation } from "@/.velite";
-import { SectionLayoutSwitch } from "@/components/mc521/layout/section-layout-switch";
+import { SectionLayoutSwitch } from "@/components/mc521/layout/experimental/section-layout-switch";
 
 const changelogNav = changelog_navigation.map((group) => ({
     ...group,
@@ -17,10 +17,9 @@ export default function ChangelogLayout({ children }: { children: React.ReactNod
                 label: "CHANGELOG",
                 title: "更新日志",
                 description: "服务器版本更新、补丁说明与历史版本记录",
-            }}
-            sidebarClassName="md:w-[286px]"
-        >
+            }}>
             {children}
         </SectionLayoutSwitch>
     );
 }
+

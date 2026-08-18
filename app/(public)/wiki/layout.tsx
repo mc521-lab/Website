@@ -1,5 +1,5 @@
 import { wiki_navigation } from "@/.velite";
-import { SectionLayoutSwitch } from "@/components/mc521/layout/section-layout-switch";
+import { SectionLayoutSwitch } from "@/components/mc521/layout/experimental/section-layout-switch";
 
 const wikiNav = wiki_navigation.map((group) => ({
     ...group,
@@ -18,10 +18,9 @@ export default function WikiLayout({ children }: { children: React.ReactNode }) 
                 title: "君庭阁百科",
                 description: "服务器玩法、规则与指令文档",
             }}
-            sidebarClassName="md:w-[272px]"
-            layoutClassName="wiki-island-layout"
-        >
+            layoutClassName="wiki-island-layout">
             {children}
         </SectionLayoutSwitch>
     );
 }
+

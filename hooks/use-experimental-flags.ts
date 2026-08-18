@@ -18,7 +18,6 @@ export const EXPERIMENTAL_FLAGS: ExperimentalFlag[] = [
         id: EXPERIMENTAL_NEW_UI_FLAG,
         label: "实验性功能：新界面风格",
         description: "经过重新组织的全站页面风格",
-        disabled: true,
     },
 ];
 
@@ -27,9 +26,9 @@ function getFlagDefinition(flagId: string): ExperimentalFlag | undefined {
     return EXPERIMENTAL_FLAGS.find((flag) => flag.id === flagId);
 }
 
-/** 判断某 flag 是否在定义中被标记为 disabled */
+/** 判断某 flag 是否在当前环境下应被禁用 */
 function isFlagDisabled(flagId: string): boolean {
-    return getFlagDefinition(flagId)?.disabled === true;
+    return getFlagDefinition(flagId)?.disabled === true && process.env.NODE_ENV === "production";
 }
 
 /**
@@ -37,6 +36,14 @@ function isFlagDisabled(flagId: string): boolean {
  */
 function sanitizeFlags(flags: string[]): string[] {
     return flags.filter((flagId) => !isFlagDisabled(flagId));
+}
+
+function areFlagsEqual(left: string[], right: string[]): boolean {
+    if (left.length !== right.length) {
+        return false;
+    }
+
+    return left.every((flagId, index) => flagId === right[index]);
 }
 
 function readStoredFlags(): string[] {
@@ -88,22 +95,19 @@ export function useExperimentalFlags() {
     const [enabledFlags, setEnabledFlagsState] = useState<string[]>(() => readStoredFlags());
 
     const syncFromStorage = useCallback(() => {
-        setEnabledFlagsState(readStoredFlags());
+        const nextFlags = readStoredFlags();
+        setEnabledFlagsState((current) => (areFlagsEqual(current, nextFlags) ? current : nextFlags));
     }, []);
 
     const setEnabledFlags = useCallback((nextFlags: string[] | ((current: string[]) => string[])) => {
         setEnabledFlagsState((current) => {
             const resolved = typeof nextFlags === "function" ? nextFlags(current) : nextFlags;
             // sanitize 会移除 disabled 的 flag，writeStoredFlags 也会再做一次
-            const sanitized = sanitizeFlags(resolved);
-            writeStoredFlags(sanitized);
-            return sanitized;
+            return sanitizeFlags(resolved);
         });
     }, []);
 
     useEffect(() => {
-        syncFromStorage();
-
         window.addEventListener("storage", syncFromStorage);
         window.addEventListener(EXPERIMENTAL_FLAGS_CHANGE_EVENT, syncFromStorage);
 
@@ -112,6 +116,14 @@ export function useExperimentalFlags() {
             window.removeEventListener(EXPERIMENTAL_FLAGS_CHANGE_EVENT, syncFromStorage);
         };
     }, [syncFromStorage]);
+
+    useEffect(() => {
+        const storedFlags = readStoredFlags();
+
+        if (!areFlagsEqual(storedFlags, enabledFlags)) {
+            writeStoredFlags(enabledFlags);
+        }
+    }, [enabledFlags]);
 
     const isEnabled = useCallback(
         (flagId: string) => {

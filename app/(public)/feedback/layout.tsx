@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 
 import { IconifyIcon } from "@/components/iconify-icon";
-import { SectionLayoutSwitch } from "@/components/mc521/layout/section-layout-switch";
+import { SectionLayoutSwitch } from "@/components/mc521/layout/experimental/section-layout-switch";
 import { PlayerIdDialog } from "@/components/mc521/feedback/player-id-dialog";
 
 export default function FeedbackLayout({ children }: { children: React.ReactNode }) {
@@ -30,7 +30,6 @@ export default function FeedbackLayout({ children }: { children: React.ReactNode
                 title: "反馈中心",
                 description: "提交 Bug、建议新功能，或查看其他玩家的反馈与回复",
             }}
-            sidebarClassName="md:w-[286px]"
             contentInnerClassName="flex flex-col"
             mobileToolbar={
                 <div className="mb-4 flex justify-end lg:hidden">
@@ -53,3 +52,4 @@ export default function FeedbackLayout({ children }: { children: React.ReactNode
         </SectionLayoutSwitch>
     );
 }
+

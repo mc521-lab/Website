@@ -158,16 +158,17 @@ function ExperimentalSectionLayout({
     const sortedNav = sortByOrder(navigation);
 
     return (
-        <SidebarProvider defaultOpen>
-            <div className="flex h-full min-h-0 max-w-[1920px] flex-col gap-4 md:flex-row md:gap-0">
+        <SidebarProvider defaultOpen className="grid min-h-0 flex-1 grid-cols-1 md:grid-cols-[calc(72*var(--spacing))_1fr]">
+            <div className="flex flex-1 flex-col">
                 <Sidebar
                     collapsible="none"
                     className={cn(
-                        "better-scroll-bar border-border/10 relative h-full w-full overflow-hidden bg-transparent md:w-71.5 md:shrink-0 md:rounded-e-none md:border-e-0",
+                        "better-scroll-bar border-border/10 bg-sidebar! relative h-full w-full overflow-hidden md:shrink-0 md:rounded-e-none md:border-e-0",
                         sidebarClassName
-                    )}>
+                    )}
+                    suppressHydrationWarning>
                     <SidebarChromeHeader className="gap-0 p-0">
-                        <div className="border-sidebar-border/70 bg-sidebar/95 rounded-none border-b px-4 py-4">
+                        <div className="border-sidebar-border/70 rounded-none border-b px-4 py-4">
                             <span className="border-sidebar-primary/20 bg-sidebar-primary/10 text-sidebar-primary inline-flex min-h-6.25 items-center rounded-full border px-3 py-1 text-[11px] font-bold tracking-[0.12em]">
                                 {header.label}
                             </span>
@@ -195,12 +196,10 @@ function ExperimentalSectionLayout({
                         {sidebarFooter && <div className="px-2 pt-2">{sidebarFooter}</div>}
                     </SidebarContent>
                 </Sidebar>
-                <main
-                    className={cn(
-                        "island-content better-scroll-bar min-w-0 flex-1 rounded-none! w-full",
-                        contentClassName
-                    )}>
-                    <div className={cn("island-content-inner", contentInnerClassName)}>
+            </div>
+            <div className="flex flex-1 flex-col">
+                <main className={cn("island-content better-scroll-bar h-full! w-full min-w-0 rounded-none! border-none!", contentClassName)}>
+                    <div className={cn("island-content-inner h-full! border-none!", contentInnerClassName)}>
                         {mobileToolbar}
                         {children}
                     </div>

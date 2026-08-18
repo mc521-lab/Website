@@ -66,11 +66,12 @@ export function ExperimentalFlagsDialog() {
                                             <FieldContent>
                                                 <FieldTitle>
                                                     {flag.label}{" "}
-                                                    {flag.disabled && process.env.NODE_ENV === "production" ? (
-                                                        <Badge variant="destructive">已被全局禁用</Badge>
-                                                    ) : (
-                                                        <Badge>仅生产环境禁用</Badge>
-                                                    )}
+                                                    {flag.disabled &&
+                                                        (!!process.env.DEBUGGING_MODE ? (
+                                                            <Badge variant="destructive">已被全局禁用</Badge>
+                                                        ) : (
+                                                            <Badge>仅生产环境禁用</Badge>
+                                                        ))}
                                                 </FieldTitle>
                                                 {flag.description && <FieldDescription>{flag.description}</FieldDescription>}
                                             </FieldContent>
@@ -81,7 +82,7 @@ export function ExperimentalFlagsDialog() {
                                                 id={`switch-${flag.id}`}
                                                 checked={checked}
                                                 onCheckedChange={(value) => modifyFlag(flag.id, value)}
-                                                disabled={flag.disabled && process.env.NODE_ENV === "production"}
+                                                disabled={flag.disabled && !!process.env.DEBUGGING_MODE}
                                             />
                                         </Field>
                                     );

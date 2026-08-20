@@ -82,7 +82,7 @@ export function ExperimentalFlagsDialog() {
                                                 id={`switch-${flag.id}`}
                                                 checked={checked}
                                                 onCheckedChange={(value) => modifyFlag(flag.id, value)}
-                                                disabled={flag.disabled && !!process.env.DEBUGGING_MODE}
+                                                disabled={flag.disabled && !process.env.DEBUGGING_MODE}
                                             />
                                         </Field>
                                     );

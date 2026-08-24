@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { gallery_deco_wallsticker_data } from "@/.velite";
-import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
-import { GalleryDetailCard } from "@/components/mc521/gallery/reusable/gallery-detail-card";
-import { GallerySearchPanel } from "@/components/mc521/gallery/reusable/gallery-search-panel";
+import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
+import { GalleryDetailCard } from "@/app/(public)/gallery/_components/reusable/gallery-detail-card";
+import { GallerySearchPanel } from "@/app/(public)/gallery/_components/reusable/gallery-search-panel";
 
 interface WallstickerItem {
     id: string;
@@ -61,3 +61,4 @@ export default function DecoWallstickerPage() {
         </GalleryShell>
     );
 }
+

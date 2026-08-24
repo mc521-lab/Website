@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { gallery_skin_cosmetic_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/components/mc521/gallery/reusable/gallery-filter-panel";
-import { GalleryItemImage } from "@/components/mc521/gallery/reusable/gallery-item-image";
+import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
+import { GalleryItemImage } from "@/app/(public)/gallery/_components/reusable/gallery-item-image";
 import { IconifyIcon } from "@/components/iconify-icon";
 
 interface CosmeticItem {
@@ -132,3 +132,4 @@ export default function SkinCosmeticPage() {
         </div>
     );
 }
+

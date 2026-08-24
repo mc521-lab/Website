@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { gallery_enchants_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/components/mc521/gallery/reusable/gallery-filter-panel";
-import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
+import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
+import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
 import { IconifyIcon } from "@/components/iconify-icon";
 import { cn } from "@/lib/utils";
 
@@ -248,3 +248,4 @@ export default function EnchantmentsPage() {
         </GalleryShell>
     );
 }
+

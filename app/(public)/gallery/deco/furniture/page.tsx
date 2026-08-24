@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { gallery_deco_furniture_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/components/mc521/gallery/reusable/gallery-filter-panel";
-import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
-import { GalleryDetailCard } from "@/components/mc521/gallery/reusable/gallery-detail-card";
+import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
+import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
+import { GalleryDetailCard } from "@/app/(public)/gallery/_components/reusable/gallery-detail-card";
 
 interface FurnitureItem {
     id: string;
@@ -95,3 +95,4 @@ export default function DecoFurniturePage() {
         </GalleryShell>
     );
 }
+

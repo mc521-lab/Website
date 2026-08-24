@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { blobToDataUrl } from "@/lib/data-url";
 import { useSkindrop, type ResolvedSkin } from "@/hooks/use-skindrop";
-import PlayerRender, { type PlayerRenderRef } from "@/components/mc521/tools/skindrop/player";
+import PlayerRender, { type PlayerRenderRef } from "@/app/(public)/tools/_components/skindrop/player";
 import { FieldLabel, Field, FieldContent, FieldTitle, FieldDescription } from "@/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
@@ -543,3 +543,4 @@ function TabButton({ active, onClick, children }: { active: boolean; onClick: ()
         </button>
     );
 }
+

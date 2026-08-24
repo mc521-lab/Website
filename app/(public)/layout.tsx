@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/mc521/layout/nav-bar";
+import { Navbar } from "@/app/(public)/_components/layout/nav-bar";
 
 export default function PublicLayout({
     children,
@@ -12,3 +12,4 @@ export default function PublicLayout({
         </>
     );
 }
+

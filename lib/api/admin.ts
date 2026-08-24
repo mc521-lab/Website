@@ -8,7 +8,7 @@ import type {
     AdminCommentPayload,
     AdminLoginPayload,
     AdminLoginResponse,
-} from "@/components/mc521/admin/types";
+} from "@/app/admin/_components/types";
 
 // ============ Normalization Helpers ============
 

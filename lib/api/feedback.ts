@@ -6,7 +6,7 @@ import type {
     FeedbackComment,
     FeedbackListQuery,
     FeedbackListResponse,
-} from "@/components/mc521/feedback/types";
+} from "@/app/(public)/feedback/_components/types";
 
 // ============ Normalization Helpers ============
 
@@ -149,3 +149,4 @@ export async function addFeedbackComment(number: number, payload: CreateCommentP
         body: payload,
     });
 }
+

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { FeedbackForm } from "@/components/mc521/feedback/feedback-form";
+import { FeedbackForm } from "../_components/feedback-form";
 
 export default function FeedbackSubmitPage() {
     const router = useRouter();

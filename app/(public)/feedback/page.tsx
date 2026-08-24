@@ -1,6 +1,6 @@
 "use client";
 
-import { FeedbackList } from "@/components/mc521/feedback/feedback-list";
+import { FeedbackList } from "./_components/feedback-list";
 
 export default function FeedbackPage() {
     return (

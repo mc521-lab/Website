@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { gallery_mcpet_mount_data, gallery_mcpet_mount_fragment_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/components/mc521/gallery/reusable/gallery-filter-panel";
-import { GalleryItemImage } from "@/components/mc521/gallery/reusable/gallery-item-image";
-import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
+import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
+import { GalleryItemImage } from "@/app/(public)/gallery/_components/reusable/gallery-item-image";
+import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
 import { IconifyIcon } from "@/components/iconify-icon";
-import { ItemCard } from "@/components/mc521/gallery/specific/items-gallery";
+import { ItemCard } from "@/app/(public)/gallery/_components/specific/items-gallery";
 import { cn } from "@/lib/utils";
 
 interface MountItem {
@@ -183,3 +183,4 @@ export default function PetMountPage() {
         </GalleryShell>
     );
 }
+

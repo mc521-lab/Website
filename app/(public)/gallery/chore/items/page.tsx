@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react";
 import { gallery_items_currency_data, gallery_items_material_data, gallery_items_prop_data } from "@/.velite";
 import { IconifyIcon } from "@/components/iconify-icon";
-import { GalleryFilterPanel } from "@/components/mc521/gallery/reusable/gallery-filter-panel";
-import { ItemsGalleryPage, type GallerySourceRule } from "@/components/mc521/gallery/specific/items-gallery";
+import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
+import { ItemsGalleryPage, type GallerySourceRule } from "@/app/(public)/gallery/_components/specific/items-gallery";
 
 const SOURCE_RULES: GallerySourceRule[] = [
     { pattern: /水晶商城/, icon: <IconifyIcon icon="fluent-emoji-flat:shopping-cart" /> },
@@ -86,3 +86,4 @@ export default function ItemsPage() {
         />
     );
 }
+

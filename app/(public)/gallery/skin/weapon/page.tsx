@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { gallery_skin_weapon_data } from "@/.velite";
-import { GalleryShell } from "@/components/mc521/gallery/reusable/gallery-shell";
-import { GalleryItemImage } from "@/components/mc521/gallery/reusable/gallery-item-image";
+import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
+import { GalleryItemImage } from "@/app/(public)/gallery/_components/reusable/gallery-item-image";
 import { IconifyIcon } from "@/components/iconify-icon";
 
 interface WeaponItem {
@@ -149,3 +149,4 @@ export default function SkinWeaponPage() {
         </GalleryShell>
     );
 }
+

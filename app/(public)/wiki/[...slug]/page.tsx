@@ -1,7 +1,7 @@
 import { wiki_content } from "@/.velite";
-import { createWikiHeadingComponents, buildWikiToc } from "@/lib/wiki-toc";
-import { MDXContent } from "@/components/mc521/markdown/mdx-content";
-import { WikiToc } from "@/components/mc521/wiki/wiki-toc";
+import { MDXContent } from "@/app/(public)/_components/markdown/mdx-content";
+import { createWikiHeadingComponents, buildWikiToc } from "@/app/(public)/wiki/_components/wiki-toc";
+import { WikiToc } from "@/app/(public)/wiki/_components/wiki-toc";
 import { cn } from "@/lib/utils";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -48,3 +48,4 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
         </div>
     );
 }
+

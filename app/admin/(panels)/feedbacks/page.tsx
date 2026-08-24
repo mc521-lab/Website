@@ -17,7 +17,7 @@ import {
     ADMIN_FEEDBACK_SERVER_LABEL,
     ADMIN_FEEDBACK_STATUS_LABEL,
     ADMIN_FEEDBACK_STATUS_COLOR,
-} from "@/components/mc521/admin/types";
+} from "@/app/admin/_components/types";
 import { cn } from "@/lib/utils";
 import { Search, ChevronLeft, ChevronRight, Loader2, MessageSquare } from "lucide-react";
 
@@ -45,7 +45,7 @@ const STATUS_FILTER_OPTIONS: { value: AdminFeedbackStatus | "all"; label: string
 ];
 
 export default function AdminFeedbacksPage() {
-    const [feedbacks, setFeedbacks] = useState<import("@/components/mc521/admin/types").AdminFeedback[]>([]);
+    const [feedbacks, setFeedbacks] = useState<import("@/app/admin/_components/types").AdminFeedback[]>([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [pageSize] = useState(20);
@@ -55,7 +55,6 @@ export default function AdminFeedbacksPage() {
     const [typeFilter, setTypeFilter] = useState<AdminFeedbackType | "all">("all");
     const [serverFilter, setServerFilter] = useState<AdminFeedbackServer | "all">("all");
     const [statusFilter, setStatusFilter] = useState<AdminFeedbackStatus | "all">("all");
-    const [refreshKey, setRefreshKey] = useState(0);
 
     const fetchFeedbacks = useCallback(async (query: AdminFeedbackListQuery) => {
         setLoading(true);
@@ -88,7 +87,7 @@ export default function AdminFeedbacksPage() {
     useEffect(() => {
         queueMicrotask(() => fetchWithFilters(1));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [refreshKey]);
+    }, []);
 
     const handleSearch = useCallback(() => fetchWithFilters(1), [fetchWithFilters]);
 
@@ -99,10 +98,6 @@ export default function AdminFeedbacksPage() {
         },
         [fetchWithFilters, totalPages]
     );
-
-    const handleBackToList = useCallback(() => {
-        setRefreshKey((k) => k + 1);
-    }, []);
 
     return (
         <div className="island-content-inner admin-feedbacks-content">
@@ -294,3 +289,4 @@ export default function AdminFeedbacksPage() {
         </div>
     );
 }
+

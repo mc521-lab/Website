@@ -4,8 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { getAdminFeedbackById, deleteAdminFeedback, updateAdminFeedback, addAdminComment, deleteAdminComment } from "@/lib/api";
-import { FeedbackDetailView } from "@/app/admin/(panels)/feedbacks/feedback-detail-view";
-import type { AdminFeedback, AdminFeedbackStatus } from "@/components/mc521/admin/types";
+import type { AdminFeedback, AdminFeedbackStatus } from "@/app/admin/_components/types";
+import { FeedbackDetailView } from "../_components/feedback-detail-view";
 
 export default function AdminFeedbackDetailPage({ params }: { params: Promise<{ number: string }> }) {
     const router = useRouter();
@@ -149,3 +149,4 @@ export default function AdminFeedbackDetailPage({ params }: { params: Promise<{ 
         </div>
     );
 }
+

@@ -1,5 +1,5 @@
 import { changelog_content } from "@/.velite";
-import { MDXContent } from "@/components/mc521/markdown/mdx-content";
+import { MDXContent } from "@/app/(public)/_components/markdown/mdx-content";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -34,3 +34,4 @@ export default async function ChangelogPage({ params }: { params: Promise<{ slug
         </article>
     );
 }
+

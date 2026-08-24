@@ -1,5 +1,5 @@
-import { AdminNavBar } from "@/components/mc521/admin/admin-nav-bar";
-import { AuthGuard } from "@/components/mc521/admin/auth-guard";
+import { AdminNavBar } from "@/app/admin/_components/admin-nav-bar";
+import { AuthGuard } from "@/app/admin/_components/auth-guard";
 
 export default function AdminLayout({
     children,
@@ -13,3 +13,4 @@ export default function AdminLayout({
         </AuthGuard>
     );
 }
+

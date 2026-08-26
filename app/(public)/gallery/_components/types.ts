@@ -80,7 +80,7 @@ export interface GemBasic {
 }
 
 export interface GemMeta {
-    "success-rate"?: number;
+    "success-rate"?: string;
     consume?: number;
 }
 

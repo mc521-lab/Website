@@ -2,7 +2,7 @@ basic:
   name: 暴击宝石
   quality: S
 gem:
-  success-rate: 25
+  success-rate: "1-25"
   consume: 4
 modifiers:
   min: 2

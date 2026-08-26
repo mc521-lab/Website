@@ -2,7 +2,7 @@ basic:
   name: 冰灵宝石
   quality: A
 gem:
-  success-rate: 50
+  success-rate: "25-50"
   consume: 4
 modifiers:
   min: 1

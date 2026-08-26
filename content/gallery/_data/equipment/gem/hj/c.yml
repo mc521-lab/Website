@@ -2,7 +2,7 @@ basic:
   name: 灰烬宝石
   quality: C
 gem:
-  success-rate: 100
+  success-rate: "100"
   consume: 2
 modifiers:
   min: 1

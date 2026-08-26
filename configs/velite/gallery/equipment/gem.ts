@@ -11,7 +11,7 @@ export const gallery_equipment_gem_data = {
             }),
             gem: s
                 .object({
-                    "success-rate": s.number().nonnegative().optional(), // 安装成功率（0–100）
+                    "success-rate": s.string().optional(), // 安装成功率（0–100）
                     consume: s.number().int().nonnegative().optional(), // 消耗容量（gemstone-consume）
                 })
                 .optional(),

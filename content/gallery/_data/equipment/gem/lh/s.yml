@@ -2,7 +2,7 @@ basic:
   name: 灵魂宝石
   quality: S
 gem:
-  success-rate: 25
+  success-rate: "1-25"
   consume: 9
 modifiers:
   min: 2

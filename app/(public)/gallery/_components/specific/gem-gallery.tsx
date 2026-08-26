@@ -143,7 +143,7 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
                         <StatRow
                             label="安装成功率"
                             icon="lucide:percent|#22c55e"
-                            value={item.gem?.["success-rate"] !== undefined ? formatPercent(item.gem["success-rate"]) : "—"}
+                            value={item.gem?.["success-rate"] !== undefined ? `${item.gem["success-rate"]}%` : "—"}
                         />
                         <StatRow
                             label="消耗容量"

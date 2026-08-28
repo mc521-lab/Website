@@ -31,6 +31,7 @@ export interface ItemsGalleryPageProps {
     variantStyles?: string[];
     filterBar?: ReactNode;
     empty?: ReactNode;
+    forceSourceSingleLine?: boolean;
 }
 
 function getSourceIcon(source: string, rules?: GallerySourceRule[]) {
@@ -62,7 +63,7 @@ function CardHeading({ item, isGif, variantStyles }: { item: GalleryItem; isGif?
             <GalleryItemImage key={item.id} src={getVariantImageSrc(activeVariant, isGif)} alt={activeVariant} />
             <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
                 <h3 className="truncate text-base leading-tight font-semibold">
-                    {item.basic.name} {item.basic.quality && <QualityBadge quality={item.basic.quality} />}
+                    {item.basic.name} {item.basic.quality && <QualityBadge quality={item.basic.quality} className="ml-1" />}
                 </h3>
                 {variantStyles && variantStyles.length > 0 && (
                     <div className="mt-2 flex gap-2">
@@ -92,11 +93,13 @@ export function ItemCard({
     isGif,
     sourceRules,
     variantStyles,
+    forceSourceSingleLine,
 }: {
     item: GalleryItem;
     isGif?: boolean;
     sourceRules?: GallerySourceRule[];
     variantStyles?: string[];
+    forceSourceSingleLine?: boolean;
 }) {
     const header = <CardHeading item={item} isGif={isGif} variantStyles={variantStyles} />;
 
@@ -104,15 +107,24 @@ export function ItemCard({
         <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
             <div className="gallery-card-header mb-3 flex items-start gap-2">{header}</div>
             <div className="space-y-2.5">
-                <GalleryContentSection title="用途" icon="lucide:wand-2" items={item.usage} />
+                <GalleryContentSection
+                    title="用途"
+                    icon="lucide:wand-2"
+                    items={item.usage}
+                    listClassName={cn("grid grid-cols-1 gap-2")}
+                    itemClassName="flex items-center gap-1.5 rounded-md px-2 py-1 text-sm bg-muted text-foreground/80"
+                />
 
                 {item.source.length > 0 && (
                     <GalleryContentSection
                         title="来源"
                         icon="lucide:map-pin"
                         items={item.source}
-                        listClassName="grid grid-cols-1 gap-2 sm:grid-cols-2"
-                        itemClassName="border-border/70 bg-background/80 flex items-center gap-1.5 rounded-md border px-2 py-1 text-sm shadow-sm"
+                        listClassName={cn(
+                            "grid grid-cols-1 gap-2",
+                            !forceSourceSingleLine && item.source.length > 1 && "sm:grid-cols-2"
+                        )}
+                        itemClassName="flex items-center gap-1.5 rounded-md px-2 py-1 text-sm bg-muted"
                         renderItem={(source) => {
                             const icon = getSourceIcon(source, sourceRules);
                             return (
@@ -140,12 +152,20 @@ export function ItemsGalleryPage({
     variantStyles,
     filterBar,
     empty,
+    forceSourceSingleLine,
 }: ItemsGalleryPageProps) {
     return (
         <GalleryShell title={title} subtitle={description} filterBar={filterBar} isEmpty={items.length === 0} empty={empty}>
             <div className={cn("grid grid-cols-1 gap-4", "sm:grid-cols-2", "lg:grid-cols-3 xl:grid-cols-4")}>
                 {items.map((item) => (
-                    <ItemCard key={item.id} item={item} isGif={isGif} sourceRules={sourceRules} variantStyles={variantStyles} />
+                    <ItemCard
+                        key={item.id}
+                        item={item}
+                        isGif={isGif}
+                        sourceRules={sourceRules}
+                        variantStyles={variantStyles}
+                        forceSourceSingleLine={forceSourceSingleLine}
+                    />
                 ))}
             </div>
         </GalleryShell>

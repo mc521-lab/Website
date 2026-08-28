@@ -8,4 +8,3 @@ export default function ArmorPage() {
     const items: ArmorItem[] = gallery_equipment_armor_data;
     return <ArmorGalleryPage items={items} />;
 }
-

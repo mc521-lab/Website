@@ -1,6 +1,6 @@
 basic:
   name: 荒野枪手碎片
 usage:
-  - 集齐20个碎片用于兑换宠物荒野枪手
+  - 集齐20个碎片兑换宠物荒野枪手
 filter:
   type: fragment

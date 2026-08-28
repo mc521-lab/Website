@@ -74,22 +74,34 @@ function MountOverviewCard({ item }: { item: MountItem }) {
                 </div>
             </div>
 
-            <div className="mb-3 grid grid-cols-4 gap-2 text-sm">
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">生命</div>
-                    <div className="mt-0.5 font-medium">{item.effects.MaxHealth.at(-1) ?? "-"}</div>
+            <div className="mb-3 grid grid-cols-2 grid-rows-2 gap-2 text-sm">
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:heart" width={12} height={12} className="text-[#ef4444]/95" />
+                        生命上限
+                    </div>
+                    <div className="font-medium">{item.effects.MaxHealth.at(-1) ?? "-"}</div>
                 </div>
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">恢复</div>
-                    <div className="mt-0.5 font-medium">{item.effects.Regeneration.at(-1) ?? "-"}</div>
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:heart-plus" width={12} height={12} className="text-[#f97316]/95" />
+                        每秒回血
+                    </div>
+                    <div className="font-medium">{item.effects.Regeneration.at(-1) ?? "-"}</div>
                 </div>
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">防御</div>
-                    <div className="mt-0.5 font-medium">{item.effects.ResistanceModifier.at(-1) ?? "-"}</div>
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:shield" width={12} height={12} className="text-[#a78bfa]/95" />
+                        防御数值
+                    </div>
+                    <div className="font-medium">{item.effects.ResistanceModifier.at(-1) ?? "-"}</div>
                 </div>
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">复活冷却</div>
-                    <div className="mt-0.5 font-medium">{item.effects.RespawnCooldown.at(-1) ?? "-"}s</div>
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:timer" width={12} height={12} className="text-[#60a5fa]/95" />
+                        复活冷却
+                    </div>
+                    <div className="font-medium">{item.effects.RespawnCooldown.at(-1) ?? "-"}s</div>
                 </div>
             </div>
         </article>
@@ -183,4 +195,3 @@ export default function PetMountPage() {
         </GalleryShell>
     );
 }
-

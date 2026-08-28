@@ -8,4 +8,3 @@ export default function SwordPage() {
     const items: SwordItem[] = gallery_equipment_sword_data;
     return <SwordGalleryPage items={items} />;
 }
-

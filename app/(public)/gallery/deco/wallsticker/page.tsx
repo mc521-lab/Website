@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react";
 import { gallery_deco_wallsticker_data } from "@/.velite";
 import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
-import { GalleryDetailCard } from "@/app/(public)/gallery/_components/reusable/gallery-detail-card";
 import { GallerySearchPanel } from "@/app/(public)/gallery/_components/reusable/gallery-search-panel";
+import { DecoGalleryDetailCard } from "@/app/(public)/gallery/deco/_components/deco-gallery-detail-card";
 
 interface WallstickerItem {
     id: string;
@@ -48,17 +48,18 @@ export default function DecoWallstickerPage() {
             }>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {filteredItems.map((item) => (
-                    <GalleryDetailCard
+                    <DecoGalleryDetailCard
                         key={item.id}
                         name={item.basic.name}
                         imageSrc={`/gallery/${item.basic.name}.png`}
                         usage={item.usage}
                         source={item.source}
                         limit={item.limit}
+                        sourceItemClassName="flex items-center gap-1.5 rounded-md px-2 py-1 text-sm bg-muted text-foreground/80"
+                        imageExtraClassName="scale-130 -translate-x-2"
                     />
                 ))}
             </div>
         </GalleryShell>
     );
 }
-

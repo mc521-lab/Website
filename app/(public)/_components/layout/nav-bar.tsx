@@ -48,7 +48,8 @@ export function Navbar() {
             className={cn(
                 useExperimental ? "bg-black/70" : "bg-black/30",
                 "border-foreground/10 sticky top-0 right-0 left-0 z-50 flex h-16 items-center justify-between border-b px-6 backdrop-blur-md"
-            )} suppressHydrationWarning>
+            )}
+            suppressHydrationWarning>
             {/* 品牌 Logo 区 */}
             <Link href="/" className="text-foreground flex items-center gap-3 transition-opacity hover:opacity-90">
                 <Image width={32} height={32} src="/images/logo.png" alt="君庭阁" className="h-11 w-auto" />
@@ -167,6 +168,3 @@ export function Navbar() {
         </header>
     );
 }
-
-
-

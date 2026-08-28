@@ -93,7 +93,11 @@ export function FeedbackDetailView({
                     <ChevronLeft size={16} />
                     返回列表
                 </Button>
-                <Button variant="ghost" size="sm" className="text-red-400 hover:bg-red-500/10 hover:text-red-300" onClick={onDelete}>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-red-400 hover:bg-red-500/10 hover:text-red-300"
+                    onClick={onDelete}>
                     <Trash2 size={14} />
                     删除反馈
                 </Button>
@@ -105,7 +109,9 @@ export function FeedbackDetailView({
                         <span className={cn("admin-detail-badge", ADMIN_FEEDBACK_TYPE_COLOR[feedback.type])}>
                             {ADMIN_FEEDBACK_TYPE_LABEL[feedback.type]}
                         </span>
-                        <span className="admin-detail-badge admin-detail-badge-server">{ADMIN_FEEDBACK_SERVER_LABEL[feedback.server]}</span>
+                        <span className="admin-detail-badge admin-detail-badge-server">
+                            {ADMIN_FEEDBACK_SERVER_LABEL[feedback.server]}
+                        </span>
                         <span className={cn("admin-detail-status", ADMIN_FEEDBACK_STATUS_COLOR[feedback.status])}>
                             {ADMIN_FEEDBACK_STATUS_LABEL[feedback.status]}
                         </span>
@@ -138,17 +144,29 @@ export function FeedbackDetailView({
                 <div className="admin-action-group">
                     <span className="admin-action-label">更新状态</span>
                     <div className="admin-action-buttons">
-                        <Button size="sm" variant={feedback.status === "waiting_admin" ? "default" : "outline"} onClick={() => onUpdateStatus("waiting_admin")}>
+                        <Button
+                            size="sm"
+                            variant={feedback.status === "waiting_admin" ? "default" : "outline"}
+                            onClick={() => onUpdateStatus("waiting_admin")}>
                             待处理
                         </Button>
-                        <Button size="sm" variant={feedback.status === "waiting_player" ? "default" : "outline"} onClick={() => onUpdateStatus("waiting_player")}>
+                        <Button
+                            size="sm"
+                            variant={feedback.status === "waiting_player" ? "default" : "outline"}
+                            onClick={() => onUpdateStatus("waiting_player")}>
                             待回复
                         </Button>
-                        <Button size="sm" variant={feedback.status === "resolved" ? "default" : "outline"} onClick={() => onUpdateStatus("resolved")}>
+                        <Button
+                            size="sm"
+                            variant={feedback.status === "resolved" ? "default" : "outline"}
+                            onClick={() => onUpdateStatus("resolved")}>
                             <Check size={14} />
                             已解决
                         </Button>
-                        <Button size="sm" variant={feedback.status === "closed" ? "default" : "outline"} onClick={() => onUpdateStatus("closed")}>
+                        <Button
+                            size="sm"
+                            variant={feedback.status === "closed" ? "default" : "outline"}
+                            onClick={() => onUpdateStatus("closed")}>
                             <X size={14} />
                             已关闭
                         </Button>
@@ -159,7 +177,11 @@ export function FeedbackDetailView({
                     <span className="admin-action-label">优先级</span>
                     <div className="admin-action-buttons">
                         {ADMIN_PRIORITY_OPTIONS.map((opt) => (
-                            <Button key={opt.value} size="sm" variant={feedback.priority === opt.value ? "default" : "outline"} onClick={() => onSetPriority(opt.value)}>
+                            <Button
+                                key={opt.value}
+                                size="sm"
+                                variant={feedback.priority === opt.value ? "default" : "outline"}
+                                onClick={() => onSetPriority(opt.value)}>
                                 {opt.label}
                             </Button>
                         ))}
@@ -187,14 +209,18 @@ export function FeedbackDetailView({
                     <div className="admin-comments-list">
                         {comments.map((comment) => (
                             <div key={comment.id} className={cn("admin-comment", comment.isAdmin && "is-admin")}>
-                                <div className="admin-comment-avatar">{comment.isAdmin ? <Shield size={14} /> : <User size={14} />}</div>
+                                <div className="admin-comment-avatar">
+                                    {comment.isAdmin ? <Shield size={14} /> : <User size={14} />}
+                                </div>
                                 <div className="admin-comment-body">
                                     <div className="admin-comment-meta">
                                         <span className={cn("admin-comment-author", comment.isAdmin && "text-primary!")}>
                                             {comment.isAdmin ? "管理员" : (comment.author?.name ?? "匿名玩家")}
                                         </span>
                                         {comment.createdAt && (
-                                            <span className="admin-comment-date">{new Date(comment.createdAt).toLocaleString("zh-CN")}</span>
+                                            <span className="admin-comment-date">
+                                                {new Date(comment.createdAt).toLocaleString("zh-CN")}
+                                            </span>
                                         )}
                                         <button
                                             type="button"
@@ -244,4 +270,3 @@ export function FeedbackDetailView({
         </div>
     );
 }
-

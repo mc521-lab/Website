@@ -34,4 +34,3 @@ export default async function ChangelogPage({ params }: { params: Promise<{ slug
         </article>
     );
 }
-

@@ -86,12 +86,12 @@ function formatList(values: string[]) {
 function formatPlaceholder(description: string, placeholder?: string, placeholders?: Record<string, string>) {
     let result = description;
     const replacements = {
-        placeholder: placeholder?.replace("%level%", "[等级]") ?? "",
+        placeholder: placeholder?.replace("%level%", "(Lv)") ?? "",
         ...(placeholders ?? {}),
     };
 
     Object.entries(replacements).forEach(([key, value]) => {
-        result = result.replaceAll(`%${key}%`, value.replace("%level%", "[等级]"));
+        result = result.replaceAll(`%${key}%`, value.replace("%level%", "(Lv)"));
     });
 
     return result;
@@ -152,22 +152,18 @@ function EnchantCard({ item, allItemArray }: { item: EnchantItem; allItemArray: 
                     <div className="text-muted-foreground text-xs">箱子刷新</div>
                     <div className="mt-0.5 font-medium">{item.filter.discoverable ? "是" : "否"}</div>
                 </div>
-                {/* <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">冲突数量</div>
-                    <div className="mt-0.5 font-medium">{item.conflicts.length}</div>
-                </div> */}
             </div>
 
             <div className="mt-3 space-y-2.5">
                 {item.targets.length > 0 && (
                     <div>
-                        <h4 className="text-muted-foreground mb-1 flex items-center gap-1 text-xs font-medium">
+                        <h4 className="text-muted-foreground mb-1 flex items-center gap-1 text-sm font-medium">
                             <IconifyIcon icon="lucide:wand-sparkles" width={12} height={12} />
                             适用部位
                         </h4>
                         <div className="flex flex-wrap gap-2">
                             {item.targets.map((target) => (
-                                <span key={target} className="bg-muted rounded-full px-2 py-1 text-xs">
+                                <span key={target} className="bg-muted rounded-full border px-2 py-1 text-sm">
                                     {SUITABLE_ITEMS[target] ?? target}
                                 </span>
                             ))}
@@ -176,12 +172,25 @@ function EnchantCard({ item, allItemArray }: { item: EnchantItem; allItemArray: 
                 )}
 
                 <div>
-                    <h4 className="text-muted-foreground mb-1 flex items-center gap-1 text-xs font-medium">
+                    <h4 className="text-muted-foreground mb-1 flex items-center gap-1 text-sm font-medium">
                         <IconifyIcon icon="lucide:shield-ban" width={12} height={12} />
                         冲突
                     </h4>
-                    <div className="bg-muted rounded-md p-2 text-sm">
-                        {item.conflicts.length > 0 ? formatList(formatConflictsName(allItemArray, item.conflicts)) : "无"}
+                    {/* <div className="bg-muted rounded-md p-2 text-sm">
+                        {item.conflicts.length > 0 ?  : "无"}
+                    </div> */}
+                    <div className="flex flex-wrap gap-2">
+                        {item.conflicts.length > 0 ? (
+                            formatList(formatConflictsName(allItemArray, item.conflicts))
+                                .split(" / ")
+                                .map((target) => (
+                                    <span key={target} className="bg-muted rounded-full border px-2 py-1 text-sm">
+                                        {target}
+                                    </span>
+                                ))
+                        ) : (
+                            <span className="bg-muted rounded-full border px-2 py-1 text-sm">无</span>
+                        )}
                     </div>
                 </div>
             </div>
@@ -231,7 +240,7 @@ export default function EnchantmentsPage() {
     return (
         <GalleryShell
             title="附魔图鉴"
-            subtitle="按类型、稀有度和目标快速浏览 EcoEnchants 配置"
+            subtitle="按类型和稀有度快速浏览服务器上的所有附魔"
             filterBar={filterBar}
             isEmpty={filteredItems.length === 0}
             empty={
@@ -248,4 +257,3 @@ export default function EnchantmentsPage() {
         </GalleryShell>
     );
 }
-

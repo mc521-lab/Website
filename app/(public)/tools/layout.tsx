@@ -18,5 +18,3 @@ export default function ToolsLayout({ children }: { children: React.ReactNode })
         </SectionLayout>
     );
 }
-
-

@@ -91,4 +91,3 @@ function SdvGalleryContent() {
 export default function SdvPage() {
     return <SdvGalleryContent />;
 }
-

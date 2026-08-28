@@ -250,7 +250,11 @@ export function FeedbackList({ refreshKey }: FeedbackListProps) {
                     <span className="feedback-pagination-info">
                         第 <strong>{page}</strong> / {totalPages} 页 · 共 {total} 条
                     </span>
-                    <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => handlePageChange(page + 1)}>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        disabled={page >= totalPages}
+                        onClick={() => handlePageChange(page + 1)}>
                         下一页
                         <ChevronRight size={16} />
                     </Button>
@@ -259,5 +263,3 @@ export function FeedbackList({ refreshKey }: FeedbackListProps) {
         </section>
     );
 }
-
-

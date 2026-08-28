@@ -1,6 +1,6 @@
 basic:
   name: 霜雪猫灵碎片
 usage:
-  - 集齐20个碎片用于兑换宠物霜雪猫灵
+  - 集齐20个碎片兑换宠物霜雪猫灵
 filter:
   type: fragment

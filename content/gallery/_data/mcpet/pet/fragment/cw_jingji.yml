@@ -1,6 +1,6 @@
 basic:
   name: 荆棘守护灵碎片
 usage:
-  - 集齐30个碎片用于兑换宠物荆棘守护灵
+  - 集齐30个碎片兑换宠物荆棘守护灵
 filter:
   type: fragment

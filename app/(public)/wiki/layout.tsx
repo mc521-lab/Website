@@ -25,5 +25,3 @@ export default function WikiLayout({ children }: { children: React.ReactNode }) 
         </SectionLayout>
     );
 }
-
-

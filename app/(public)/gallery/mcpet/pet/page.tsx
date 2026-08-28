@@ -62,7 +62,7 @@ function PetOverviewCard({ item }: { item: PetItem }) {
                         {hasVariants ? activeVariant : item.basic.name}
                     </h3>
                     <div className="mt-1 flex items-center gap-2">
-                        <p className="text-muted-foreground text-xs">宠物</p>
+                        <p className="text-muted-foreground text-xs">最高 Lv.{item.basic.maxLevel ?? "-"}</p>
                         {hasVariants && (
                             <div className="flex gap-2">
                                 {variants.map((variant, index) => {
@@ -83,76 +83,50 @@ function PetOverviewCard({ item }: { item: PetItem }) {
                 </div>
             </div>
 
-            <div className="mb-3 grid grid-cols-4 gap-2 text-sm">
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">最大等级</div>
-                    <div className="mt-0.5 font-medium">{item.basic.maxLevel ?? "-"}</div>
-                </div>
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">生命</div>
-                    <div className="mt-0.5 font-medium">{item.effects.MaxHealth.at(-1) ?? "-"}</div>
-                </div>
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">恢复</div>
-                    <div className="mt-0.5 font-medium">{item.effects.Regeneration.at(-1) ?? "-"}</div>
-                </div>
-                <div className="bg-muted rounded-md p-2">
-                    <div className="text-muted-foreground text-xs">防御</div>
-                    <div className="mt-0.5 font-medium">{item.effects.ResistanceModifier.at(-1) ?? "-"}</div>
-                </div>
+            <div className="text-muted-foreground mb-1 flex items-center gap-1 text-sm font-medium">
+                <IconifyIcon icon="lucide:sparkles" width={12} height={12} />
+                成长曲线 (Lv{Array.from({ length: item.basic.maxLevel ?? 0 }, (_, i) => i + 1).join("/")})
             </div>
-
-            <div className="bg-muted rounded-md p-2 text-sm">
-                <div className="text-muted-foreground mb-1 flex items-center gap-1 text-xs font-medium">
-                    <IconifyIcon icon="lucide:sparkles" width={12} height={12} />
-                    成长曲线 (Lv{Array.from({ length: item.basic.maxLevel ?? 0 }, (_, i) => i + 1).join("/")})
+            <div className="mb-3 grid grid-cols-1 grid-rows-5 gap-2 text-sm">
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:star" width={12} height={12} className="text-[#eccc68]/95" />
+                        所需经验
+                    </div>
+                    <div className="font-medium">{item.effects.ExperienceThreshold.join(" / ") ?? "-"}</div>
                 </div>
-                <div className="grid grid-cols-[48px_1fr] gap-x-2 gap-y-1 text-xs">
-                    <span className="text-muted-foreground">所需经验</span>
-                    <span className="text-right">{item.effects.ExperienceThreshold.join(" / ")}</span>
-                    <span className="text-muted-foreground">生命上限</span>
-                    <span className="text-right">{item.effects.MaxHealth.join(" / ")}</span>
-                    <span className="text-muted-foreground">每秒回血</span>
-                    <span className="text-right">{item.effects.Regeneration.join(" / ")}</span>
-                    <span className="text-muted-foreground">防御数值</span>
-                    <span className="text-right">{item.effects.ResistanceModifier.join(" / ")}</span>
-                    <span className="text-muted-foreground">复活冷却</span>
-                    <span className="text-right">{item.effects.RespawnCooldown.join("s / ")}s</span>
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:heart" width={12} height={12} className="text-[#ef4444]/95" />
+                        生命上限
+                    </div>
+                    <div className="font-medium">{item.effects.MaxHealth.join(" / ") ?? "-"}</div>
+                </div>
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:heart-plus" width={12} height={12} className="text-[#f97316]/95" />
+                        每秒回血
+                    </div>
+                    <div className="font-medium">{item.effects.Regeneration.join(" / ") ?? "-"}</div>
+                </div>
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:shield" width={12} height={12} className="text-[#a78bfa]/95" />
+                        防御数值
+                    </div>
+                    <div className="font-medium">{item.effects.ResistanceModifier.join(" / ") ?? "-"}</div>
+                </div>
+                <div className="bg-muted flex items-center justify-between rounded-md p-2">
+                    <div className="text-muted-foreground flex items-center gap-1 text-sm">
+                        <IconifyIcon icon="lucide:timer" width={12} height={12} className="text-[#60a5fa]/95" />
+                        复活冷却
+                    </div>
+                    <div className="font-medium">{item.effects.RespawnCooldown.join("s / ") ?? "-"}s</div>
                 </div>
             </div>
         </article>
     );
 }
-
-// function FragmentCard({ item }: { item: FragmentItem }) {
-//     return (
-//         <article className="gallery-item-card border-border bg-card relative flex flex-col overflow-hidden rounded-xl border p-4 shadow-sm">
-//             <div className="gallery-card-header mb-3 flex items-start gap-2">
-//                 <GalleryItemImage src={`/gallery/${item.basic.name}.png`} alt={item.basic.name} />
-//                 <div className="ml-1 flex h-full min-w-0 flex-1 flex-col justify-center">
-//                     <h3 className="truncate text-base leading-tight font-semibold">{item.basic.name}</h3>
-//                     <p className="text-muted-foreground mt-1 text-xs">碎片</p>
-//                 </div>
-//             </div>
-
-//             {item.usage.length > 0 && (
-//                 <div className="bg-muted rounded-md p-2 text-sm">
-//                     <div className="text-muted-foreground mb-1 flex items-center gap-1 text-xs font-medium">
-//                         <IconifyIcon icon="lucide:wand-2" width={12} height={12} />
-//                         用途
-//                     </div>
-//                     <ul className="space-y-0.5">
-//                         {item.usage.map((usage, index) => (
-//                             <li key={`${usage}-${index}`} className="text-foreground/80 text-sm">
-//                                 {usage}
-//                             </li>
-//                         ))}
-//                     </ul>
-//                 </div>
-//             )}
-//         </article>
-//     );
-// }
 
 export default function PetGalleryPage() {
     const pets = gallery_mcpet_pet_data as unknown as PetItem[];
@@ -234,7 +208,7 @@ export default function PetGalleryPage() {
                     <p className="text-lg">未找到匹配的条目</p>
                 </div>
             }>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {(typeFilter === "all" || typeFilter === "pet") &&
                     petItems.length > 0 &&
                     petItems.map((item) => <PetOverviewCard key={item.id} item={item} />)}
@@ -265,4 +239,3 @@ export default function PetGalleryPage() {
         </GalleryShell>
     );
 }
-

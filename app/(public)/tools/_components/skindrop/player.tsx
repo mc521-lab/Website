@@ -41,8 +41,12 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
         const wavePose = useMemo(
             () =>
                 PlayerPose.diff(
-                    type === "wide" ? new glTFDatasets.WideIdleDataset().getNodes() : new glTFDatasets.SlimIdleDataset().getNodes(),
-                    type === "wide" ? new glTFDatasets.WideActionDataset().getNodes() : new glTFDatasets.SlimActionDataset().getNodes()
+                    type === "wide"
+                        ? new glTFDatasets.WideIdleDataset().getNodes()
+                        : new glTFDatasets.SlimIdleDataset().getNodes(),
+                    type === "wide"
+                        ? new glTFDatasets.WideActionDataset().getNodes()
+                        : new glTFDatasets.SlimActionDataset().getNodes()
                 ),
             [type]
         );
@@ -175,10 +179,14 @@ const PlayerRender = forwardRef<PlayerRenderRef, PlayerRenderProps>(
             startWaveSequence();
         }, [startWaveSequence]);
 
-        useImperativeHandle(ref, () => ({
-            onFaceFront,
-            onStartWave,
-        }), [onFaceFront, onStartWave]);
+        useImperativeHandle(
+            ref,
+            () => ({
+                onFaceFront,
+                onStartWave,
+            }),
+            [onFaceFront, onStartWave]
+        );
 
         const onResize = useCallback(() => {
             const container = containerRef.current;

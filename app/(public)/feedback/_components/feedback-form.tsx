@@ -8,7 +8,12 @@ import { IconifyIcon } from "@/components/iconify-icon";
 import { Button } from "@/components/ui/button";
 import { createFeedback } from "@/lib/api";
 import { ensureSession } from "@/lib/api/client";
-import { type FeedbackServer, type FeedbackType, FEEDBACK_SERVER_LABEL, FEEDBACK_TYPE_LABEL } from "@/app/(public)/feedback/_components/types";
+import {
+    type FeedbackServer,
+    type FeedbackType,
+    FEEDBACK_SERVER_LABEL,
+    FEEDBACK_TYPE_LABEL,
+} from "@/app/(public)/feedback/_components/types";
 
 interface FeedbackFormProps {
     onSubmitSuccess?: () => void;
@@ -174,7 +179,11 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
 
                 <div className="feedback-form-actions">
                     {onCancel && (
-                        <Button type="button" variant="ghost" onClick={onCancel} className="text-foreground/70 hover:text-foreground">
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            onClick={onCancel}
+                            className="text-foreground/70 hover:text-foreground">
                             取消
                         </Button>
                     )}
@@ -196,5 +205,3 @@ export function FeedbackForm({ onSubmitSuccess, onCancel }: FeedbackFormProps) {
         </section>
     );
 }
-
-

@@ -8,4 +8,3 @@ export default function JewelryPage() {
     const items: JewelryItem[] = gallery_equipment_jewelry_data as JewelryItem[];
     return <JewelryGalleryPage items={items} />;
 }
-

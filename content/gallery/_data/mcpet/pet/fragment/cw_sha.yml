@@ -1,6 +1,6 @@
 basic:
   name: 碧海小鲨碎片
 usage:
-  - 集齐25个碎片用于兑换宠物碧海小鲨
+  - 集齐25个碎片兑换宠物碧海小鲨
 filter:
   type: fragment

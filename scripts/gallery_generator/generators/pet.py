@@ -206,7 +206,7 @@ def build_material_fragment_content(key: str, base: dict[str, Any]) -> dict[str,
                 usage.append(line)
             continue
         if "即可兑换宠物" in line:
-            line = line.replace("即可兑换宠物-", "用于兑换宠物")
+            line = line.replace("即可兑换宠物-", "兑换宠物")
             line = line.strip()
             if line and line not in usage:
                 usage[0] += line

@@ -146,7 +146,9 @@ export function FeedbackDetail({ feedbackNumber, onBack }: FeedbackDetailProps) 
                     <div className="feedback-comments-list">
                         {comments.map((comment: FeedbackComment) => (
                             <div key={comment.id} className={`feedback-comment ${comment.isAdmin ? "is-admin" : ""}`}>
-                                <div className="feedback-comment-avatar">{comment.isAdmin ? <Shield size={14} /> : <User size={14} />}</div>
+                                <div className="feedback-comment-avatar">
+                                    {comment.isAdmin ? <Shield size={14} /> : <User size={14} />}
+                                </div>
                                 <div className="feedback-comment-body">
                                     <div className="feedback-comment-meta">
                                         <span className={cn("feedback-comment-author", comment.isAdmin && "text-primary!")}>
@@ -181,7 +183,11 @@ export function FeedbackDetail({ feedbackNumber, onBack }: FeedbackDetailProps) 
                     />
                     <div className="feedback-comment-actions">
                         <span className="feedback-comment-counter">{commentText.length} / 5000</span>
-                        <Button size="sm" disabled={submittingComment || !commentText.trim()} onClick={handleAddComment} className="gap-2">
+                        <Button
+                            size="sm"
+                            disabled={submittingComment || !commentText.trim()}
+                            onClick={handleAddComment}
+                            className="gap-2">
                             {submittingComment ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
                             发送评论
                         </Button>
@@ -191,5 +197,3 @@ export function FeedbackDetail({ feedbackNumber, onBack }: FeedbackDetailProps) 
         </section>
     );
 }
-
-

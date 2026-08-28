@@ -23,8 +23,7 @@ export function SectionLayout({
                     { ...generalProps, ...newProps },
                     { ...generalProps, ...oldProps },
                 ],
-            ]}
-        >
+            ]}>
             {children}
         </ExperimentalWrapper>
     );

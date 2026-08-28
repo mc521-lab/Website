@@ -48,4 +48,3 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
         </div>
     );
 }
-

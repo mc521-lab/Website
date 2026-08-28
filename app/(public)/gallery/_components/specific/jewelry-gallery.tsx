@@ -135,7 +135,7 @@ function ModifierStatLines({ stats }: { stats: JewelryStatEntry[] }) {
     return (
         <div className="mt-1 space-y-1">
             {stats.map((s) => (
-                <div key={s.effect} className="text-muted-foreground flex items-center justify-between gap-2 text-xs">
+                <div key={s.effect} className="text-muted-foreground flex items-center justify-between gap-2 text-sm">
                     <EffectLabel effect={s.effect} className="translate-y-[1.5px]" />
                     <span className="text-foreground font-medium tabular-nums">{formatRange(s.min, s.max)}</span>
                 </div>
@@ -149,7 +149,7 @@ function ModifierEntryRow({ entry }: { entry: { probability: number; stats: Jewe
         <div className="border-border/50 bg-muted/60 rounded-md border px-2.5 py-1.5">
             <div className="mb-0.5 flex items-center justify-between gap-2">
                 <span className="text-muted-foreground text-xs">
-                    生效概率 <span className="text-foreground font-medium">{formatPercent(entry.probability)}</span>
+                    出现概率 <span className="text-foreground font-medium">{formatPercent(entry.probability)}</span>
                 </span>
             </div>
             <ModifierStatLines stats={entry.stats ?? []} />
@@ -178,7 +178,7 @@ function JewelryCard({ item, accent }: { item: JewelryItem; accent?: string }) {
             badge={<SpecialBadge special={item.basic.special} />}
             className="gallery-jewelry-card">
             <div>
-                <GalleryContentSection title={`属性组${entries.length > 0 ? `（${entries.length}）` : ""}`} icon="lucide:gem">
+                <GalleryContentSection title={`属性 ${entries.length > 0 ? `(${entries.length})` : ""}`} icon="lucide:gem">
                     <div className="space-y-1.5">
                         {entries.length === 0 ? (
                             <div className="bg-muted/40 rounded-lg p-2.5">

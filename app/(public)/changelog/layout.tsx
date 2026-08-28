@@ -24,4 +24,3 @@ export default function ChangelogLayout({ children }: { children: React.ReactNod
         </SectionLayout>
     );
 }
-

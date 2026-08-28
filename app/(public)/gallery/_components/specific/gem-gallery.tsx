@@ -109,18 +109,9 @@ function groupByQuality(items: GemItem[]): GemSetGroup[] {
 
 function ModifierEntryRow({ entry }: { entry: { probability: number; effect: string; min: number; max: number } }) {
     return (
-        <div className="gallery-jewelry-entry">
-            <div className="mb-0.5 flex items-center justify-between gap-2">
-                <EffectLabel effect={entry.effect} className="text-sm font-medium" />
-            </div>
-            <div className="text-muted-foreground flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
-                <span>
-                    概率 <span className="text-foreground font-medium">{formatPercent(entry.probability)}</span>
-                </span>
-                <span>
-                    数值 <span className="text-foreground font-medium tabular-nums">{formatRange(entry.min, entry.max)}</span>
-                </span>
-            </div>
+        <div className="gallery-jewelry-entry flex! min-h-full! flex-row! items-center justify-between">
+            <EffectLabel effect={entry.effect} className="text-sm font-medium" />
+            <span className="text-foreground text-sm font-medium tabular-nums">{formatRange(entry.min, entry.max)}</span>
         </div>
     );
 }
@@ -129,6 +120,7 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
     const typeCode = resolveType(item);
     const typeLabel = typeCode === "UNKNOWN" ? item.basic.name : TYPE_LABEL[typeCode];
     const entries = item.modifiers?.entries ? Object.entries(item.modifiers.entries) : [];
+    const isMaximum = item.modifiers?.min === item.modifiers?.max && item.modifiers?.max === 2;
 
     return (
         <ItemCardShell
@@ -150,20 +142,15 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
                             icon="lucide:package-minus|#a1a1aa"
                             value={formatNumber(item.gem?.consume, 0)}
                         />
-                        <StatRow
-                            label="属性生效"
-                            icon="lucide:layers|#6366f1"
-                            value={formatRange(item.modifiers?.min, item.modifiers?.max) + "组"}
-                        />
                     </div>
                 </GalleryContentSection>
 
                 <GalleryContentSection
-                    title={`属性组${entries.length > 0 ? `（${entries.length}）` : ""}`}
-                    icon="lucide:sliders-horizontal">
+                    title={`属性 ${isMaximum ? "( " : "(随机 "}${formatRange(item.modifiers?.min, item.modifiers?.max) + " 种"})`}
+                    icon="lucide:layers">
                     {entries.length === 0 ? (
                         <div className="bg-muted/40 rounded-lg p-2.5">
-                            <p className="text-muted-foreground text-sm">无修饰符条目</p>
+                            <p className="text-muted-foreground text-sm">无...?</p>
                         </div>
                     ) : (
                         <div className="space-y-1.5">

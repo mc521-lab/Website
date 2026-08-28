@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "[ROOT] Website",
+			"path": "."
+		},
+		{
+			"name": "[Folder] App",
+			"path": "./app/"
+		},
+		{
+			"name": "[Folder] Content",
+			"path": "./content/"
+		}
+	],
+	"settings": {}
+}

@@ -21,8 +21,8 @@ export default function RootLayout({
             <body>
                 <ThemeProvider>
                     <video
-                        muted
                         controls={false}
+                        muted
                         autoPlay
                         loop
                         playsInline

@@ -103,6 +103,7 @@ export default function Page() {
 
             {/* 底部状态栏 */}
             <div className="absolute right-0 bottom-0 left-0 z-10 flex flex-wrap items-center justify-center gap-4 border-t border-white/10 bg-black/40 px-5 py-3 backdrop-blur-md sm:gap-8">
+                <div className="mr-6"></div>
                 {status.map((item, idx) => (
                     <div key={idx} className="text-foreground inline-flex items-center gap-2 text-base">
                         {item.type === "dot" && <span className="h-2 w-2 rounded-full" style={{ background: item.color }} />}

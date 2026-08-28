@@ -84,6 +84,13 @@ function SwordCard({ item }: { item: SwordItem }) {
     const hasGem = item.gem?.count !== undefined || item.gem?.volume !== undefined || item.gem?.lock !== undefined;
     const subtitle = <>{JOB_LABEL[item.basic.job]}武器</>;
 
+    function getGemCountString(item: SwordItem) {
+        const count = formatNumber(item.gem?.count, "", 0);
+        const hasLock = item.gem?.lock! > 0;
+        const lock = hasLock ? ` (${formatNumber(item.gem?.lock, "", 0)} 待打孔)` : "";
+        return `${count}${lock}`;
+    }
+
     return (
         <ItemCardShell
             name={item.basic.name}
@@ -96,7 +103,7 @@ function SwordCard({ item }: { item: SwordItem }) {
                         <StatRow
                             label="耐久度"
                             icon="lucide:rectangle-ellipsis|#f0bd00"
-                            value={formatNumber(stats.durable, 0)}
+                            value={formatNumber(stats.durable, "", 0)}
                         />
                         <StatRow label="攻击力" icon="lucide:sword|#ef4444" value={formatNumber(stats.attackDamage)} />
                         <StatRow label="攻击速度" icon="lucide:gauge|#3b82f6" value={formatNumber(stats.attackSpeed)} />
@@ -116,13 +123,8 @@ function SwordCard({ item }: { item: SwordItem }) {
                 {hasGem && (
                     <GalleryContentSection title="宝石" icon="lucide:gem">
                         <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
-                            <StatRow label="槽位" icon="lucide:wallet-cards" value={formatNumber(item.gem?.count, 0)} />
-                            <StatRow
-                                label="锁定"
-                                icon="lucide:lock|#a1a1aa"
-                                value={formatNumber(item.gem?.lock, 0) === "—" ? "0" : formatNumber(item.gem?.lock, 0)}
-                            />
-                            <StatRow label="容量" icon="lucide:package-open" value={formatNumber(item.gem?.volume, 0)} />
+                            <StatRow label="槽位" icon="lucide:wallet-cards" value={getGemCountString(item)} />
+                            <StatRow label="容量" icon="lucide:package-open" value={formatNumber(item.gem?.volume, "", 0)} />
                         </div>
                     </GalleryContentSection>
                 )}

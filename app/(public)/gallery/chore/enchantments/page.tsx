@@ -85,16 +85,17 @@ function formatList(values: string[]) {
 
 function formatPlaceholder(description: string, placeholder?: string, placeholders?: Record<string, string>) {
     let result = description;
+    
     const replacements = {
-        placeholder: placeholder?.replace("%level%", "(Lv)") ?? "",
+        placeholder: placeholder?.replace("%level%", "(等级)") ?? "",
         ...(placeholders ?? {}),
     };
 
     Object.entries(replacements).forEach(([key, value]) => {
-        result = result.replaceAll(`%${key}%`, value.replace("%level%", "(Lv)"));
+        result = result.replaceAll(`%${key}%`, value.replace("%level%", "(等级)"));
     });
 
-    return result;
+    return result.replaceAll(" ", "");
 }
 
 function EnchantCard({ item, allItemArray }: { item: EnchantItem; allItemArray: EnchantItem[] }) {
@@ -205,7 +206,7 @@ export default function EnchantmentsPage() {
 
     const filteredItems = useMemo(() => {
         let result = allItems;
-        if (rarity !== "all") result = result.filter((item) => item.filter.rarity === rarity);
+        if (rarity !== "all") result = result.filter((item) => item.filter.rarity === rarity && !item.basic.name.includes("诅咒"));
         if (search.trim()) {
             const q = search.trim().toLowerCase();
             result = result.filter((item) => item.basic.name.toLowerCase().includes(q));

@@ -133,14 +133,14 @@ function GemCard({ item, accent }: { item: GemItem; accent?: string }) {
                 <GalleryContentSection title="镶嵌信息" icon="lucide:gem">
                     <div className="bg-muted/40 space-y-1 rounded-lg p-2.5">
                         <StatRow
-                            label="安装成功率"
+                            label="成功率"
                             icon="lucide:percent|#22c55e"
                             value={item.gem?.["success-rate"] !== undefined ? `${item.gem["success-rate"]}%` : "—"}
                         />
                         <StatRow
-                            label="消耗容量"
+                            label="占用容量"
                             icon="lucide:package-minus|#a1a1aa"
-                            value={formatNumber(item.gem?.consume, 0)}
+                            value={formatNumber(item.gem?.consume, "", 0)}
                         />
                     </div>
                 </GalleryContentSection>

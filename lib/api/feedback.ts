@@ -6,7 +6,7 @@ import type {
     FeedbackComment,
     FeedbackListQuery,
     FeedbackListResponse,
-} from "@/components/ui/types";
+} from "@/types/feedback";
 
 // ============ Normalization Helpers ============
 

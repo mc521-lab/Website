@@ -8,14 +8,14 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { addFeedbackComment, getFeedbackByNumber } from "@/lib/api";
 import {
-    type Feedback,
-    type FeedbackComment,
+    Feedback,
+    FEEDBACK_TYPE_COLOR,
+    FEEDBACK_TYPE_LABEL,
     FEEDBACK_SERVER_LABEL,
     FEEDBACK_STATUS_COLOR,
     FEEDBACK_STATUS_LABEL,
-    FEEDBACK_TYPE_COLOR,
-    FEEDBACK_TYPE_LABEL,
-} from "@/components/ui/types";
+    FeedbackComment,
+} from "@/types/feedback";
 
 interface FeedbackDetailProps {
     feedbackNumber: number;

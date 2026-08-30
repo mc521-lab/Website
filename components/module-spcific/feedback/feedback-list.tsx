@@ -19,7 +19,7 @@ import {
     FEEDBACK_STATUS_LABEL,
     FEEDBACK_TYPE_COLOR,
     FEEDBACK_TYPE_LABEL,
-} from "@/components/ui/types";
+} from "@/types/feedback";
 
 interface FeedbackListProps {
     refreshKey?: number;

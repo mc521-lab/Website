@@ -13,7 +13,7 @@ import {
     type FeedbackType,
     FEEDBACK_SERVER_LABEL,
     FEEDBACK_TYPE_LABEL,
-} from "@/components/ui/types";
+} from "@/types/feedback";
 
 interface FeedbackFormProps {
     onSubmitSuccess?: () => void;

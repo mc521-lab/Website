@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 
 import { IconifyIcon } from "@/components/iconify-icon";
-import { PlayerIdDialog } from "@/app/(public)/feedback/_components/player-id-dialog";
+import { PlayerIdDialog } from "@/components/module-spcific/feedback/player-id-dialog";
 import { SectionLayout } from "@/components/experimental/components/section-layout";
 
 export default function FeedbackLayout({ children }: { children: React.ReactNode }) {

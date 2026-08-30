@@ -244,10 +244,7 @@
     flex: 1 1 auto;
     overflow-y: auto;
     border-radius: 16px;
-    background:
-        radial-gradient(circle at 92% 0%, rgba(85, 94, 119, 0.12), transparent 34%),
-        radial-gradient(circle at 2% 100%, rgba(111, 78, 37, 0.055), transparent 30%),
-        linear-gradient(145deg, rgba(27, 29, 35, 0.975), rgba(20, 22, 27, 0.982));
+    background: color-mix(in oklch, var(--color-sidebar), transparent 50%)
 }
 
 .island-content::before {

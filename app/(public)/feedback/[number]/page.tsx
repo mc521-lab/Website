@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FeedbackDetail } from "../_components/feedback-detail";
+import { FeedbackDetail } from "../../../../components/module-spcific/feedback/feedback-detail";
 
 export default function FeedbackDetailPage({ params }: { params: Promise<{ number: string }> }) {
     const router = useRouter();

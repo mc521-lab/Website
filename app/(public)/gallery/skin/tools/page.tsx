@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { gallery_skin_tools_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
-import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
-import { GalleryItemImage } from "@/app/(public)/gallery/_components/reusable/gallery-item-image";
+import { GalleryFilterPanel } from "@/components/module-spcific/gallery/reusable/gallery-filter-panel";
+import { GalleryShell } from "@/components/module-spcific/gallery/reusable/gallery-shell";
+import { GalleryItemImage } from "@/components/module-spcific/gallery/reusable/gallery-item-image";
 import { IconifyIcon } from "@/components/iconify-icon";
 
 interface ToolsItem {

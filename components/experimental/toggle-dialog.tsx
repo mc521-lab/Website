@@ -10,6 +10,7 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { EXPERIMENTAL_FLAGS, useExperimentalFlags } from "@/hooks/use-experimental-flags";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export function ExperimentalFlagsDialog() {
     const [open, setOpen] = useState(false);
@@ -41,7 +42,7 @@ export function ExperimentalFlagsDialog() {
                 variant="outline"
                 onClick={() => setOpen(true)}
                 aria-label="实验性功能开关"
-                className="text-foreground/55 hover:bg-foreground/5 hover:text-foreground rounded-full">
+                className={cn("text-foreground/55 hover:bg-foreground/5 hover:text-foreground rounded-full")}>
                 <FlaskConical size={16} />
             </Button>
             <Dialog open={open} onOpenChange={setOpen}>

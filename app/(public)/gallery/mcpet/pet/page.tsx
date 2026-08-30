@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { gallery_mcpet_pet_data, gallery_mcpet_pet_fragment_data, gallery_mcpet_food_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
-import { GalleryItemImage } from "@/app/(public)/gallery/_components/reusable/gallery-item-image";
-import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
+import { GalleryFilterPanel } from "@/components/module-spcific/gallery/reusable/gallery-filter-panel";
+import { GalleryItemImage } from "@/components/module-spcific/gallery/reusable/gallery-item-image";
+import { GalleryShell } from "@/components/module-spcific/gallery/reusable/gallery-shell";
 import { IconifyIcon } from "@/components/iconify-icon";
-import { ItemCard } from "@/app/(public)/gallery/_components/specific/items-gallery";
+import { ItemCard } from "@/components/module-spcific/gallery/specific/items-gallery";
 import { cn } from "@/lib/utils";
 
 interface PetItem {

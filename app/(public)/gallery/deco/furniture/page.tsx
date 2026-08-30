@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { gallery_deco_furniture_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
-import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
+import { GalleryFilterPanel } from "@/components/module-spcific/gallery/reusable/gallery-filter-panel";
+import { GalleryShell } from "@/components/module-spcific/gallery/reusable/gallery-shell";
 import { DecoGalleryDetailCard } from "@/app/(public)/gallery/deco/_components/deco-gallery-detail-card";
 
 interface FurnitureItem {

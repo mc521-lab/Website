@@ -2,8 +2,8 @@
 
 import { type ReactNode } from "react";
 import Image from "next/image";
-import { type ItemCardShellProps } from "@/app/(public)/gallery/_components/reusable//item-card-shell";
-import { GalleryContentSection } from "@/app/(public)/gallery/_components/reusable//gallery-content-section";
+import { type ItemCardShellProps } from "@/components/module-spcific/gallery/reusable/item-card-shell";
+import { GalleryContentSection } from "@/components/module-spcific/gallery/reusable/gallery-content-section";
 import { cn } from "@/lib/utils";
 
 export interface GalleryDetailCardProps {

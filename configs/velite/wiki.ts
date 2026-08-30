@@ -38,13 +38,15 @@ export const wiki_content = {
             /** 页面描述 (可选) */
             description: s.string().optional(),
             /** 页面元数据 */
-            metadata: s.metadata(),
+            metadata: s.metadata().optional(),
             /** 页面排序 (可选, 默认 0) */
             order: s.number().default(0),
             /** 页面路径 */
             slug: s.path(),
             /** 页面摘要 */
-            excerpt: s.excerpt(),
+            excerpt: s.excerpt().optional(),
+            /** 页面是否没有任何子标题 */
+            nosubtitle: s.boolean().default(false),
             /** 页面内容 (mdx 正文) */
             body: s.mdx(),
         })

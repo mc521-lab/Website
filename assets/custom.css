@@ -61,6 +61,10 @@
         width: 0;
         height: 0;
     }
+
+    img.pixelated {
+        image-rendering: pixelated;
+    }
 }
 
 @keyframes flashing-border {

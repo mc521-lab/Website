@@ -3,11 +3,15 @@
   icon: lucide:lightbulb
   defaultExpanded: false
   items:
+    - title: 菜单
+      href: /acknowledge/menu
+      icon: fluent-emoji-flat:keycap-hashtag
+      order: 1
     - title: 获取资源
       href: /acknowledge/resources
       icon: fluent-emoji-flat:fish-cake-with-swirl
-      order: 1
+      order: 2
     - title: 限制
       href: /acknowledge/limits
       icon: fluent-emoji-flat:name-badge
-      order: 1
+      order: 3

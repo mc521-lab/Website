@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { gallery_sdv_crop_data, gallery_sdv_seed_data, gallery_sdv_tool_data } from "@/.velite";
-import { GalleryFilterPanel } from "@/app/(public)/gallery/_components/reusable/gallery-filter-panel";
-import { ItemsGalleryPage, type GallerySourceRule } from "@/app/(public)/gallery/_components/specific/items-gallery";
+import { GalleryFilterPanel } from "@/components/module-spcific/gallery/reusable/gallery-filter-panel";
+import { ItemsGalleryPage, type GallerySourceRule } from "@/components/module-spcific/gallery/specific/items-gallery";
 import { IconifyIcon } from "@/components/iconify-icon";
 
 const SOURCE_RULES: GallerySourceRule[] = [

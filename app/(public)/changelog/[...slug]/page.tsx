@@ -1,5 +1,5 @@
 import { changelog_content } from "@/.velite";
-import { MDXContent } from "@/app/(public)/_components/markdown/mdx-content";
+import { MDXContent } from "@/components/markdown/mdx-content";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {

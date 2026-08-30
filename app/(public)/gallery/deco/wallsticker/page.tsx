@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { gallery_deco_wallsticker_data } from "@/.velite";
-import { GalleryShell } from "@/app/(public)/gallery/_components/reusable/gallery-shell";
-import { GallerySearchPanel } from "@/app/(public)/gallery/_components/reusable/gallery-search-panel";
+import { GalleryShell } from "@/components/module-spcific/gallery/reusable/gallery-shell";
+import { GallerySearchPanel } from "@/components/module-spcific/gallery/reusable/gallery-search-panel";
 import { DecoGalleryDetailCard } from "@/app/(public)/gallery/deco/_components/deco-gallery-detail-card";
 
 interface WallstickerItem {

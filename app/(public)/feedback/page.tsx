@@ -1,6 +1,6 @@
 "use client";
 
-import { FeedbackList } from "./_components/feedback-list";
+import { FeedbackList } from "../../../components/module-spcific/feedback/feedback-list";
 
 export default function FeedbackPage() {
     return (

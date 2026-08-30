@@ -1,17 +1,55 @@
 {
-	"folders": [
-		{
-			"name": "[ROOT] Website",
-			"path": "."
-		},
-		{
-			"name": "[Folder] App",
-			"path": "./app/"
-		},
-		{
-			"name": "[Folder] Content",
-			"path": "./content/"
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "name": "[ROOT] Website",
+            "path": ".",
+        },
+        {
+            "name": "[Docs] Wiki",
+            "path": "./content/wiki/",
+        },
+        {
+            "name": "[Docs] Gallery",
+            "path": "./content/gallery/",
+        },
+    ],
+    "settings": {
+        "search.useIgnoreFiles": true,
+        "i18n-ally.disable": true,
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "NextJS Dev Server",
+                "type": "shell",
+                "command": "nr dev",
+                "options": {
+                    "cwd": "${workspaceFolder}",
+                },
+                "problemMatcher": [],
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "new",
+                },
+                "group": {
+                    "kind": "build",
+                    "isDefault": true,
+                },
+            },
+            {
+                "label": "Velite Dev Server",
+                "type": "shell",
+                "command": "nr velite:watch",
+                "options": {
+                    "cwd": "${workspaceFolder}",
+                },
+                "problemMatcher": [],
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "new",
+                },
+            },
+        ],
+    },
 }

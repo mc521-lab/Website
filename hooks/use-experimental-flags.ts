@@ -18,6 +18,7 @@ export const EXPERIMENTAL_FLAGS: ExperimentalFlag[] = [
         id: EXPERIMENTAL_NEW_UI_FLAG,
         label: "实验性功能：新界面风格",
         description: "经过重新组织的全站页面风格",
+        disabled: true,
     },
 ];
 

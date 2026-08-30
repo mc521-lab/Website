@@ -1,7 +1,7 @@
 import { wiki_content } from "@/.velite";
-import { MDXContent } from "@/app/(public)/_components/markdown/mdx-content";
-import { createWikiHeadingComponents, buildWikiToc } from "@/app/(public)/wiki/_components/wiki-toc";
-import { WikiToc } from "@/app/(public)/wiki/_components/wiki-toc";
+import { MDXContent } from "@/components/markdown/mdx-content";
+import { createWikiHeadingComponents, buildWikiToc } from "@/components/module-spcific/wiki/wiki-toc";
+import { WikiToc } from "@/components/module-spcific/wiki/wiki-toc";
 import { cn } from "@/lib/utils";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -29,6 +29,7 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
     const source = await readFile(sourcePath, "utf8");
     const toc = buildWikiToc(source);
     const headingComponents = createWikiHeadingComponents();
+    const isNoSubtitlePage = doc.nosubtitle
 
     return (
         <div className={cn("wiki-content-layout", toc.length > 0 && "has-toc")}>
@@ -39,7 +40,7 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
                     {doc.description && <p>{doc.description}</p>}
                 </header>
 
-                <div className="island-article-body typeset typeset-docs">
+                <div className={cn("island-article-body typeset typeset-docs", isNoSubtitlePage && "island-article-body-full")}>
                     <MDXContent code={doc.body} components={headingComponents as Record<string, ComponentType<unknown>>} />
                 </div>
             </article>

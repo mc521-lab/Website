@@ -128,7 +128,7 @@ export function ExperimentalSectionLayout({
                 <Sidebar
                     collapsible="none"
                     className={cn(
-                        "better-scroll-bar border-border/10 bg-sidebar! relative h-full w-full overflow-hidden md:shrink-0 md:rounded-e-none md:border-e-0",
+                        "better-scroll-bar border-border/10 bg-sidebar/75! backdrop-blur-sm relative h-full w-full overflow-hidden md:shrink-0 md:rounded-e-none md:border-e-0",
                         sidebarClassName
                     )}
                     suppressHydrationWarning>

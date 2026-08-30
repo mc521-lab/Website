@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { FeedbackForm } from "../_components/feedback-form";
+import { FeedbackForm } from "../../../../components/module-spcific/feedback/feedback-form";
 
 export default function FeedbackSubmitPage() {
     const router = useRouter();

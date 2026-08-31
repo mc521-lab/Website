@@ -71,11 +71,11 @@ export function InteractiveGui({ ui, className, onGuiUpdate, initialPageId }: In
     return (
         <section
             ref={sectionRef}
-            className={cn("relative mt-4 origin-top-left scale-113 overflow-hidden", className)}
+            className={cn("relative mt-3 origin-top-left scale-113 overflow-hidden", className)}
             style={{ marginBottom: `-${height * 1.13}px`, marginRight: `-${width * 1.13}px` }}>
             <img
                 src="/wiki/menu/generic_54.png"
-                className="raw-image pixelated absolute top-0 left-0 aspect-square w-full translate-x-[-0.5%] translate-y-[2%]"
+                className="raw-image pixelated absolute top-0 left-0 aspect-square w-full translate-x-[-0.5%] translate-y-[3%]"
             />
             <section className="relative" style={currentGui.overlapStyle}>
                 <img

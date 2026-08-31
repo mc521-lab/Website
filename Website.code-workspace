@@ -50,6 +50,19 @@
                     "panel": "new",
                 },
             },
+            {
+                "label": "Watermark Menus",
+                "type": "shell",
+                "command": "python .\\scripts\\watermark\\watermark.py",
+                "options": {
+                    "cwd": "${workspaceFolder}",
+                },
+                "problemMatcher": [],
+                "presentation": {
+                    "reveal": "always",
+                    "panel": "new",
+                },
+            },
         ],
     },
 }

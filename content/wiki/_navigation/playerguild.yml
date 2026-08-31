@@ -3,19 +3,15 @@
   icon: lucide:landmark
   defaultExpanded: false
   items:
-    - title: 公会升级
-      href: /playerguild/update
+    - title: 简介
+      href: /playerguild/info
       icon: fluent-emoji-flat:houses
       order: 1
-    - title: 公会神石
-      href: /playerguild/stone
-      icon: fluent-emoji-flat:gem-stone
+    - title: 升级与收益
+      href: /playerguild/update
+      icon: fluent-emoji-flat:fast-up-button
       order: 2
-    - title: 常见问题
-      href: /playerguild/faq
-      icon: fluent-emoji-flat:white-question-mark
-      order: 3
     - title: 维护成本
       href: /playerguild/maintainance-funds
       icon: fluent-emoji-flat:coin
-      order: 4
+      order: 3

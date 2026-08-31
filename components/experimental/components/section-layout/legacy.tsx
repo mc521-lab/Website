@@ -30,7 +30,7 @@ export function LegacySectionLayout({
         <div className="island-page">
             <div className={cn("island-layout", layoutClassName)}>
                 <IslandSidebar navigation={navigation} header={header} className={sidebarClassName} footer={sidebarFooter} />
-                <main className={cn("island-content better-scroll-bar", contentClassName)}>
+                <main className={cn("island-content better-scroll-bar backdrop-blur-lg", contentClassName)}>
                     <div className={cn("island-content-inner", contentInnerClassName)}>
                         {mobileToolbar}
                         {children}

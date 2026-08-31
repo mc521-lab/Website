@@ -3,45 +3,23 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { GuiButtonConfig, GuiConfig } from "@/types/iagui";
 
 const DEBUG_MODE = false;
 
-export interface InteractiveGuiProps {
+interface InteractiveGuiProps {
     ui: GuiConfig[];
     className?: string;
     onGuiUpdate?: (arg0: GuiConfig) => void;
-}
-export interface GuiConfig {
-    id: string;
-    image?: string;
-    buttons: Record<number, GuiButtonConfig | null>;
-}
-export interface GuiButtonConfig {
-    content?: React.ReactElement;
-    onClick: GuiButtonClickEvent;
+    initialPageId: string | null;
 }
 
-export type GuiButtonClickEvent = GuiButtonClickEventNavigate | GuiButtonClickEventRedirect | GuiButtonClickEventCustom;
-
-export interface GuiButtonClickEventNavigate {
-    action: "navigate";
-    to: string;
-}
-export interface GuiButtonClickEventRedirect {
-    action: "redirect";
-    href: string;
-}
-export interface GuiButtonClickEventCustom {
-    action: "custom";
-    fn: (idx: number) => void;
-}
-
-export function InteractiveGui({ ui, className, onGuiUpdate }: InteractiveGuiProps) {
+export function InteractiveGui({ ui, className, onGuiUpdate, initialPageId }: InteractiveGuiProps) {
     const router = useRouter();
     const sectionRef = useRef<HTMLElement>(null);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
-    const [currentGuiId, setCurrentGuiId] = useState(ui[0]?.id);
+    const [currentGuiId, setCurrentGuiId] = useState(initialPageId ?? ui[0]?.id);
     const currentGui = ui.find((gui) => gui.id === currentGuiId);
 
     useEffect(() => {
@@ -65,6 +43,7 @@ export function InteractiveGui({ ui, className, onGuiUpdate }: InteractiveGuiPro
 
     const handleClick = (button: GuiButtonConfig, index: number) => {
         const event = button.onClick;
+        if (!event) return;
         switch (event.action) {
             case "navigate": {
                 const target = ui.find((gui) => gui.id === event.to);
@@ -92,13 +71,13 @@ export function InteractiveGui({ ui, className, onGuiUpdate }: InteractiveGuiPro
     return (
         <section
             ref={sectionRef}
-            className={cn("relative overflow-hidden", className)}
+            className={cn("relative mt-4 origin-top-left scale-113 overflow-hidden", className)}
             style={{ marginBottom: `-${height * 1.13}px`, marginRight: `-${width * 1.13}px` }}>
             <img
                 src="/wiki/menu/generic_54.png"
                 className="raw-image pixelated absolute top-0 left-0 aspect-square w-full translate-x-[-0.5%] translate-y-[2%]"
             />
-            <section className="relative">
+            <section className="relative" style={currentGui.overlapStyle}>
                 <img
                     src={currentGui.image ? currentGui.image : `/wiki/menu/${currentGui.id}.webp`}
                     className="raw-image pixelated aspect-square w-full translate-x-[-11.2%] translate-y-[-3.58%]"
@@ -118,11 +97,12 @@ export function InteractiveGui({ ui, className, onGuiUpdate }: InteractiveGuiPro
                                     }
                                 }}
                                 className={cn(
-                                    "block h-full w-full cursor-pointer text-center",
+                                    "flex items-center justify-center h-full w-full",
+                                    button?.onClick && "cursor-pointer",
                                     DEBUG_MODE && (i % 2 === 0 ? "bg-red-400/50" : "bg-lime-400/50"),
                                     DEBUG_MODE && "font-bold text-blue-900"
                                 )}>
-                                {DEBUG_MODE ? i : button?.content}
+                                {button?.content ?? (DEBUG_MODE && i)}
                             </button>
                         );
                     })}

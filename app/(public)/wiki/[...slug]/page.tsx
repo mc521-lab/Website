@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { notFound } from "next/navigation";
-import type { ComponentType } from "react";
+import { Suspense, type ComponentType } from "react";
 
 export async function generateStaticParams() {
     return wiki_content.map((doc: { slug: string }) => ({
@@ -14,7 +14,10 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function WikiPage({ params }: { params: Promise<{ slug: string[] }> }) {
+interface WikiPageProps {
+    params: Promise<{ slug: string[] }>;
+}
+export default async function WikiPage({ params }: WikiPageProps) {
     const { slug } = await params;
 
     const pagePath = slug.join("/");
@@ -29,7 +32,7 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
     const source = await readFile(sourcePath, "utf8");
     const toc = buildWikiToc(source);
     const headingComponents = createWikiHeadingComponents();
-    const isNoSubtitlePage = doc.nosubtitle
+    const isNoSubtitlePage = doc.nosubtitle;
 
     return (
         <div className={cn("wiki-content-layout", toc.length > 0 && "has-toc")}>
@@ -41,7 +44,9 @@ export default async function WikiPage({ params }: { params: Promise<{ slug: str
                 </header>
 
                 <div className={cn("island-article-body typeset typeset-docs", isNoSubtitlePage && "island-article-body-full")}>
-                    <MDXContent code={doc.body} components={headingComponents as Record<string, ComponentType<unknown>>} />
+                    <Suspense>
+                        <MDXContent code={doc.body} components={headingComponents as Record<string, ComponentType<unknown>>} />
+                    </Suspense>
                 </div>
             </article>
 

@@ -32,8 +32,6 @@
     box-shadow:
         0 24px 70px rgba(0, 0, 0, 0.34),
         inset 0 1px 0 rgba(255, 255, 255, 0.045);
-    backdrop-filter: blur(20px) saturate(118%);
-    -webkit-backdrop-filter: blur(20px) saturate(118%);
 }
 
 .island-sidebar {
